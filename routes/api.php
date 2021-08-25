@@ -22,6 +22,11 @@ use App\Http\Controllers\Api\PermissionController;
 
 Route::post('/login', [AuthController::class, 'login'])->name('api.login');
 
+Route::middleware('api')->group(function () {
+    Route::post('token', [AuthController::class, 'apiLogin'])
+        ->name('token');
+});
+
 Route::middleware('auth:sanctum')
     ->get('/user', function (Request $request) {
         return $request->user();
