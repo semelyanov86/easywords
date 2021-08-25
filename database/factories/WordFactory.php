@@ -23,8 +23,8 @@ class WordFactory extends Factory
     public function definition()
     {
         return [
-            'original' => $this->faker->text(255),
-            'translated' => $this->faker->text(255),
+            'original' => $this->faker->text(100),
+            'translated' => $this->faker->text(100),
             'done_at' => $this->faker->dateTime,
             'starred' => $this->faker->boolean,
             'language' => $this->faker->text(5),

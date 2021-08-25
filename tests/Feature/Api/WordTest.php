@@ -67,12 +67,12 @@ class WordTest extends TestCase
         $user = User::factory()->create();
 
         $data = [
-            'original' => $this->faker->text(255),
-            'translated' => $this->faker->text(255),
-            'done_at' => $this->faker->dateTime,
+            'original' => $this->faker->text(100),
+            'translated' => $this->faker->text(100),
+            'done_at' => null,
             'starred' => $this->faker->boolean,
-            'language' => $this->faker->text(5),
-            'views' => 0,
+            'language' => 'RU',
+            'views' => 2,
             'user_id' => $user->id,
         ];
 
