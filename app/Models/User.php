@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Glorand\Model\Settings\Traits\HasSettingsTable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Scopes\Searchable;
 use Spatie\Permission\Traits\HasRoles;
@@ -23,6 +24,7 @@ class User extends Authenticatable
     use HasApiTokens;
     use HasProfilePhoto;
     use TwoFactorAuthenticatable;
+    use HasSettingsTable;
 
     protected $fillable = ['name', 'email', 'password'];
 

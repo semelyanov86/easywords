@@ -2,38 +2,40 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Actions\IndexUsersAction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteAttributes\Attributes\Middleware;
+use Spatie\RouteAttributes\Attributes\Prefix;
+use Spatie\RouteAttributes\Attributes\Resource;
 
+#[Prefix('api')]
+#[Middleware('auth:sanctum')]
+#[Resource('users')]
 class UserController extends Controller
 {
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    #[Get('me', name: 'users.profile')]
+    public function profile(): UserResource
+    {
+        return new UserResource(Auth::user());
+    }
+
+    public function index(Request $request): UserCollection
     {
         $this->authorize('view-any', User::class);
 
-        $search = $request->get('search', '');
-
-        $users = User::search($search)
-            ->latest()
-            ->paginate();
-
-        return new UserCollection($users);
+        return new UserCollection(IndexUsersAction::run($request->get('search', '')));
     }
 
-    /**
-     * @param \App\Http\Requests\UserStoreRequest $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(UserStoreRequest $request)
     {
         $this->authorize('create', User::class);
@@ -49,11 +51,6 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\User $user
-     * @return \Illuminate\Http\Response
-     */
     public function show(Request $request, User $user)
     {
         $this->authorize('view', $user);
@@ -61,11 +58,6 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    /**
-     * @param \App\Http\Requests\UserUpdateRequest $request
-     * @param \App\Models\User $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(UserUpdateRequest $request, User $user)
     {
         $this->authorize('update', $user);
@@ -85,11 +77,6 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\User $user
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, User $user)
     {
         $this->authorize('delete', $user);

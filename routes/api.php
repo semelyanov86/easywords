@@ -36,10 +36,8 @@ Route::middleware('auth:sanctum')
 Route::name('api.')
     ->middleware('auth:sanctum')
     ->group(function () {
-        Route::apiResource('roles', RoleController::class);
-        Route::apiResource('permissions', PermissionController::class);
 
-        Route::apiResource('users', UserController::class);
+//        Route::apiResource('users', UserController::class);
 
         // User Words
         Route::get('/users/{user}/words', [

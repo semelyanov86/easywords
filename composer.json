@@ -10,13 +10,17 @@
     "require": {
         "php": "^7.3|^8.0",
         "fruitcake/laravel-cors": "^2.0",
+        "glorand/laravel-model-settings": "^4.2",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
         "laravel/jetstream": "^2.3",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
+        "lorisleiva/laravel-actions": "^2.1",
+        "spatie/data-transfer-object": "^3.6",
         "spatie/laravel-permission": "^3.17",
+        "spatie/laravel-route-attributes": "^1.6",
         "wulfheart/pretty_routes": "^0.3.0"
     },
     "require-dev": {
