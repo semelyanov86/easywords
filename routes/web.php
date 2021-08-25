@@ -23,12 +23,12 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])
-    ->get('/dashboard', function () {
+    ->get('/admin', function () {
         return view('dashboard');
     })
     ->name('dashboard');
 
-Route::prefix('/')
+Route::prefix('/admin')
     ->middleware(['auth:sanctum', 'verified'])
     ->group(function () {
         Route::resource('roles', RoleController::class);
