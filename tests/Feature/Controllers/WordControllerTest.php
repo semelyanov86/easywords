@@ -63,6 +63,9 @@ class WordControllerTest extends TestCase
             ->toArray();
 
         $response = $this->post(route('words.store'), $data);
+        $data['user_id'] = (string) $data['user_id'];
+        $data['views'] = (string) $data['views'];
+        unset($data['done_at']);
 
         $this->assertDatabaseHas('words', $data);
 

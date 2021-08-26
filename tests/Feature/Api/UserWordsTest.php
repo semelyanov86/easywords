@@ -61,7 +61,10 @@ class UserWordsTest extends TestCase
             $data
         );
 
-        $this->assertDatabaseHas('words', $data);
+        $this->assertDatabaseHas('words', [
+            'original' => $data['original'],
+            'translated' => $data['translated']
+        ]);
 
         $response->assertStatus(201)->assertJsonFragment($data);
 

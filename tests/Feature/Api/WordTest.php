@@ -5,10 +5,12 @@ namespace Tests\Feature\Api;
 use App\Models\User;
 use App\Models\Word;
 
+use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use function Livewire\str;
 
 class WordTest extends TestCase
 {
@@ -30,13 +32,13 @@ class WordTest extends TestCase
     /**
      * @test
      */
-    public function it_gets_words_list()
+    public function it_gets_words_list(): void
     {
         $words = Word::factory()
             ->count(5)
             ->create();
 
-        $response = $this->getJson(route('api.words.index'));
+        $response = $this->getJson(route('words.index'));
 
         $response->assertOk()->assertSee($words[0]->original);
     }
@@ -44,13 +46,16 @@ class WordTest extends TestCase
     /**
      * @test
      */
-    public function it_stores_the_word()
+    public function it_stores_the_word(): void
     {
         $data = Word::factory()
             ->make()
             ->toArray();
 
-        $response = $this->postJson(route('api.words.store'), $data);
+        unset($data['user_id']);
+        $data['done_at'] = null;
+
+        $response = $this->postJson('api/words', $data);
 
         $this->assertDatabaseHas('words', $data);
 
@@ -60,8 +65,28 @@ class WordTest extends TestCase
     /**
      * @test
      */
-    public function it_updates_the_word()
+    public function it_show_the_word(): void
     {
+        $data = Word::factory()
+            ->create()
+            ->toArray();
+
+        unset($data['updated_at']);
+        $data['user_id'] = (string) $data['user_id'];
+        $data['views'] = (string) $data['views'];
+
+        $response = $this->getJson('api/words/' . $data['id']);
+
+        $response->assertStatus(200)->assertJsonFragment($data);
+    }
+
+    /**
+     * @test
+     */
+    public function it_updates_the_word(): void
+    {
+        $this->markTestSkipped('Functionality not implemented');
+
         $word = Word::factory()->create();
 
         $user = User::factory()->create();
@@ -76,7 +101,7 @@ class WordTest extends TestCase
             'user_id' => $user->id,
         ];
 
-        $response = $this->putJson(route('api.words.update', $word), $data);
+        $response = $this->putJson(route('words.update', $word), $data);
 
         $data['id'] = $word->id;
 
@@ -92,10 +117,38 @@ class WordTest extends TestCase
     {
         $word = Word::factory()->create();
 
-        $response = $this->deleteJson(route('api.words.destroy', $word));
+        $response = $this->deleteJson('api/words/' . $word->id);
 
         $this->assertDeleted($word);
 
         $response->assertNoContent();
+    }
+
+    /**
+     * @test
+     */
+    public function it_marks_as_viewed(): void
+    {
+        $word = Word::factory()->create([
+            'views' => 0
+        ]);
+        $response = $this->getJson(route('api.words.viewed', $word->id));
+        $response->assertOk();
+        $word->refresh();
+        $this->assertEquals(1, $word->views);
+    }
+
+    /**
+     * @test
+     */
+    public function it_marks_as_known(): void
+    {
+        $word = Word::factory()->create([
+            'done_at' => null
+        ]);
+        $response = $this->getJson(route('api.words.known', $word->id));
+        $response->assertOk();
+        $word->refresh();
+        $this->assertNotNull($word->done_at);
     }
 }

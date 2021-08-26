@@ -14,6 +14,7 @@ return [
             'known_enabled' => false,
             'fresh_first' => false,
             'languages_list' => config('app.supported_languages'),
+            'main_language' => config('app.main_language')
         ]
     ]
 ];

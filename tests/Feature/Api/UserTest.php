@@ -35,7 +35,7 @@ class UserTest extends TestCase
             ->count(5)
             ->create();
 
-        $response = $this->getJson(route('api.users.index'));
+        $response = $this->getJson(route('users.index'));
 
         $response->assertOk()->assertSee($users[0]->name);
     }
@@ -50,7 +50,7 @@ class UserTest extends TestCase
             ->toArray();
         $data['password'] = \Str::random('8');
 
-        $response = $this->postJson(route('api.users.store'), $data);
+        $response = $this->postJson('api/users', $data);
 
         unset($data['password']);
         unset($data['email_verified_at']);
@@ -65,7 +65,7 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function it_updates_the_user()
+    public function it_updates_the_user(): void
     {
         $user = User::factory()->create();
 
@@ -76,7 +76,7 @@ class UserTest extends TestCase
 
         $data['password'] = \Str::random('8');
 
-        $response = $this->putJson(route('api.users.update', $user), $data);
+        $response = $this->putJson('api/users/' . $user->id, $data);
 
         unset($data['password']);
         unset($data['email_verified_at']);
@@ -93,11 +93,11 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function it_deletes_the_user()
+    public function it_deletes_the_user(): void
     {
         $user = User::factory()->create();
 
-        $response = $this->deleteJson(route('api.users.destroy', $user));
+        $response = $this->deleteJson('api/users/' . $user->id);
 
         $this->assertSoftDeleted($user);
 

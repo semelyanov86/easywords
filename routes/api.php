@@ -49,5 +49,4 @@ Route::name('api.')
             'store',
         ])->name('users.words.store');
 
-        Route::apiResource('words', WordController::class);
     });

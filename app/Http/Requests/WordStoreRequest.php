@@ -21,14 +21,14 @@ class WordStoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'original' => ['required', 'max:255', 'string'],
             'translated' => ['required', 'max:255', 'string'],
             'done_at' => ['nullable', 'date'],
             'starred' => ['required', 'boolean'],
-            'user_id' => ['required', 'exists:users,id'],
+            'user_id' => ['nullable', 'exists:users,id'],
             'language' => ['required', 'max:5', 'string'],
             'views' => ['required', 'max:255'],
         ];
