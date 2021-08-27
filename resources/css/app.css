@@ -1,5 +1,3 @@
-@import "~balm-ui/dist/balm-ui.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

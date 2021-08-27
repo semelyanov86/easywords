@@ -1,4 +1,4 @@
-// import { ItemsApiClientUrlsInterface } from '@/models/api-client/items'
+import { SettingsApiClientUrlsInterface } from '../models/api-client/settings'
 import { LocaleInfoInterface } from '@/models/localization/LocaleInfo.interface'
 
 /**
@@ -22,6 +22,6 @@ export interface ConfigInterface {
   }
 
   settings: {
-    // apiUrls: ItemsApiClientUrlsInterface
+    apiUrls: SettingsApiClientUrlsInterface
   }
 }

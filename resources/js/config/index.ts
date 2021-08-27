@@ -7,7 +7,7 @@ import configBeta from './config-files/beta.json'
 import configLive from './config-files/live.json'
 
 // return appropriate config based on env VUE_APP_CONFIG
-let env: string = 'mock' /* by default we return the mock configuration */
+let env: string = 'live' /* by default we return the live configuration */
 
 // if our env VUE_APP_CONFIG variable is set, get its value
 if (process.env && process.env.VUE_APP_CONFIG) {

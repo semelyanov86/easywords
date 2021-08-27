@@ -7,20 +7,10 @@
     "flag": "us",
     "selected": false
   }, {
-    "name": "Italy",
-    "locale": "it-IT",
-    "flag": "it",
+    "name": "RU",
+    "locale": "ru-RU",
+    "flag": "ru",
     "selected": true
-  }, {
-    "name": "Spain",
-    "locale": "es-ES",
-    "flag": "es",
-    "selected": false
-  }, {
-    "name": "France",
-    "locale": "fr-FR",
-    "flag": "fr",
-    "selected": false
   }],
   "themes": [{
     "id": "default-theme",
@@ -47,7 +37,7 @@
   },
   "settings": {
     "apiUrls": {
-      "fetchSettings": "/path/to/your/real/LOCAL/api/and-point"
+      "fetchSettings": "/api/settings"
     }
   }
 }

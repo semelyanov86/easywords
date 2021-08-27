@@ -1,8 +1,7 @@
 <template>
-    <div>
-        <h1>{{ i18n.t('welcome') }}</h1>
-        <home></home>
-    </div>
+    <w-app>
+        <router-view></router-view>
+    </w-app>
 </template>
 
 <script lang="ts">

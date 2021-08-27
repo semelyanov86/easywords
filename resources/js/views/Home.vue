@@ -1,5 +1,6 @@
 <template>
 <div class="home">
+    <h1>{{ i18n.t('welcome') }}</h1>
     <h1>HOME</h1>
     <div v-if="settings">
         <language-list :languages="settings.languages_list" :main_language="settings.main_language"></language-list>

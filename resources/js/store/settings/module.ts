@@ -6,6 +6,7 @@ import { initialSettingsState } from './initialState'
 
 import { SettingInterface } from '../../models/settings/setting.interface'
 import {SettingsMutationType} from "@/models/store/settings/SettingsMutationType";
+import apiClient from "../../api-client";
 // import apiClient from '@/api-client'
 
 /**
@@ -45,6 +46,9 @@ export const actions: ActionTree<SettingsStateInterface, RootStateInterface> = {
         // let's pretend we called some API end-point
         // and it takes 1 second to return the data
         // by using javascript setTimeout with 1000 for the milliseconds option
+        apiClient.settings.fetchItems().then((data) => {
+            console.log(data)
+        })
         setTimeout(() => {
             commit(MutationType.settings.loadedSettings, {
                 "paginate": "40",

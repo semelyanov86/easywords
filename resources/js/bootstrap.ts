@@ -9,6 +9,7 @@
 import axios from "axios"
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.withCredentials = true;
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
