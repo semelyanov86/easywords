@@ -1,7 +1,7 @@
 <template>
-    <w-app>
+    <div>
         <router-view></router-view>
-    </w-app>
+    </div>
 </template>
 
 <script lang="ts">

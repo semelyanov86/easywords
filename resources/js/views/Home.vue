@@ -18,6 +18,7 @@ import { MutationType, StoreModuleNames } from '../models/store'
 import {useSettingsStore} from "../store/settings";
 import { SettingInterface } from '../models/settings/setting.interface'
 import { SettingsMutationType } from "../models/store/settings/SettingsMutationType";
+import {useI18n} from 'vue-i18n';
 
 export default defineComponent({
     name: "Home",
@@ -45,9 +46,10 @@ export default defineComponent({
         onMounted(() => {
             settingsStore.action(MutationType.settings.loadSettings)
         })
+        const i18n = useI18n()
 
         return {
-            settings
+            settings, i18n
         }
     }
 })

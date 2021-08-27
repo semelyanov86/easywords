@@ -1,50 +1,106 @@
 <template>
-    <w-flex column justify-center>
-        <w-card title="Login in easyword!" class="mx10">
-            <w-form v-model="valid">
-                <w-input
-                    label="First name"
-                    :validators="[validators.required]">
-                </w-input>
+    <div class="body-bg min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0" style="font-family:'Lato',sans-serif;">
+        <header class="max-w-lg mx-auto">
+            <a href="#">
+                <h1 class="text-4xl font-bold text-white text-center">EasyWords</h1>
+            </a>
+        </header>
 
-                <w-input
-                    class="mt3"
-                    label="Last name"
-                    :validators="[validators.required]">
-                </w-input>
+        <main class="bg-white max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg shadow-2xl">
+            <section>
+                <h3 class="font-bold text-2xl">Easy application for quick learning new words</h3>
+                <p class="text-gray-600 pt-2">Sign in to your account.</p>
+            </section>
 
-                <div class="text-right mt6">
-                    <strong>v-model:</strong>
-                    <code class="ml2 mr4">
-                        {{ valid === false ? 'false' : valid || 'null' }}
-                    </code>
-                    <w-button type="submit" :disabled="valid === false">
-                        Validate
-                    </w-button>
-                </div>
-            </w-form>
-        </w-card>
-    </w-flex>
+            <section class="mt-10">
+                <form class="flex flex-col" v-on:submit.prevent="onLogin">
+                    <div class="mb-6 pt-3 rounded bg-gray-200">
+                        <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="email">Email</label>
+                        <input type="text" id="email" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" v-model="email">
+                    </div>
+                    <div class="mb-6 pt-3 rounded bg-gray-200">
+                        <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="password">Password</label>
+                        <input type="password" id="password" class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3" v-model="password">
+                    </div>
+                    <div class="flex justify-end">
+                        <a href="/admin" class="text-sm text-purple-600 hover:text-purple-700 hover:underline mb-6">Forgot your password?</a>
+                    </div>
+                    <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Sign In</button>
+                </form>
+            </section>
+        </main>
+
+        <footer class="max-w-lg mx-auto flex justify-center text-white">
+            Author: Sergey Emelyanov
+        </footer>
+    </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, computed, onMounted} from "vue";
-import {ValidatorInterface} from "@/models/forms/ValidatorInterface";
+import {defineComponent, ref} from "vue";
+import apiClient from "../api-client";
+import router from "../router";
+import {TokenInterface} from "@/models/auth/TokenInterface";
+import {config} from "../config";
+import {notify} from "../components/notifications"
+import {NotifyTypes} from "../components/notifications/NotifyTypes";
+// import the styling for the toast
+import 'mosha-vue-toastify/dist/style.css'
 
 export default defineComponent({
     name: "Login",
     setup() {
-        let valid = null;
-        let validators:ValidatorInterface = {
-            required: value => !!value || 'This field is required'
+        const email = ref('')
+        const password = ref('')
+        const onLogin = () => {
+            const authData = {
+                email: email.value,
+                password: password.value,
+                device_name: "Vue"
+            }
+            apiClient.auth.doLogin(authData).then((data:TokenInterface) => {
+                const TOKEN_KEY = config.httpClient.tokenKey || 'myapp-token'
+                localStorage.setItem(TOKEN_KEY, data.token)
+                router.push({ name: 'Home'})
+                console.log(data, localStorage.getItem(TOKEN_KEY))
+            }).catch((error) => {
+                let message:string;
+                if (error.response) {
+                    /*
+                     * The request was made and the server responded with a
+                     * status code that falls out of the range of 2xx
+                     */
+                    message = error.response.data.message;
+                } else if (error.request) {
+                    /*
+                     * The request was made but no response was received, `error.request`
+                     * is an instance of XMLHttpRequest in the browser and an instance
+                     * of http.ClientRequest in Node.js
+                     */
+                    message = error.request;
+                } else {
+                    // Something happened in setting up the request and triggered an Error
+                    message = 'Error: ' + error.message;
+                }
+                console.log(error);
+                notify({
+                    title: 'Error during login',
+                    message: message,
+                    type: NotifyTypes.danger
+                })
+
+            })
         }
         return {
-            valid, validators
+            email, password, onLogin
         }
     }
 })
 </script>
 
 <style scoped>
-
+.body-bg {
+    background-color: #9921e8;
+    background-image: linear-gradient(315deg, #9921e8 0%, #5f72be 74%);
+}
 </style>

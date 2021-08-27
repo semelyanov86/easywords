@@ -39,5 +39,10 @@
     "apiUrls": {
       "fetchSettings": "/api/settings"
     }
-  }
+  },
+    "auth": {
+        "apiUrls": {
+            "login": "api/token"
+        }
+    }
 }

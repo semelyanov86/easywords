@@ -49,5 +49,10 @@
     "apiUrls": {
       "fetchSettings": "/static/data/items.json"
     }
-  }
+  },
+    "auth": {
+        "apiUrls": {
+            "login": "api/token"
+        }
+    }
 }

@@ -19,7 +19,7 @@ export class SettingsApiClientModel implements SettingsApiClientInterface {
   fetchItems(): Promise<SettingInterface[]> {
     const getParameters: HttpRequestParamsInterface = {
       url: this.urls.fetchSettings,
-      requiresToken: false
+      requiresToken: true
     }
 
     return HttpClient.get<SettingInterface[]>(getParameters)

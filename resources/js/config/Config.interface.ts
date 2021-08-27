@@ -1,4 +1,5 @@
 import { SettingsApiClientUrlsInterface } from '../models/api-client/settings'
+import { AuthApiClientUrlsInterface } from '../models/api-client/auth'
 import { LocaleInfoInterface } from '@/models/localization/LocaleInfo.interface'
 
 /**
@@ -24,4 +25,7 @@ export interface ConfigInterface {
   settings: {
     apiUrls: SettingsApiClientUrlsInterface
   }
+    auth: {
+        apiUrls: AuthApiClientUrlsInterface
+    }
 }

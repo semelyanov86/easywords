@@ -1,5 +1,6 @@
 // GEN-IMPORTS
 import { SettingsApiClientInterface } from './settings'
+import {AuthApiClientInterface} from "./auth";
 
 /**
  * @Name ApiClientInterface
@@ -8,5 +9,6 @@ import { SettingsApiClientInterface } from './settings'
  */
 export interface ApiClientInterface {
   // GEN-PROPERTIES
-  settings: SettingsApiClientInterface
+  settings: SettingsApiClientInterface,
+    auth: AuthApiClientInterface
 }
