@@ -1,14 +1,22 @@
 <template>
 <div class="home">
     <h1>HOME</h1>
-    <language-list :languages="settings.languages_list" :main_language="settings.main_language"></language-list>
+    <div v-if="settings">
+        <language-list :languages="settings.languages_list" :main_language="settings.main_language"></language-list>
+    </div>
+    <div v-else>
+        <p>loading...</p>
+    </div>
 </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import {defineComponent, reactive, computed, onMounted} from "vue";
 import LanguageList from "../components/settings/LanguageList.vue";
-import {SettingInterface} from "../models/settings/setting.interface";
+import { MutationType, StoreModuleNames } from '../models/store'
+import {useSettingsStore} from "../store/settings";
+import { SettingInterface } from '../models/settings/setting.interface'
+import { SettingsMutationType } from "../models/store/settings/SettingsMutationType";
 
 export default defineComponent({
     name: "Home",
@@ -16,18 +24,27 @@ export default defineComponent({
         LanguageList
     },
     setup() {
-        const settings: SettingInterface = {
-            "paginate": "40",
-            "default_language": "EN",
-            "starred_enabled": false,
-            "known_enabled": false,
-            "fresh_first": false,
-            "languages_list": [
-                "DE",
-                "EN"
-            ],
-            "main_language": "RU"
+        // private:
+        const settingsStore = useSettingsStore()
+
+        const settings = computed(() => {
+            return settingsStore.state.settings
+        })
+        const loading = computed(() => {
+            return settingsStore.state.loading
+        })
+        // methods:
+        const onSelectSetting = (item: SettingInterface) => {
+            /*settingsStore.action(MutationType.settings.selectItem, {
+                id: item.id,
+                selected: !item.selected
+            })*/
         }
+        // lifecycle event handlers:
+        onMounted(() => {
+            settingsStore.action(MutationType.settings.loadSettings)
+        })
+
         return {
             settings
         }
