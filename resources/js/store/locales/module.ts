@@ -19,7 +19,7 @@ export const mutations: MutationTree<LocalesStateInterface> = {
         // switch i18n selected locale
         i18n.global.locale = localeInfo.locale as any // Had to do this with vue-i18n@9.0.0-beta.8
         // save the user preference also to localStorage
-        localStorage.setSetting(LocalStorageKeys.locale, localeInfo.locale)
+        localStorage.setItem(LocalStorageKeys.locale, localeInfo.locale)
       }
     })
   }

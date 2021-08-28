@@ -54,6 +54,20 @@
             "list": {
                 "header": "My Languages List"
             }
+        },
+        "Profile": "Profile",
+        "Settings": "Settings",
+        "Logout": "Logout",
+        "Profile page": "Profile page",
+        "Profile Detail Info": "Profile Detail Info",
+        "field": "Field",
+        "value": "Value",
+        "user": {
+            "created_at": "Created At",
+            "email": "Email",
+            "id": "ID",
+            "name": "User Name",
+            "updated_at": "Updated At"
         }
     }
 }

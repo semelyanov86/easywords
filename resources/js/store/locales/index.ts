@@ -1,7 +1,7 @@
 import { rootStore, dispatchModuleAction } from '../root'
-import { MutationType, StoreModuleNames, LocalesStateInterface } from '@/models/store'
-import { LocalStorageKeys } from '@/models/local-storage/LocalStorageKeys'
-import {SettingsMutationType} from "@/models/store/settings/SettingsMutationType";
+import { MutationType, StoreModuleNames, LocalesStateInterface } from '../../models/store'
+import { LocalStorageKeys } from '../../models/local-storage/LocalStorageKeys'
+import {SettingsMutationType} from "../../models/store/settings/SettingsMutationType";
 
 /**
  * @name localesStore
@@ -25,7 +25,7 @@ export const useLocalesStore = () => {
 // for the current locale,
 // try using the last user's preferred locale
 // if available from localStorage
-const userPreferredLocaleId: string = localStorage.getSetting(LocalStorageKeys.locale) || ''
+const userPreferredLocaleId: string = localStorage.getItem(LocalStorageKeys.locale) || ''
 if (userPreferredLocaleId.length > 0) {
   // change locale selected
   localesStore.action(MutationType.locales.selectLocale, userPreferredLocaleId)

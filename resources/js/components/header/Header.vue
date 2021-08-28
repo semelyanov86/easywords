@@ -7,8 +7,8 @@
                 <span class="ml-3 text-xl">EasyWords</span>
             </router-link>
         </div>
-
         <div class="flex items-center">
+            <LocaleSelector :availableLocales="availableLocales" @clicked="onLocaleClicked" />
             <button class="flex mx-4 text-gray-600 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </button>
@@ -58,14 +58,19 @@ import {computed, defineComponent, PropType, ref} from "vue";
 import {useUserStore} from "../../store/user";
 import DropdownItem from './children/DropdownItem.vue'
 import {useI18n} from 'vue-i18n';
+import { MutationType } from '../../models/store'
+import { useLocalesStore } from '../../store/locales'
+import { LocaleInfoInterface } from '../../models/localization/LocaleInfo.interface'
+import LocaleSelector from '../../components/locale-selector/LocaleSelector.component.vue'
 
 export default defineComponent({
     components: {
-        DropdownItem
+        DropdownItem, LocaleSelector
     },
     setup(_, {emit}) {
         const dropdownOpen = ref(false);
         const userStore = useUserStore()
+        const localesStore = useLocalesStore()
         const user = computed(() => {
             return userStore.state.user
         })
@@ -86,8 +91,18 @@ export default defineComponent({
         ]
 
         const i18n = useI18n()
+
+        const availableLocales = computed(() => {
+            return localesStore.state.availableLocales
+        })
+        // methods:
+        const onLocaleClicked = (localeInfo: LocaleInfoInterface) => {
+            localesStore.action(MutationType.locales.selectLocale, localeInfo.locale)
+        }
         return {
-            dropdownOpen, user, dropdowns, i18n
+            dropdownOpen, user, dropdowns, i18n,
+            availableLocales,
+            onLocaleClicked
         };
     },
 });
