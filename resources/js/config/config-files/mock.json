@@ -47,7 +47,8 @@
   },
   "settings": {
     "apiUrls": {
-      "fetchSettings": "/static/data/items.json"
+      "fetchSettings": "/static/data/items.json",
+        "updateSetting": "/api/settings"
     }
   },
     "user": {

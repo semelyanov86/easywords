@@ -59,7 +59,7 @@ export class HttpClientModel implements HttpClientInterface {
 
       if (requiresToken) {
         const token = this.getToken()
-        options.headers.RequestVerificationToken = token
+          options.headers.Authorization = `Bearer ${token}`
       }
 
       axios

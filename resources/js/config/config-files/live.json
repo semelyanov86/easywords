@@ -43,7 +43,8 @@
     },
     "settings": {
         "apiUrls": {
-            "fetchSettings": "/api/settings"
+            "fetchSettings": "/api/settings",
+            "updateSetting": "/api/settings"
         }
     },
     "user": {

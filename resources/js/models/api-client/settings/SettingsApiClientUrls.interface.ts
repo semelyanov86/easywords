@@ -4,5 +4,6 @@
  * Interface for the Items urls used to avoid hard-coded strings
  */
 export interface SettingsApiClientUrlsInterface {
-  fetchSettings: string
+  fetchSettings: string,
+    updateSetting: string
 }

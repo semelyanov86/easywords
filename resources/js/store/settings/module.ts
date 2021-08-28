@@ -7,8 +7,11 @@ import { initialSettingsState } from './initialState'
 import { SettingInterface } from '../../models/settings/setting.interface'
 import {SettingsMutationType} from "@/models/store/settings/SettingsMutationType";
 import {ErrorHandler} from "../../plugins/error-handler/ErrorHandler";
+import {UpdateSettingsInterface} from "../../models/settings/updateSettings.interface";
 import apiClient from "../../api-client";
 import {AxiosError} from "axios";
+import {notify} from "../../components/notifications";
+import {NotifyTypes} from "../../components/notifications/NotifyTypes";
 // import apiClient from '@/api-client'
 
 /**
@@ -33,6 +36,9 @@ export const mutations: MutationTree<SettingsStateInterface> = {
     ) {
         const { id, selected } = params
 
+    },
+    updateSettingValue(state: SettingsStateInterface, params:UpdateSettingsInterface) {
+        state.settings[params.name] = params.value
     }
 }
 
@@ -63,6 +69,21 @@ export const actions: ActionTree<SettingsStateInterface, RootStateInterface> = {
         }
     ) {
         commit(MutationType.settings.selectSetting, params)
+    },
+    updateSetting(
+        { commit },
+        data: UpdateSettingsInterface
+    ) {
+        commit(MutationType.settings.updateSettingValue,data)
+        apiClient.settings.updateSetting(data).then(() => {
+            notify({
+                title: 'Successfull operation',
+                message: 'Settings successfully updated!',
+                type: NotifyTypes.success
+            })
+        }).catch((error: Error | AxiosError) => {
+            ErrorHandler(error);
+        })
     }
 }
 
