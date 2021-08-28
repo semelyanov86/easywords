@@ -50,6 +50,11 @@
       "fetchSettings": "/static/data/items.json"
     }
   },
+    "user": {
+        "apiUrls": {
+            "fetchUser": "/api/me"
+        }
+    },
     "auth": {
         "apiUrls": {
             "login": "api/token"

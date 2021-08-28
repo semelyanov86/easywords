@@ -40,6 +40,11 @@
       "fetchSettings": "/api/settings"
     }
   },
+    "user": {
+        "apiUrls": {
+            "fetchUser": "/api/me"
+        }
+    },
     "auth": {
         "apiUrls": {
             "login": "api/token"

@@ -7,6 +7,7 @@ import { initialRootState } from './initialState'
 // import each Vuex module
 // GEN-IMPORTS-STATE
 import { settingsState } from '../settings/module'
+import { userState } from '../user/module'
 import { localesState } from '../locales/module'
 
 /**
@@ -20,7 +21,8 @@ const storeOptions: StoreOptions<RootStateInterface> = {
     modules: {
         // GEN-MODULES
         settingsState,
-        localesState
+        localesState,
+        userState
         // as you create additional modules, you'll add them here similar to the itemsState
     }
 }

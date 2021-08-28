@@ -16,6 +16,7 @@ import {defineComponent, reactive, computed, onMounted} from "vue";
 import { MutationType, StoreModuleNames } from '../models/store'
 import LanguageList from "../components/settings/LanguageList.vue";
 import {useSettingsStore} from "../store/settings";
+import {useUserStore} from "../store/user";
 import { SettingInterface } from '../models/settings/setting.interface'
 import { SettingsMutationType } from "../models/store/settings/SettingsMutationType";
 import {useI18n} from 'vue-i18n';
@@ -28,9 +29,13 @@ export default defineComponent({
     setup() {
         // private:
         const settingsStore = useSettingsStore()
+        const userStore = useUserStore()
 
         const settings = computed(() => {
             return settingsStore.state.settings
+        })
+        const user = computed(() => {
+            return userStore.state.user
         })
         const loading = computed(() => {
             return settingsStore.state.loading
@@ -46,11 +51,12 @@ export default defineComponent({
         // lifecycle event handlers:
         onMounted(() => {
             settingsStore.action(MutationType.settings.loadSettings)
+            userStore.action(MutationType.user.loadUser)
         })
         const i18n = useI18n()
 
         return {
-            settings, i18n
+            settings, i18n, user
         }
     }
 })

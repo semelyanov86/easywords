@@ -1,45 +1,56 @@
 {
-  "global": {
-  },
-  "locales": [{
-    "name": "USA",
-    "locale": "en-US",
-    "flag": "us",
-    "selected": false
-  }, {
-    "name": "RU",
-    "locale": "ru-RU",
-    "flag": "ru",
-    "selected": true
-  }],
-  "themes": [{
-    "id": "default-theme",
-    "name": "Default",
-    "icon": "color_lens",
-    "selected": false
-  }, {
-    "id": "dark-theme",
-    "name": "Dark",
-    "icon": "color_lens",
-    "selected": true
-  },
-  {
-    "id": "navy-theme",
-    "name": "Navy Dark",
-    "icon": "color_lens",
-    "selected": false
-  }],
-  "httpClient": {
-    "tokenKey": "myapp-token"
-  },
-  "apiClient": {
-    "type": "live"
-  },
-  "settings": {
-    "apiUrls": {
-      "fetchSettings": "/api/settings"
-    }
-  },
+    "global": {
+    },
+    "locales": [
+        {
+            "name": "USA",
+            "locale": "en-US",
+            "flag": "us",
+            "selected": false
+        },
+        {
+            "name": "RU",
+            "locale": "ru-RU",
+            "flag": "ru",
+            "selected": true
+        }
+    ],
+    "themes": [
+        {
+            "id": "default-theme",
+            "name": "Default",
+            "icon": "color_lens",
+            "selected": false
+        },
+        {
+            "id": "dark-theme",
+            "name": "Dark",
+            "icon": "color_lens",
+            "selected": true
+        },
+        {
+            "id": "navy-theme",
+            "name": "Navy Dark",
+            "icon": "color_lens",
+            "selected": false
+        }
+    ],
+    "httpClient": {
+        "tokenKey": "myapp-token"
+    },
+    "apiClient": {
+        "type": "live"
+    },
+    "settings": {
+        "apiUrls": {
+            "fetchSettings": "/api/settings"
+        }
+    },
+    "user": {
+        "apiUrls": {
+            "fetchUser": "/api/me"
+        }
+    },
     "auth": {
         "apiUrls": {
             "login": "api/token"
