@@ -1,12 +1,10 @@
-// import router from "../../router";
+import router from "../../router";
 import axios from "axios";
 import {AxiosError} from "axios";
 import {notify} from "../../components/notifications";
 import {NotifyTypes} from "../../components/notifications/NotifyTypes";
-import { useRouter, useRoute } from 'vue-router'
 
 export function ErrorHandler(error: Error | AxiosError) {
-    const router = useRouter()
     let message:string;
     if (axios.isAxiosError(error))  {
         if (error.response) {
