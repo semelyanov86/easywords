@@ -7,5 +7,5 @@ import { SettingInterface } from '@/models/settings/setting.interface'
  */
 export interface SettingsStateInterface {
   loading: boolean
-  settings: SettingInterface[]
+  settings: SettingInterface
 }

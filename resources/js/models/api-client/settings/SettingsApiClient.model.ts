@@ -3,6 +3,7 @@ import { HttpClient, HttpRequestParamsInterface } from '../../../models/http-cli
 import { SettingsApiClientUrlsInterface } from './SettingsApiClientUrls.interface'
 import { SettingsApiClientInterface } from './SettingsApiClient.interface'
 import { SettingInterface } from '../../../models/settings/setting.interface'
+import {LoadedSettingsInterface} from "../../../models/settings/LoadedSettingsInterface";
 
 /**
  * @Name SettingsApiClientModel
@@ -16,12 +17,12 @@ export class SettingsApiClientModel implements SettingsApiClientInterface {
     this.urls = urls
   }
 
-  fetchItems(): Promise<SettingInterface[]> {
+  fetchItems(): Promise<LoadedSettingsInterface> {
     const getParameters: HttpRequestParamsInterface = {
       url: this.urls.fetchSettings,
       requiresToken: true
     }
 
-    return HttpClient.get<SettingInterface[]>(getParameters)
+    return HttpClient.get<LoadedSettingsInterface>(getParameters)
   }
 }

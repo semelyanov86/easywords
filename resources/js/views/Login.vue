@@ -44,6 +44,8 @@ import {TokenInterface} from "@/models/auth/TokenInterface";
 import {config} from "../config";
 import {notify} from "../components/notifications"
 import {NotifyTypes} from "../components/notifications/NotifyTypes";
+import {AxiosError} from "axios";
+import axios from "axios";
 // import the styling for the toast
 import 'mosha-vue-toastify/dist/style.css'
 
@@ -62,26 +64,30 @@ export default defineComponent({
                 const TOKEN_KEY = config.httpClient.tokenKey || 'myapp-token'
                 localStorage.setItem(TOKEN_KEY, data.token)
                 router.push({ name: 'Home'})
-                console.log(data, localStorage.getItem(TOKEN_KEY))
-            }).catch((error) => {
+            }).catch((error: Error | AxiosError) => {
                 let message:string;
-                if (error.response) {
-                    /*
-                     * The request was made and the server responded with a
-                     * status code that falls out of the range of 2xx
-                     */
-                    message = error.response.data.message;
-                } else if (error.request) {
-                    /*
-                     * The request was made but no response was received, `error.request`
-                     * is an instance of XMLHttpRequest in the browser and an instance
-                     * of http.ClientRequest in Node.js
-                     */
-                    message = error.request;
+                if (axios.isAxiosError(error))  {
+                    if (error.response) {
+                        /*
+                         * The request was made and the server responded with a
+                         * status code that falls out of the range of 2xx
+                         */
+                        message = error.response.data.message;
+                    } else if (error.request) {
+                        /*
+                         * The request was made but no response was received, `error.request`
+                         * is an instance of XMLHttpRequest in the browser and an instance
+                         * of http.ClientRequest in Node.js
+                         */
+                        message = error.request;
+                    } else {
+                        // Something happened in setting up the request and triggered an Error
+                        message = 'Error: ' + error.message;
+                    }
                 } else {
-                    // Something happened in setting up the request and triggered an Error
                     message = 'Error: ' + error.message;
                 }
+
                 console.log(error);
                 notify({
                     title: 'Error during login',

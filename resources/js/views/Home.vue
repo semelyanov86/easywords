@@ -13,8 +13,8 @@
 
 <script lang="ts">
 import {defineComponent, reactive, computed, onMounted} from "vue";
-import LanguageList from "../components/settings/LanguageList.vue";
 import { MutationType, StoreModuleNames } from '../models/store'
+import LanguageList from "../components/settings/LanguageList.vue";
 import {useSettingsStore} from "../store/settings";
 import { SettingInterface } from '../models/settings/setting.interface'
 import { SettingsMutationType } from "../models/store/settings/SettingsMutationType";
@@ -37,6 +37,7 @@ export default defineComponent({
         })
         // methods:
         const onSelectSetting = (item: SettingInterface) => {
+            console.log(item)
             /*settingsStore.action(MutationType.settings.selectItem, {
                 id: item.id,
                 selected: !item.selected

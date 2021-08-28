@@ -6,7 +6,9 @@ import { initialSettingsState } from './initialState'
 
 import { SettingInterface } from '../../models/settings/setting.interface'
 import {SettingsMutationType} from "@/models/store/settings/SettingsMutationType";
+import {ErrorHandler} from "../../plugins/error-handler/ErrorHandler";
 import apiClient from "../../api-client";
+import {AxiosError} from "axios";
 // import apiClient from '@/api-client'
 
 /**
@@ -18,7 +20,7 @@ export const mutations: MutationTree<SettingsStateInterface> = {
     loadingSettings(state: SettingsStateInterface) {
         state.loading = true
     },
-    loadedSettings(state: SettingsStateInterface, settings: SettingInterface[]) {
+    loadedSettings(state: SettingsStateInterface, settings: SettingInterface) {
         state.settings = settings
         state.loading = false
     },
@@ -47,22 +49,11 @@ export const actions: ActionTree<SettingsStateInterface, RootStateInterface> = {
         // and it takes 1 second to return the data
         // by using javascript setTimeout with 1000 for the milliseconds option
         apiClient.settings.fetchItems().then((data) => {
-            console.log(data)
+            const result:SettingInterface = data.data;
+            commit(MutationType.settings.loadedSettings, result)
+        }).catch((error: Error | AxiosError) => {
+            ErrorHandler(error);
         })
-        setTimeout(() => {
-            commit(MutationType.settings.loadedSettings, {
-                "paginate": "40",
-                "default_language": "EN",
-                "starred_enabled": false,
-                "known_enabled": false,
-                "fresh_first": false,
-                "languages_list": [
-                    "DE",
-                    "EN"
-                ],
-                "main_language": "RU"
-            })
-        }, 1000)
     },
     selectSetting(
         { commit },
