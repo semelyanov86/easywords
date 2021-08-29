@@ -36,6 +36,9 @@ export class HttpClientModel implements HttpClientInterface {
         const token = this.getToken()
         options.headers.Authorization = `Bearer ${token}`
       }
+      if (parameters.payload) {
+          options.params = parameters.payload
+      }
       axios
         .get(url, options)
         .then((response: AxiosResponse) => {

@@ -41,10 +41,10 @@
           classes.push('bg-gray-500 text-gray-300 opacity-50 cursor-not-allowed')
         } else {
     			// these are the button CSS classes when enabled
-          classes.push('bg-blue-500 text-white hover:bg-blue-400')
+          classes.push('text-white hover:bg-blue-400')
         }
 
-        // addCss will have additional CSS class 
+        // addCss will have additional CSS class
         // we want to apply from where we consume this component
         if ((this.addCss || '').trim().length > 0) {
           classes.push(this.addCss.trim())

@@ -5,6 +5,7 @@ import { WordsApiClientInterface } from './WordsApiClient.interface'
 import { WordInterface } from '../../../models/words/Word.interface'
 import { LoadedWordsInterface } from '../../../models/words/LoadedWords.interface'
 import { LoadedWordInterface } from '../../../models/words/LoadedWord.interface'
+import {WordRequestInterface} from "../../../models/words/WordRequest.interface";
 
 /**
  * @Name WordsApiClientModel
@@ -18,10 +19,11 @@ export class WordsApiClientModel implements WordsApiClientInterface {
     this.urls = urls
   }
 
-  fetchWords(): Promise<LoadedWordsInterface> {
+  fetchWords(setting: WordRequestInterface): Promise<LoadedWordsInterface> {
     const getParameters: HttpRequestParamsInterface = {
       url: this.urls.fetchWords,
-      requiresToken: true
+      requiresToken: true,
+        payload: setting
     }
 
     return HttpClient.get<LoadedWordsInterface>(getParameters)
@@ -43,7 +45,6 @@ export class WordsApiClientModel implements WordsApiClientInterface {
           url: url.replace('{id}', id.toString()),
           requiresToken: true
       }
-
       return HttpClient.get<LoadedWordInterface>(getParameters)
     }
 

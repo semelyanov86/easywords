@@ -5,7 +5,9 @@ import { MutationType, RootStateInterface, WordsStateInterface } from '../../mod
 import { initialWordsState } from './initialState'
 
 import { WordInterface } from '../../models/words/Word.interface'
+import {SettingInterface} from "../../models/settings/setting.interface";
 import apiClient from '../../api-client'
+import {WordRequestInterface} from "@/models/words/WordRequest.interface";
 
 /**
  * @name mutations
@@ -29,17 +31,24 @@ export const mutations: MutationTree<WordsStateInterface> = {
  * Vuex Items actions
  */
 export const actions: ActionTree<WordsStateInterface, RootStateInterface> = {
-  loadWords({ commit }) {
+  loadWords({ commit }, setting:WordRequestInterface) {
     commit(MutationType.words.loadingWords)
 
-    // let's pretend we called some API end-point
-    // and it takes 1 second to return the data
-    // by using javascript setTimeout with 1000 for the milliseconds option
-      apiClient.words.fetchWords().then((data) => {
+      apiClient.words.fetchWords(setting).then((data) => {
           const result = data.data
-          commit(MutationType.words.loadedWords, data)
+          commit(MutationType.words.loadedWords, result)
       })
-  }
+  },
+  markViewed({commit}, id:number) {
+      apiClient.words.markViewed(id).then((data) => {
+
+      })
+  },
+    markKnown({commit}, id:number) {
+        apiClient.words.markKnown(id).then((data) => {
+            state.words.filter((word) => word.id === id)
+        })
+    }
 }
 
 /**

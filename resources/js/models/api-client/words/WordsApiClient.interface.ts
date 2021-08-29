@@ -1,6 +1,7 @@
 import { LoadedWordsInterface } from '@/models/words/LoadedWords.interface'
 import { WordInterface } from '@/models/words/Word.interface'
 import { LoadedWordInterface } from '@/models/words/LoadedWord.interface'
+import {WordRequestInterface} from "@/models/words/WordRequest.interface";
 
 /**
  * @Name WordsApiClientInterface
@@ -8,7 +9,7 @@ import { LoadedWordInterface } from '@/models/words/LoadedWord.interface'
  * Interface for the Words api client module
  */
 export interface WordsApiClientInterface {
-    fetchWords: () => Promise<LoadedWordsInterface>
+    fetchWords: (setting:WordRequestInterface) => Promise<LoadedWordsInterface>
     createWords: (word: WordInterface) => Promise<LoadedWordInterface>
     markViewed: (id: number) => Promise<LoadedWordInterface>
     markKnown: (id: number) => Promise<LoadedWordInterface>
