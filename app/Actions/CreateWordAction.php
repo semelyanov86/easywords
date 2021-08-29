@@ -21,6 +21,11 @@ final class CreateWordAction
 
     public function handle(WordDto $dto): Word
     {
+        $existing = Word::where('original', $dto->original)
+            ->where('user_id', $dto->user_id)->first();
+        if ($existing) {
+            abort(422, 'Word already existing');
+        }
         return $this->repository->create($dto);
     }
 }
