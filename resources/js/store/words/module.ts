@@ -14,6 +14,7 @@ import {notify} from "../../components/notifications";
 // import the styling for the toast
 import 'mosha-vue-toastify/dist/style.css'
 import {NotifyTypes} from "../../components/notifications/NotifyTypes";
+import {LoadedWordInterface} from "@/models/words/LoadedWord.interface";
 
 /**
  * @name mutations
@@ -57,6 +58,17 @@ export const actions: ActionTree<WordsStateInterface, RootStateInterface> = {
         apiClient.words.markKnown(id).then((data) => {
             commit(MutationType.words.deleteItem, id)
             // state.words.filter((word) => word.id === id)
+        })
+    },
+    createWord({commit}, word:WordInterface): void {
+        apiClient.words.createWords(word).then((data) => {
+            notify({
+                title: 'Word created with id: ' + data.data.id,
+                message: 'Word successfully created with id: ' + data.data.id,
+                type: NotifyTypes.success
+            })
+        }).catch((error: Error | AxiosError) => {
+            ErrorHandler(error);
         })
     },
     markStarred({commit}, id:number) {

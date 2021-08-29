@@ -30,6 +30,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import(/* webpackChunkName: "about" */ '../views/Profile.vue')
     },
     {
+        path: '/create',
+        name: 'Create',
+        component: () => import(/* webpackChunkName: "about" */ '../views/Create.vue')
+    },
+    {
         path: '/words/:parent/:target/:rev',
         name: 'Words',
         props: true,
