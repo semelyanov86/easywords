@@ -7,19 +7,15 @@
             <div class="max-w-sm mt-6 overflow-hidden bg-white rounded shadow-lg" v-if="word">
                 <transition name="slide-fade" mode="out-in">
                     <div :key="word.id">
-                        <vue-flip v-model="flipped" height="150px" width="300px">
-                            <template v-slot:front class="front">
+                        <transition name="flip">
+                            <div class="card" :key="getWordKeyTranslation">
                                 <div class="px-6 py-4">
                                     <div class="mb-2 text-2xl font-bold text-gray-900 text-left">{{ word[getWordKeyTranslation] }}</div>
                                 </div>
-                            </template>
-                            <template v-slot:back class="back">
-                                <div class="px-6 py-4">
-                                    <div class="mb-2 text-2xl font-bold text-gray-900 text-left">{{ word[getWordKeyTranslation] }}</div>
-                                </div>
-                            </template>
-                        </vue-flip>
-                        <card-buttons :id="word.id"></card-buttons>
+                                <card-buttons :id="word.id"></card-buttons>
+                            </div>
+                        </transition>
+
                     </div>
                 </transition>
             </div>
@@ -190,5 +186,22 @@ export default defineComponent({
     /* .slide-fade-leave-active for <2.1.8 */ {
     transform: translateX(10px);
     opacity: 0;
+}
+.card {
+    text-align: center;
+    will-change: transform;
+}
+.flip-enter-active {
+    transition: all 0.4s ease;
+}
+
+.flip-leave-active {
+    display: none;
+}
+
+.flip-enter-from, .flip-leave-to {
+    transform: rotateY(180deg);
+    opacity: 0;
+
 }
 </style>
