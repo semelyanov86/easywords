@@ -69,6 +69,14 @@ final class WordRepository
         return $word;
     }
 
+    public function markStarred(int $id): Word
+    {
+        $word = $this->getById($id);
+        $word->starred = 1;
+        $word->save();
+        return $word;
+    }
+
     public function create(WordDto $dto): Word
     {
         return Word::create($dto->toArray());

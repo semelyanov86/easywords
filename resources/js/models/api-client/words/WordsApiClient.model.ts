@@ -57,4 +57,24 @@ export class WordsApiClientModel implements WordsApiClientInterface {
 
       return HttpClient.get<LoadedWordInterface>(getParameters)
     }
+
+    markStarred(id: number): Promise<LoadedWordInterface> {
+        const url = this.urls.markStarred;
+        const getParameters: HttpRequestParamsInterface = {
+            url: url.replace('{id}', id.toString()),
+            requiresToken: true
+        }
+
+        return HttpClient.get<LoadedWordInterface>(getParameters)
+    }
+
+    deleteWord(id:number): Promise<void> {
+        const url = this.urls.deleteWord;
+        const getParameters: HttpRequestParamsInterface = {
+            url: url.replace('{id}', id.toString()),
+            requiresToken: true
+        }
+
+        return HttpClient.delete<void>(getParameters)
+    }
 }

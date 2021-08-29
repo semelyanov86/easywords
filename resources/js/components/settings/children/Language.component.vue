@@ -67,7 +67,7 @@ export default defineComponent({
                 params: {
                     parent: props.main_language,
                     target: props.language,
-                    rev: is_reversed ? 'left' : 'right'
+                    rev: is_reversed ? 'right' : 'left'
                 }
             })
         }

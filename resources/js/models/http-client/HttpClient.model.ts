@@ -75,4 +75,32 @@ export class HttpClientModel implements HttpClientInterface {
         })
     })
   }
+
+    delete<T>(parameters: HttpRequestParamsInterface): Promise<T> {
+        return new Promise<T>((resolve, reject) => {
+            const { url, requiresToken } = parameters
+
+            // axios options
+            const options: AxiosRequestConfig = {
+                headers: {}
+            }
+
+            if (requiresToken) {
+                const token = this.getToken()
+                options.headers.Authorization = `Bearer ${token}`
+            }
+            if (parameters.payload) {
+                options.params = parameters.payload
+            }
+            axios
+                .delete(url, options)
+                .then((response: AxiosResponse) => {
+                    resolve(response.data as T)
+                })
+                .catch((error: AxiosResponse) => {
+                    console.info('------ rejecting ----')
+                    reject(error)
+                })
+        })
+    }
 }

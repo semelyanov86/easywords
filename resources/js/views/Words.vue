@@ -20,7 +20,7 @@
                 </transition>
             </div>
             <div v-else>
-                <h4 class="text-2xl font-semibold text-gray-700">{{ i18n.t('languageList.no-items') }}</h4>
+                <no-words-found :target="target"></no-words-found>
             </div>
         </div>
         <footer class="text-gray-600 body-font">
@@ -69,11 +69,12 @@ import ElButton from "../components/primitives/buttons/ElButton.vue"
 import { WordInterface } from "../models/words/Word.interface";
 import VueFlip from 'vue-flip';
 import CardButtons from '../components/words/CardButtons.vue'
+import NoWordsFound from '../components/words/NoWordsFound.vue'
 
 export default defineComponent({
     name: "Words",
     components: {
-        Loader, ElButton, VueFlip, CardButtons
+        Loader, ElButton, VueFlip, CardButtons, NoWordsFound
     },
     props: {
         parent: {

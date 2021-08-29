@@ -7,6 +7,8 @@ export interface WordsApiClientUrlsInterface {
     fetchWords: string,
     createWords: string,
     markViewed: string,
-    markKnown: string
+    markKnown: string,
+    markStarred: string,
+    deleteWord: string
 }
 

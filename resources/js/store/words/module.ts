@@ -8,6 +8,12 @@ import { WordInterface } from '../../models/words/Word.interface'
 import {SettingInterface} from "../../models/settings/setting.interface";
 import apiClient from '../../api-client'
 import {WordRequestInterface} from "@/models/words/WordRequest.interface";
+import {AxiosError} from "axios";
+import {ErrorHandler} from "../../plugins/error-handler/ErrorHandler";
+import {notify} from "../../components/notifications";
+// import the styling for the toast
+import 'mosha-vue-toastify/dist/style.css'
+import {NotifyTypes} from "../../components/notifications/NotifyTypes";
 
 /**
  * @name mutations
@@ -22,6 +28,9 @@ export const mutations: MutationTree<WordsStateInterface> = {
     state.words = words
     state.loading = false
   },
+    deleteItem(state: WordsStateInterface, id: number) {
+        state.words = state.words.filter((word) => word.id !== id)
+    }
 
 }
 
@@ -46,7 +55,31 @@ export const actions: ActionTree<WordsStateInterface, RootStateInterface> = {
   },
     markKnown({commit}, id:number) {
         apiClient.words.markKnown(id).then((data) => {
-            state.words.filter((word) => word.id === id)
+            commit(MutationType.words.deleteItem, id)
+            // state.words.filter((word) => word.id === id)
+        })
+    },
+    markStarred({commit}, id:number) {
+      apiClient.words.markStarred(id).then((data) => {
+          notify({
+              title: 'Word ' + data.data.original + ' is starred',
+              message: 'Later you can learn only starred words',
+              type: NotifyTypes.success
+          })
+      }).catch((error: Error | AxiosError) => {
+          ErrorHandler(error);
+      })
+    },
+    deleteWord({commit}, id:number) {
+        apiClient.words.deleteWord(id).then((data) => {
+            commit(MutationType.words.deleteItem, id)
+            notify({
+                title: 'Word has been deleted starred',
+                message: 'You can not restore it anymore',
+                type: NotifyTypes.success
+            })
+        }).catch((error: Error | AxiosError) => {
+            ErrorHandler(error);
         })
     }
 }

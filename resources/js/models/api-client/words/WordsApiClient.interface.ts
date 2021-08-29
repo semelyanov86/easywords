@@ -13,4 +13,6 @@ export interface WordsApiClientInterface {
     createWords: (word: WordInterface) => Promise<LoadedWordInterface>
     markViewed: (id: number) => Promise<LoadedWordInterface>
     markKnown: (id: number) => Promise<LoadedWordInterface>
+    markStarred: (id: number) => Promise<LoadedWordInterface>
+    deleteWord: (id: number) => Promise<void>
 }

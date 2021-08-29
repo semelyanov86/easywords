@@ -9,6 +9,7 @@ use App\Actions\DeleteWordAction;
 use App\Actions\IncreaseCounterAction;
 use App\Actions\IndexWordsAction;
 use App\Actions\MarkWordKnownAction;
+use App\Actions\MarkWordStarredAction;
 use App\DataTransferObjects\WordDto;
 use App\Http\Requests\IndexWordsRequest;
 use App\Models\Word;
@@ -42,6 +43,14 @@ final class WordController extends Controller
     {
         Auth::user()->hasPermissionTo('view words');
         $wordModel = MarkWordKnownAction::run($word);
+        return new WordResource($wordModel);
+    }
+
+    #[Get('words/{word}/starred', name: 'api.words.starred')]
+    public function markStarred(int $word): WordResource
+    {
+        Auth::user()->hasPermissionTo('view words');
+        $wordModel = MarkWordStarredAction::run($word);
         return new WordResource($wordModel);
     }
 

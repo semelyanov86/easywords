@@ -6,6 +6,7 @@
         </el-button>
         <el-button
             :label="i18n.t('languageList.star')"
+            @click="makeStar"
             add-css="px-3 py-1 text-sm text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none">
         </el-button>
     </div>
@@ -15,6 +16,7 @@
 import {computed, defineComponent, onMounted, ref, reactive} from 'vue'
 import ElButton from "../primitives/buttons/ElButton.vue"
 import {useI18n} from 'vue-i18n';
+import {useWordsStore} from "../../store/words";
 
 export default defineComponent({
     name: "CardButtons",
@@ -27,10 +29,18 @@ export default defineComponent({
     components: {
         ElButton
     },
-    setup() {
+    setup(props) {
         const i18n = useI18n()
+        const wordsStore = useWordsStore()
+
+        function makeStar() {
+            wordsStore.action('markStarred', props.id)
+        }
+        function deleteWord() {
+            wordsStore.action('deleteWord', props.id)
+        }
         return {
-            i18n
+            i18n, makeStar
         }
     }
 })
