@@ -8,6 +8,7 @@
   import { defineComponent } from 'vue'
 
   export default defineComponent({
+      name: "Loader",
     props: {
       show: {
         type: Boolean

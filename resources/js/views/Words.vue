@@ -17,6 +17,10 @@ export default defineComponent({
         target: {
             type: String,
             required: true
+        },
+        rev: {
+            type: String,
+            required: true
         }
     },
     setup() {

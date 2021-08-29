@@ -1,12 +1,10 @@
 <template>
 <div class="home">
-    <h1>{{ i18n.t('welcome') }}</h1>
-    <h1>HOME</h1>
     <div v-if="settings">
         <language-list :languages="settings.languages_list" :main_language="settings.main_language"></language-list>
     </div>
     <div v-else>
-        <p>loading...</p>
+        <loader :show="true"></loader>
     </div>
 </div>
 </template>
@@ -18,13 +16,14 @@ import LanguageList from "../components/settings/LanguageList.vue";
 import {useSettingsStore} from "../store/settings";
 import {useUserStore} from "../store/user";
 import { SettingInterface } from '../models/settings/setting.interface'
+import Loader from '../components/shared/Loader.component.vue'
 import { SettingsMutationType } from "../models/store/settings/SettingsMutationType";
 import {useI18n} from 'vue-i18n';
 
 export default defineComponent({
     name: "Home",
     components: {
-        LanguageList
+        LanguageList, Loader
     },
     setup() {
         // private:
