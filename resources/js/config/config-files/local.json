@@ -43,7 +43,8 @@
   },
     "user": {
         "apiUrls": {
-            "fetchUser": "/api/me"
+            "fetchUser": "/api/me",
+            "updatePassword": "/api/user/password"
         }
     },
     "auth": {

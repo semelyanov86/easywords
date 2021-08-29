@@ -4,6 +4,7 @@ import { UserApiClientUrlsInterface } from './UserApiClientUrls.interface'
 import { UserApiClientInterface } from './UserApiClient.interface'
 import { UserInterface } from '../../../models/user/user.interface'
 import {LoadedUserInterface} from "../../../models/user/loadedUser.interface";
+import {UpdatePasswordInterface} from "../../../models/user/updatePassword.interface";
 
 /**
  * @Name UserApiClientModel
@@ -24,5 +25,15 @@ export class UserApiClientModel implements UserApiClientInterface {
     }
 
     return HttpClient.get<LoadedUserInterface>(getParameters)
+  }
+
+  updatePassword(data:UpdatePasswordInterface): Promise<LoadedUserInterface> {
+      const getParameters: HttpRequestParamsInterface = {
+          url: this.urls.updatePassword,
+          requiresToken: true,
+          payload: data
+      }
+
+      return HttpClient.put<LoadedUserInterface>(getParameters)
   }
 }

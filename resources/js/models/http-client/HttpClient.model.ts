@@ -103,4 +103,29 @@ export class HttpClientModel implements HttpClientInterface {
                 })
         })
     }
+
+    put<T>(parameters: HttpRequestParamsInterface): Promise<T> {
+        return new Promise<T>((resolve, reject) => {
+            const { url, requiresToken, payload } = parameters
+
+            // axios options
+            const options: AxiosRequestConfig = {
+                headers: {}
+            }
+
+            if (requiresToken) {
+                const token = this.getToken()
+                options.headers.Authorization = `Bearer ${token}`
+            }
+
+            axios
+                .put(url, payload, options)
+                .then((response: AxiosResponse) => {
+                    resolve(response.data as T)
+                })
+                .catch((error: AxiosResponse) => {
+                    reject(error)
+                })
+        })
+    }
 }

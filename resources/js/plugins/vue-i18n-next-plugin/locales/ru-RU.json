@@ -48,13 +48,16 @@
             "home": "Главная",
             "settings": "Настройки",
             "primitives": "Примитивы",
-            "widgetsPlayground": "Виджеты"
+            "widgetsPlayground": "Виджеты",
+            "Change Password": "Изменить пароль",
+            "ChangePassword": "Изменить пароль"
         },
         "languages": {
             "list": {
                 "header": "Список языков"
             }
         },
+        "ChangePassword": "Изменить пароль",
         "Profile": "Профиль",
         "Settings": "Настройки",
         "Logout": "Выход из системы",
@@ -97,6 +100,14 @@
             "done_at": "Когда изучено",
             "language": "Язык",
             "save": "Сохранить"
+        },
+        "password": {
+            "header": "Изменить пароль",
+            "short": "Здесь можно изменить пароль пользователя",
+            "fill-data": "Заполните форму для добавления",
+            "current_password": "Текущий пароль",
+            "password": "Новый пароль",
+            "password_confirmation": "Подтвердите пароль"
         }
     }
 }

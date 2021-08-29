@@ -35,6 +35,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import(/* webpackChunkName: "about" */ '../views/Create.vue')
     },
     {
+        path: '/user/password',
+        name: 'ChangePassword',
+        component: () => import(/* webpackChunkName: "about" */ '../views/ChangePassword.vue')
+    },
+    {
         path: '/words/:parent/:target/:rev',
         name: 'Words',
         props: true,

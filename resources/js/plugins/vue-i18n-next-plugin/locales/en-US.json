@@ -48,13 +48,16 @@
             "home": "Home",
             "settings": "Settings",
             "primitives": "Primitives",
-            "widgetsPlayground": "Widgets Playground"
+            "widgetsPlayground": "Widgets Playground",
+            "Change Password": "Change Password",
+            "ChangePassword": "Change Password"
         },
         "languages": {
             "list": {
                 "header": "My Languages List"
             }
         },
+        "ChangePassword": "Изменить пароль",
         "Profile": "Profile",
         "Settings": "Settings",
         "Logout": "Logout",
@@ -68,6 +71,43 @@
             "id": "ID",
             "name": "User Name",
             "updated_at": "Updated At"
+        },
+        "setting": {
+            "paginate": "Number of words learn at once",
+            "default_language": "Default language to learn",
+            "starred_enabled": "Show only starred",
+            "known_enabled": "Show known words",
+            "fresh_first": "Show fresh first"
+        },
+        "languageList": {
+            "chooseLanguage": "For starting choose language",
+            "header": "Translate word",
+            "intro": "Try to translate word by yourself. Then turn card.",
+            "no-items": "No words for learning. Add new words and try to update list.",
+            "delete": "Delete",
+            "star": "Add to star",
+            "next": "Next",
+            "show": "Turn",
+            "know": "Got it!",
+            "update-words": "Update words"
+        },
+        "create": {
+            "header": "Add to dictionary",
+            "short": "Quick create new word",
+            "fill-data": "Fill out the form",
+            "original": "Original word",
+            "translated": "Translated word",
+            "done_at": "When done",
+            "language": "Language",
+            "save": "Save"
+        },
+        "password": {
+            "header": "Change password",
+            "short": "Here you can change user password",
+            "fill-data": "Fill the form",
+            "current_password": "Current password",
+            "password": "New password",
+            "password_confirmation": "Confirm password"
         }
     }
 }

@@ -87,6 +87,10 @@ export default defineComponent({
                 name: 'Settings'
             },
             {
+                title: 'Change Password',
+                name: 'ChangePassword'
+            },
+            {
                 title: 'Logout',
                 name: 'Logout'
             }

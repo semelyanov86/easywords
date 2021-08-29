@@ -1,13 +1,22 @@
 <?php
 namespace App\Http\Controllers\Api;
 
+use App\Actions\Fortify\UpdateUserPassword;
 use App\Http\Requests\AuthRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteAttributes\Attributes\Middleware;
+use Spatie\RouteAttributes\Attributes\Prefix;
+use Spatie\RouteAttributes\Attributes\Put;
 
+#[Prefix('api')]
+#[Middleware('auth:sanctum')]
 class AuthController extends Controller
 {
     /**
@@ -58,5 +67,17 @@ class AuthController extends Controller
         return response()->json([
             'token' => $token->plainTextToken,
         ]);
+    }
+
+    #[Put('user/password', name: 'user.password')]
+    public function password(Request $request, UpdateUserPassword $action): UserResource
+    {
+        /** @var User|null $user */
+        $user = Auth::user();
+        if (!$user) {
+            abort(403);
+        }
+        $action->update($user, $request->all());
+        return new UserResource($user);
     }
 }
