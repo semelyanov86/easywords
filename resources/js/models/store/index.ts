@@ -10,5 +10,6 @@ export * from './root/RootStore.model'
 // as you add more state modules, add additional exports for those here as well
 // GEN-EXPORTS
 export * from './settings/SettingsState.interface'
+export * from './words/WordsState.interface'
 export * from './user/UserState.interface'
 export * from './locales/LocalesState.interface'

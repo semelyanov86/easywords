@@ -1,5 +1,6 @@
 // GEN-IMPORTS
 import { SettingsApiClientInterface } from './settings'
+import { WordsApiClientInterface } from './words'
 import {AuthApiClientInterface} from "./auth";
 import {UserApiClientInterface} from "./user";
 
@@ -10,7 +11,8 @@ import {UserApiClientInterface} from "./user";
  */
 export interface ApiClientInterface {
   // GEN-PROPERTIES
-  settings: SettingsApiClientInterface,
+    settings: SettingsApiClientInterface,
     auth: AuthApiClientInterface,
-    user: UserApiClientInterface
+    user: UserApiClientInterface,
+    words: WordsApiClientInterface
 }

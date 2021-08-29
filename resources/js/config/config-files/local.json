@@ -50,5 +50,13 @@
         "apiUrls": {
             "login": "api/token"
         }
+    },
+    "words": {
+        "apiUrls": {
+            "fetchWords": "api/words",
+            "createWords": "api/words",
+            "markViewed": "api/words/{id}/viewed",
+            "markKnown": "api/words/{id}/known"
+        }
     }
 }
