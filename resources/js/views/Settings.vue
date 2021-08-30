@@ -104,6 +104,9 @@ export default defineComponent({
         let setting = reactive<SettingInterface>(initialSettingsState.settings)
         onMounted(() => {
             setting = settings.value
+            setting.fresh_first = Boolean(setting.fresh_first)
+            setting.known_enabled = Boolean(setting.known_enabled)
+            setting.starred_enabled = Boolean(setting.starred_enabled)
         })
         const close = () => {
             router.back()

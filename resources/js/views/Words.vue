@@ -118,7 +118,7 @@ export default defineComponent({
 
         const word = computed(() => {
             if (current.value > words.value.length-1) {
-                const curIndex = Math.floor(Math.random() * (words.value.length-1));
+                const curIndex = Math.floor(Math.random() * (words.value.length));
                 return words.value[curIndex]
             }
             return words.value[current.value]
@@ -158,7 +158,6 @@ export default defineComponent({
 
         function markKnown() {
             wordsStore.action('markKnown', word.value.id)
-            showNext()
         }
 
         onMounted(() => {
