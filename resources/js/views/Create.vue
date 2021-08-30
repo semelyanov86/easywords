@@ -15,6 +15,7 @@
                         <div>
                             <label class="text-gray-700" for="original">{{ i18n.t('create.original') }}</label>
                             <input
+                                ref="original"
                                 id="original"
                                 class="w-full mt-2 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
                                 type="text"
@@ -48,8 +49,8 @@
 
                     <div class="flex justify-end mt-4">
                         <el-button
+                            type="submit"
                             :label="i18n.t('create.save')"
-                            @click="register"
                             add-css="px-4 py-2 text-gray-200 bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
                         </el-button>
                     </div>
@@ -80,6 +81,7 @@ export default defineComponent({
         const settingsStore = useSettingsStore()
         const userStore = useUserStore()
         const wordsStore = useWordsStore()
+        const original = ref(null);
 
         const settings = computed(() => {
             return settingsStore.state.settings
@@ -104,10 +106,12 @@ export default defineComponent({
             wordsStore.action('createWord', word)
             word.original = '';
             word.translated = '';
+            // @ts-ignore
+            original.value?.focus();
         }
 
         return {
-            i18n, word, settings, register
+            i18n, word, settings, register, original
         }
     }
 })

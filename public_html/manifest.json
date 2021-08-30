@@ -18,8 +18,8 @@
             "type": "image/png"
         }
     ],
-    "start_url": "/",
-    "scope": ".",
+    "start_url": "https://cards.sergeyem.ru/",
+    "scope": "https://cards.sergeyem.ru/",
     "display": "standalone",
     "background_color": "#fff",
     "theme_color": "#000",

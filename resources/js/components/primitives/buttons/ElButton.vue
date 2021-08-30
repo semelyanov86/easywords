@@ -1,5 +1,5 @@
 <template>
-  <button type="button" :class="cssClass" :disabled="disabled" @click="onClick">
+  <button :type="type" :class="cssClass" :disabled="disabled" @click="onClick">
     <span>{{ label }}</span>
   </button>
 </template>
@@ -10,6 +10,10 @@
   export default defineComponent({
     name: 'ElButton',
     props: {
+      type: {
+        type: String,
+        default: 'button'
+      },
       disabled: {
         type: Boolean,
         default: false
