@@ -21,8 +21,7 @@ final class CreateWordAction
 
     public function handle(WordDto $dto): Word
     {
-        $existing = Word::where('original', $dto->original)
-            ->where('user_id', $dto->user_id)->first();
+        $existing = $this->repository->findByNameAndUser($dto->original, $dto->user_id);
         if ($existing) {
             abort(422, 'Word already existing');
         }

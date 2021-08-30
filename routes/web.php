@@ -19,12 +19,12 @@ use App\Http\Controllers\PermissionController;
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware(['auth:sanctum', 'verified']);
+});
 
 Route::middleware(['auth:sanctum', 'verified'])
-    ->get('/admin', function () {
-        return view('dashboard');
-    })
+    ->get('/admin', [
+        \App\Http\Controllers\DashboardController::class, 'index'
+    ])
     ->name('dashboard');
 
 Route::prefix('/admin')

@@ -4,6 +4,7 @@
     >
         <div class="flex items-center">
             <router-link :to="{name: 'Home'}" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                <img src="images/easywords.png" alt="EasyWords" class="logo">
                 <span class="ml-3 text-xl">EasyWords</span>
             </router-link>
         </div>
@@ -113,3 +114,9 @@ export default defineComponent({
     },
 });
 </script>
+
+<style scoped>
+.logo {
+    width: 29px;
+}
+</style>

@@ -6,6 +6,11 @@
     <div v-else>
         <loader :show="true"></loader>
     </div>
+    <footer class="mt-10 text-gray-600 body-font">
+        <div class="text-center">
+            <img src="images/easywords-full.png" alt="EasyWords">
+        </div>
+    </footer>
 </div>
 </template>
 

@@ -87,6 +87,17 @@ final class WordRepository
         return Word::findOrFail($id);
     }
 
+    public function findByNameAndUser(string $name, int $user): ?Word
+    {
+        return Word::where('original', $name)
+            ->where('user_id', $user)->first();
+    }
+
+    public function getPopularWords(): iterable
+    {
+        return Word::orderBy('views', 'DESC')->limit(10)->get();
+    }
+
     public function delete(int $id): bool
     {
         $word = $this->getById($id);
