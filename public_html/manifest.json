@@ -1,0 +1,29 @@
+{
+    "name": "EasyWords",
+    "short_name": "EasyWords",
+    "icons": [
+        {
+            "src": "/images/easywords.png",
+            "sizes": "134x129",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/easywords-s.png",
+            "sizes": "129x129",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/easywords-l.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "scope": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#000",
+    "description": "Learn words easily",
+    "dir": "ltr",
+    "lang": "ru-RU"
+}

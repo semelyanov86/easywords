@@ -72,6 +72,9 @@
                           Save
                       </button>
                   </div>
+              <div class="flex justify-end mt-4">
+                  <add-to-home-screen></add-to-home-screen>
+              </div>
           </div>
       </div>
   </div>
@@ -86,9 +89,13 @@ import {UpdateSettingsInterface} from "../models/settings/updateSettings.interfa
 import {useI18n} from 'vue-i18n';
 import router from "../router";
 import {MutationType} from "../models/store";
+import AddToHomeScreen from '../components/pwa/AddToHomeScreen.vue';
 
 export default defineComponent({
     name: "Settings",
+    components: {
+        AddToHomeScreen
+    },
     setup() {
         const settingsStore = useSettingsStore()
         const settings = computed(() => {
