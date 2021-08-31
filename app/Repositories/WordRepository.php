@@ -61,18 +61,18 @@ final class WordRepository
         return $word;
     }
 
-    public function markKnown(int $id): Word
+    public function markKnown(int $id, ?Carbon $date): Word
     {
         $word = $this->getById($id);
-        $word->done_at = Carbon::now();
+        $word->done_at = $date;
         $word->save();
         return $word;
     }
 
-    public function markStarred(int $id): Word
+    public function markStarred(int $id, int $value = 1): Word
     {
         $word = $this->getById($id);
-        $word->starred = 1;
+        $word->starred = $value;
         $word->save();
         return $word;
     }

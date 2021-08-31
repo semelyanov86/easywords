@@ -18,8 +18,8 @@ final class MarkWordStarredAction
     {
     }
 
-    public function handle(int $word): Word
+    public function handle(int $word, int $value = 1): Word
     {
-        return $this->repository->markStarred($word);
+        return $this->repository->markStarred($word, $value);
     }
 }

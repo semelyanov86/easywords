@@ -38,19 +38,19 @@ final class WordController extends Controller
         return new WordResource($wordModel);
     }
 
-    #[Get('words/{word}/known', name: 'api.words.known')]
-    public function markViewed(int $word): WordResource
+    #[Get('words/{word}/known/{value}', name: 'api.words.known')]
+    public function markViewed(int $word, int $value = 1): WordResource
     {
         Auth::user()->hasPermissionTo('view words');
-        $wordModel = MarkWordKnownAction::run($word);
+        $wordModel = MarkWordKnownAction::run($word, $value);
         return new WordResource($wordModel);
     }
 
-    #[Get('words/{word}/starred', name: 'api.words.starred')]
-    public function markStarred(int $word): WordResource
+    #[Get('words/{word}/starred/{value}', name: 'api.words.starred')]
+    public function markStarred(int $word, int $value = 1): WordResource
     {
         Auth::user()->hasPermissionTo('view words');
-        $wordModel = MarkWordStarredAction::run($word);
+        $wordModel = MarkWordStarredAction::run($word, $value);
         return new WordResource($wordModel);
     }
 
