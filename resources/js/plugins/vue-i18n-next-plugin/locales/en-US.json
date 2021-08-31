@@ -86,9 +86,11 @@
             "no-items": "No words for learning. Add new words and try to update list.",
             "delete": "Delete",
             "star": "Add to star",
+            "unstar": "Remove Star",
             "next": "Next",
             "show": "Turn",
             "know": "Got it!",
+            "unknow": "Learn Again!",
             "update-words": "Update words"
         },
         "create": {

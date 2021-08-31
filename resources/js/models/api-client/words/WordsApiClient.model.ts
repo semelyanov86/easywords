@@ -48,20 +48,20 @@ export class WordsApiClientModel implements WordsApiClientInterface {
       return HttpClient.get<LoadedWordInterface>(getParameters)
     }
 
-    markKnown(id: number): Promise<LoadedWordInterface> {
+    markKnown(id: number, value:number): Promise<LoadedWordInterface> {
       const url = this.urls.markKnown;
       const getParameters: HttpRequestParamsInterface = {
-          url: url.replace('{id}', id.toString()),
+          url: url.replace('{id}', id.toString()) + '/' + value,
           requiresToken: true
       }
 
       return HttpClient.get<LoadedWordInterface>(getParameters)
     }
 
-    markStarred(id: number): Promise<LoadedWordInterface> {
+    markStarred(id: number, value:number): Promise<LoadedWordInterface> {
         const url = this.urls.markStarred;
         const getParameters: HttpRequestParamsInterface = {
-            url: url.replace('{id}', id.toString()),
+            url: url.replace('{id}', id.toString()) + '/' + value,
             requiresToken: true
         }
 

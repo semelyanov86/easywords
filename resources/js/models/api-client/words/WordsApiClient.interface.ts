@@ -12,7 +12,7 @@ export interface WordsApiClientInterface {
     fetchWords: (setting:WordRequestInterface) => Promise<LoadedWordsInterface>
     createWords: (word: WordInterface) => Promise<LoadedWordInterface>
     markViewed: (id: number) => Promise<LoadedWordInterface>
-    markKnown: (id: number) => Promise<LoadedWordInterface>
-    markStarred: (id: number) => Promise<LoadedWordInterface>
+    markKnown: (id: number, value: number) => Promise<LoadedWordInterface>
+    markStarred: (id: number, value: number) => Promise<LoadedWordInterface>
     deleteWord: (id: number) => Promise<void>
 }

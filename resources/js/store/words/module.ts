@@ -11,6 +11,7 @@ import {WordRequestInterface} from "@/models/words/WordRequest.interface";
 import {AxiosError} from "axios";
 import {ErrorHandler} from "../../plugins/error-handler/ErrorHandler";
 import {notify} from "../../components/notifications";
+import {UpdateWordStatusInterface} from "../../models/words/UpdateWordStatus.interface";
 // import the styling for the toast
 import 'mosha-vue-toastify/dist/style.css'
 import {NotifyTypes} from "../../components/notifications/NotifyTypes";
@@ -54,9 +55,9 @@ export const actions: ActionTree<WordsStateInterface, RootStateInterface> = {
 
       })
   },
-    markKnown({commit}, id:number) {
-        apiClient.words.markKnown(id).then((data) => {
-            commit(MutationType.words.deleteItem, id)
+    markKnown({commit}, wordData: UpdateWordStatusInterface) {
+        apiClient.words.markKnown(wordData.id, wordData.value).then((data) => {
+            commit(MutationType.words.deleteItem, wordData.id)
             // state.words.filter((word) => word.id === id)
         })
     },
@@ -71,8 +72,8 @@ export const actions: ActionTree<WordsStateInterface, RootStateInterface> = {
             ErrorHandler(error);
         })
     },
-    markStarred({commit}, id:number) {
-      apiClient.words.markStarred(id).then((data) => {
+    markStarred({commit}, wordData: UpdateWordStatusInterface) {
+      apiClient.words.markStarred(wordData.id, wordData.value).then((data) => {
           notify({
               title: 'Word ' + data.data.original + ' is starred',
               message: 'Later you can learn only starred words',

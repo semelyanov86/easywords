@@ -12,7 +12,7 @@
                                 <div class="px-6 py-4">
                                     <div class="mb-2 text-2xl font-bold text-gray-900 text-left">{{ word[getWordKeyTranslation] }}</div>
                                 </div>
-                                <card-buttons :id="word.id"></card-buttons>
+                                <card-buttons :word="word"></card-buttons>
                             </div>
                         </transition>
 
@@ -28,7 +28,7 @@
                 <div class="container px-5 py-8 flex flex-wrap mx-auto items-center">
                     <div class="flex md:flex-nowrap flex-wrap justify-center items-end md:justify-start">
                         <el-button
-                            :label="i18n.t('languageList.know')"
+                            :label="word && word.done_at ? i18n.t('languageList.unknow') : i18n.t('languageList.know')"
                             @click="markKnown"
                             add-css="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
                         </el-button>
@@ -157,7 +157,10 @@ export default defineComponent({
         }
 
         function markKnown() {
-            wordsStore.action('markKnown', word.value.id)
+            wordsStore.action('markKnown', {
+                id: word.value.id,
+                value: word.value.done_at ? 0 : 1
+            })
         }
 
         onMounted(() => {
