@@ -84,7 +84,7 @@ final class WordRepository
 
     public function getById(int $id): Word
     {
-        return Word::findOrFail($id);
+        return Word::where('id', $id)->firstOrFail();
     }
 
     public function findByNameAndUser(string $name, int $user): ?Word

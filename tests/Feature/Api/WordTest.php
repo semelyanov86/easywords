@@ -146,9 +146,86 @@ class WordTest extends TestCase
         $word = Word::factory()->create([
             'done_at' => null
         ]);
-        $response = $this->getJson(route('api.words.known', $word->id));
+        $response = $this->getJson(route('api.words.known', [
+            'word' => $word->id,
+            'value' => 1
+        ]));
         $response->assertOk();
         $word->refresh();
         $this->assertNotNull($word->done_at);
+    }
+
+    /**
+     * @test
+     */
+    public function it_marks_as_unknown(): void
+    {
+        $word = Word::factory()->create([
+            'done_at' => null
+        ]);
+        $response = $this->getJson(route('api.words.known', [
+            'word' => $word->id,
+            'value' => 0
+        ]));
+        $response->assertOk();
+        $word->refresh();
+        $this->assertNull($word->done_at);
+    }
+
+    /**
+     * @test
+     */
+    public function it_marks_as_starred(): void
+    {
+        $word = Word::factory()->create([
+            'starred' => false
+        ]);
+        $response = $this->getJson(route('api.words.starred', [
+            'word' => $word->id,
+            'value' => 1
+        ]));
+        $response->assertOk();
+        $word->refresh();
+        $this->assertTrue($word->starred);
+    }
+
+    /**
+     * @test
+     */
+    public function it_marks_as_unstarred(): void
+    {
+        $word = Word::factory()->create([
+            'starred' => true
+        ]);
+        $response = $this->getJson(route('api.words.starred', [
+            'word' => $word->id,
+            'value' => 0
+        ]));
+        $response->assertOk();
+        $word->refresh();
+        $this->assertFalse($word->starred);
+    }
+
+    /**
+     * @test
+     */
+    public function it_share_word_to_different_user(): void
+    {
+        $user1 = User::factory()->createOne();
+        $user2 = User::factory()->createOne();
+        $word = Word::factory()->createOne([
+            'user_id' => $user1->id
+        ]);
+        $response = $this->getJson(route('api.words.share', [
+            'word' => $word->id,
+            'user' => $user2->id
+        ]));
+        $response->assertStatus(201);
+        $word->refresh();
+        $this->assertDatabaseHas('words', [
+            'original' => $word->original,
+            'translated' => $word->translated,
+            'user_id' => $user2->id
+        ]);
     }
 }
