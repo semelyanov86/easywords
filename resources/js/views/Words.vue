@@ -30,17 +30,17 @@
                         <el-button
                             :label="word && word.done_at ? i18n.t('languageList.unknow') : i18n.t('languageList.know')"
                             @click="markKnown"
-                            add-css="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                            add-css="inline-flex text-white bg-red-500 border-0 py-3 px-6 focus:outline-none hover:bg-indigo-600 rounded mt-3">
                         </el-button>
                         <el-button
                             :label="i18n.t('languageList.show')"
                             @click="showTranslation"
-                            add-css="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                            add-css="inline-flex text-white bg-yellow-500 border-0 py-3 px-6 focus:outline-none hover:bg-indigo-600 rounded mt-3">
                         </el-button>
                         <el-button
                             :label="i18n.t('languageList.next')"
                             @click="showNext"
-                            add-css="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+                            add-css="inline-flex text-white bg-indigo-500 border-0 py-3 px-6 focus:outline-none hover:bg-indigo-600 rounded mt-3">
                         </el-button>
                     </div>
                     <span class="inline-flex lg:ml-auto lg:mt-0 mt-6 w-full justify-center md:justify-start md:w-auto">
