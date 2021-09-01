@@ -9,6 +9,7 @@ import {UserMutationType} from "../../models/store/user/UserMutationType";
 import {ErrorHandler} from "../../plugins/error-handler/ErrorHandler";
 import apiClient from "../../api-client";
 import {AxiosError} from "axios";
+import {ShortUserInterface} from "../../models/user/shortUser.interface";
 
 /**
  * @name mutations
@@ -21,6 +22,10 @@ export const mutations: MutationTree<UserStateInterface> = {
     },
     loadedUser(state: UserStateInterface, user: UserInterface) {
         state.user = user
+        state.loading = false
+    },
+    loadedUsersList(state: UserStateInterface, users: ShortUserInterface[]) {
+        state.usersList = users
         state.loading = false
     }
 }
@@ -40,6 +45,16 @@ export const actions: ActionTree<UserStateInterface, RootStateInterface> = {
         apiClient.user.fetchUser().then((data) => {
             const result:UserInterface = data.data;
             commit(MutationType.user.loadedUser, result)
+        }).catch((error: Error | AxiosError) => {
+            ErrorHandler(error);
+        })
+    },
+    loadShortUsers({ commit }) {
+        commit(MutationType.user.loadingUser)
+
+        apiClient.user.fetchUsersShort().then((data) => {
+            const result:ShortUserInterface[] = data.data;
+            commit(MutationType.user.loadedUsersList, result)
         }).catch((error: Error | AxiosError) => {
             ErrorHandler(error);
         })

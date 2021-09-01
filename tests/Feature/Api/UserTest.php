@@ -103,4 +103,18 @@ class UserTest extends TestCase
 
         $response->assertNoContent();
     }
+
+    /**
+     * @test
+     */
+    public function it_gets_short_list()
+    {
+        $users = User::factory()
+            ->count(3)
+            ->create();
+
+        $response = $this->getJson(route('users.short'));
+
+        $response->assertOk()->assertSee($users[0]->name);
+    }
 }

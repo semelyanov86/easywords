@@ -50,7 +50,8 @@
     "user": {
         "apiUrls": {
             "fetchUser": "/api/me",
-            "updatePassword": "/api/user/password"
+            "updatePassword": "/api/user/password",
+            "fetchUsersShort": "/api/short"
         }
     },
     "auth": {
@@ -65,6 +66,7 @@
             "markViewed": "api/words/{id}/viewed",
             "markKnown": "api/words/{id}/known",
             "markStarred": "api/words/{id}/starred",
+            "shareWord": "api/words/{id}/share",
             "deleteWord": "api/words/{id}"
         }
     }

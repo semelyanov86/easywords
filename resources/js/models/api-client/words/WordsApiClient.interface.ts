@@ -2,6 +2,7 @@ import { LoadedWordsInterface } from '@/models/words/LoadedWords.interface'
 import { WordInterface } from '@/models/words/Word.interface'
 import { LoadedWordInterface } from '@/models/words/LoadedWord.interface'
 import {WordRequestInterface} from "@/models/words/WordRequest.interface";
+import {ShareWordInterface} from "@/models/words/ShareWord.interface";
 
 /**
  * @Name WordsApiClientInterface
@@ -14,5 +15,6 @@ export interface WordsApiClientInterface {
     markViewed: (id: number) => Promise<LoadedWordInterface>
     markKnown: (id: number, value: number) => Promise<LoadedWordInterface>
     markStarred: (id: number, value: number) => Promise<LoadedWordInterface>
+    shareWord: (word:ShareWordInterface) => Promise<LoadedWordInterface>
     deleteWord: (id: number) => Promise<void>
 }

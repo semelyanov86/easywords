@@ -70,7 +70,9 @@
             "email": "Email",
             "id": "ID",
             "name": "User Name",
-            "updated_at": "Updated At"
+            "updated_at": "Updated At",
+            "choose_user": "Choose user",
+            "choose_user_helper": "Please choose user and press save button"
         },
         "setting": {
             "paginate": "Number of words learn at once",

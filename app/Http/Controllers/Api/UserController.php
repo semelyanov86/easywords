@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Actions\IndexShortUsersAction;
 use App\Actions\IndexUsersAction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,6 +23,12 @@ use Spatie\RouteAttributes\Attributes\Resource;
 #[Resource('users')]
 class UserController extends Controller
 {
+    #[Get('short', name: 'users.short')]
+    public function short(Request $request): UserCollection
+    {
+        return new UserCollection(IndexShortUsersAction::run());
+    }
+
     #[Get('me', name: 'users.profile')]
     public function profile(): UserResource
     {

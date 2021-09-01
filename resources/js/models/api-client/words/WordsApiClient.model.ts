@@ -6,6 +6,7 @@ import { WordInterface } from '../../../models/words/Word.interface'
 import { LoadedWordsInterface } from '../../../models/words/LoadedWords.interface'
 import { LoadedWordInterface } from '../../../models/words/LoadedWord.interface'
 import {WordRequestInterface} from "../../../models/words/WordRequest.interface";
+import {ShareWordInterface} from "@/models/words/ShareWord.interface";
 
 /**
  * @Name WordsApiClientModel
@@ -62,6 +63,17 @@ export class WordsApiClientModel implements WordsApiClientInterface {
         const url = this.urls.markStarred;
         const getParameters: HttpRequestParamsInterface = {
             url: url.replace('{id}', id.toString()) + '/' + value,
+            requiresToken: true
+        }
+
+        return HttpClient.get<LoadedWordInterface>(getParameters)
+    }
+
+    shareWord(word:ShareWordInterface): Promise<LoadedWordInterface> {
+        const url = this.urls.shareWord;
+        const wordId = word.word;
+        const getParameters: HttpRequestParamsInterface = {
+            url: url.replace('{id}', wordId.toString()) + '/' + word.user.toString(),
             requiresToken: true
         }
 

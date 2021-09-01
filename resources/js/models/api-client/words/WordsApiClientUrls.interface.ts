@@ -9,6 +9,7 @@ export interface WordsApiClientUrlsInterface {
     markViewed: string,
     markKnown: string,
     markStarred: string,
+    shareWord: string,
     deleteWord: string
 }
 

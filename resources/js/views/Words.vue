@@ -7,6 +7,7 @@
             <div class="max-w-sm mt-6 overflow-hidden bg-white rounded shadow-lg" v-if="word">
                 <transition name="slide-fade" mode="out-in">
                     <div :key="word.id">
+                        <share-component :id="word.id"></share-component>
                         <transition name="flip">
                             <div class="card" :key="getWordKeyTranslation">
                                 <div class="px-6 py-4">
@@ -70,11 +71,12 @@ import { WordInterface } from "../models/words/Word.interface";
 import VueFlip from 'vue-flip';
 import CardButtons from '../components/words/CardButtons.vue'
 import NoWordsFound from '../components/words/NoWordsFound.vue'
+import ShareComponent from "../components/words/ShareComponent.vue"
 
 export default defineComponent({
     name: "Words",
     components: {
-        Loader, ElButton, VueFlip, CardButtons, NoWordsFound
+        Loader, ElButton, VueFlip, CardButtons, NoWordsFound, ShareComponent
     },
     props: {
         parent: {
@@ -157,6 +159,8 @@ export default defineComponent({
         }
 
         function markKnown() {
+            flipped.value = false
+            showTranslate.value = false
             wordsStore.action('markKnown', {
                 id: word.value.id,
                 value: word.value.done_at ? 0 : 1

@@ -16,6 +16,7 @@ import {UpdateWordStatusInterface} from "../../models/words/UpdateWordStatus.int
 import 'mosha-vue-toastify/dist/style.css'
 import {NotifyTypes} from "../../components/notifications/NotifyTypes";
 import {LoadedWordInterface} from "@/models/words/LoadedWord.interface";
+import {ShareWordInterface} from "@/models/words/ShareWord.interface";
 
 /**
  * @name mutations
@@ -82,6 +83,17 @@ export const actions: ActionTree<WordsStateInterface, RootStateInterface> = {
       }).catch((error: Error | AxiosError) => {
           ErrorHandler(error);
       })
+    },
+    shareWord({commit}, wordData: ShareWordInterface) {
+        apiClient.words.shareWord(wordData).then((data) => {
+            notify({
+                title: 'Word ' + data.data.original + ' has been shared',
+                message: 'Word ' + data.data.original + ' has been shared',
+                type: NotifyTypes.success
+            })
+        }).catch((error: Error | AxiosError) => {
+            ErrorHandler(error);
+        })
     },
     deleteWord({commit}, id:number) {
         apiClient.words.deleteWord(id).then((data) => {

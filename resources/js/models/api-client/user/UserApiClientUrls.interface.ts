@@ -5,5 +5,6 @@
  */
 export interface UserApiClientUrlsInterface {
   fetchUser: string,
-    updatePassword: string
+    updatePassword: string,
+    fetchUsersShort: string
 }

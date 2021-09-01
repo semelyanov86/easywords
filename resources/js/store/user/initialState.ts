@@ -16,5 +16,6 @@ export const initialUserState: UserStateInterface = {
         "profile_photo_path": null,
         "created_at": "2021-08-26T05:57:00.000000Z",
         "updated_at": "2021-08-26T05:57:00.000000Z"
-    }
+    },
+    usersList: []
 }
