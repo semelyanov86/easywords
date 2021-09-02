@@ -18,17 +18,60 @@ use Spatie\RouteAttributes\Attributes\Middleware;
 use Spatie\RouteAttributes\Attributes\Prefix;
 use Spatie\RouteAttributes\Attributes\Resource;
 
+/**
+ * @group Users
+ *
+ * Getting information about other users in system and profile information
+ */
 #[Prefix('api')]
 #[Middleware('auth:sanctum')]
-#[Resource('users')]
 class UserController extends Controller
 {
+    /**
+     * Get users list
+     *
+     * Receive short list of users for dropdown options. Here we get only ID and name of user.
+     *
+     * @response scenario=success {
+     * "data": [
+     * {
+     * "id": 12,
+     * "name": "Ksenia Emelyanova"
+     * }
+     * ]
+     * }
+     * @response status=401 scenario=unauthorized {
+     * "message": "Unauthenticated."
+     * }
+     */
     #[Get('short', name: 'users.short')]
     public function short(Request $request): UserCollection
     {
         return new UserCollection(IndexShortUsersAction::run());
     }
 
+    /**
+     * Profile Info
+     *
+     * Get current authenticated user data
+     *
+     * @response scenario=success {
+     * "data": {
+     * "id": 1,
+     * "name": "Mr. Nelson Haag",
+     * "email": "admin@admin.com",
+     * "email_verified_at": "2021-08-26T05:57:00.000000Z",
+     * "current_team_id": null,
+     * "profile_photo_path": null,
+     * "created_at": "2021-08-26T05:57:00.000000Z",
+     * "updated_at": "2021-08-26T05:57:00.000000Z",
+     * "deleted_at": null
+     * }
+     * }
+     * @response status=401 scenario=unauthorized {
+     * "message": "Unauthenticated."
+     * }
+     */
     #[Get('me', name: 'users.profile')]
     public function profile(): UserResource
     {

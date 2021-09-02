@@ -23,4 +23,6 @@ Default credentials
 Username: `admin@admin.com`
 Password: `password`
 
+Application has detail API documentation. You can access it by route: [/docs/index.html](/docs/index.html)
 
+Also you can get insomnia collection. It is located in `public_html/docs/Insomnia_collection.yaml`

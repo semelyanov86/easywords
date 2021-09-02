@@ -1,0 +1,3069 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation for EasyWords APP</title>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="./css/theme-default.print.css" media="print">
+    <script src="./js/theme-default-3.9.1.js"></script>
+
+    <link rel="stylesheet"
+          href="//unpkg.com/@highlightjs/cdn-assets@10.7.2/styles/obsidian.min.css">
+    <script src="//unpkg.com/@highlightjs/cdn-assets@10.7.2/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script src="//cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+    <script>
+        var baseUrl = "http://cards.sergeyem.test:8000";
+    </script>
+    <script src="./js/tryitout-3.9.1.js"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+<a href="#" id="nav-button">
+      <span>
+        MENU
+        <img src="./images/navbar.png" alt="navbar-image" />
+      </span>
+</a>
+<div class="tocify-wrapper">
+        <img src="../images/easywords-full.png" alt="logo" class="logo" style="padding-top: 10px;" width="230px"/>
+                <div class="lang-selector">
+                            <a href="#" data-language-name="bash">bash</a>
+                            <a href="#" data-language-name="javascript">javascript</a>
+                    </div>
+        <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+    <ul class="search-results"></ul>
+
+    <ul id="toc">
+    </ul>
+
+            <ul class="toc-footer" id="toc-footer">
+                            <li><a href="./collection.json">View Postman collection</a></li>
+                            <li><a href="./openapi.yaml">View OpenAPI spec</a></li>
+                            <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+                    </ul>
+            <ul class="toc-footer" id="last-updated">
+            <li>Last updated: September 2 2021</li>
+        </ul>
+</div>
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1>Introduction</h1>
+<p>Here you can find detail documentation about API endpoints for EasyWords APP. Currently API supports getting short list of users and getting latest words for display in cards</p>
+<p>This documentation aims to provide all the information you need to work with API of EasyWords APP.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<blockquote>
+<p>Base URL</p>
+</blockquote>
+<pre><code class="language-yaml">http://cards.sergeyem.test:8000</code></pre>
+
+        <h1>Authenticating requests</h1>
+<p>This API is authenticated by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
+<p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
+
+        <h1 id="analytics">Analytics</h1>
+
+    <p>Get all statistics data which is need for displaying widgets</p>
+
+            <h2 id="analytics-GETapi-statistics">All statistics</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get all analytics information for displaying widgets</p>
+
+<span id="example-requests-GETapi-statistics">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/statistics" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/statistics"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-statistics">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;all&quot;: 24,
+    &quot;starred&quot;: 2,
+    &quot;not_dones&quot;: 8,
+    &quot;dones&quot;: 16,
+    &quot;total_views&quot;: 33,
+    &quot;users_count&quot;: 2,
+    &quot;most_viewed&quot;: [
+        {
+            &quot;id&quot;: 2,
+            &quot;original&quot;: &quot;der Cognac&quot;,
+            &quot;translated&quot;: &quot;Коньяк&quot;,
+            &quot;done_at&quot;: null,
+            &quot;starred&quot;: true,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 7,
+            &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 3,
+            &quot;original&quot;: &quot;die Sauerkraut&quot;,
+            &quot;translated&quot;: &quot;Квашеная капуста&quot;,
+            &quot;done_at&quot;: null,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 7,
+            &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 1,
+            &quot;original&quot;: &quot;der Sekt&quot;,
+            &quot;translated&quot;: &quot;Шампанское&quot;,
+            &quot;done_at&quot;: null,
+            &quot;starred&quot;: true,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 5,
+            &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 9,
+            &quot;original&quot;: &quot;gro&szlig;artig&quot;,
+            &quot;translated&quot;: &quot;Великолепный, замечательный&quot;,
+            &quot;done_at&quot;: &quot;2021-08-30T16:59:56.000000Z&quot;,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 3,
+            &quot;created_at&quot;: &quot;2021-08-29T19:53:17.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 11,
+            &quot;original&quot;: &quot;test11&quot;,
+            &quot;translated&quot;: &quot;te11&quot;,
+            &quot;done_at&quot;: &quot;2021-08-30T17:00:57.000000Z&quot;,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 1,
+            &quot;created_at&quot;: &quot;2021-08-30T14:17:15.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 13,
+            &quot;original&quot;: &quot;test13&quot;,
+            &quot;translated&quot;: &quot;te13&quot;,
+            &quot;done_at&quot;: &quot;2021-08-30T17:01:06.000000Z&quot;,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 1,
+            &quot;created_at&quot;: &quot;2021-08-30T14:23:44.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 12,
+            &quot;original&quot;: &quot;test12&quot;,
+            &quot;translated&quot;: &quot;te12&quot;,
+            &quot;done_at&quot;: &quot;2021-08-30T17:00:47.000000Z&quot;,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 1,
+            &quot;created_at&quot;: &quot;2021-08-30T14:23:36.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 14,
+            &quot;original&quot;: &quot;test14&quot;,
+            &quot;translated&quot;: &quot;te14&quot;,
+            &quot;done_at&quot;: &quot;2021-08-30T17:00:06.000000Z&quot;,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 1,
+            &quot;created_at&quot;: &quot;2021-08-30T14:23:58.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 16,
+            &quot;original&quot;: &quot;test16&quot;,
+            &quot;translated&quot;: &quot;te16&quot;,
+            &quot;done_at&quot;: &quot;2021-08-30T17:00:27.000000Z&quot;,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 1,
+            &quot;created_at&quot;: &quot;2021-08-30T14:24:39.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 19,
+            &quot;original&quot;: &quot;test19&quot;,
+            &quot;translated&quot;: &quot;te19&quot;,
+            &quot;done_at&quot;: &quot;2021-08-30T17:00:36.000000Z&quot;,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 1,
+            &quot;created_at&quot;: &quot;2021-08-30T16:47:30.000000Z&quot;
+        }
+    ],
+    &quot;added_today&quot;: [
+        {
+            &quot;id&quot;: 27,
+            &quot;original&quot;: &quot;fasdf&quot;,
+            &quot;translated&quot;: &quot;аывап&quot;,
+            &quot;done_at&quot;: null,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 0,
+            &quot;created_at&quot;: &quot;2021-09-02T11:55:21.000000Z&quot;
+        }
+    ],
+    &quot;updated_this_month&quot;: 1,
+    &quot;updated_today&quot;: 1
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-statistics" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-statistics"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-statistics"></code></pre>
+</span>
+<span id="execution-error-GETapi-statistics" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-statistics"></code></pre>
+</span>
+<form id="form-GETapi-statistics" data-method="GET"
+      data-path="api/statistics"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-statistics', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-statistics"
+                    onclick="tryItOut('GETapi-statistics');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-statistics"
+                    onclick="cancelTryOut('GETapi-statistics');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-statistics" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/statistics</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-statistics" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-statistics"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+        <h1 id="other">Other</h1>
+
+    
+
+            <h2 id="other-GETapi-user">User Information</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Getting authenticated user information</p>
+
+<span id="example-requests-GETapi-user">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/user" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/user"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-user">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+vary: Origin
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-user" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-user"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-user"></code></pre>
+</span>
+<span id="execution-error-GETapi-user" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-user"></code></pre>
+</span>
+<form id="form-GETapi-user" data-method="GET"
+      data-path="api/user"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-user', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-user"
+                    onclick="tryItOut('GETapi-user');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-user"
+                    onclick="cancelTryOut('GETapi-user');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-user" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/user</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-user" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-user"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+            <h2 id="other-GETapi-users--user_id--words">List of user words</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Getting list of words of other users. Currently not implemented.</p>
+
+<span id="example-requests-GETapi-users--user_id--words">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/users/19/words" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/users/19/words"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-users--user_id--words">
+            <blockquote>
+            <p>Example response (503):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json"></code>
+ </pre>
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+vary: Origin
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-users--user_id--words" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-users--user_id--words"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-users--user_id--words"></code></pre>
+</span>
+<span id="execution-error-GETapi-users--user_id--words" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-users--user_id--words"></code></pre>
+</span>
+<form id="form-GETapi-users--user_id--words" data-method="GET"
+      data-path="api/users/{user_id}/words"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-users--user_id--words', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-users--user_id--words"
+                    onclick="tryItOut('GETapi-users--user_id--words');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-users--user_id--words"
+                    onclick="cancelTryOut('GETapi-users--user_id--words');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-users--user_id--words" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/users/{user_id}/words</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-users--user_id--words" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-users--user_id--words"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>user_id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="user_id"
+               data-endpoint="GETapi-users--user_id--words"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of the user.</p>            </p>
+                    </form>
+
+            <h2 id="other-POSTapi-users--user--words">Store word by user</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Creating new word of passed user. Currently this functionality not implemented</p>
+
+<span id="example-requests-POSTapi-users--user--words">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://cards.sergeyem.test:8000/api/users/6/words" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"original\": \"dhwkijnssacprrywwjgobaivurhoasydvsbcosanxvtxmbijdeltpgiqyahqjveqlibuoowujnquwidtxibvtvlkrgnpwuxnkswlmcezbokgjbyyhgxtesucbhlbxcenvoxyumghefwkcgaunuloolpihojwvyhgkmtjcoqjhsljhlpjnvchcxfufxrvynjjcvyeufmrgkaqaqugokzijsjzzgjgdmemgpxgvlamcnwosmvyswjegxpdpdoqv\",
+    \"translated\": \"lbwsbdopqznaenroogavvxhuynbsrvtunpdjphvlmylmqlpxcaduvbmwzequzsadaogvarqfybw\",
+    \"done_at\": \"2021-09-02T19:23:32\",
+    \"starred\": false,
+    \"language\": \"\",
+    \"views\": \"avofuqgiptaaimwlwuyczhjzcnkuuowfenlkejojgjqoupfjqllqpnkaocnuuiufhnqqztbpppaitfblmiaexlkoumhdlekxblrczjtymazekpfgctgvbtkpmcztpkpcrizkndlbjinboticpkkuuodyezvrczg\"
+}"
+</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/users/6/words"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "original": "dhwkijnssacprrywwjgobaivurhoasydvsbcosanxvtxmbijdeltpgiqyahqjveqlibuoowujnquwidtxibvtvlkrgnpwuxnkswlmcezbokgjbyyhgxtesucbhlbxcenvoxyumghefwkcgaunuloolpihojwvyhgkmtjcoqjhsljhlpjnvchcxfufxrvynjjcvyeufmrgkaqaqugokzijsjzzgjgdmemgpxgvlamcnwosmvyswjegxpdpdoqv",
+    "translated": "lbwsbdopqznaenroogavvxhuynbsrvtunpdjphvlmylmqlpxcaduvbmwzequzsadaogvarqfybw",
+    "done_at": "2021-09-02T19:23:32",
+    "starred": false,
+    "language": "",
+    "views": "avofuqgiptaaimwlwuyczhjzcnkuuowfenlkejojgjqoupfjqllqpnkaocnuuiufhnqqztbpppaitfblmiaexlkoumhdlekxblrczjtymazekpfgctgvbtkpmcztpkpcrizkndlbjinboticpkkuuodyezvrczg"
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-users--user--words">
+            <blockquote>
+            <p>Example response (503):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json"></code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-users--user--words" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-users--user--words"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-users--user--words"></code></pre>
+</span>
+<span id="execution-error-POSTapi-users--user--words" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-users--user--words"></code></pre>
+</span>
+<form id="form-POSTapi-users--user--words" data-method="POST"
+      data-path="api/users/{user}/words"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-users--user--words', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-users--user--words"
+                    onclick="tryItOut('POSTapi-users--user--words');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-users--user--words"
+                    onclick="cancelTryOut('POSTapi-users--user--words');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-users--user--words" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/users/{user}/words</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-users--user--words" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTapi-users--user--words"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>user</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="user"
+               data-endpoint="POSTapi-users--user--words"
+               data-component="url" required  hidden>
+    <br>
+            </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>original</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="original"
+               data-endpoint="POSTapi-users--user--words"
+               data-component="body" required  hidden>
+    <br>
+<p>Must not be greater than 255 characters.</p>        </p>
+                <p>
+            <b><code>translated</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="translated"
+               data-endpoint="POSTapi-users--user--words"
+               data-component="body" required  hidden>
+    <br>
+<p>Must not be greater than 255 characters.</p>        </p>
+                <p>
+            <b><code>done_at</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="done_at"
+               data-endpoint="POSTapi-users--user--words"
+               data-component="body"  hidden>
+    <br>
+<p>Must be a valid date.</p>        </p>
+                <p>
+            <b><code>starred</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
+                <label data-endpoint="POSTapi-users--user--words" hidden>
+            <input type="radio" name="starred"
+                   value="true"
+                   data-endpoint="POSTapi-users--user--words"
+                   data-component="body" required             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-users--user--words" hidden>
+            <input type="radio" name="starred"
+                   value="false"
+                   data-endpoint="POSTapi-users--user--words"
+                   data-component="body" required             >
+            <code>false</code>
+        </label>
+    <br>
+        </p>
+                <p>
+            <b><code>language</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="language"
+               data-endpoint="POSTapi-users--user--words"
+               data-component="body" required  hidden>
+    <br>
+<p>Must not be greater than 5 characters.</p>        </p>
+                <p>
+            <b><code>views</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="views"
+               data-endpoint="POSTapi-users--user--words"
+               data-component="body" required  hidden>
+    <br>
+<p>Must not be greater than 255 characters.</p>        </p>
+    
+    </form>
+
+        <h1 id="authentication">Authentication</h1>
+
+    <p>APIs for managing authentication and getting tokens</p>
+
+            <h2 id="authentication-PUTapi-user-password">Change user password</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>This API endpoint you will use for  changing user password</p>
+
+<span id="example-requests-PUTapi-user-password">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request PUT \
+    "http://cards.sergeyem.test:8000/api/user/password" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"current_password\": \"\\\"password\\\"\",
+    \"password\": \"\\\"new_password\\\"\",
+    \"password_confirmation\": \"\\\"new_password\\\"\"
+}"
+</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/user/password"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "current_password": "\"password\"",
+    "password": "\"new_password\"",
+    "password_confirmation": "\"new_password\""
+}
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-PUTapi-user-password">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Mr. Nelson Haag&quot;,
+        &quot;email&quot;: &quot;admin@admin.com&quot;,
+        &quot;email_verified_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;,
+        &quot;current_team_id&quot;: null,
+        &quot;profile_photo_path&quot;: null,
+        &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;,
+        &quot;deleted_at&quot;: null
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, validation error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;email&quot;: [
+            &quot;The provided credentials are incorrect.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-user-password" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-user-password"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-user-password"></code></pre>
+</span>
+<span id="execution-error-PUTapi-user-password" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-user-password"></code></pre>
+</span>
+<form id="form-PUTapi-user-password" data-method="PUT"
+      data-path="api/user/password"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-user-password', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-user-password"
+                    onclick="tryItOut('PUTapi-user-password');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-user-password"
+                    onclick="cancelTryOut('PUTapi-user-password');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-user-password" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/user/password</code></b>
+        </p>
+                <p>
+            <label id="auth-PUTapi-user-password" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="PUTapi-user-password"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>current_password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="current_password"
+               data-endpoint="PUTapi-user-password"
+               data-component="body" required  hidden>
+    <br>
+<p>Current password of user.</p>        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="PUTapi-user-password"
+               data-component="body" required  hidden>
+    <br>
+<p>Your new password.</p>        </p>
+                <p>
+            <b><code>password_confirmation</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password_confirmation"
+               data-endpoint="PUTapi-user-password"
+               data-component="body" required  hidden>
+    <br>
+<p>Retype your new password.</p>        </p>
+    
+    </form>
+
+            <h2 id="authentication-POSTapi-login">Get Plain text token</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Using this endpoint you can get Plain token token</p>
+
+<span id="example-requests-POSTapi-login">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://cards.sergeyem.test:8000/api/login" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"\\\"admin@admin.com\\\"\",
+    \"password\": \"\\\"password\\\"\"
+}"
+</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/login"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "\"admin@admin.com\"",
+    "password": "\"password\""
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-login">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+ &quot;token&quot;: &quot;sfgdfgfgfds&quot;,
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, validation error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;email&quot;: [
+            &quot;The provided credentials are incorrect.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-login" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-login"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-login"></code></pre>
+</span>
+<span id="execution-error-POSTapi-login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-login"></code></pre>
+</span>
+<form id="form-POSTapi-login" data-method="POST"
+      data-path="api/login"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-login', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-login"
+                    onclick="tryItOut('POSTapi-login');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-login"
+                    onclick="cancelTryOut('POSTapi-login');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-login" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/login</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-login" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTapi-login"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-login"
+               data-component="body" required  hidden>
+    <br>
+<p>Email of authenticated user.</p>        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-login"
+               data-component="body" required  hidden>
+    <br>
+<p>Password of authenticated user.</p>        </p>
+    
+    </form>
+
+            <h2 id="authentication-POSTapi-token">Get JSON token</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Using this endpoint you can get JSON token. This is the main endpoint which you will use for working with third-party apps</p>
+
+<span id="example-requests-POSTapi-token">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://cards.sergeyem.test:8000/api/token" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"\\\"admin@admin.com\\\"\",
+    \"password\": \"\\\"password\\\"\",
+    \"device_name\": \"\\\"Insomnia\\\"\"
+}"
+</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/token"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "\"admin@admin.com\"",
+    "password": "\"password\"",
+    "device_name": "\"Insomnia\""
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-token">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+ &quot;token&quot;: &quot;2|n4a2Mnfe6FrEpZ0BqbWUiYA84g5USkuGpAcKTyMf&quot;,
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, validation error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;email&quot;: [
+            &quot;The provided credentials are incorrect.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-token" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-token"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-token"></code></pre>
+</span>
+<span id="execution-error-POSTapi-token" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-token"></code></pre>
+</span>
+<form id="form-POSTapi-token" data-method="POST"
+      data-path="api/token"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-token', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-token"
+                    onclick="tryItOut('POSTapi-token');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-token"
+                    onclick="cancelTryOut('POSTapi-token');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-token" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/token</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-token" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTapi-token"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-token"
+               data-component="body" required  hidden>
+    <br>
+<p>Email of authenticated user.</p>        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-token"
+               data-component="body" required  hidden>
+    <br>
+<p>Password of authenticated user.</p>        </p>
+                <p>
+            <b><code>device_name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="device_name"
+               data-endpoint="POSTapi-token"
+               data-component="body" required  hidden>
+    <br>
+<p>Type of device which will use this App.</p>        </p>
+    
+    </form>
+
+        <h1 id="settings">Settings</h1>
+
+    <p>Get settings of currently authenticated user or change setting value</p>
+
+            <h2 id="settings-GETapi-settings">Settings Information</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get current list of authenticated user with it's key and value</p>
+
+<span id="example-requests-GETapi-settings">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/settings" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/settings"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-settings">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;paginate&quot;: &quot;20&quot;,
+        &quot;default_language&quot;: &quot;DE&quot;,
+        &quot;starred_enabled&quot;: &quot;&quot;,
+        &quot;known_enabled&quot;: &quot;&quot;,
+        &quot;fresh_first&quot;: &quot;1&quot;,
+        &quot;languages_list&quot;: [
+            &quot;DE&quot;,
+            &quot;EN&quot;
+        ],
+        &quot;main_language&quot;: &quot;RU&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-settings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-settings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-settings"></code></pre>
+</span>
+<span id="execution-error-GETapi-settings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-settings"></code></pre>
+</span>
+<form id="form-GETapi-settings" data-method="GET"
+      data-path="api/settings"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-settings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-settings"
+                    onclick="tryItOut('GETapi-settings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-settings"
+                    onclick="cancelTryOut('GETapi-settings');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-settings" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/settings</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-settings" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-settings"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+            <h2 id="settings-POSTapi-settings">Change Settings</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Here you can change any setting value. For this purposes in body params you need to pass key of setting and it's value</p>
+
+<span id="example-requests-POSTapi-settings">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://cards.sergeyem.test:8000/api/settings" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"\\\"main_language\\\"\",
+    \"value\": \"\\\"RU\\\"\"
+}"
+</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/settings"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "\"main_language\"",
+    "value": "\"RU\""
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-settings">
+            <blockquote>
+            <p>Example response (204, success):</p>
+        </blockquote>
+                <pre>
+<code>[Empty response]</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-settings" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-settings"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-settings"></code></pre>
+</span>
+<span id="execution-error-POSTapi-settings" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-settings"></code></pre>
+</span>
+<form id="form-POSTapi-settings" data-method="POST"
+      data-path="api/settings"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-settings', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-settings"
+                    onclick="tryItOut('POSTapi-settings');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-settings"
+                    onclick="cancelTryOut('POSTapi-settings');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-settings" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/settings</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-settings" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTapi-settings"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="POSTapi-settings"
+               data-component="body" required  hidden>
+    <br>
+<p>Name of setting.</p>        </p>
+                <p>
+            <b><code>value</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="value"
+               data-endpoint="POSTapi-settings"
+               data-component="body" required  hidden>
+    <br>
+<p>Setting value.</p>        </p>
+    
+    </form>
+
+        <h1 id="users">Users</h1>
+
+    <p>Getting information about other users in system and profile information</p>
+
+            <h2 id="users-GETapi-short">Get users list</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Receive short list of users for dropdown options. Here we get only ID and name of user.</p>
+
+<span id="example-requests-GETapi-short">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/short" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/short"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-short">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 12,
+            &quot;name&quot;: &quot;Ksenia Emelyanova&quot;
+        }
+    ]
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-short" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-short"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-short"></code></pre>
+</span>
+<span id="execution-error-GETapi-short" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-short"></code></pre>
+</span>
+<form id="form-GETapi-short" data-method="GET"
+      data-path="api/short"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-short', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-short"
+                    onclick="tryItOut('GETapi-short');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-short"
+                    onclick="cancelTryOut('GETapi-short');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-short" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/short</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-short" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-short"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+            <h2 id="users-GETapi-me">Profile Info</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get current authenticated user data</p>
+
+<span id="example-requests-GETapi-me">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/me" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/me"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-me">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Mr. Nelson Haag&quot;,
+        &quot;email&quot;: &quot;admin@admin.com&quot;,
+        &quot;email_verified_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;,
+        &quot;current_team_id&quot;: null,
+        &quot;profile_photo_path&quot;: null,
+        &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;,
+        &quot;deleted_at&quot;: null
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-me" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-me"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-me"></code></pre>
+</span>
+<span id="execution-error-GETapi-me" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-me"></code></pre>
+</span>
+<form id="form-GETapi-me" data-method="GET"
+      data-path="api/me"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-me', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-me"
+                    onclick="tryItOut('GETapi-me');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-me"
+                    onclick="cancelTryOut('GETapi-me');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-me" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/me</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-me" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-me"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+        <h1 id="words">Words</h1>
+
+    <p>Main group which is need for different operations with words - getting list of all words, changing status of words</p>
+
+            <h2 id="words-GETapi-words">List of Words</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get list of words which we need for learning. Getting words with limit which we store in settings.</p>
+
+<span id="example-requests-GETapi-words">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/words?language=officia&amp;page=19" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/words"
+);
+
+const params = {
+    "language": "officia",
+    "page": "19",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-words">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;original&quot;: &quot;der Sekt&quot;,
+            &quot;translated&quot;: &quot;Шампанское&quot;,
+            &quot;done_at&quot;: null,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 0,
+            &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;original&quot;: &quot;der Cognac&quot;,
+            &quot;translated&quot;: &quot;Коньяк&quot;,
+            &quot;done_at&quot;: null,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 0,
+            &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 3,
+            &quot;original&quot;: &quot;die Sauerkraut&quot;,
+            &quot;translated&quot;: &quot;Квашеная капуста&quot;,
+            &quot;done_at&quot;: null,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 0,
+            &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 6,
+            &quot;original&quot;: &quot;voll&quot;,
+            &quot;translated&quot;: &quot;Полный&quot;,
+            &quot;done_at&quot;: null,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 0,
+            &quot;created_at&quot;: &quot;2021-08-26T05:58:17.000000Z&quot;
+        }
+    ],
+    &quot;links&quot;: {
+        &quot;first&quot;: &quot;http://cards.sergeyem.test:8000/api/words?page=1&quot;,
+        &quot;last&quot;: &quot;http://cards.sergeyem.test:8000/api/words?page=1&quot;,
+        &quot;prev&quot;: null,
+        &quot;next&quot;: null
+    },
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;from&quot;: 1,
+        &quot;last_page&quot;: 1,
+        &quot;links&quot;: [
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://cards.sergeyem.test:8000/api/words?page=1&quot;,
+                &quot;label&quot;: &quot;1&quot;,
+                &quot;active&quot;: true
+            },
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
+                &quot;active&quot;: false
+            }
+        ],
+        &quot;path&quot;: &quot;http://cards.sergeyem.test:8000/api/words&quot;,
+        &quot;per_page&quot;: &quot;20&quot;,
+        &quot;to&quot;: 4,
+        &quot;total&quot;: 4
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-words" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-words"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-words"></code></pre>
+</span>
+<span id="execution-error-GETapi-words" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-words"></code></pre>
+</span>
+<form id="form-GETapi-words" data-method="GET"
+      data-path="api/words"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-words', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-words"
+                    onclick="tryItOut('GETapi-words');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-words"
+                    onclick="cancelTryOut('GETapi-words');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-words" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/words</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-words" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-words"
+                                                                data-component="header"></label>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                    <p>
+                <b><code>language</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="language"
+               data-endpoint="GETapi-words"
+               data-component="query" required  hidden>
+    <br>
+<p>Language which we need to get list of words. Example=DE</p>            </p>
+                    <p>
+                <b><code>page</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="page"
+               data-endpoint="GETapi-words"
+               data-component="query"  hidden>
+    <br>
+<p>Page number if you need to get new list of words. Example=1</p>            </p>
+                </form>
+
+            <h2 id="words-POSTapi-words">Create Word</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Here you can create new word. Before saving system will check for existing ford and if it is exist it will throw validation error.</p>
+
+<span id="example-requests-POSTapi-words">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://cards.sergeyem.test:8000/api/words" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"original\": \"\\\"wichtig\\\"\",
+    \"translated\": \"\\\"Важно\\\"\",
+    \"done_at\": \"null\",
+    \"starred\": false,
+    \"language\": \"\\\"DE\\\"\",
+    \"views\": 0
+}"
+</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/words"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "original": "\"wichtig\"",
+    "translated": "\"Важно\"",
+    "done_at": "null",
+    "starred": false,
+    "language": "\"DE\"",
+    "views": 0
+}
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-words">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 6,
+        &quot;original&quot;: &quot;voll&quot;,
+        &quot;translated&quot;: &quot;Полный&quot;,
+        &quot;done_at&quot;: null,
+        &quot;starred&quot;: false,
+        &quot;user_id&quot;: 1,
+        &quot;language&quot;: &quot;DE&quot;,
+        &quot;views&quot;: 0
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Word already exists&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-words" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-words"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-words"></code></pre>
+</span>
+<span id="execution-error-POSTapi-words" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-words"></code></pre>
+</span>
+<form id="form-POSTapi-words" data-method="POST"
+      data-path="api/words"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-words', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-words"
+                    onclick="tryItOut('POSTapi-words');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-words"
+                    onclick="cancelTryOut('POSTapi-words');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-words" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/words</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-words" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTapi-words"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>original</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="original"
+               data-endpoint="POSTapi-words"
+               data-component="body" required  hidden>
+    <br>
+<p>Original name of word.</p>        </p>
+                <p>
+            <b><code>translated</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="translated"
+               data-endpoint="POSTapi-words"
+               data-component="body" required  hidden>
+    <br>
+<p>Translated word value.</p>        </p>
+                <p>
+            <b><code>done_at</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="done_at"
+               data-endpoint="POSTapi-words"
+               data-component="body"  hidden>
+    <br>
+<p>Should we mark this word as known.</p>        </p>
+                <p>
+            <b><code>starred</code></b>&nbsp;&nbsp;<small>boolean</small>     <i>optional</i> &nbsp;
+                <label data-endpoint="POSTapi-words" hidden>
+            <input type="radio" name="starred"
+                   value="true"
+                   data-endpoint="POSTapi-words"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-words" hidden>
+            <input type="radio" name="starred"
+                   value="false"
+                   data-endpoint="POSTapi-words"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Mark this word as starred or not.</p>        </p>
+                <p>
+            <b><code>user_id</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="user_id"
+               data-endpoint="POSTapi-words"
+               data-component="body"  hidden>
+    <br>
+        </p>
+                <p>
+            <b><code>language</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="language"
+               data-endpoint="POSTapi-words"
+               data-component="body" required  hidden>
+    <br>
+<p>What language for this word you creating.</p>        </p>
+                <p>
+            <b><code>views</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="views"
+               data-endpoint="POSTapi-words"
+               data-component="body"  hidden>
+    <br>
+<p>Number of views we create by default for this word.</p>        </p>
+    
+    </form>
+
+            <h2 id="words-GETapi-words--id-">Get word by ID</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Getting detail information about word by it's ID</p>
+
+<span id="example-requests-GETapi-words--id-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/words/8" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/words/8"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-words--id-">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 2,
+        &quot;original&quot;: &quot;der Cognac&quot;,
+        &quot;translated&quot;: &quot;Коньяк&quot;,
+        &quot;done_at&quot;: null,
+        &quot;starred&quot;: false,
+        &quot;user_id&quot;: 1,
+        &quot;language&quot;: &quot;DE&quot;,
+        &quot;views&quot;: 7,
+        &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Word].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-words--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-words--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-words--id-"></code></pre>
+</span>
+<span id="execution-error-GETapi-words--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-words--id-"></code></pre>
+</span>
+<form id="form-GETapi-words--id-" data-method="GET"
+      data-path="api/words/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-words--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-words--id-"
+                    onclick="tryItOut('GETapi-words--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-words--id-"
+                    onclick="cancelTryOut('GETapi-words--id-');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-words--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/words/{id}</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-words--id-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-words--id-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="GETapi-words--id-"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of word. Example=2</p>            </p>
+                    </form>
+
+            <h2 id="words-PUTapi-words--id-">Update word by ID</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Update word information. Currently we get 503 error. Route do not implemented yet.</p>
+
+<span id="example-requests-PUTapi-words--id-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request PUT \
+    "http://cards.sergeyem.test:8000/api/words/4" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"original\": \"xzhtnqjcvyyavfcyzvscbyuiimynujcxzdpmokvsenvstdhjgjxaujgpmzbjjcjmzhirqfgoxwngvbbdchkwjfpcermyhtdkykpgdzvyyicagkjfbfsnrea\",
+    \"translated\": \"dakuayeigedpzlnop\",
+    \"done_at\": \"2021-09-02T19:23:32\",
+    \"starred\": false,
+    \"user_id\": \"velit\",
+    \"language\": \"ad\",
+    \"views\": \"djcwlmatvimosjhefqyzbrvkekqlakzdqjfwwsltldwhcxdllqnkzlwlczoexibgpxpjhwthnnmgeedybkoaigqaoliphazlgyolhrnzipmamkajxwvhzbcrkhlbkfzhacinpvwhlcjesbirabqwgvocklqsravlmpcrpfigbuspsvrbqpwhysvpqtgjjjwytpwtyjfyrijwcdyfhsxfpbmajhgveuadmhpicxvrotavogqauosxbzdmixqnxu\"
+}"
+</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/words/4"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "original": "xzhtnqjcvyyavfcyzvscbyuiimynujcxzdpmokvsenvstdhjgjxaujgpmzbjjcjmzhirqfgoxwngvbbdchkwjfpcermyhtdkykpgdzvyyicagkjfbfsnrea",
+    "translated": "dakuayeigedpzlnop",
+    "done_at": "2021-09-02T19:23:32",
+    "starred": false,
+    "user_id": "velit",
+    "language": "ad",
+    "views": "djcwlmatvimosjhefqyzbrvkekqlakzdqjfwwsltldwhcxdllqnkzlwlczoexibgpxpjhwthnnmgeedybkoaigqaoliphazlgyolhrnzipmamkajxwvhzbcrkhlbkfzhacinpvwhlcjesbirabqwgvocklqsravlmpcrpfigbuspsvrbqpwhysvpqtgjjjwytpwtyjfyrijwcdyfhsxfpbmajhgveuadmhpicxvrotavogqauosxbzdmixqnxu"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-PUTapi-words--id-">
+            <blockquote>
+            <p>Example response (503, Not implemented):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json"></code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-words--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-words--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-words--id-"></code></pre>
+</span>
+<span id="execution-error-PUTapi-words--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-words--id-"></code></pre>
+</span>
+<form id="form-PUTapi-words--id-" data-method="PUT"
+      data-path="api/words/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-words--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-words--id-"
+                    onclick="tryItOut('PUTapi-words--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-words--id-"
+                    onclick="cancelTryOut('PUTapi-words--id-');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-words--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/words/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/words/{id}</code></b>
+        </p>
+                <p>
+            <label id="auth-PUTapi-words--id-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="PUTapi-words--id-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="PUTapi-words--id-"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of word. Example=2</p>            </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>original</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="original"
+               data-endpoint="PUTapi-words--id-"
+               data-component="body" required  hidden>
+    <br>
+<p>Must not be greater than 255 characters.</p>        </p>
+                <p>
+            <b><code>translated</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="translated"
+               data-endpoint="PUTapi-words--id-"
+               data-component="body" required  hidden>
+    <br>
+<p>Must not be greater than 255 characters.</p>        </p>
+                <p>
+            <b><code>done_at</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="done_at"
+               data-endpoint="PUTapi-words--id-"
+               data-component="body"  hidden>
+    <br>
+<p>Must be a valid date.</p>        </p>
+                <p>
+            <b><code>starred</code></b>&nbsp;&nbsp;<small>boolean</small>  &nbsp;
+                <label data-endpoint="PUTapi-words--id-" hidden>
+            <input type="radio" name="starred"
+                   value="true"
+                   data-endpoint="PUTapi-words--id-"
+                   data-component="body" required             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-words--id-" hidden>
+            <input type="radio" name="starred"
+                   value="false"
+                   data-endpoint="PUTapi-words--id-"
+                   data-component="body" required             >
+            <code>false</code>
+        </label>
+    <br>
+        </p>
+                <p>
+            <b><code>user_id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="user_id"
+               data-endpoint="PUTapi-words--id-"
+               data-component="body" required  hidden>
+    <br>
+        </p>
+                <p>
+            <b><code>language</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="language"
+               data-endpoint="PUTapi-words--id-"
+               data-component="body" required  hidden>
+    <br>
+<p>Must not be greater than 5 characters.</p>        </p>
+                <p>
+            <b><code>views</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="views"
+               data-endpoint="PUTapi-words--id-"
+               data-component="body" required  hidden>
+    <br>
+<p>Must not be greater than 255 characters.</p>        </p>
+    
+    </form>
+
+            <h2 id="words-DELETEapi-words--id-">Delete word by ID</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Here you can remove word through database</p>
+
+<span id="example-requests-DELETEapi-words--id-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request DELETE \
+    "http://cards.sergeyem.test:8000/api/words/16" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/words/16"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-DELETEapi-words--id-">
+            <blockquote>
+            <p>Example response (204, success):</p>
+        </blockquote>
+                <pre>
+<code>[Empty response]</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Word].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-words--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-words--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-words--id-"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-words--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-words--id-"></code></pre>
+</span>
+<form id="form-DELETEapi-words--id-" data-method="DELETE"
+      data-path="api/words/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-words--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-words--id-"
+                    onclick="tryItOut('DELETEapi-words--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-words--id-"
+                    onclick="cancelTryOut('DELETEapi-words--id-');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-words--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/words/{id}</code></b>
+        </p>
+                <p>
+            <label id="auth-DELETEapi-words--id-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="DELETEapi-words--id-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="DELETEapi-words--id-"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of word. Example=2</p>            </p>
+                    </form>
+
+            <h2 id="words-GETapi-words--word--viewed">Mark Viewed</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Default get request which is need for increasing of VIEWS counter.</p>
+
+<span id="example-requests-GETapi-words--word--viewed">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/words/16/viewed" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/words/16/viewed"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-words--word--viewed">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 2,
+        &quot;original&quot;: &quot;der Cognac&quot;,
+        &quot;translated&quot;: &quot;Коньяк&quot;,
+        &quot;done_at&quot;: null,
+        &quot;starred&quot;: true,
+        &quot;user_id&quot;: 1,
+        &quot;language&quot;: &quot;DE&quot;,
+        &quot;views&quot;: 9,
+        &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Word].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-words--word--viewed" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-words--word--viewed"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-words--word--viewed"></code></pre>
+</span>
+<span id="execution-error-GETapi-words--word--viewed" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-words--word--viewed"></code></pre>
+</span>
+<form id="form-GETapi-words--word--viewed" data-method="GET"
+      data-path="api/words/{word}/viewed"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-words--word--viewed', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-words--word--viewed"
+                    onclick="tryItOut('GETapi-words--word--viewed');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-words--word--viewed"
+                    onclick="cancelTryOut('GETapi-words--word--viewed');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-words--word--viewed" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/words/{word}/viewed</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-words--word--viewed" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-words--word--viewed"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>word</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="word"
+               data-endpoint="GETapi-words--word--viewed"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of word. Example=2</p>            </p>
+                    </form>
+
+            <h2 id="words-GETapi-words--word--known--value-">Mark Known</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>If you mark this word as known, we put current timestamp in done_at column. Also you can mark corrent word as unknown. In this case you should pass 0 as value param</p>
+
+<span id="example-requests-GETapi-words--word--known--value-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/words/14/known/14" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/words/14/known/14"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-words--word--known--value-">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 2,
+        &quot;original&quot;: &quot;der Cognac&quot;,
+        &quot;translated&quot;: &quot;Коньяк&quot;,
+        &quot;done_at&quot;: &quot;2021-09-02T18:53:27.000000Z&quot;,
+        &quot;starred&quot;: true,
+        &quot;user_id&quot;: 1,
+        &quot;language&quot;: &quot;DE&quot;,
+        &quot;views&quot;: 9,
+        &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Word].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-words--word--known--value-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-words--word--known--value-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-words--word--known--value-"></code></pre>
+</span>
+<span id="execution-error-GETapi-words--word--known--value-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-words--word--known--value-"></code></pre>
+</span>
+<form id="form-GETapi-words--word--known--value-" data-method="GET"
+      data-path="api/words/{word}/known/{value}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-words--word--known--value-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-words--word--known--value-"
+                    onclick="tryItOut('GETapi-words--word--known--value-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-words--word--known--value-"
+                    onclick="cancelTryOut('GETapi-words--word--known--value-');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-words--word--known--value-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/words/{word}/known/{value}</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-words--word--known--value-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-words--word--known--value-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>word</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="word"
+               data-endpoint="GETapi-words--word--known--value-"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of word. Example=2</p>            </p>
+                    <p>
+                <b><code>value</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="value"
+               data-endpoint="GETapi-words--word--known--value-"
+               data-component="url" required  hidden>
+    <br>
+<p>Need to pass 0 or 1, should we mark this word known (1) or unknown (0). Example=1</p>            </p>
+                    </form>
+
+            <h2 id="words-GETapi-words--word--starred--value-">Mark Starred</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>You can mark word as starred in case later to learn only starred words. To makr word as starred, pass value 1. To mark as unstarred, pass 0</p>
+
+<span id="example-requests-GETapi-words--word--starred--value-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/words/7/starred/6" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/words/7/starred/6"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-words--word--starred--value-">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 2,
+        &quot;original&quot;: &quot;der Cognac&quot;,
+        &quot;translated&quot;: &quot;Коньяк&quot;,
+        &quot;done_at&quot;: &quot;2021-09-02T18:53:27.000000Z&quot;,
+        &quot;starred&quot;: true,
+        &quot;user_id&quot;: 1,
+        &quot;language&quot;: &quot;DE&quot;,
+        &quot;views&quot;: 9,
+        &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Word].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-words--word--starred--value-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-words--word--starred--value-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-words--word--starred--value-"></code></pre>
+</span>
+<span id="execution-error-GETapi-words--word--starred--value-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-words--word--starred--value-"></code></pre>
+</span>
+<form id="form-GETapi-words--word--starred--value-" data-method="GET"
+      data-path="api/words/{word}/starred/{value}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-words--word--starred--value-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-words--word--starred--value-"
+                    onclick="tryItOut('GETapi-words--word--starred--value-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-words--word--starred--value-"
+                    onclick="cancelTryOut('GETapi-words--word--starred--value-');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-words--word--starred--value-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/words/{word}/starred/{value}</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-words--word--starred--value-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-words--word--starred--value-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>word</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="word"
+               data-endpoint="GETapi-words--word--starred--value-"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of word. Example=2</p>            </p>
+                    <p>
+                <b><code>value</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="value"
+               data-endpoint="GETapi-words--word--starred--value-"
+               data-component="url" required  hidden>
+    <br>
+<p>Need to pass 0 or 1, should we mark this word starred (1) or unstar it (0). Example=1</p>            </p>
+                    </form>
+
+            <h2 id="words-GETapi-words--word--share--user-">Share Word</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Using this functionality you can create new word for different user. This way system will diplicate word and change user ID to passed one.</p>
+
+<span id="example-requests-GETapi-words--word--share--user-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/words/16/share/reprehenderit" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/words/16/share/reprehenderit"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-words--word--share--user-">
+            <blockquote>
+            <p>Example response (201, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 2,
+        &quot;original&quot;: &quot;der Cognac&quot;,
+        &quot;translated&quot;: &quot;Коньяк&quot;,
+        &quot;done_at&quot;: &quot;2021-09-02T18:53:27.000000Z&quot;,
+        &quot;starred&quot;: true,
+        &quot;user_id&quot;: 2,
+        &quot;language&quot;: &quot;DE&quot;,
+        &quot;views&quot;: 0,
+        &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Word].&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Word already exists&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-words--word--share--user-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-words--word--share--user-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-words--word--share--user-"></code></pre>
+</span>
+<span id="execution-error-GETapi-words--word--share--user-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-words--word--share--user-"></code></pre>
+</span>
+<form id="form-GETapi-words--word--share--user-" data-method="GET"
+      data-path="api/words/{word}/share/{user}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-words--word--share--user-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-words--word--share--user-"
+                    onclick="tryItOut('GETapi-words--word--share--user-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-words--word--share--user-"
+                    onclick="cancelTryOut('GETapi-words--word--share--user-');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-words--word--share--user-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/words/{word}/share/{user}</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-words--word--share--user-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-words--word--share--user-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>word</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="word"
+               data-endpoint="GETapi-words--word--share--user-"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of word. Example=2</p>            </p>
+                    <p>
+                <b><code>user</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="user"
+               data-endpoint="GETapi-words--word--share--user-"
+               data-component="url" required  hidden>
+    <br>
+            </p>
+                    <p>
+                <b><code>value</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="value"
+               data-endpoint="GETapi-words--word--share--user-"
+               data-component="url" required  hidden>
+    <br>
+<p>User ID which we need to copy word. Example=2</p>            </p>
+                    </form>
+
+    
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                    <a href="#" data-language-name="bash">bash</a>
+                                    <a href="#" data-language-name="javascript">javascript</a>
+                            </div>
+            </div>
+</div>
+<script>
+    $(function () {
+        var exampleLanguages = ["bash","javascript"];
+        setupLanguages(exampleLanguages);
+    });
+</script>
+</body>
+</html>

@@ -27,6 +27,11 @@ Route::middleware('api')->group(function () {
         ->name('token');
 });
 
+/**
+ * User Information
+ *
+ * Getting authenticated user information
+ */
 Route::middleware('auth:sanctum')
     ->get('/user', function (Request $request) {
         return $request->user();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Models\Word;
 use Illuminate\Http\Request;
 use App\Http\Resources\WordResource;
 use App\Http\Controllers\Controller;
@@ -11,12 +12,15 @@ use App\Http\Resources\WordCollection;
 class UserWordsController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\User $user
-     * @return \Illuminate\Http\Response
+     * List of user words
+     *
+     * Getting list of words of other users. Currently not implemented.
+     *
+     * @response status=503
      */
     public function index(Request $request, User $user)
     {
+        abort(503);
         $this->authorize('view', $user);
 
         $search = $request->get('search', '');
@@ -31,12 +35,15 @@ class UserWordsController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\User $user
-     * @return \Illuminate\Http\Response
+     * Store word by user
+     *
+     * Creating new word of passed user. Currently this functionality not implemented
+     *
+     * @response status=503
      */
     public function store(Request $request, User $user)
     {
+        abort(503);
         $this->authorize('create', Word::class);
 
         $validated = $request->validate([

@@ -15,13 +15,34 @@ use Spatie\RouteAttributes\Attributes\Middleware;
 use Spatie\RouteAttributes\Attributes\Prefix;
 use Spatie\RouteAttributes\Attributes\Put;
 
+/**
+ * @group Authentication
+ *
+ * APIs for managing authentication and getting tokens
+ */
 #[Prefix('api')]
 #[Middleware('auth:sanctum')]
 class AuthController extends Controller
 {
     /**
-     * @param  AuthRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * Get JSON token
+     *
+     * Using this endpoint you can get JSON token. This is the main endpoint which you will use for working with third-party apps
+     *
+     * @bodyParam email string required Email of authenticated user. Example: "admin@admin.com"
+     * @bodyParam password string required Password of authenticated user. Example: "password"
+     * @bodyParam device_name string required Type of device which will use this App. Example: "Insomnia"
+     * @response scenario=success {
+     *  "token": "2|n4a2Mnfe6FrEpZ0BqbWUiYA84g5USkuGpAcKTyMf",
+     * }
+     * @response status=422 scenario="validation error" {
+     * "message": "The given data was invalid.",
+     * "errors": {
+     * "email": [
+     * "The provided credentials are incorrect."
+     * ]
+     * }
+     * }
      * @throws ValidationException
      * @psalm-suppress MixedArgument
      */
@@ -44,8 +65,25 @@ class AuthController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * Get Plain text token
+     *
+     * Using this endpoint you can get Plain token token
+     *
+     * @bodyParam email string required Email of authenticated user. Example: "admin@admin.com"
+     * @bodyParam password string required Password of authenticated user. Example: "password"
+     * @response scenario=success {
+     *  "token": "sfgdfgfgfds",
+     * }
+     * @response status=422 scenario="validation error" {
+     * "message": "The given data was invalid.",
+     * "errors": {
+     * "email": [
+     * "The provided credentials are incorrect."
+     * ]
+     * }
+     * }
+     *
+     * @psalm-suppress MixedArgument
      */
     public function login(Request $request)
     {
@@ -69,6 +107,36 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Change user password
+     *
+     * This API endpoint you will use for  changing user password
+     *
+     * @bodyParam current_password string required Current password of user. Example: "password"
+     * @bodyParam password string required Your new password. Example: "new_password"
+     * @bodyParam password_confirmation string required Retype your new password. Example: "new_password"
+     * @response scenario=success {
+     * "data": {
+     * "id": 1,
+     * "name": "Mr. Nelson Haag",
+     * "email": "admin@admin.com",
+     * "email_verified_at": "2021-08-26T05:57:00.000000Z",
+     * "current_team_id": null,
+     * "profile_photo_path": null,
+     * "created_at": "2021-08-26T05:57:00.000000Z",
+     * "updated_at": "2021-08-26T05:57:00.000000Z",
+     * "deleted_at": null
+     * }
+     * }
+     * @response status=422 scenario="validation error" {
+     * "message": "The given data was invalid.",
+     * "errors": {
+     * "email": [
+     * "The provided credentials are incorrect."
+     * ]
+     * }
+     * }
+     */
     #[Put('user/password', name: 'user.password')]
     public function password(Request $request, UpdateUserPassword $action): UserResource
     {
