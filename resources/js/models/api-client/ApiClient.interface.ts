@@ -3,6 +3,7 @@ import { SettingsApiClientInterface } from './settings'
 import { WordsApiClientInterface } from './words'
 import {AuthApiClientInterface} from "./auth";
 import {UserApiClientInterface} from "./user";
+import {StatisticsApiClientInterface} from "@/models/api-client/statistics";
 
 /**
  * @Name ApiClientInterface
@@ -14,5 +15,6 @@ export interface ApiClientInterface {
     settings: SettingsApiClientInterface,
     auth: AuthApiClientInterface,
     user: UserApiClientInterface,
-    words: WordsApiClientInterface
+    words: WordsApiClientInterface,
+    statistics: StatisticsApiClientInterface
 }

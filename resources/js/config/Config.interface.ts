@@ -3,6 +3,7 @@ import { WordsApiClientUrlsInterface } from '../models/api-client/words'
 import { UserApiClientUrlsInterface } from '../models/api-client/user'
 import { AuthApiClientUrlsInterface } from '../models/api-client/auth'
 import { LocaleInfoInterface } from '@/models/localization/LocaleInfo.interface'
+import {StatisticsApiClientUrlsInterface} from "../models/api-client/statistics";
 
 /**
  * @Name ConfigInterface
@@ -29,6 +30,9 @@ export interface ConfigInterface {
   }
     user: {
         apiUrls: UserApiClientUrlsInterface
+    }
+    statistics: {
+        apiUrls: StatisticsApiClientUrlsInterface
     }
     auth: {
         apiUrls: AuthApiClientUrlsInterface

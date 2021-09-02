@@ -54,6 +54,11 @@
             "fetchUsersShort": "/api/short"
         }
     },
+    "statistics": {
+        "apiUrls": {
+            "fetchStatistics": "/api/statistics"
+        }
+    },
     "auth": {
         "apiUrls": {
             "login": "api/token"

@@ -60,6 +60,7 @@
         "ChangePassword": "Изменить пароль",
         "Profile": "Profile",
         "Settings": "Settings",
+        "Statistics": "Statistics",
         "Logout": "Logout",
         "Profile page": "Profile page",
         "Profile Detail Info": "Profile Detail Info",
@@ -103,7 +104,22 @@
             "translated": "Translated word",
             "done_at": "When done",
             "language": "Language",
-            "save": "Save"
+            "save": "Save",
+            "views": "Number of views",
+            "created_at": "Created Date"
+        },
+        "statistics": {
+            "header": "Your activity in learning language",
+            "all": "Total number of words",
+            "starred": "In starred",
+            "not_dones": "Number of not learned words",
+            "dones": "Number of known words",
+            "total_views": "Total views",
+            "users_count": "Number of users",
+            "updated_this_month": "Viewed in this month",
+            "updated_today": "Viewed today",
+            "most_viewed": "Most viewed words",
+            "added_today": "Added today"
         },
         "password": {
             "header": "Change password",
