@@ -1,0 +1,91 @@
+name: Settings
+description: |-
+
+  Get settings of currently authenticated user or change setting value
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/settings
+    metadata:
+      title: 'Settings Information'
+      description: 'Get current list of authenticated user with it''s key and value'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+          "data": {
+          "paginate": "20",
+          "default_language": "DE",
+          "starred_enabled": "",
+          "known_enabled": "",
+          "fresh_first": "1",
+          "languages_list": [
+          "DE",
+          "EN"
+          ],
+          "main_language": "RU"
+          }
+          }
+        headers: []
+        description: '200, success'
+      -
+        status: 401
+        content: |-
+          {
+          "message": "Unauthenticated."
+          }
+        headers: []
+        description: '401, unauthorized'
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/settings
+    metadata:
+      title: 'Change Settings'
+      description: 'Here you can change any setting value. For this purposes in body params you need to pass key of setting and it''s value'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Name of setting.'
+        required: true
+        example: '"main_language"'
+        type: string
+      value:
+        name: value
+        description: 'Setting value.'
+        required: true
+        example: '"RU"'
+        type: string
+    responses:
+      -
+        status: 204
+        content: ''
+        headers: []
+        description: '204, success'
+      -
+        status: 401
+        content: |-
+          {
+          "message": "Unauthenticated."
+          }
+        headers: []
+        description: '401, unauthorized'
+    responseFields: []
