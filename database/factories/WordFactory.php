@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Word;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,14 +23,20 @@ class WordFactory extends Factory
      */
     public function definition()
     {
+        $users = User::all();
+        if ($users && $users->isNotEmpty()) {
+            $userId = $users->random();
+        } else {
+            $userId = \App\Models\User::factory();
+        }
         return [
-            'original' => $this->faker->text(100),
-            'translated' => $this->faker->text(100),
-            'done_at' => $this->faker->dateTime,
-            'starred' => $this->faker->boolean,
-            'language' => $this->faker->text(5),
-            'views' => 0,
-            'user_id' => \App\Models\User::factory(),
+            'original' => $this->faker->word(),
+            'translated' => $this->faker->word(),
+            'done_at' => null,
+            'starred' => $this->faker->boolean(20),
+            'language' => $this->faker->randomElement(config('app.supported_languages')),
+            'views' => $this->faker->randomNumber(1),
+            'user_id' => $userId,
         ];
     }
 }

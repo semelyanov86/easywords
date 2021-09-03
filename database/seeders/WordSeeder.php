@@ -15,7 +15,7 @@ class WordSeeder extends Seeder
     public function run()
     {
         Word::factory()
-            ->count(5)
+            ->count(20)
             ->create();
     }
 }

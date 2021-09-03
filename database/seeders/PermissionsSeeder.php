@@ -55,5 +55,8 @@ class PermissionsSeeder extends Seeder
         if ($user) {
             $user->assignRole($adminRole);
         }
+        $userModel = \App\Models\User::whereEmail('user@user.com')->first();
+
+        $userModel?->assignRole($userRole);
     }
 }

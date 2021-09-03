@@ -14,8 +14,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()
-            ->count(5)
-            ->create();
+        /** @var User $admin */
+        $admin = \App\Models\User::factory()
+            ->createOne([
+                'email' => 'admin@admin.com',
+                'password' => \Hash::make('password'),
+            ]);
+        $admin->settings()->setMultiple(config('model_settings.defaultSettings.users'));
+        /** @var User $user */
+        $user = \App\Models\User::factory()
+            ->createOne([
+                'email' => 'user@user.com',
+                'password' => \Hash::make('password'),
+            ]);
+        $user->settings()->setMultiple(config('model_settings.defaultSettings.users'));
     }
 }
