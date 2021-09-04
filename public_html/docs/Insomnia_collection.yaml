@@ -1,8 +1,119 @@
 _type: export
 __export_format: 4
-__export_date: 2021-09-02T19:26:54.594Z
+__export_date: 2021-09-04T10:45:40.110Z
 __export_source: insomnia.desktop.app:v2021.5.0
 resources:
+  - _id: req_5feed044f18140fe8ba22a79326d5839
+    parentId: fld_22dce1445bbc4a06bbdd11a19f23a027
+    modified: 1630748692488
+    created: 1630748654878
+    url: "{{ _.BASE_URL }}/samples/export/DE"
+    name: Import Words
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_be932e263d9b4ac98b5de5c598e5a9f6
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_40430c972ed84693b6b099bd923b8da6
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1630748654878
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_22dce1445bbc4a06bbdd11a19f23a027
+    parentId: wrk_7c24dc6a683c416a99ae422c7883e687
+    modified: 1630748419313
+    created: 1630748419313
+    name: Samples
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630748419314
+    _type: request_group
+  - _id: wrk_7c24dc6a683c416a99ae422c7883e687
+    parentId: null
+    modified: 1629899436837
+    created: 1629899436837
+    name: EasyWords
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_b9245c42b3284b9a898b5ffc594e06e6
+    parentId: fld_22dce1445bbc4a06bbdd11a19f23a027
+    modified: 1630748489300
+    created: 1630748428195
+    url: "{{ _.BASE_URL }}/samples?language=DE"
+    name: List of samples
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_8bb6ac215ce84d8fb377b098567b4236
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_eba646af506347768c7ec19b49e194db
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1630748428195
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a4de2be3ae0b40b09e6e4f54e290f67a
+    parentId: fld_22dce1445bbc4a06bbdd11a19f23a027
+    modified: 1630748571881
+    created: 1630748566738
+    url: "{{ _.BASE_URL }}/samples/3"
+    name: Get Sample By ID
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_8bb6ac215ce84d8fb377b098567b4236
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_eba646af506347768c7ec19b49e194db
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1630665155883.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_498bcfda01e34894994183c1b2201435
     parentId: fld_87530f575dab48b5999f121bcda43b19
     modified: 1630581915643
@@ -44,14 +155,6 @@ resources:
     environmentPropertyOrder: null
     metaSortKey: -1630581435446
     _type: request_group
-  - _id: wrk_7c24dc6a683c416a99ae422c7883e687
-    parentId: null
-    modified: 1629899436837
-    created: 1629899436837
-    name: EasyWords
-    description: ""
-    scope: collection
-    _type: workspace
   - _id: req_299505051915451cb727a2f9449d5c79
     parentId: fld_6c24baac659b4a6a9884d3a265dc9010
     modified: 1630516399693
@@ -519,14 +622,14 @@ resources:
     _type: request_group
   - _id: env_1ee151589ae110794170982a8669080227b9c79a
     parentId: wrk_7c24dc6a683c416a99ae422c7883e687
-    modified: 1629957494035
+    modified: 1630748476198
     created: 1629899437200
     name: Base Environment
     data:
       BASE_URL: http://cards.sergeyem.test:8000/api
       LOGIN: admin@admin.com
       PASSWORD: password
-      TOKEN: 1|abQA3ySJ3yQltP9dargEg9QQwy27YDaq6z25XnKJ
+      TOKEN: 1|rf9JJySqNANs3S8r9yOcBam4mpRvQk63JZjG3vsY
     dataPropertyOrder:
       "&":
         - BASE_URL

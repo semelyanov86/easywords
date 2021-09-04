@@ -75,6 +75,7 @@
               <div class="flex justify-end mt-4">
                   <add-to-home-screen></add-to-home-screen>
               </div>
+              <import-words :language="setting.default_language"></import-words>
           </div>
       </div>
   </div>
@@ -90,11 +91,12 @@ import {useI18n} from 'vue-i18n';
 import router from "../router";
 import {MutationType} from "../models/store";
 import AddToHomeScreen from '../components/pwa/AddToHomeScreen.vue';
+import ImportWords from '../components/shared/ImportWords.component.vue'
 
 export default defineComponent({
     name: "Settings",
     components: {
-        AddToHomeScreen
+        AddToHomeScreen, ImportWords
     },
     setup() {
         const settingsStore = useSettingsStore()

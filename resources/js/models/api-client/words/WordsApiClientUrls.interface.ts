@@ -10,6 +10,7 @@ export interface WordsApiClientUrlsInterface {
     markKnown: string,
     markStarred: string,
     shareWord: string,
-    deleteWord: string
+    deleteWord: string,
+    importWords: string
 }
 

@@ -128,6 +128,10 @@
             "current_password": "Current password",
             "password": "New password",
             "password_confirmation": "Confirm password"
+        },
+        "import": {
+            "header": "Do not have time for adding new words? Just import most popular words for your default language!",
+            "button": "Import Words!"
         }
     }
 }

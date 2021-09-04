@@ -89,4 +89,13 @@ export class WordsApiClientModel implements WordsApiClientInterface {
 
         return HttpClient.delete<void>(getParameters)
     }
+
+    importWords(language:string): Promise<void> {
+      const url = this.urls.importWords;
+        const getParameters: HttpRequestParamsInterface = {
+            url: url.replace('{language}', language),
+            requiresToken: true
+        }
+        return HttpClient.get<void>(getParameters)
+    }
 }

@@ -17,4 +17,5 @@ export interface WordsApiClientInterface {
     markStarred: (id: number, value: number) => Promise<LoadedWordInterface>
     shareWord: (word:ShareWordInterface) => Promise<LoadedWordInterface>
     deleteWord: (id: number) => Promise<void>
+    importWords: (language: string) => Promise<void>
 }
