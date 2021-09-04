@@ -61,7 +61,7 @@ Then install composer dependencies:
   composer install --no-dev
 ```
 
-Fill out your database with seeders. Notice: seed is important, because it will create the first admin user for you.
+Fill out your database with seeders. Notice: seed is important, because it will create the first admin user for you and also will fill sample database for english and german words.
 
 ```bash
   php artisan migrate --seed
@@ -113,6 +113,7 @@ To run this project, you will need to add the following environment variables to
 - Choose language you want to learn.
 - See statistics and analytics data. Monitor your progress.
 - Cross platform with PWA support.
+- Manage most popular words. If user do not want to create words manually, he can import most popular words from samples table
 
 ## Running Tests
 
@@ -210,6 +211,24 @@ Mobile application on android is coming. It will use Vue.native stack.
 #### Can I connect multiple users to my app?
 
 Yes, it is support multiuser functionality. But for now registration from frontend is not supported. You can create new users through admin page.
+
+#### Can I add support for new language?
+
+Yes, just add new language code in `config/app.php` file, `supported_languages` array.
+
+For example:
+````php
+    'supported_languages' => [
+        'DE', 'EN', 'ES'
+    ],
+````
+Then you will need to create file in folder `database/seeders/samples/ES.php` 
+
+This file should contain array with sample data of most popular words.
+
+Then run command `php artisan db:seed --class=SampleSeeder`
+
+Using this steps you can see new language - ES with sample data which you can import.
 
 ## License
 
