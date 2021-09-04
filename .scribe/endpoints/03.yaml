@@ -1,79 +1,29 @@
-name: Settings
+name: Samples
 description: |-
 
-  Get settings of currently authenticated user or change setting value
+  List of sample words which we need to autofill words list for users
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/settings
+    uri: 'api/samples/export/{language}'
     metadata:
-      title: 'Settings Information'
-      description: 'Get current list of authenticated user with it''s key and value'
+      title: 'Export Samples'
+      description: 'User can load samples from specific language to it''s own database'
       authenticated: true
     headers:
       Authorization: 'Bearer {YOUR_AUTH_KEY}'
       Content-Type: application/json
       Accept: application/json
-    urlParameters: []
+    urlParameters:
+      language:
+        name: language
+        description: 'Language for export. Example=DE'
+        required: true
+        example: et
+        type: string
     queryParameters: []
     bodyParameters: []
-    responses:
-      -
-        status: 200
-        content: |-
-          {
-          "data": {
-          "paginate": "20",
-          "default_language": "DE",
-          "starred_enabled": "",
-          "known_enabled": "",
-          "fresh_first": "1",
-          "languages_list": [
-          "DE",
-          "EN"
-          ],
-          "main_language": "RU"
-          }
-          }
-        headers: []
-        description: '200, success'
-      -
-        status: 401
-        content: |-
-          {
-          "message": "Unauthenticated."
-          }
-        headers: []
-        description: '401, unauthorized'
-    responseFields: []
-  -
-    httpMethods:
-      - POST
-    uri: api/settings
-    metadata:
-      title: 'Change Settings'
-      description: 'Here you can change any setting value. For this purposes in body params you need to pass key of setting and it''s value'
-      authenticated: true
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    queryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'Name of setting.'
-        required: true
-        example: '"main_language"'
-        type: string
-      value:
-        name: value
-        description: 'Setting value.'
-        required: true
-        example: '"RU"'
-        type: string
     responses:
       -
         status: 204
@@ -88,4 +38,82 @@ endpoints:
           }
         headers: []
         description: '401, unauthorized'
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: api/samples
+    metadata:
+      title: 'List of Samples'
+      description: 'Get list of samples which we need for import process.'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters:
+      language:
+        name: language
+        description: 'Language which we need to get list of words. Example=DE'
+        required: true
+        example: quos
+        type: string
+      page:
+        name: page
+        description: 'Page number if you need to get new list of samples. Example=1'
+        required: false
+        example: 14
+        type: integer
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":1,"original":"der Sekt","translated":"Шампанское","language":"DE","created_at":"2021-08-26T05:57:00.000000Z"},{"id":2,"original":"der Cognac","translated":"Коньяк","language":"DE","created_at":"2021-08-26T05:57:00.000000Z"}],"links":{"first":"http://cards.sergeyem.test:8000/api/samples?page=1","last":"http://cards.sergeyem.test:8000/api/samples?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http://cards.sergeyem.test:8000/api/samples?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"http://cards.sergeyem.test:8000/api/samples","per_page":"20","to":4,"total":4}}'
+        headers: []
+        description: '200, success'
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/samples/{id}'
+    metadata:
+      title: 'Get sample by ID'
+      description: 'Getting detail information about sample by it''s ID'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of sample. Example=2'
+        required: true
+        example: 5
+        type: integer
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":2,"original":"der Cognac","translated":"Коньяк","language":"DE","created_at":"2021-08-26T05:57:00.000000Z"}}'
+        headers: []
+        description: '200, success'
+      -
+        status: 401
+        content: |-
+          {
+          "message": "Unauthenticated."
+          }
+        headers: []
+        description: '401, unauthorized'
+      -
+        status: 404
+        content: |-
+          {
+          "message": "No query results for model [App\\Models\\Sample]."
+          }
+        headers: []
+        description: '404, Not Found'
     responseFields: []

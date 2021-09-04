@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Models\Scopes\Searchable;
@@ -19,6 +21,7 @@ class Word extends Model
         'user_id',
         'language',
         'views',
+        'from_sample',
     ];
 
     protected $searchableFields = ['*'];
@@ -26,9 +29,10 @@ class Word extends Model
     protected $casts = [
         'done_at' => 'datetime',
         'starred' => 'boolean',
+        'from_sample' => 'boolean',
     ];
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SampleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WordController;
@@ -35,4 +36,5 @@ Route::prefix('/admin')
 
         Route::resource('users', UserController::class);
         Route::resource('words', WordController::class);
+        Route::resource('samples', SampleController::class);
     });

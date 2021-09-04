@@ -1,0 +1,486 @@
+name: Words
+description: |-
+
+  Main group which is need for different operations with words - getting list of all words, changing status of words
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/words
+    metadata:
+      title: 'List of Words'
+      description: 'Get list of words which we need for learning. Getting words with limit which we store in settings.'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters:
+      language:
+        name: language
+        description: 'Language which we need to get list of words. Example=DE'
+        required: true
+        example: eum
+        type: string
+      page:
+        name: page
+        description: 'Page number if you need to get new list of words. Example=1'
+        required: false
+        example: 14
+        type: integer
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":1,"original":"der Sekt","translated":"Шампанское","done_at":null,"starred":false,"user_id":1,"language":"DE","views":0,"created_at":"2021-08-26T05:57:00.000000Z"},{"id":2,"original":"der Cognac","translated":"Коньяк","done_at":null,"starred":false,"user_id":1,"language":"DE","views":0,"created_at":"2021-08-26T05:57:00.000000Z"},{"id":3,"original":"die Sauerkraut","translated":"Квашеная капуста","done_at":null,"starred":false,"user_id":1,"language":"DE","views":0,"created_at":"2021-08-26T05:57:00.000000Z"},{"id":6,"original":"voll","translated":"Полный","done_at":null,"starred":false,"user_id":1,"language":"DE","views":0,"created_at":"2021-08-26T05:58:17.000000Z"}],"links":{"first":"http://cards.sergeyem.test:8000/api/words?page=1","last":"http://cards.sergeyem.test:8000/api/words?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http://cards.sergeyem.test:8000/api/words?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"http://cards.sergeyem.test:8000/api/words","per_page":"20","to":4,"total":4}}'
+        headers: []
+        description: '200, success'
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/words
+    metadata:
+      title: 'Create Word'
+      description: 'Here you can create new word. Before saving system will check for existing ford and if it is exist it will throw validation error.'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      original:
+        name: original
+        description: 'Original name of word.'
+        required: true
+        example: '"wichtig"'
+        type: string
+      translated:
+        name: translated
+        description: 'Translated word value.'
+        required: true
+        example: '"Важно"'
+        type: string
+      done_at:
+        name: done_at
+        description: 'Should we mark this word as known.'
+        required: false
+        example: 'null'
+        type: string
+      starred:
+        name: starred
+        description: 'Mark this word as starred or not.'
+        required: false
+        example: false
+        type: boolean
+      user_id:
+        name: user_id
+        description: ''
+        required: false
+        example: null
+        type: string
+      language:
+        name: language
+        description: 'What language for this word you creating.'
+        required: true
+        example: '"DE"'
+        type: string
+      views:
+        name: views
+        description: 'Number of views we create by default for this word.'
+        required: false
+        example: 0
+        type: integer
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":6,"original":"voll","translated":"Полный","done_at":null,"starred":false,"user_id":1,"language":"DE","views":0}}'
+        headers: []
+        description: '200, success'
+      -
+        status: 422
+        content: |-
+          {
+          "message": "Word already exists"
+          }
+        headers: []
+        description: '422, Validation Error'
+      -
+        status: 401
+        content: |-
+          {
+          "message": "Unauthenticated."
+          }
+        headers: []
+        description: '401, unauthorized'
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/words/{id}'
+    metadata:
+      title: 'Get word by ID'
+      description: 'Getting detail information about word by it''s ID'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of word. Example=2'
+        required: true
+        example: 3
+        type: integer
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":2,"original":"der Cognac","translated":"Коньяк","done_at":null,"starred":false,"user_id":1,"language":"DE","views":7,"created_at":"2021-08-26T05:57:00.000000Z"}}'
+        headers: []
+        description: '200, success'
+      -
+        status: 401
+        content: |-
+          {
+          "message": "Unauthenticated."
+          }
+        headers: []
+        description: '401, unauthorized'
+      -
+        status: 404
+        content: |-
+          {
+          "message": "No query results for model [App\\Models\\Word]."
+          }
+        headers: []
+        description: '404, Not Found'
+    responseFields: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/words/{id}'
+    metadata:
+      title: 'Update word by ID'
+      description: 'Update word information. Currently we get 503 error. Route do not implemented yet.'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of word. Example=2'
+        required: true
+        example: 2
+        type: integer
+    queryParameters: []
+    bodyParameters:
+      original:
+        name: original
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: russqhfckarnpfkzishtacfkaxtbgodjbvobnwpjmbrcwgibfrupzrevpkrdwltknzqownzsucnsuefhdqfkshfozxvskxatnjkrdanfqdynlovbqdzcpklaphxyuopnmpbmhwiiaprooymtxuzjcahdervioxwqv
+        type: string
+      translated:
+        name: translated
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: ewzgvepxptwucbmaucoirlmfortfjlltxnjhmjguuyywthbecouzqbmkmxrrywdszwgmssaffjwbijzksoarodouckpijvmgkidovfodlufktpcimiurbammecbxuqtmbddojyzbdrybbccobhsrizsgzjayhljclndwhdzvmbsxcgxwgdkclspjgbqprmarhqnxjfghxkfftnapqyxyxchvnm
+        type: string
+      done_at:
+        name: done_at
+        description: 'Must be a valid date.'
+        required: false
+        example: '2021-09-04T09:50:02'
+        type: string
+      starred:
+        name: starred
+        description: ''
+        required: true
+        example: false
+        type: boolean
+      user_id:
+        name: user_id
+        description: ''
+        required: true
+        example: quo
+        type: string
+      language:
+        name: language
+        description: 'Must not be greater than 5 characters.'
+        required: true
+        example: orqc
+        type: string
+      views:
+        name: views
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: bzlnbwlwwulfgixrltymdijzzzbtgjsdcrniftpjvqevwyspwfbjsywqmdvppbxrvhpqdghbfvjgcyemxeibxaplnmlnbmqshgjahvocfwjjjwvjzfrilioptmkustlimnfpwclrvscjuuzjcmxrlzthbslnaxs
+        type: string
+    responses:
+      -
+        status: 503
+        content: ''
+        headers: []
+        description: '503, Not implemented'
+    responseFields: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/words/{id}'
+    metadata:
+      title: 'Delete word by ID'
+      description: 'Here you can remove word through database'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of word. Example=2'
+        required: true
+        example: 9
+        type: integer
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 204
+        content: ''
+        headers: []
+        description: '204, success'
+      -
+        status: 401
+        content: |-
+          {
+          "message": "Unauthenticated."
+          }
+        headers: []
+        description: '401, unauthorized'
+      -
+        status: 404
+        content: |-
+          {
+          "message": "No query results for model [App\\Models\\Word]."
+          }
+        headers: []
+        description: '404, Not Found'
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/words/{word}/viewed'
+    metadata:
+      title: 'Mark Viewed'
+      description: 'Default get request which is need for increasing of VIEWS counter.'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      word:
+        name: word
+        description: 'The ID of word. Example=2'
+        required: true
+        example: 5
+        type: integer
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":2,"original":"der Cognac","translated":"Коньяк","done_at":null,"starred":true,"user_id":1,"language":"DE","views":9,"created_at":"2021-08-26T05:57:00.000000Z"}}'
+        headers: []
+        description: '200, success'
+      -
+        status: 401
+        content: |-
+          {
+          "message": "Unauthenticated."
+          }
+        headers: []
+        description: '401, unauthorized'
+      -
+        status: 404
+        content: |-
+          {
+          "message": "No query results for model [App\\Models\\Word]."
+          }
+        headers: []
+        description: '404, Not Found'
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/words/{word}/known/{value}'
+    metadata:
+      title: 'Mark Known'
+      description: 'If you mark this word as known, we put current timestamp in done_at column. Also you can mark corrent word as unknown. In this case you should pass 0 as value param'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      word:
+        name: word
+        description: 'The ID of word. Example=2'
+        required: true
+        example: 5
+        type: integer
+      value:
+        name: value
+        description: 'Need to pass 0 or 1, should we mark this word known (1) or unknown (0). Example=1'
+        required: true
+        example: 8
+        type: integer
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":2,"original":"der Cognac","translated":"Коньяк","done_at":"2021-09-02T18:53:27.000000Z","starred":true,"user_id":1,"language":"DE","views":9,"created_at":"2021-08-26T05:57:00.000000Z"}}'
+        headers: []
+        description: '200, success'
+      -
+        status: 401
+        content: |-
+          {
+          "message": "Unauthenticated."
+          }
+        headers: []
+        description: '401, unauthorized'
+      -
+        status: 404
+        content: |-
+          {
+          "message": "No query results for model [App\\Models\\Word]."
+          }
+        headers: []
+        description: '404, Not Found'
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/words/{word}/starred/{value}'
+    metadata:
+      title: 'Mark Starred'
+      description: 'You can mark word as starred in case later to learn only starred words. To makr word as starred, pass value 1. To mark as unstarred, pass 0'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      word:
+        name: word
+        description: 'The ID of word. Example=2'
+        required: true
+        example: 3
+        type: integer
+      value:
+        name: value
+        description: 'Need to pass 0 or 1, should we mark this word starred (1) or unstar it (0). Example=1'
+        required: true
+        example: 3
+        type: integer
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"id":2,"original":"der Cognac","translated":"Коньяк","done_at":"2021-09-02T18:53:27.000000Z","starred":true,"user_id":1,"language":"DE","views":9,"created_at":"2021-08-26T05:57:00.000000Z"}}'
+        headers: []
+        description: '200, success'
+      -
+        status: 401
+        content: |-
+          {
+          "message": "Unauthenticated."
+          }
+        headers: []
+        description: '401, unauthorized'
+      -
+        status: 404
+        content: |-
+          {
+          "message": "No query results for model [App\\Models\\Word]."
+          }
+        headers: []
+        description: '404, Not Found'
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/words/{word}/share/{user}'
+    metadata:
+      title: 'Share Word'
+      description: 'Using this functionality you can create new word for different user. This way system will diplicate word and change user ID to passed one.'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      word:
+        name: word
+        description: 'The ID of word. Example=2'
+        required: true
+        example: 19
+        type: integer
+      user:
+        name: user
+        description: ''
+        required: true
+        example: et
+        type: string
+      value:
+        name: value
+        description: 'User ID which we need to copy word. Example=2'
+        required: true
+        example: 20
+        type: integer
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 201
+        content: '{"data":{"id":2,"original":"der Cognac","translated":"Коньяк","done_at":"2021-09-02T18:53:27.000000Z","starred":true,"user_id":2,"language":"DE","views":0,"created_at":"2021-08-26T05:57:00.000000Z"}}'
+        headers: []
+        description: '201, success'
+      -
+        status: 401
+        content: |-
+          {
+          "message": "Unauthenticated."
+          }
+        headers: []
+        description: '401, unauthorized'
+      -
+        status: 404
+        content: |-
+          {
+          "message": "No query results for model [App\\Models\\Word]."
+          }
+        headers: []
+        description: '404, Not Found'
+      -
+        status: 422
+        content: |-
+          {
+          "message": "Word already exists"
+          }
+        headers: []
+        description: '422, Validation Error'
+    responseFields: []

@@ -25,6 +25,8 @@ final class WordDto extends \Spatie\DataTransferObject\DataTransferObject
 
     public int $views;
 
+    public bool $from_sample;
+
     public static function fromRequest(FormRequest $request, ?int $userId = null): self
     {
         return new self([
@@ -34,7 +36,8 @@ final class WordDto extends \Spatie\DataTransferObject\DataTransferObject
             'starred' => $request->boolean('starred'),
             'user_id' => $request->input('user_id', $userId),
             'language' => $request->input('language'),
-            'views' => (int) $request->input('views')
+            'views' => (int) $request->input('views'),
+            'from_sample' => $request->boolean('from_sample')
         ]);
     }
 }

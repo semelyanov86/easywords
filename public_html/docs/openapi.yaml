@@ -7,6 +7,285 @@ servers:
   -
     url: 'http://cards.sergeyem.test:8000'
 paths:
+  '/api/samples/export/{language}':
+    get:
+      summary: 'Export Samples'
+      description: 'User can load samples from specific language to it''s own database'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: success
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Samples
+    parameters:
+      -
+        in: path
+        name: language
+        description: 'Language for export. Example=DE'
+        example: et
+        required: true
+        schema:
+          type: string
+  /api/samples:
+    get:
+      summary: 'List of Samples'
+      description: 'Get list of samples which we need for import process.'
+      parameters:
+        -
+          in: query
+          name: language
+          description: 'Language which we need to get list of words. Example=DE'
+          example: quos
+          required: true
+          schema:
+            type: string
+            description: 'Language which we need to get list of words. Example=DE'
+            example: quos
+        -
+          in: query
+          name: page
+          description: 'Page number if you need to get new list of samples. Example=1'
+          example: 14
+          required: false
+          schema:
+            type: integer
+            description: 'Page number if you need to get new list of samples. Example=1'
+            example: 14
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      original: 'der Sekt'
+                      translated: Шампанское
+                      language: DE
+                      created_at: '2021-08-26T05:57:00.000000Z'
+                    -
+                      id: 2
+                      original: 'der Cognac'
+                      translated: Коньяк
+                      language: DE
+                      created_at: '2021-08-26T05:57:00.000000Z'
+                  links:
+                    first: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                    last: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://cards.sergeyem.test:8000/api/samples'
+                    per_page: '20'
+                    to: 4
+                    total: 4
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        original: 'der Sekt'
+                        translated: Шампанское
+                        language: DE
+                        created_at: '2021-08-26T05:57:00.000000Z'
+                      -
+                        id: 2
+                        original: 'der Cognac'
+                        translated: Коньяк
+                        language: DE
+                        created_at: '2021-08-26T05:57:00.000000Z'
+                    items:
+                      type: object
+                  links:
+                    type: object
+                    example:
+                      first: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                      last: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                      prev: null
+                      next: null
+                  meta:
+                    type: object
+                    example:
+                      current_page: 1
+                      from: 1
+                      last_page: 1
+                      links:
+                        -
+                          url: null
+                          label: '&laquo; Previous'
+                          active: false
+                        -
+                          url: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                          label: '1'
+                          active: true
+                        -
+                          url: null
+                          label: 'Next &raquo;'
+                          active: false
+                      path: 'http://cards.sergeyem.test:8000/api/samples'
+                      per_page: '20'
+                      to: 4
+                      total: 4
+      tags:
+        - Samples
+  '/api/samples/{id}':
+    get:
+      summary: 'Get sample by ID'
+      description: 'Getting detail information about sample by it''s ID'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 2
+                    original: 'der Cognac'
+                    translated: Коньяк
+                    language: DE
+                    created_at: '2021-08-26T05:57:00.000000Z'
+                properties:
+                  data:
+                    type: object
+                    example:
+                      id: 2
+                      original: 'der Cognac'
+                      translated: Коньяк
+                      language: DE
+                      created_at: '2021-08-26T05:57:00.000000Z'
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No query results for model [App\Models\Sample].'
+                properties:
+                  message:
+                    type: string
+                    example: 'No query results for model [App\Models\Sample].'
+      tags:
+        - Samples
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of sample. Example=2'
+        example: 5
+        required: true
+        schema:
+          type: integer
   /api/statistics:
     get:
       summary: 'All statistics'
@@ -320,186 +599,6 @@ paths:
                     example: Unauthenticated.
       tags:
         - Analytics
-  /api/user:
-    get:
-      summary: 'User Information'
-      description: 'Getting authenticated user information'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        401:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-      tags:
-        - Other
-  '/api/users/{user_id}/words':
-    get:
-      summary: 'List of user words'
-      description: 'Getting list of words of other users. Currently not implemented.'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        503:
-          description: ''
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: ''
-        401:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-      tags:
-        - Other
-    parameters:
-      -
-        in: path
-        name: user_id
-        description: 'The ID of the user.'
-        example: 19
-        required: true
-        schema:
-          type: integer
-  '/api/users/{user}/words':
-    post:
-      summary: 'Store word by user'
-      description: 'Creating new word of passed user. Currently this functionality not implemented'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        503:
-          description: ''
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: ''
-      tags:
-        - Other
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                original:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: dhwkijnssacprrywwjgobaivurhoasydvsbcosanxvtxmbijdeltpgiqyahqjveqlibuoowujnquwidtxibvtvlkrgnpwuxnkswlmcezbokgjbyyhgxtesucbhlbxcenvoxyumghefwkcgaunuloolpihojwvyhgkmtjcoqjhsljhlpjnvchcxfufxrvynjjcvyeufmrgkaqaqugokzijsjzzgjgdmemgpxgvlamcnwosmvyswjegxpdpdoqv
-                translated:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: lbwsbdopqznaenroogavvxhuynbsrvtunpdjphvlmylmqlpxcaduvbmwzequzsadaogvarqfybw
-                done_at:
-                  type: string
-                  description: 'Must be a valid date.'
-                  example: '2021-09-02T19:23:32'
-                starred:
-                  type: boolean
-                  description: ''
-                  example: false
-                language:
-                  type: string
-                  description: 'Must not be greater than 5 characters.'
-                  example: ''
-                views:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: avofuqgiptaaimwlwuyczhjzcnkuuowfenlkejojgjqoupfjqllqpnkaocnuuiufhnqqztbpppaitfblmiaexlkoumhdlekxblrczjtymazekpfgctgvbtkpmcztpkpcrizkndlbjinboticpkkuuodyezvrczg
-              required:
-                - original
-                - translated
-                - starred
-                - language
-                - views
-    parameters:
-      -
-        in: path
-        name: user
-        description: ''
-        example: 6
-        required: true
-        schema:
-          type: integer
   /api/user/password:
     put:
       summary: 'Change user password'
@@ -755,6 +854,186 @@ paths:
                 - email
                 - password
                 - device_name
+  /api/user:
+    get:
+      summary: 'User Information'
+      description: 'Getting authenticated user information'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Other
+  '/api/users/{user_id}/words':
+    get:
+      summary: 'List of user words'
+      description: 'Getting list of words of other users. Currently not implemented.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        503:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ''
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Other
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: 20
+        required: true
+        schema:
+          type: integer
+  '/api/users/{user}/words':
+    post:
+      summary: 'Store word by user'
+      description: 'Creating new word of passed user. Currently this functionality not implemented'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        503:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ''
+      tags:
+        - Other
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                original:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: xztzweeigozkyqthiaxsowvginhalaxhveieqlwnjipzbdyhwvuxhaklfiyjenzafpmxveywiucorsncsutwhlnuqrkuutwvjklynzehorcdhwsxakvydoejwevjqfupzrcanfrzsxyzsjnicucmhfrjzcqlhaqttunvbzkvz
+                translated:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: qrhdmkgcksbkvefkzggoljxxnmkughospyngqatswpgvjttjclhglhpxtqxelmwfmdo
+                done_at:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2021-09-04T09:50:02'
+                starred:
+                  type: boolean
+                  description: ''
+                  example: false
+                language:
+                  type: string
+                  description: 'Must not be greater than 5 characters.'
+                  example: os
+                views:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: vbdckkgfapzhktrhblhngrspuukonmvpjmlaojyqvbcwvqftbdocesdubfidoswytylrtyqwnwtpbcjuxclavcyeupuvhheslmgxbssbsxxxjwvkzzfzpvdwcdmudnuqlbbrdkyllbnfhjzxfnxaqcguuamornocacxwvbcdovlgtzixvcu
+              required:
+                - original
+                - translated
+                - starred
+                - language
+                - views
+    parameters:
+      -
+        in: path
+        name: user
+        description: ''
+        example: 1
+        required: true
+        schema:
+          type: integer
   /api/settings:
     get:
       summary: 'Settings Information'
@@ -1027,22 +1306,22 @@ paths:
           in: query
           name: language
           description: 'Language which we need to get list of words. Example=DE'
-          example: officia
+          example: eum
           required: true
           schema:
             type: string
             description: 'Language which we need to get list of words. Example=DE'
-            example: officia
+            example: eum
         -
           in: query
           name: page
           description: 'Page number if you need to get new list of words. Example=1'
-          example: 19
+          example: 14
           required: false
           schema:
             type: integer
             description: 'Page number if you need to get new list of words. Example=1'
-            example: 19
+            example: 14
         -
           in: header
           name: Authorization
@@ -1464,15 +1743,15 @@ paths:
                 original:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: xzhtnqjcvyyavfcyzvscbyuiimynujcxzdpmokvsenvstdhjgjxaujgpmzbjjcjmzhirqfgoxwngvbbdchkwjfpcermyhtdkykpgdzvyyicagkjfbfsnrea
+                  example: russqhfckarnpfkzishtacfkaxtbgodjbvobnwpjmbrcwgibfrupzrevpkrdwltknzqownzsucnsuefhdqfkshfozxvskxatnjkrdanfqdynlovbqdzcpklaphxyuopnmpbmhwiiaprooymtxuzjcahdervioxwqv
                 translated:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: dakuayeigedpzlnop
+                  example: ewzgvepxptwucbmaucoirlmfortfjlltxnjhmjguuyywthbecouzqbmkmxrrywdszwgmssaffjwbijzksoarodouckpijvmgkidovfodlufktpcimiurbammecbxuqtmbddojyzbdrybbccobhsrizsgzjayhljclndwhdzvmbsxcgxwgdkclspjgbqprmarhqnxjfghxkfftnapqyxyxchvnm
                 done_at:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2021-09-02T19:23:32'
+                  example: '2021-09-04T09:50:02'
                 starred:
                   type: boolean
                   description: ''
@@ -1480,15 +1759,15 @@ paths:
                 user_id:
                   type: string
                   description: ''
-                  example: velit
+                  example: quo
                 language:
                   type: string
                   description: 'Must not be greater than 5 characters.'
-                  example: ad
+                  example: orqc
                 views:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: djcwlmatvimosjhefqyzbrvkekqlakzdqjfwwsltldwhcxdllqnkzlwlczoexibgpxpjhwthnnmgeedybkoaigqaoliphazlgyolhrnzipmamkajxwvhzbcrkhlbkfzhacinpvwhlcjesbirabqwgvocklqsravlmpcrpfigbuspsvrbqpwhysvpqtgjjjwytpwtyjfyrijwcdyfhsxfpbmajhgveuadmhpicxvrotavogqauosxbzdmixqnxu
+                  example: bzlnbwlwwulfgixrltymdijzzzbtgjsdcrniftpjvqevwyspwfbjsywqmdvppbxrvhpqdghbfvjgcyemxeibxaplnmlnbmqshgjahvocfwjjjwvjzfrilioptmkustlimnfpwclrvscjuuzjcmxrlzthbslnaxs
               required:
                 - original
                 - translated
@@ -1555,7 +1834,7 @@ paths:
         in: path
         name: id
         description: 'The ID of word. Example=2'
-        example: 8
+        example: 3
         required: true
         schema:
           type: integer
@@ -1647,7 +1926,7 @@ paths:
         in: path
         name: word
         description: 'The ID of word. Example=2'
-        example: 16
+        example: 5
         required: true
         schema:
           type: integer
@@ -1739,7 +2018,7 @@ paths:
         in: path
         name: word
         description: 'The ID of word. Example=2'
-        example: 14
+        example: 5
         required: true
         schema:
           type: integer
@@ -1747,7 +2026,7 @@ paths:
         in: path
         name: value
         description: 'Need to pass 0 or 1, should we mark this word known (1) or unknown (0). Example=1'
-        example: 14
+        example: 8
         required: true
         schema:
           type: integer
@@ -1839,7 +2118,7 @@ paths:
         in: path
         name: word
         description: 'The ID of word. Example=2'
-        example: 7
+        example: 3
         required: true
         schema:
           type: integer
@@ -1847,7 +2126,7 @@ paths:
         in: path
         name: value
         description: 'Need to pass 0 or 1, should we mark this word starred (1) or unstar it (0). Example=1'
-        example: 6
+        example: 3
         required: true
         schema:
           type: integer
@@ -1951,7 +2230,7 @@ paths:
         in: path
         name: word
         description: 'The ID of word. Example=2'
-        example: 16
+        example: 19
         required: true
         schema:
           type: integer
@@ -1959,7 +2238,7 @@ paths:
         in: path
         name: user
         description: ''
-        example: reprehenderit
+        example: et
         required: true
         schema:
           type: string
@@ -1967,20 +2246,23 @@ paths:
         in: path
         name: value
         description: 'User ID which we need to copy word. Example=2'
-        example: 18
+        example: 20
         required: true
         schema:
           type: integer
 tags:
   -
+    name: Samples
+    description: "\nList of sample words which we need to autofill words list for users"
+  -
     name: Analytics
     description: "\nGet all statistics data which is need for displaying widgets"
   -
-    name: Other
-    description: ''
-  -
     name: Authentication
     description: "\nAPIs for managing authentication and getting tokens"
+  -
+    name: Other
+    description: ''
   -
     name: Settings
     description: "\nGet settings of currently authenticated user or change setting value"

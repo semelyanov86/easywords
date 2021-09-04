@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <img src="{{ asset('images/easywords.png') }}" alt="Easywords" width="50px">
+                        <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
@@ -28,12 +28,17 @@
                         Words
                         </x-dropdown-link>
                         @endcan
+                        @can('view-any', App\Models\Sample::class)
+                        <x-dropdown-link href="{{ route('samples.index') }}">
+                        Samples
+                        </x-dropdown-link>
+                        @endcan
                 </x-nav-dropdown>
 
-                    @if (Auth::user()->can('view-any', Spatie\Permission\Models\Role::class) ||
+                    @if (Auth::user()->can('view-any', Spatie\Permission\Models\Role::class) || 
                         Auth::user()->can('view-any', Spatie\Permission\Models\Permission::class))
                     <x-nav-dropdown title="Access Management" align="right" width="48">
-
+                        
                         @can('view-any', Spatie\Permission\Models\Role::class)
                         <x-dropdown-link href="{{ route('roles.index') }}">Roles</x-dropdown-link>
                         @endcan
@@ -41,7 +46,7 @@
                         @can('view-any', Spatie\Permission\Models\Permission::class)
                         <x-dropdown-link href="{{ route('permissions.index') }}">Permissions</x-dropdown-link>
                         @endcan
-
+                        
                     </x-nav-dropdown>
                     @endif
             </div>
@@ -169,7 +174,7 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
-
+            
                 @can('view-any', App\Models\User::class)
                 <x-jet-responsive-nav-link href="{{ route('users.index') }}">
                 Users
@@ -180,10 +185,15 @@
                 Words
                 </x-jet-responsive-nav-link>
                 @endcan
+                @can('view-any', App\Models\Sample::class)
+                <x-jet-responsive-nav-link href="{{ route('samples.index') }}">
+                Samples
+                </x-jet-responsive-nav-link>
+                @endcan
 
-                @if (Auth::user()->can('view-any', Spatie\Permission\Models\Role::class) ||
+                @if (Auth::user()->can('view-any', Spatie\Permission\Models\Role::class) || 
                     Auth::user()->can('view-any', Spatie\Permission\Models\Permission::class))
-
+                    
                     @can('view-any', Spatie\Permission\Models\Role::class)
                     <x-jet-responsive-nav-link href="{{ route('roles.index') }}">Roles</x-jet-responsive-nav-link>
                     @endcan
@@ -191,7 +201,7 @@
                     @can('view-any', Spatie\Permission\Models\Permission::class)
                     <x-jet-responsive-nav-link href="{{ route('permissions.index') }}">Permissions</x-jet-responsive-nav-link>
                     @endcan
-
+                    
                 @endif
         </div>
 

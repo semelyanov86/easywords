@@ -49,6 +49,7 @@ return [
             'user_id' => 'User',
             'language' => 'Language',
             'views' => 'Views',
+            'from_sample' => 'From Sample',
         ],
     ],
 
@@ -71,6 +72,20 @@ return [
         'show_title' => 'Show Permission',
         'inputs' => [
             'name' => 'Name',
+        ],
+    ],
+
+    'samples' => [
+        'name' => 'Samples',
+        'index_title' => 'Samples List',
+        'new_title' => 'New Sample',
+        'create_title' => 'Create Sample',
+        'edit_title' => 'Edit Sample',
+        'show_title' => 'Show Sample',
+        'inputs' => [
+            'original' => 'Original',
+            'translated' => 'Translated',
+            'language' => 'Language',
         ],
     ],
 ];

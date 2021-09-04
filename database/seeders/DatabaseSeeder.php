@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionsSeeder::class);
 
         $this->call(WordSeeder::class);
+        $this->call(SampleSeeder::class);
     }
 }

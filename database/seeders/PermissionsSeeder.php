@@ -21,6 +21,12 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'update words']);
         Permission::create(['name' => 'delete words']);
 
+        Permission::create(['name' => 'list samples']);
+        Permission::create(['name' => 'view samples']);
+        Permission::create(['name' => 'create samples']);
+        Permission::create(['name' => 'update samples']);
+        Permission::create(['name' => 'delete samples']);
+
         // Create user role and assign existing permissions
         $currentPermissions = Permission::all();
         $userRole = Role::create(['name' => 'user']);
@@ -55,8 +61,5 @@ class PermissionsSeeder extends Seeder
         if ($user) {
             $user->assignRole($adminRole);
         }
-        $userModel = \App\Models\User::whereEmail('user@user.com')->first();
-
-        $userModel?->assignRole($userRole);
     }
 }

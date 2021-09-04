@@ -32,7 +32,8 @@ final class ShareWordAction
             'user_id' => $userId,
             'starred' => false,
             'language' => $word->language,
-            'views' => 0
+            'views' => 0,
+            'from_sample' => false
         ]);
         return CreateWordAction::run($dto);
     }
