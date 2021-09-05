@@ -100,6 +100,7 @@ export default defineComponent({
             language: settings.value.default_language,
             views: 0,
             created_at: new Date().toISOString(),
+            from_sample: false
         })
 
         function register() {

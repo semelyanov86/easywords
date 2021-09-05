@@ -7,10 +7,29 @@
             <div class="max-w-sm mt-6 overflow-hidden bg-white rounded shadow-lg" v-if="word">
                 <transition name="slide-fade" mode="out-in">
                     <div :key="word.id">
-                        <share-component :id="word.id"></share-component>
+                        <div class="flex">
+                            <div class="flex-auto">
+                                <div :title="i18n.t('from_sample')" class="ml-3 text-blue-800" v-if="word.from_sample">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path></svg>
+                                </div>
+                            </div>
+                            <div class="flex-auto">
+                                <div class="ml-3 text-blue-800">
+                                    <p>#{{ word.id }}</p>
+                                </div>
+                            </div>
+                            <div class="flex-auto">
+                                <div class="ml-3 text-blue-800">
+                                    <p v-if="words">{{ index }} / {{ words.length }}</p>
+                                </div>
+                            </div>
+                            <div class="flex-auto text-blue-800">
+                                <share-component :id="word.id"></share-component>
+                            </div>
+                        </div>
                         <transition name="flip">
                             <div class="card" :key="getWordKeyTranslation">
-                                <div class="px-6 py-4">
+                                <div class="px-6 py-4 mt-2">
                                     <div class="mb-2 text-2xl font-bold text-gray-900 text-left">{{ word[getWordKeyTranslation] }}</div>
                                 </div>
                                 <card-buttons :word="word"></card-buttons>
@@ -97,6 +116,7 @@ export default defineComponent({
         const wordsStore = useWordsStore()
         const showTranslate = ref<boolean>(false);
         const flipped = ref<boolean>(false)
+        const index = ref(1);
 
         let current = ref<number>(0);
 
@@ -121,8 +141,10 @@ export default defineComponent({
         const word = computed(() => {
             if (current.value > words.value.length-1) {
                 const curIndex = Math.floor(Math.random() * (words.value.length));
+                index.value = curIndex + 1
                 return words.value[curIndex]
             }
+            index.value = current.value + 1
             return words.value[current.value]
         })
 
@@ -173,7 +195,7 @@ export default defineComponent({
 
         return {
             i18n, isLoading, word, showTranslate, getWordKeyTranslation, showTranslation, flipped, showNext,
-            markKnown
+            markKnown, index, words
         }
     }
 })

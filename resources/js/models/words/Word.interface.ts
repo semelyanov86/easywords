@@ -7,5 +7,6 @@ export interface WordInterface {
     user_id: number,
     language: string,
     views: number,
-    created_at: string
+    created_at: string,
+    from_sample: boolean
 }
