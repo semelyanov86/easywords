@@ -31,6 +31,7 @@ class WordStoreRequest extends FormRequest
             'user_id' => ['nullable', 'exists:users,id'],
             'language' => ['required', 'max:5', 'string'],
             'views' => ['required', 'max:255'],
+            'shared_by' => ['nullable', 'integer']
         ];
     }
 }

@@ -27,6 +27,8 @@ final class WordDto extends \Spatie\DataTransferObject\DataTransferObject
 
     public bool $from_sample;
 
+    public ?int $shared_by = null;
+
     public static function fromRequest(FormRequest $request, ?int $userId = null): self
     {
         return new self([

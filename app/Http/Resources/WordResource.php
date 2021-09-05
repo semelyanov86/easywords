@@ -24,7 +24,8 @@ class WordResource extends JsonResource
             'language' => $model->language,
             'views' => $model->views,
             'from_sample' => (bool) $model->from_sample,
-            'created_at' => $model->created_at
+            'created_at' => $model->created_at,
+            'shared_by' => $model->shared_by
         ];
     }
 }

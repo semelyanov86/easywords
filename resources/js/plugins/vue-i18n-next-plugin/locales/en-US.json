@@ -133,6 +133,7 @@
             "header": "Do not have time for adding new words? Just import most popular words for your default language!",
             "button": "Import Words!"
         },
-        "from_sample": "Word added from samples list"
+        "from_sample": "Word added from samples list",
+        "from_user": "Word added from other user"
     }
 }

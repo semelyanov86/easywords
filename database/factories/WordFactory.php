@@ -37,6 +37,7 @@ class WordFactory extends Factory
             'language' => $this->faker->randomElement(config('app.supported_languages')),
             'views' => $this->faker->randomNumber(1),
             'user_id' => $userId,
+            'shared_by' => null
         ];
     }
 }

@@ -8,7 +8,7 @@ use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Word extends Model
+final class Word extends Model
 {
     use HasFactory;
     use Searchable;
@@ -22,6 +22,7 @@ class Word extends Model
         'language',
         'views',
         'from_sample',
+        'shared_by',
     ];
 
     protected $searchableFields = ['*'];

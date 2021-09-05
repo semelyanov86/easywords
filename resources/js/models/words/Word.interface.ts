@@ -8,5 +8,6 @@ export interface WordInterface {
     language: string,
     views: number,
     created_at: string,
-    from_sample: boolean
+    from_sample: boolean,
+    shared_by: number|null
 }

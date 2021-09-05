@@ -7,6 +7,7 @@ namespace App\Actions;
 use App\DataTransferObjects\WordDto;
 use App\Models\Word;
 use App\Repositories\WordRepository;
+use Illuminate\Support\Facades\Auth;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 final class ShareWordAction
@@ -25,6 +26,7 @@ final class ShareWordAction
         if (!$user) {
             abort(404, 'User with this ID not found!');
         }
+        $author = Auth::id();
         $word = $this->repository->getById($wordId);
         $dto = new WordDto([
             'original' => $word->original,
@@ -33,7 +35,8 @@ final class ShareWordAction
             'starred' => false,
             'language' => $word->language,
             'views' => 0,
-            'from_sample' => false
+            'from_sample' => false,
+            'shared_by' => $author
         ]);
         return CreateWordAction::run($dto);
     }
