@@ -27,6 +27,14 @@ final class WordRepository
             $query->whereNull('done_at');
         }
 
+        if (!$settings['show_shared']) {
+            $query->whereNull('shared_by');
+        }
+
+        if (!$settings['show_imported']) {
+            $query->where('from_sample', 0);
+        }
+
         return $query
             ->orderBy('created_at')
             ->paginate($settings['paginate']);

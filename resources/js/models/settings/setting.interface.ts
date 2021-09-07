@@ -5,5 +5,7 @@ export interface SettingInterface {
     known_enabled: boolean,
     fresh_first: boolean,
     languages_list: string[],
-    main_language: string
+    main_language: string,
+    show_imported: boolean,
+    show_shared: boolean
 }

@@ -80,7 +80,9 @@
             "default_language": "Default language to learn",
             "starred_enabled": "Show only starred",
             "known_enabled": "Show known words",
-            "fresh_first": "Show fresh first"
+            "fresh_first": "Show fresh first",
+            "show_imported": "Show imported words",
+            "show_shared": "Show shared words"
         },
         "languageList": {
             "chooseLanguage": "For starting choose language",

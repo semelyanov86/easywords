@@ -17,6 +17,8 @@ export const initialSettingsState: SettingsStateInterface = {
             "DE",
             "EN"
         ],
-        "main_language": "RU"
+        "main_language": "RU",
+        "show_shared": true,
+        "show_imported": true
     }
 }

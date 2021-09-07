@@ -62,6 +62,26 @@
                               v-model="setting.fresh_first"
                           />
                       </div>
+                      <div>
+                          <label class="text-gray-700" for="show_imported">{{ i18n.t('setting.show_imported') }}</label>
+                          <input
+                              id="show_imported"
+                              class="rounded text-pink-500"
+                              type="checkbox"
+                              v-on:change="register('show_imported')"
+                              v-model="setting.show_imported"
+                          />
+                      </div>
+                      <div>
+                          <label class="text-gray-700" for="show_shared">{{ i18n.t('setting.show_shared') }}</label>
+                          <input
+                              id="show_shared"
+                              class="rounded text-pink-500"
+                              type="checkbox"
+                              v-on:change="register('show_shared')"
+                              v-model="setting.show_shared"
+                          />
+                      </div>
                   </div>
 
                   <div class="flex justify-end mt-4">
@@ -109,6 +129,8 @@ export default defineComponent({
             setting.fresh_first = Boolean(setting.fresh_first)
             setting.known_enabled = Boolean(setting.known_enabled)
             setting.starred_enabled = Boolean(setting.starred_enabled)
+            setting.show_imported = Boolean(setting.show_imported)
+            setting.show_shared = Boolean(setting.show_shared)
         })
         const close = () => {
             router.back()
