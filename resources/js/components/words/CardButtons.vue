@@ -2,6 +2,7 @@
     <div class="flex items-center justify-between px-5 py-3">
         <el-button
             :label="i18n.t('languageList.delete')"
+            @click="deleteWord"
             add-css="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none">
         </el-button>
         <el-button
@@ -44,7 +45,7 @@ export default defineComponent({
             wordsStore.action('deleteWord', props.word.id)
         }
         return {
-            i18n, makeStar
+            i18n, makeStar, deleteWord
         }
     }
 })
