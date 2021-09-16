@@ -61,6 +61,12 @@
                             add-css="inline-flex text-white bg-yellow-500 border-0 py-3 px-6 focus:outline-none hover:bg-indigo-600 rounded mt-3">
                         </el-button>
                         <el-button
+                            :label="i18n.t('languageList.prev')"
+                            @click="showPrev"
+                            :disabled="prev === null"
+                            add-css="inline-flex text-white bg-blue-600 border-0 py-3 px-6 focus:outline-none hover:bg-indigo-600 rounded mt-3">
+                        </el-button>
+                        <el-button
                             :label="i18n.t('languageList.next')"
                             @click="showNext"
                             add-css="inline-flex text-white bg-indigo-500 border-0 py-3 px-6 focus:outline-none hover:bg-indigo-600 rounded mt-3">
@@ -119,14 +125,25 @@ export default defineComponent({
         const wordsStore = useWordsStore()
         const showTranslate = ref<boolean>(false);
         const flipped = ref<boolean>(false)
-        const index = ref(1);
+        const index = ref<number>(1);
 
         let current = ref<number>(0);
+        let prev = ref<number|null>(null)
 
         function showNext() {
             flipped.value = false
             showTranslate.value = false
+            prev.value = current.value;
             current.value++;
+        }
+
+        function showPrev() {
+            flipped.value = false
+            showTranslate.value = false
+            if (prev.value) {
+                current.value = prev.value;
+            }
+            prev.value = null;
         }
 
         const settings = computed(() => {
@@ -190,6 +207,7 @@ export default defineComponent({
                 id: word.value.id,
                 value: word.value.done_at ? 0 : 1
             })
+            prev.value = null;
         }
 
         onMounted(() => {
@@ -198,7 +216,7 @@ export default defineComponent({
 
         return {
             i18n, isLoading, word, showTranslate, getWordKeyTranslation, showTranslation, flipped, showNext,
-            markKnown, index, words
+            markKnown, index, words, showPrev, prev
         }
     }
 })
