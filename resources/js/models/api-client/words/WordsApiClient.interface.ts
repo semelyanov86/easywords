@@ -18,4 +18,5 @@ export interface WordsApiClientInterface {
     shareWord: (word:ShareWordInterface) => Promise<LoadedWordInterface>
     deleteWord: (id: number) => Promise<void>
     importWords: (language: string) => Promise<void>
+    knownWords: () => Promise<LoadedWordsInterface>
 }

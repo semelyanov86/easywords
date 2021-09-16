@@ -11,6 +11,7 @@ export interface WordsApiClientUrlsInterface {
     markStarred: string,
     shareWord: string,
     deleteWord: string,
-    importWords: string
+    importWords: string,
+    knownWords: string
 }
 

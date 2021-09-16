@@ -122,7 +122,9 @@
             "updated_this_month": "Viewed in this month",
             "updated_today": "Viewed today",
             "most_viewed": "Most viewed words",
-            "added_today": "Added today"
+            "added_today": "Added today",
+            "known_list": "List of known words",
+            "go_back": "Go back"
         },
         "password": {
             "header": "Change password",

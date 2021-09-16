@@ -94,7 +94,7 @@
                     </div>
                 </div>
 
-                <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
+                <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 xl:mt-0" @click="showKnown">
                     <div
                         class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm"
                     >
@@ -344,6 +344,7 @@ import {AxiosError} from "axios";
 import {ErrorHandler} from "../plugins/error-handler/ErrorHandler";
 import {StatisticsDataInterface} from "../models/statistics/statisticsData.interface";
 import Loader from '../components/shared/Loader.component.vue'
+import router from "../router";
 
 export default defineComponent({
     name: "Statistics",
@@ -383,11 +384,17 @@ export default defineComponent({
             return new Date(date).toLocaleDateString()
         }
 
+        function showKnown() {
+            router.push({
+                name: 'KnownWords'
+            })
+        }
+
         onMounted(() => {
             receiveStatistics()
         })
         return {
-            i18n, statistics, loading, displayedDate
+            i18n, statistics, loading, displayedDate, showKnown
         }
     }
 })

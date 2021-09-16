@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\DataTransferObjects\WordDto;
 use App\Models\Word;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -111,5 +112,10 @@ final class WordRepository
         $word = $this->getById($id);
         $word->delete();
         return true;
+    }
+
+    public function getKnownWords(int $userId): Collection
+    {
+        return Word::where('user_id', $userId)->whereNotNull('done_at')->get();
     }
 }

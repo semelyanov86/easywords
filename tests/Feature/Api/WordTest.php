@@ -46,6 +46,25 @@ class WordTest extends TestCase
     /**
      * @test
      */
+    public function it_gets_known_words(): void
+    {
+        $words = Word::factory()
+            ->count(5)
+            ->create();
+        $wordsKnown = Word::factory()
+            ->count(2)
+            ->create([
+                'done_at' => now()
+            ]);
+
+        $response = $this->getJson(route('api.words.listknown'));
+
+        $response->assertOk()->assertSee($wordsKnown[0]->original)->assertSee($wordsKnown[1]->original);
+    }
+
+    /**
+     * @test
+     */
     public function it_stores_the_word(): void
     {
         $data = Word::factory()

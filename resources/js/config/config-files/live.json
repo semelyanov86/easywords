@@ -73,7 +73,8 @@
             "markStarred": "api/words/{id}/starred",
             "shareWord": "api/words/{id}/share",
             "deleteWord": "api/words/{id}",
-            "importWords": "api/samples/export/{language}"
+            "importWords": "api/samples/export/{language}",
+            "knownWords": "api/known"
         }
     }
 }

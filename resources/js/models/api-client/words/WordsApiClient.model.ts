@@ -30,6 +30,15 @@ export class WordsApiClientModel implements WordsApiClientInterface {
     return HttpClient.get<LoadedWordsInterface>(getParameters)
   }
 
+  knownWords(): Promise<LoadedWordsInterface> {
+    const getParameters: HttpRequestParamsInterface = {
+      url: this.urls.knownWords,
+      requiresToken: true
+    }
+
+    return HttpClient.get<LoadedWordsInterface>(getParameters)
+  }
+
     createWords(word: WordInterface): Promise<LoadedWordInterface> {
         const getParameters: HttpRequestParamsInterface = {
             url: this.urls.createWords,

@@ -8,6 +8,7 @@ use App\Actions\CreateWordAction;
 use App\Actions\DeleteWordAction;
 use App\Actions\IncreaseCounterAction;
 use App\Actions\IndexWordsAction;
+use App\Actions\ListOfKnownWordsAction;
 use App\Actions\MarkWordKnownAction;
 use App\Actions\MarkWordStarredAction;
 use App\Actions\ShareWordAction;
@@ -36,6 +37,21 @@ use Spatie\RouteAttributes\Attributes\Resource;
 #[Resource('words')]
 final class WordController extends Controller
 {
+    /**
+     * List of known words
+     *
+     * Get list of known words
+     *
+     * @response scenario=success {"data":[{"id":18,"original":"voluptates","translated":"deserunt","done_at":"2021-09-16T08:30:26.000000Z","starred":false,"user_id":1,"language":"DE","views":8,"from_sample":false,"created_at":"2021-09-04T10:11:33.000000Z","shared_by":null},{"id":27,"original":"spielen","translated":"играть; резвиться","done_at":"2021-09-16T08:26:26.000000Z","starred":false,"user_id":1,"language":"DE","views":0,"from_sample":true,"created_at":"2021-09-04T10:43:34.000000Z","shared_by":null},{"id":33,"original":"die Eltern","translated":"родители","done_at":"2021-09-16T08:30:35.000000Z","starred":false,"user_id":1,"language":"DE","views":0,"from_sample":true,"created_at":"2021-09-04T10:43:34.000000Z","shared_by":null},{"id":34,"original":"der Familienstand","translated":"семейное положение","done_at":"2021-09-16T08:30:33.000000Z","starred":false,"user_id":1,"language":"DE","views":0,"from_sample":true,"created_at":"2021-09-04T10:43:34.000000Z","shared_by":null}]}
+     */
+    #[Get('known', name: 'api.words.listknown')]
+    public function known(Request $request): WordCollection
+    {
+        $words = ListOfKnownWordsAction::run();
+
+        return new WordCollection($words);
+    }
+
     /**
      * Mark Viewed
      *
