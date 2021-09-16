@@ -94,7 +94,7 @@
                     </div>
                 </div>
 
-                <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 xl:mt-0" @click="showKnown">
+                <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 xl:mt-0 cursor-pointer" @click="showKnown">
                     <div
                         class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm"
                     >
