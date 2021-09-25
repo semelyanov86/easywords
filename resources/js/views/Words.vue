@@ -23,7 +23,7 @@
                             </div>
                             <div class="flex-auto">
                                 <div class="ml-3 text-blue-800">
-                                    <p v-if="words">{{ index }} / {{ words.length }}</p>
+                                    <p v-if="words">{{ current + 1 }} / {{ words.length }}</p>
                                 </div>
                             </div>
                             <div class="flex-auto text-blue-800">
@@ -46,7 +46,7 @@
                 <no-words-found :target="target"></no-words-found>
             </div>
         </div>
-        <footer class="text-gray-600 body-font">
+        <footer class="text-gray-600 body-font" v-if="word">
             <div class="border-t border-gray-200">
                 <div class="container px-5 py-8 flex flex-wrap mx-auto items-center">
                     <div class="flex md:flex-nowrap flex-wrap justify-center items-end md:justify-start">
@@ -100,6 +100,9 @@ import VueFlip from 'vue-flip';
 import CardButtons from '../components/words/CardButtons.vue'
 import NoWordsFound from '../components/words/NoWordsFound.vue'
 import ShareComponent from "../components/words/ShareComponent.vue"
+import getNextWord from "../services/getNextWord";
+import {WordsMutationType} from "@/models/store/words/WordsMutationType";
+import nextWord = WordsMutationType.nextWord;
 
 export default defineComponent({
     name: "Words",
@@ -126,22 +129,38 @@ export default defineComponent({
         const showTranslate = ref<boolean>(false);
         const flipped = ref<boolean>(false)
         const index = ref<number>(1);
-
-        let current = ref<number>(0);
         let prev = ref<number|null>(null)
+        let word = ref<WordInterface|null>(null)
 
         function showNext() {
+            setNulls();
+            prev.value = current.value;
+            index.value++;
+            generateWord();
+        }
+
+        const current = computed<number>(() => {
+            if (!word || !word.value) {
+                return 0;
+            }
+            return wordsStore.state.words.findIndex(wordFound => {
+                if (!word.value) {
+                    return false
+                }
+                return wordFound.original === word.value.original
+            })
+        })
+
+        function setNulls() {
             flipped.value = false
             showTranslate.value = false
-            prev.value = current.value;
-            current.value++;
         }
 
         function showPrev() {
-            flipped.value = false
-            showTranslate.value = false
+            setNulls();
             if (prev.value) {
-                current.value = prev.value;
+                word.value = words.value[prev.value];
+                index.value--;
             }
             prev.value = null;
         }
@@ -158,15 +177,9 @@ export default defineComponent({
             return wordsStore.state.loading
         })
 
-        const word = computed(() => {
-            if (current.value > words.value.length-1) {
-                const curIndex = Math.floor(Math.random() * (words.value.length));
-                index.value = curIndex + 1
-                return words.value[curIndex]
-            }
-            index.value = current.value + 1
-            return words.value[current.value]
-        })
+        function generateWord() {
+            word.value = getNextWord(current.value, prev.value, index.value)
+        }
 
         const getWordKeyTranslation = computed(() => {
             if (showTranslate.value) {
@@ -187,12 +200,15 @@ export default defineComponent({
         const i18n = useI18n()
 
         function receiveWords() {
-            wordsStore.action('loadWords', {
+            wordsStore.actionAsync('loadWords', {
                 language: props.target
-            })
+            }).then(words => word.value = words[0])
         }
 
         function showTranslation() {
+            if (!word.value) {
+                return;
+            }
             flipped.value = !flipped.value
             showTranslate.value = !showTranslate.value
             if (showTranslate.value) {
@@ -201,13 +217,16 @@ export default defineComponent({
         }
 
         function markKnown() {
-            flipped.value = false
-            showTranslate.value = false
+            setNulls();
+            if (!word.value) {
+                return;
+            }
             wordsStore.action('markKnown', {
                 id: word.value.id,
                 value: word.value.done_at ? 0 : 1
             })
             prev.value = null;
+            showNext();
         }
 
         onMounted(() => {
@@ -216,7 +235,7 @@ export default defineComponent({
 
         return {
             i18n, isLoading, word, showTranslate, getWordKeyTranslation, showTranslation, flipped, showNext,
-            markKnown, index, words, showPrev, prev
+            markKnown, index, words, showPrev, prev, current
         }
     }
 })

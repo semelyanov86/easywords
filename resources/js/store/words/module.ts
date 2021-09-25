@@ -43,13 +43,16 @@ export const mutations: MutationTree<WordsStateInterface> = {
  * Vuex Items actions
  */
 export const actions: ActionTree<WordsStateInterface, RootStateInterface> = {
-  loadWords({ commit }, setting:WordRequestInterface) {
+  loadWords({ commit }, setting:WordRequestInterface): Promise<WordInterface[]> {
     commit(MutationType.words.loadingWords)
+      return new Promise((resolve, reject) => {
+          apiClient.words.fetchWords(setting).then((data) => {
+              const result = data.data
+              commit(MutationType.words.loadedWords, result)
+              resolve(result)
+          }).catch((err) => reject(err))
+      });
 
-      apiClient.words.fetchWords(setting).then((data) => {
-          const result = data.data
-          commit(MutationType.words.loadedWords, result)
-      })
   },
   markViewed({commit}, id:number) {
       apiClient.words.markViewed(id).then((data) => {

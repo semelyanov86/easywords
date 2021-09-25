@@ -10,6 +10,7 @@ import { settingsState } from '../settings/module'
 import { wordsState } from '../words/module'
 import { userState } from '../user/module'
 import { localesState } from '../locales/module'
+import {WordInterface} from "@/models/words/Word.interface";
 
 /**
  * @name storeOptions

@@ -1,5 +1,6 @@
-import { rootStore, dispatchModuleAction } from '../root'
+import {rootStore, dispatchModuleAction} from '../root'
 import { StoreModuleNames, WordsStateInterface } from '../../models/store'
+import {WordInterface} from "@/models/words/Word.interface";
 
 /**
  * @name wordsStore
@@ -12,7 +13,11 @@ const wordsStore = {
   },
   action<T>(actionName: string, params?: T): void {
     dispatchModuleAction(StoreModuleNames.wordsState, actionName, params)
-  }
+  },
+    actionAsync<T>(actionName: string, params?: T): Promise<WordInterface[]> {
+      const moduleName = StoreModuleNames.wordsState;
+        return rootStore.dispatch(`${moduleName}/${actionName}`, params)
+    }
 }
 // export our wrapper using the composition API convention (i.e. useXYZ)
 export const useWordsStore = () => {
