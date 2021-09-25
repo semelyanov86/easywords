@@ -72,12 +72,12 @@
                             add-css="inline-flex text-white bg-indigo-500 border-0 py-3 px-6 focus:outline-none hover:bg-indigo-600 rounded mt-3">
                         </el-button>
                     </div>
-                    <span class="inline-flex lg:ml-auto lg:mt-0 mt-6 w-full justify-center md:justify-start md:w-auto">
+                    <span class="inline-flex lg:ml-auto lg:mt-0 mt-1 w-full justify-center md:justify-start md:w-auto">
       </span>
                 </div>
             </div>
             <div class="bg-gray-100">
-                <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+                <div class="container mx-auto py-2 px-5 flex flex-wrap flex-col sm:flex-row">
                     <p class="text-gray-500 text-sm text-center sm:text-left">© 2021 EasyWords —
                         <a href="https://sergeyem.ru" class="text-gray-600 ml-1" target="_blank" rel="noopener noreferrer">Sergey Emelyanov</a>
                     </p>
