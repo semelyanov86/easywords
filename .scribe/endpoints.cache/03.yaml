@@ -22,7 +22,7 @@ endpoints:
         name: language
         description: 'Language for export. Example=DE'
         required: true
-        example: et
+        example: quia
         type: string
     queryParameters: []
     bodyParameters: []
@@ -59,13 +59,13 @@ endpoints:
         name: language
         description: 'Language which we need to get list of words. Example=DE'
         required: true
-        example: quos
+        example: voluptatem
         type: string
       page:
         name: page
         description: 'Page number if you need to get new list of samples. Example=1'
         required: false
-        example: 14
+        example: 7
         type: integer
     bodyParameters: []
     responses:
@@ -92,7 +92,7 @@ endpoints:
         name: id
         description: 'The ID of sample. Example=2'
         required: true
-        example: 5
+        example: 4
         type: integer
     queryParameters: []
     bodyParameters: []

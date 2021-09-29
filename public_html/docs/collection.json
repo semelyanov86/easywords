@@ -10,163 +10,11 @@
     ],
     "info": {
         "name": "API Documentation for EasyWords APP",
-        "_postman_id": "40b43e2e-eda0-4d80-bb8a-708ce97b855e",
+        "_postman_id": "1f81d0de-7e3f-473e-9cfa-143a8fcb87a0",
         "description": "Here you can find detail documentation about API endpoints for EasyWords APP. Currently API supports getting short list of users and getting latest words for display in cards",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
-        {
-            "name": "Samples",
-            "description": "\nList of sample words which we need to autofill words list for users",
-            "item": [
-                {
-                    "name": "Export Samples",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/samples\/export\/:language",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/samples\/export\/:language",
-                            "variable": [
-                                {
-                                    "id": "language",
-                                    "key": "language",
-                                    "value": "et",
-                                    "description": "Language for export. Example=DE"
-                                }
-                            ]
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "User can load samples from specific language to it's own database"
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 204,
-                            "body": "",
-                            "name": "success"
-                        },
-                        {
-                            "header": [],
-                            "code": 401,
-                            "body": "{\n\"message\": \"Unauthenticated.\"\n}",
-                            "name": "unauthorized"
-                        }
-                    ]
-                },
-                {
-                    "name": "List of Samples",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/samples",
-                            "query": [
-                                {
-                                    "key": "language",
-                                    "value": "quos",
-                                    "description": "Language which we need to get list of words. Example=DE",
-                                    "disabled": false
-                                },
-                                {
-                                    "key": "page",
-                                    "value": "14",
-                                    "description": "Page number if you need to get new list of samples. Example=1",
-                                    "disabled": false
-                                }
-                            ],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/samples?language=quos&page=14"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "Get list of samples which we need for import process."
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\"data\":[{\"id\":1,\"original\":\"der Sekt\",\"translated\":\"\u0428\u0430\u043c\u043f\u0430\u043d\u0441\u043a\u043e\u0435\",\"language\":\"DE\",\"created_at\":\"2021-08-26T05:57:00.000000Z\"},{\"id\":2,\"original\":\"der Cognac\",\"translated\":\"\u041a\u043e\u043d\u044c\u044f\u043a\",\"language\":\"DE\",\"created_at\":\"2021-08-26T05:57:00.000000Z\"}],\"links\":{\"first\":\"http:\/\/cards.sergeyem.test:8000\/api\/samples?page=1\",\"last\":\"http:\/\/cards.sergeyem.test:8000\/api\/samples?page=1\",\"prev\":null,\"next\":null},\"meta\":{\"current_page\":1,\"from\":1,\"last_page\":1,\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\/\/cards.sergeyem.test:8000\/api\/samples?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"path\":\"http:\/\/cards.sergeyem.test:8000\/api\/samples\",\"per_page\":\"20\",\"to\":4,\"total\":4}}",
-                            "name": "success"
-                        }
-                    ]
-                },
-                {
-                    "name": "Get sample by ID",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/samples\/:id",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/samples\/:id",
-                            "variable": [
-                                {
-                                    "id": "id",
-                                    "key": "id",
-                                    "value": "5",
-                                    "description": "The ID of sample. Example=2"
-                                }
-                            ]
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "Getting detail information about sample by it's ID"
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\"data\":{\"id\":2,\"original\":\"der Cognac\",\"translated\":\"\u041a\u043e\u043d\u044c\u044f\u043a\",\"language\":\"DE\",\"created_at\":\"2021-08-26T05:57:00.000000Z\"}}",
-                            "name": "success"
-                        },
-                        {
-                            "header": [],
-                            "code": 401,
-                            "body": "{\n\"message\": \"Unauthenticated.\"\n}",
-                            "name": "unauthorized"
-                        },
-                        {
-                            "header": [],
-                            "code": 404,
-                            "body": "{\n\"message\": \"No query results for model [App\\\\Models\\\\Sample].\"\n}",
-                            "name": "Not Found"
-                        }
-                    ]
-                }
-            ]
-        },
         {
             "name": "Analytics",
             "description": "\nGet all statistics data which is need for displaying widgets",
@@ -341,6 +189,39 @@
                             "name": "validation error"
                         }
                     ]
+                },
+                {
+                    "name": "Revoke current token",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/signout",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/signout"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Using this endpoint signout and delete current token"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"success\": \"ok\",\n}",
+                            "name": "success"
+                        }
+                    ]
                 }
             ]
         },
@@ -407,7 +288,7 @@
                                 {
                                     "id": "user_id",
                                     "key": "user_id",
-                                    "value": "20",
+                                    "value": "18",
                                     "description": "The ID of the user."
                                 }
                             ]
@@ -467,7 +348,7 @@
                                 {
                                     "id": "user",
                                     "key": "user",
-                                    "value": "1",
+                                    "value": "19",
                                     "description": ""
                                 }
                             ]
@@ -485,7 +366,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"original\":\"xztzweeigozkyqthiaxsowvginhalaxhveieqlwnjipzbdyhwvuxhaklfiyjenzafpmxveywiucorsncsutwhlnuqrkuutwvjklynzehorcdhwsxakvydoejwevjqfupzrcanfrzsxyzsjnicucmhfrjzcqlhaqttunvbzkvz\",\"translated\":\"qrhdmkgcksbkvefkzggoljxxnmkughospyngqatswpgvjttjclhglhpxtqxelmwfmdo\",\"done_at\":\"2021-09-04T09:50:02\",\"starred\":false,\"language\":\"os\",\"views\":\"vbdckkgfapzhktrhblhngrspuukonmvpjmlaojyqvbcwvqftbdocesdubfidoswytylrtyqwnwtpbcjuxclavcyeupuvhheslmgxbssbsxxxjwvkzzfzpvdwcdmudnuqlbbrdkyllbnfhjzxfnxaqcguuamornocacxwvbcdovlgtzixvcu\"}"
+                            "raw": "{\"original\":\"uldpotgbwvvfisahktvlpnvoxnndfkokeueuzeyylndieuetdsbgkydhaczxxgztbtbnqiolacugbwwqvuxwkaswnzntvfwfkthwswksgxbegoxyggicxethssgbnwukqlbrxvcvdfxmodfxytibooyztspgrliweymdplpbiudorqnconkggdvlahdrbjhonobfgzuq\",\"translated\":\"ttbqvyiovjelvtqesrcnaydiujifwbmjrwrwculpwvaqbxibbiguckwguountowdyiivclfvhngpfscgjhjrmdcxkxwqsmarzuihptisldnltcshlokidveuhnsihcgjcocrzarliufdei\",\"done_at\":\"2021-09-29T11:53:49\",\"starred\":false,\"language\":\"egizo\",\"views\":\"ixbqujcpptfcjxvthawdegenzciqq\"}"
                         },
                         "description": "Creating new word of passed user. Currently this functionality not implemented"
                     },
@@ -495,6 +376,158 @@
                             "code": 503,
                             "body": "",
                             "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Samples",
+            "description": "\nList of sample words which we need to autofill words list for users",
+            "item": [
+                {
+                    "name": "Export Samples",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/samples\/export\/:language",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/samples\/export\/:language",
+                            "variable": [
+                                {
+                                    "id": "language",
+                                    "key": "language",
+                                    "value": "quia",
+                                    "description": "Language for export. Example=DE"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "User can load samples from specific language to it's own database"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 204,
+                            "body": "",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"message\": \"Unauthenticated.\"\n}",
+                            "name": "unauthorized"
+                        }
+                    ]
+                },
+                {
+                    "name": "List of Samples",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/samples",
+                            "query": [
+                                {
+                                    "key": "language",
+                                    "value": "voluptatem",
+                                    "description": "Language which we need to get list of words. Example=DE",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "7",
+                                    "description": "Page number if you need to get new list of samples. Example=1",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/samples?language=voluptatem&page=7"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get list of samples which we need for import process."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[{\"id\":1,\"original\":\"der Sekt\",\"translated\":\"\u0428\u0430\u043c\u043f\u0430\u043d\u0441\u043a\u043e\u0435\",\"language\":\"DE\",\"created_at\":\"2021-08-26T05:57:00.000000Z\"},{\"id\":2,\"original\":\"der Cognac\",\"translated\":\"\u041a\u043e\u043d\u044c\u044f\u043a\",\"language\":\"DE\",\"created_at\":\"2021-08-26T05:57:00.000000Z\"}],\"links\":{\"first\":\"http:\/\/cards.sergeyem.test:8000\/api\/samples?page=1\",\"last\":\"http:\/\/cards.sergeyem.test:8000\/api\/samples?page=1\",\"prev\":null,\"next\":null},\"meta\":{\"current_page\":1,\"from\":1,\"last_page\":1,\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"http:\/\/cards.sergeyem.test:8000\/api\/samples?page=1\",\"label\":\"1\",\"active\":true},{\"url\":null,\"label\":\"Next &raquo;\",\"active\":false}],\"path\":\"http:\/\/cards.sergeyem.test:8000\/api\/samples\",\"per_page\":\"20\",\"to\":4,\"total\":4}}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get sample by ID",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/samples\/:id",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/samples\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "4",
+                                    "description": "The ID of sample. Example=2"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Getting detail information about sample by it's ID"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":{\"id\":2,\"original\":\"der Cognac\",\"translated\":\"\u041a\u043e\u043d\u044c\u044f\u043a\",\"language\":\"DE\",\"created_at\":\"2021-08-26T05:57:00.000000Z\"}}",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"message\": \"Unauthenticated.\"\n}",
+                            "name": "unauthorized"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n\"message\": \"No query results for model [App\\\\Models\\\\Sample].\"\n}",
+                            "name": "Not Found"
                         }
                     ]
                 }
@@ -685,18 +718,18 @@
                             "query": [
                                 {
                                     "key": "language",
-                                    "value": "eum",
+                                    "value": "voluptatum",
                                     "description": "Language which we need to get list of words. Example=DE",
                                     "disabled": false
                                 },
                                 {
                                     "key": "page",
-                                    "value": "14",
+                                    "value": "8",
                                     "description": "Page number if you need to get new list of words. Example=1",
                                     "disabled": false
                                 }
                             ],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/words?language=eum&page=14"
+                            "raw": "http:\/\/{{baseUrl}}\/api\/words?language=voluptatum&page=8"
                         },
                         "method": "GET",
                         "header": [
@@ -744,7 +777,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"original\":\"\\\"wichtig\\\"\",\"translated\":\"\\\"\u0412\u0430\u0436\u043d\u043e\\\"\",\"done_at\":\"null\",\"starred\":false,\"language\":\"\\\"DE\\\"\",\"views\":0}"
+                            "raw": "{\"original\":\"\\\"wichtig\\\"\",\"translated\":\"\\\"\u0412\u0430\u0436\u043d\u043e\\\"\",\"done_at\":\"null\",\"starred\":false,\"language\":\"\\\"DE\\\"\",\"views\":0,\"shared_by\":16}"
                         },
                         "description": "Here you can create new word. Before saving system will check for existing ford and if it is exist it will throw validation error."
                     },
@@ -782,7 +815,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "3",
+                                    "value": "6",
                                     "description": "The ID of word. Example=2"
                                 }
                             ]
@@ -835,7 +868,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "2",
+                                    "value": "18",
                                     "description": "The ID of word. Example=2"
                                 }
                             ]
@@ -853,7 +886,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"original\":\"russqhfckarnpfkzishtacfkaxtbgodjbvobnwpjmbrcwgibfrupzrevpkrdwltknzqownzsucnsuefhdqfkshfozxvskxatnjkrdanfqdynlovbqdzcpklaphxyuopnmpbmhwiiaprooymtxuzjcahdervioxwqv\",\"translated\":\"ewzgvepxptwucbmaucoirlmfortfjlltxnjhmjguuyywthbecouzqbmkmxrrywdszwgmssaffjwbijzksoarodouckpijvmgkidovfodlufktpcimiurbammecbxuqtmbddojyzbdrybbccobhsrizsgzjayhljclndwhdzvmbsxcgxwgdkclspjgbqprmarhqnxjfghxkfftnapqyxyxchvnm\",\"done_at\":\"2021-09-04T09:50:02\",\"starred\":false,\"user_id\":\"quo\",\"language\":\"orqc\",\"views\":\"bzlnbwlwwulfgixrltymdijzzzbtgjsdcrniftpjvqevwyspwfbjsywqmdvppbxrvhpqdghbfvjgcyemxeibxaplnmlnbmqshgjahvocfwjjjwvjzfrilioptmkustlimnfpwclrvscjuuzjcmxrlzthbslnaxs\"}"
+                            "raw": "{\"original\":\"kuzhvirfaqavrzroyiacmollirbfuoguysvlicrqxaywroumrgihwhlkqmbrjzuhzvckvkbrjnimgcmxhruzruzhontmoznkekcphucvzbkzolfywwcjigznnarjsyrwwjhsccofvjvlujcfejcuqdkbjheifrtqzzjdyqjjvabvsarjymfmh\",\"translated\":\"iytltbzzmhrxpxltoffgljlxpsnbympmahlukarirxflgvsskukkbskwcronlwbsrhcmmkkydlxcdujpdrjicxbujnibhdqsajztwakuymzmqvttvxgixottfjzihuxhskiabatfkxtbvfirellvxobndbccudkwksobzelolhfnqojpdifdxuv\",\"done_at\":\"2021-09-29T11:53:49\",\"starred\":false,\"user_id\":\"dolorum\",\"language\":\"inxf\",\"views\":\"psvrbseqbfzcqkygkoscnylhgvlitxzkpgrthnsdpfxbnfslntoorsetfeeojjmpxgmhskarqlregkzziyolfaikxmabndmwcmanlseuqeeruzkoxtdqonqriudvkkfzgqkiikfwmclapcyzxzeloqsxcmhxqjktoyoxdslxyosvjetayngnyszjkdckwnuyixbrobxumaztjkigj\",\"shared_by\":5}"
                         },
                         "description": "Update word information. Currently we get 503 error. Route do not implemented yet."
                     },
@@ -879,7 +912,7 @@
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "9",
+                                    "value": "19",
                                     "description": "The ID of word. Example=2"
                                 }
                             ]
@@ -932,7 +965,7 @@
                                 {
                                     "id": "word",
                                     "key": "word",
-                                    "value": "5",
+                                    "value": "15",
                                     "description": "The ID of word. Example=2"
                                 }
                             ]
@@ -985,13 +1018,13 @@
                                 {
                                     "id": "word",
                                     "key": "word",
-                                    "value": "5",
+                                    "value": "8",
                                     "description": "The ID of word. Example=2"
                                 },
                                 {
                                     "id": "value",
                                     "key": "value",
-                                    "value": "8",
+                                    "value": "15",
                                     "description": "Need to pass 0 or 1, should we mark this word known (1) or unknown (0). Example=1"
                                 }
                             ]
@@ -1044,7 +1077,7 @@
                                 {
                                     "id": "word",
                                     "key": "word",
-                                    "value": "3",
+                                    "value": "16",
                                     "description": "The ID of word. Example=2"
                                 },
                                 {
@@ -1103,7 +1136,7 @@
                                 {
                                     "id": "word",
                                     "key": "word",
-                                    "value": "19",
+                                    "value": "16",
                                     "description": "The ID of word. Example=2"
                                 },
                                 {
@@ -1115,7 +1148,7 @@
                                 {
                                     "id": "value",
                                     "key": "value",
-                                    "value": "20",
+                                    "value": "15",
                                     "description": "User ID which we need to copy word. Example=2"
                                 }
                             ]
@@ -1158,6 +1191,39 @@
                             "code": 422,
                             "body": "{\n\"message\": \"Word already exists\"\n}",
                             "name": "Validation Error"
+                        }
+                    ]
+                },
+                {
+                    "name": "List of known words",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/known",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/known"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get list of known words"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[{\"id\":18,\"original\":\"voluptates\",\"translated\":\"deserunt\",\"done_at\":\"2021-09-16T08:30:26.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":8,\"from_sample\":false,\"created_at\":\"2021-09-04T10:11:33.000000Z\",\"shared_by\":null},{\"id\":27,\"original\":\"spielen\",\"translated\":\"\u0438\u0433\u0440\u0430\u0442\u044c; \u0440\u0435\u0437\u0432\u0438\u0442\u044c\u0441\u044f\",\"done_at\":\"2021-09-16T08:26:26.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-09-04T10:43:34.000000Z\",\"shared_by\":null},{\"id\":33,\"original\":\"die Eltern\",\"translated\":\"\u0440\u043e\u0434\u0438\u0442\u0435\u043b\u0438\",\"done_at\":\"2021-09-16T08:30:35.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-09-04T10:43:34.000000Z\",\"shared_by\":null},{\"id\":34,\"original\":\"der Familienstand\",\"translated\":\"\u0441\u0435\u043c\u0435\u0439\u043d\u043e\u0435 \u043f\u043e\u043b\u043e\u0436\u0435\u043d\u0438\u0435\",\"done_at\":\"2021-09-16T08:30:33.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-09-04T10:43:34.000000Z\",\"shared_by\":null}]}",
+                            "name": "success"
                         }
                     ]
                 }

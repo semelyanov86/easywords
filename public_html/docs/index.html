@@ -52,7 +52,7 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: September 4 2021</li>
+            <li>Last updated: September 29 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -72,411 +72,6 @@ You can switch the language used with the tabs at the top right (or from the nav
 <p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
-
-        <h1 id="samples">Samples</h1>
-
-    <p>List of sample words which we need to autofill words list for users</p>
-
-            <h2 id="samples-GETapi-samples-export--language-">Export Samples</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-<p>User can load samples from specific language to it's own database</p>
-
-<span id="example-requests-GETapi-samples-export--language-">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-bash">curl --request GET \
-    --get "http://cards.sergeyem.test:8000/api/samples/export/et" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "http://cards.sergeyem.test:8000/api/samples/export/et"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-</span>
-
-<span id="example-responses-GETapi-samples-export--language-">
-            <blockquote>
-            <p>Example response (204, success):</p>
-        </blockquote>
-                <pre>
-<code>[Empty response]</code>
- </pre>
-            <blockquote>
-            <p>Example response (401, unauthorized):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-samples-export--language-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-samples-export--language-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-samples-export--language-"></code></pre>
-</span>
-<span id="execution-error-GETapi-samples-export--language-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-samples-export--language-"></code></pre>
-</span>
-<form id="form-GETapi-samples-export--language-" data-method="GET"
-      data-path="api/samples/export/{language}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-samples-export--language-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-samples-export--language-"
-                    onclick="tryItOut('GETapi-samples-export--language-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-samples-export--language-"
-                    onclick="cancelTryOut('GETapi-samples-export--language-');" hidden>Cancel
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-samples-export--language-" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/samples/export/{language}</code></b>
-        </p>
-                <p>
-            <label id="auth-GETapi-samples-export--language-" hidden>Authorization header:
-                <b><code>Bearer </code></b><input type="text"
-                                                                name="Authorization"
-                                                                data-prefix="Bearer "
-                                                                data-endpoint="GETapi-samples-export--language-"
-                                                                data-component="header"></label>
-        </p>
-                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <p>
-                <b><code>language</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="language"
-               data-endpoint="GETapi-samples-export--language-"
-               data-component="url" required  hidden>
-    <br>
-<p>Language for export. Example=DE</p>            </p>
-                    </form>
-
-            <h2 id="samples-GETapi-samples">List of Samples</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-<p>Get list of samples which we need for import process.</p>
-
-<span id="example-requests-GETapi-samples">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-bash">curl --request GET \
-    --get "http://cards.sergeyem.test:8000/api/samples?language=quos&amp;page=14" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "http://cards.sergeyem.test:8000/api/samples"
-);
-
-const params = {
-    "language": "quos",
-    "page": "14",
-};
-Object.keys(params)
-    .forEach(key =&gt; url.searchParams.append(key, params[key]));
-
-const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-</span>
-
-<span id="example-responses-GETapi-samples">
-            <blockquote>
-            <p>Example response (200, success):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json">{
-    &quot;data&quot;: [
-        {
-            &quot;id&quot;: 1,
-            &quot;original&quot;: &quot;der Sekt&quot;,
-            &quot;translated&quot;: &quot;Шампанское&quot;,
-            &quot;language&quot;: &quot;DE&quot;,
-            &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: 2,
-            &quot;original&quot;: &quot;der Cognac&quot;,
-            &quot;translated&quot;: &quot;Коньяк&quot;,
-            &quot;language&quot;: &quot;DE&quot;,
-            &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
-        }
-    ],
-    &quot;links&quot;: {
-        &quot;first&quot;: &quot;http://cards.sergeyem.test:8000/api/samples?page=1&quot;,
-        &quot;last&quot;: &quot;http://cards.sergeyem.test:8000/api/samples?page=1&quot;,
-        &quot;prev&quot;: null,
-        &quot;next&quot;: null
-    },
-    &quot;meta&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;from&quot;: 1,
-        &quot;last_page&quot;: 1,
-        &quot;links&quot;: [
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://cards.sergeyem.test:8000/api/samples?page=1&quot;,
-                &quot;label&quot;: &quot;1&quot;,
-                &quot;active&quot;: true
-            },
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
-                &quot;active&quot;: false
-            }
-        ],
-        &quot;path&quot;: &quot;http://cards.sergeyem.test:8000/api/samples&quot;,
-        &quot;per_page&quot;: &quot;20&quot;,
-        &quot;to&quot;: 4,
-        &quot;total&quot;: 4
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-samples" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-samples"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-samples"></code></pre>
-</span>
-<span id="execution-error-GETapi-samples" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-samples"></code></pre>
-</span>
-<form id="form-GETapi-samples" data-method="GET"
-      data-path="api/samples"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-samples', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-samples"
-                    onclick="tryItOut('GETapi-samples');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-samples"
-                    onclick="cancelTryOut('GETapi-samples');" hidden>Cancel
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-samples" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/samples</code></b>
-        </p>
-                <p>
-            <label id="auth-GETapi-samples" hidden>Authorization header:
-                <b><code>Bearer </code></b><input type="text"
-                                                                name="Authorization"
-                                                                data-prefix="Bearer "
-                                                                data-endpoint="GETapi-samples"
-                                                                data-component="header"></label>
-        </p>
-                    <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
-                    <p>
-                <b><code>language</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
-                <input type="text"
-               name="language"
-               data-endpoint="GETapi-samples"
-               data-component="query" required  hidden>
-    <br>
-<p>Language which we need to get list of words. Example=DE</p>            </p>
-                    <p>
-                <b><code>page</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
-                <input type="number"
-               name="page"
-               data-endpoint="GETapi-samples"
-               data-component="query"  hidden>
-    <br>
-<p>Page number if you need to get new list of samples. Example=1</p>            </p>
-                </form>
-
-            <h2 id="samples-GETapi-samples--id-">Get sample by ID</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-<p>Getting detail information about sample by it's ID</p>
-
-<span id="example-requests-GETapi-samples--id-">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-bash">curl --request GET \
-    --get "http://cards.sergeyem.test:8000/api/samples/5" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "http://cards.sergeyem.test:8000/api/samples/5"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-</span>
-
-<span id="example-responses-GETapi-samples--id-">
-            <blockquote>
-            <p>Example response (200, success):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json">{
-    &quot;data&quot;: {
-        &quot;id&quot;: 2,
-        &quot;original&quot;: &quot;der Cognac&quot;,
-        &quot;translated&quot;: &quot;Коньяк&quot;,
-        &quot;language&quot;: &quot;DE&quot;,
-        &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
-    }
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (401, unauthorized):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (404, Not Found):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json">{
-    &quot;message&quot;: &quot;No query results for model [App\\Models\\Sample].&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-samples--id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-samples--id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-samples--id-"></code></pre>
-</span>
-<span id="execution-error-GETapi-samples--id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-samples--id-"></code></pre>
-</span>
-<form id="form-GETapi-samples--id-" data-method="GET"
-      data-path="api/samples/{id}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-samples--id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-samples--id-"
-                    onclick="tryItOut('GETapi-samples--id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-samples--id-"
-                    onclick="cancelTryOut('GETapi-samples--id-');" hidden>Cancel
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-samples--id-" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/samples/{id}</code></b>
-        </p>
-                <p>
-            <label id="auth-GETapi-samples--id-" hidden>Authorization header:
-                <b><code>Bearer </code></b><input type="text"
-                                                                name="Authorization"
-                                                                data-prefix="Bearer "
-                                                                data-endpoint="GETapi-samples--id-"
-                                                                data-component="header"></label>
-        </p>
-                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <p>
-                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="id"
-               data-endpoint="GETapi-samples--id-"
-               data-component="url" required  hidden>
-    <br>
-<p>The ID of sample. Example=2</p>            </p>
-                    </form>
 
         <h1 id="analytics">Analytics</h1>
 
@@ -1162,6 +757,100 @@ fetch(url, {
     
     </form>
 
+            <h2 id="authentication-GETapi-signout">Revoke current token</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Using this endpoint signout and delete current token</p>
+
+<span id="example-requests-GETapi-signout">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/signout" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/signout"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-signout">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+ &quot;success&quot;: &quot;ok&quot;,
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-signout" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-signout"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-signout"></code></pre>
+</span>
+<span id="execution-error-GETapi-signout" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-signout"></code></pre>
+</span>
+<form id="form-GETapi-signout" data-method="GET"
+      data-path="api/signout"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-signout', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-signout"
+                    onclick="tryItOut('GETapi-signout');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-signout"
+                    onclick="cancelTryOut('GETapi-signout');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-signout" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/signout</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-signout" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-signout"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
         <h1 id="other">Other</h1>
 
     
@@ -1281,13 +970,13 @@ vary: Origin
 
 
 <pre><code class="language-bash">curl --request GET \
-    --get "http://cards.sergeyem.test:8000/api/users/20/words" \
+    --get "http://cards.sergeyem.test:8000/api/users/18/words" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://cards.sergeyem.test:8000/api/users/20/words"
+    "http://cards.sergeyem.test:8000/api/users/18/words"
 );
 
 const headers = {
@@ -1399,22 +1088,22 @@ vary: Origin
 
 
 <pre><code class="language-bash">curl --request POST \
-    "http://cards.sergeyem.test:8000/api/users/1/words" \
+    "http://cards.sergeyem.test:8000/api/users/19/words" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"original\": \"xztzweeigozkyqthiaxsowvginhalaxhveieqlwnjipzbdyhwvuxhaklfiyjenzafpmxveywiucorsncsutwhlnuqrkuutwvjklynzehorcdhwsxakvydoejwevjqfupzrcanfrzsxyzsjnicucmhfrjzcqlhaqttunvbzkvz\",
-    \"translated\": \"qrhdmkgcksbkvefkzggoljxxnmkughospyngqatswpgvjttjclhglhpxtqxelmwfmdo\",
-    \"done_at\": \"2021-09-04T09:50:02\",
+    \"original\": \"uldpotgbwvvfisahktvlpnvoxnndfkokeueuzeyylndieuetdsbgkydhaczxxgztbtbnqiolacugbwwqvuxwkaswnzntvfwfkthwswksgxbegoxyggicxethssgbnwukqlbrxvcvdfxmodfxytibooyztspgrliweymdplpbiudorqnconkggdvlahdrbjhonobfgzuq\",
+    \"translated\": \"ttbqvyiovjelvtqesrcnaydiujifwbmjrwrwculpwvaqbxibbiguckwguountowdyiivclfvhngpfscgjhjrmdcxkxwqsmarzuihptisldnltcshlokidveuhnsihcgjcocrzarliufdei\",
+    \"done_at\": \"2021-09-29T11:53:49\",
     \"starred\": false,
-    \"language\": \"os\",
-    \"views\": \"vbdckkgfapzhktrhblhngrspuukonmvpjmlaojyqvbcwvqftbdocesdubfidoswytylrtyqwnwtpbcjuxclavcyeupuvhheslmgxbssbsxxxjwvkzzfzpvdwcdmudnuqlbbrdkyllbnfhjzxfnxaqcguuamornocacxwvbcdovlgtzixvcu\"
+    \"language\": \"egizo\",
+    \"views\": \"ixbqujcpptfcjxvthawdegenzciqq\"
 }"
 </code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://cards.sergeyem.test:8000/api/users/1/words"
+    "http://cards.sergeyem.test:8000/api/users/19/words"
 );
 
 const headers = {
@@ -1424,12 +1113,12 @@ const headers = {
 };
 
 let body = {
-    "original": "xztzweeigozkyqthiaxsowvginhalaxhveieqlwnjipzbdyhwvuxhaklfiyjenzafpmxveywiucorsncsutwhlnuqrkuutwvjklynzehorcdhwsxakvydoejwevjqfupzrcanfrzsxyzsjnicucmhfrjzcqlhaqttunvbzkvz",
-    "translated": "qrhdmkgcksbkvefkzggoljxxnmkughospyngqatswpgvjttjclhglhpxtqxelmwfmdo",
-    "done_at": "2021-09-04T09:50:02",
+    "original": "uldpotgbwvvfisahktvlpnvoxnndfkokeueuzeyylndieuetdsbgkydhaczxxgztbtbnqiolacugbwwqvuxwkaswnzntvfwfkthwswksgxbegoxyggicxethssgbnwukqlbrxvcvdfxmodfxytibooyztspgrliweymdplpbiudorqnconkggdvlahdrbjhonobfgzuq",
+    "translated": "ttbqvyiovjelvtqesrcnaydiujifwbmjrwrwculpwvaqbxibbiguckwguountowdyiivclfvhngpfscgjhjrmdcxkxwqsmarzuihptisldnltcshlokidveuhnsihcgjcocrzarliufdei",
+    "done_at": "2021-09-29T11:53:49",
     "starred": false,
-    "language": "os",
-    "views": "vbdckkgfapzhktrhblhngrspuukonmvpjmlaojyqvbcwvqftbdocesdubfidoswytylrtyqwnwtpbcjuxclavcyeupuvhheslmgxbssbsxxxjwvkzzfzpvdwcdmudnuqlbbrdkyllbnfhjzxfnxaqcguuamornocacxwvbcdovlgtzixvcu"
+    "language": "egizo",
+    "views": "ixbqujcpptfcjxvthawdegenzciqq"
 }
 
 fetch(url, {
@@ -1565,6 +1254,411 @@ fetch(url, {
 <p>Must not be greater than 255 characters.</p>        </p>
     
     </form>
+
+        <h1 id="samples">Samples</h1>
+
+    <p>List of sample words which we need to autofill words list for users</p>
+
+            <h2 id="samples-GETapi-samples-export--language-">Export Samples</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>User can load samples from specific language to it's own database</p>
+
+<span id="example-requests-GETapi-samples-export--language-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/samples/export/quia" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/samples/export/quia"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-samples-export--language-">
+            <blockquote>
+            <p>Example response (204, success):</p>
+        </blockquote>
+                <pre>
+<code>[Empty response]</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-samples-export--language-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-samples-export--language-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-samples-export--language-"></code></pre>
+</span>
+<span id="execution-error-GETapi-samples-export--language-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-samples-export--language-"></code></pre>
+</span>
+<form id="form-GETapi-samples-export--language-" data-method="GET"
+      data-path="api/samples/export/{language}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-samples-export--language-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-samples-export--language-"
+                    onclick="tryItOut('GETapi-samples-export--language-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-samples-export--language-"
+                    onclick="cancelTryOut('GETapi-samples-export--language-');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-samples-export--language-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/samples/export/{language}</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-samples-export--language-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-samples-export--language-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>language</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="language"
+               data-endpoint="GETapi-samples-export--language-"
+               data-component="url" required  hidden>
+    <br>
+<p>Language for export. Example=DE</p>            </p>
+                    </form>
+
+            <h2 id="samples-GETapi-samples">List of Samples</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get list of samples which we need for import process.</p>
+
+<span id="example-requests-GETapi-samples">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/samples?language=voluptatem&amp;page=7" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/samples"
+);
+
+const params = {
+    "language": "voluptatem",
+    "page": "7",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-samples">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;original&quot;: &quot;der Sekt&quot;,
+            &quot;translated&quot;: &quot;Шампанское&quot;,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;original&quot;: &quot;der Cognac&quot;,
+            &quot;translated&quot;: &quot;Коньяк&quot;,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+        }
+    ],
+    &quot;links&quot;: {
+        &quot;first&quot;: &quot;http://cards.sergeyem.test:8000/api/samples?page=1&quot;,
+        &quot;last&quot;: &quot;http://cards.sergeyem.test:8000/api/samples?page=1&quot;,
+        &quot;prev&quot;: null,
+        &quot;next&quot;: null
+    },
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;from&quot;: 1,
+        &quot;last_page&quot;: 1,
+        &quot;links&quot;: [
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
+                &quot;active&quot;: false
+            },
+            {
+                &quot;url&quot;: &quot;http://cards.sergeyem.test:8000/api/samples?page=1&quot;,
+                &quot;label&quot;: &quot;1&quot;,
+                &quot;active&quot;: true
+            },
+            {
+                &quot;url&quot;: null,
+                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
+                &quot;active&quot;: false
+            }
+        ],
+        &quot;path&quot;: &quot;http://cards.sergeyem.test:8000/api/samples&quot;,
+        &quot;per_page&quot;: &quot;20&quot;,
+        &quot;to&quot;: 4,
+        &quot;total&quot;: 4
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-samples" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-samples"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-samples"></code></pre>
+</span>
+<span id="execution-error-GETapi-samples" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-samples"></code></pre>
+</span>
+<form id="form-GETapi-samples" data-method="GET"
+      data-path="api/samples"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-samples', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-samples"
+                    onclick="tryItOut('GETapi-samples');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-samples"
+                    onclick="cancelTryOut('GETapi-samples');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-samples" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/samples</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-samples" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-samples"
+                                                                data-component="header"></label>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                    <p>
+                <b><code>language</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="language"
+               data-endpoint="GETapi-samples"
+               data-component="query" required  hidden>
+    <br>
+<p>Language which we need to get list of words. Example=DE</p>            </p>
+                    <p>
+                <b><code>page</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="page"
+               data-endpoint="GETapi-samples"
+               data-component="query"  hidden>
+    <br>
+<p>Page number if you need to get new list of samples. Example=1</p>            </p>
+                </form>
+
+            <h2 id="samples-GETapi-samples--id-">Get sample by ID</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Getting detail information about sample by it's ID</p>
+
+<span id="example-requests-GETapi-samples--id-">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/samples/4" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/samples/4"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-samples--id-">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 2,
+        &quot;original&quot;: &quot;der Cognac&quot;,
+        &quot;translated&quot;: &quot;Коньяк&quot;,
+        &quot;language&quot;: &quot;DE&quot;,
+        &quot;created_at&quot;: &quot;2021-08-26T05:57:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, unauthorized):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Sample].&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-samples--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-samples--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-samples--id-"></code></pre>
+</span>
+<span id="execution-error-GETapi-samples--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-samples--id-"></code></pre>
+</span>
+<form id="form-GETapi-samples--id-" data-method="GET"
+      data-path="api/samples/{id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-samples--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-samples--id-"
+                    onclick="tryItOut('GETapi-samples--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-samples--id-"
+                    onclick="cancelTryOut('GETapi-samples--id-');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-samples--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/samples/{id}</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-samples--id-" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-samples--id-"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="GETapi-samples--id-"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of sample. Example=2</p>            </p>
+                    </form>
 
         <h1 id="settings">Settings</h1>
 
@@ -2055,7 +2149,7 @@ fetch(url, {
 
 
 <pre><code class="language-bash">curl --request GET \
-    --get "http://cards.sergeyem.test:8000/api/words?language=eum&amp;page=14" \
+    --get "http://cards.sergeyem.test:8000/api/words?language=voluptatum&amp;page=8" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>
@@ -2065,8 +2159,8 @@ fetch(url, {
 );
 
 const params = {
-    "language": "eum",
-    "page": "14",
+    "language": "voluptatum",
+    "page": "8",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -2260,7 +2354,8 @@ fetch(url, {
     \"done_at\": \"null\",
     \"starred\": false,
     \"language\": \"\\\"DE\\\"\",
-    \"views\": 0
+    \"views\": 0,
+    \"shared_by\": 16
 }"
 </code></pre>
 
@@ -2280,7 +2375,8 @@ let body = {
     "done_at": "null",
     "starred": false,
     "language": "\"DE\"",
-    "views": 0
+    "views": 0,
+    "shared_by": 16
 }
 
 fetch(url, {
@@ -2442,6 +2538,14 @@ fetch(url, {
                data-component="body"  hidden>
     <br>
 <p>Number of views we create by default for this word.</p>        </p>
+                <p>
+            <b><code>shared_by</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="shared_by"
+               data-endpoint="POSTapi-words"
+               data-component="body"  hidden>
+    <br>
+        </p>
     
     </form>
 
@@ -2458,13 +2562,13 @@ fetch(url, {
 
 
 <pre><code class="language-bash">curl --request GET \
-    --get "http://cards.sergeyem.test:8000/api/words/3" \
+    --get "http://cards.sergeyem.test:8000/api/words/6" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://cards.sergeyem.test:8000/api/words/3"
+    "http://cards.sergeyem.test:8000/api/words/6"
 );
 
 const headers = {
@@ -2589,23 +2693,24 @@ fetch(url, {
 
 
 <pre><code class="language-bash">curl --request PUT \
-    "http://cards.sergeyem.test:8000/api/words/2" \
+    "http://cards.sergeyem.test:8000/api/words/18" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"original\": \"russqhfckarnpfkzishtacfkaxtbgodjbvobnwpjmbrcwgibfrupzrevpkrdwltknzqownzsucnsuefhdqfkshfozxvskxatnjkrdanfqdynlovbqdzcpklaphxyuopnmpbmhwiiaprooymtxuzjcahdervioxwqv\",
-    \"translated\": \"ewzgvepxptwucbmaucoirlmfortfjlltxnjhmjguuyywthbecouzqbmkmxrrywdszwgmssaffjwbijzksoarodouckpijvmgkidovfodlufktpcimiurbammecbxuqtmbddojyzbdrybbccobhsrizsgzjayhljclndwhdzvmbsxcgxwgdkclspjgbqprmarhqnxjfghxkfftnapqyxyxchvnm\",
-    \"done_at\": \"2021-09-04T09:50:02\",
+    \"original\": \"kuzhvirfaqavrzroyiacmollirbfuoguysvlicrqxaywroumrgihwhlkqmbrjzuhzvckvkbrjnimgcmxhruzruzhontmoznkekcphucvzbkzolfywwcjigznnarjsyrwwjhsccofvjvlujcfejcuqdkbjheifrtqzzjdyqjjvabvsarjymfmh\",
+    \"translated\": \"iytltbzzmhrxpxltoffgljlxpsnbympmahlukarirxflgvsskukkbskwcronlwbsrhcmmkkydlxcdujpdrjicxbujnibhdqsajztwakuymzmqvttvxgixottfjzihuxhskiabatfkxtbvfirellvxobndbccudkwksobzelolhfnqojpdifdxuv\",
+    \"done_at\": \"2021-09-29T11:53:49\",
     \"starred\": false,
-    \"user_id\": \"quo\",
-    \"language\": \"orqc\",
-    \"views\": \"bzlnbwlwwulfgixrltymdijzzzbtgjsdcrniftpjvqevwyspwfbjsywqmdvppbxrvhpqdghbfvjgcyemxeibxaplnmlnbmqshgjahvocfwjjjwvjzfrilioptmkustlimnfpwclrvscjuuzjcmxrlzthbslnaxs\"
+    \"user_id\": \"dolorum\",
+    \"language\": \"inxf\",
+    \"views\": \"psvrbseqbfzcqkygkoscnylhgvlitxzkpgrthnsdpfxbnfslntoorsetfeeojjmpxgmhskarqlregkzziyolfaikxmabndmwcmanlseuqeeruzkoxtdqonqriudvkkfzgqkiikfwmclapcyzxzeloqsxcmhxqjktoyoxdslxyosvjetayngnyszjkdckwnuyixbrobxumaztjkigj\",
+    \"shared_by\": 5
 }"
 </code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://cards.sergeyem.test:8000/api/words/2"
+    "http://cards.sergeyem.test:8000/api/words/18"
 );
 
 const headers = {
@@ -2615,13 +2720,14 @@ const headers = {
 };
 
 let body = {
-    "original": "russqhfckarnpfkzishtacfkaxtbgodjbvobnwpjmbrcwgibfrupzrevpkrdwltknzqownzsucnsuefhdqfkshfozxvskxatnjkrdanfqdynlovbqdzcpklaphxyuopnmpbmhwiiaprooymtxuzjcahdervioxwqv",
-    "translated": "ewzgvepxptwucbmaucoirlmfortfjlltxnjhmjguuyywthbecouzqbmkmxrrywdszwgmssaffjwbijzksoarodouckpijvmgkidovfodlufktpcimiurbammecbxuqtmbddojyzbdrybbccobhsrizsgzjayhljclndwhdzvmbsxcgxwgdkclspjgbqprmarhqnxjfghxkfftnapqyxyxchvnm",
-    "done_at": "2021-09-04T09:50:02",
+    "original": "kuzhvirfaqavrzroyiacmollirbfuoguysvlicrqxaywroumrgihwhlkqmbrjzuhzvckvkbrjnimgcmxhruzruzhontmoznkekcphucvzbkzolfywwcjigznnarjsyrwwjhsccofvjvlujcfejcuqdkbjheifrtqzzjdyqjjvabvsarjymfmh",
+    "translated": "iytltbzzmhrxpxltoffgljlxpsnbympmahlukarirxflgvsskukkbskwcronlwbsrhcmmkkydlxcdujpdrjicxbujnibhdqsajztwakuymzmqvttvxgixottfjzihuxhskiabatfkxtbvfirellvxobndbccudkwksobzelolhfnqojpdifdxuv",
+    "done_at": "2021-09-29T11:53:49",
     "starred": false,
-    "user_id": "quo",
-    "language": "orqc",
-    "views": "bzlnbwlwwulfgixrltymdijzzzbtgjsdcrniftpjvqevwyspwfbjsywqmdvppbxrvhpqdghbfvjgcyemxeibxaplnmlnbmqshgjahvocfwjjjwvjzfrilioptmkustlimnfpwclrvscjuuzjcmxrlzthbslnaxs"
+    "user_id": "dolorum",
+    "language": "inxf",
+    "views": "psvrbseqbfzcqkygkoscnylhgvlitxzkpgrthnsdpfxbnfslntoorsetfeeojjmpxgmhskarqlregkzziyolfaikxmabndmwcmanlseuqeeruzkoxtdqonqriudvkkfzgqkiikfwmclapcyzxzeloqsxcmhxqjktoyoxdslxyosvjetayngnyszjkdckwnuyixbrobxumaztjkigj",
+    "shared_by": 5
 }
 
 fetch(url, {
@@ -2767,6 +2873,14 @@ fetch(url, {
                data-component="body" required  hidden>
     <br>
 <p>Must not be greater than 255 characters.</p>        </p>
+                <p>
+            <b><code>shared_by</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+                <input type="number"
+               name="shared_by"
+               data-endpoint="PUTapi-words--id-"
+               data-component="body"  hidden>
+    <br>
+        </p>
     
     </form>
 
@@ -2783,13 +2897,13 @@ fetch(url, {
 
 
 <pre><code class="language-bash">curl --request DELETE \
-    "http://cards.sergeyem.test:8000/api/words/9" \
+    "http://cards.sergeyem.test:8000/api/words/19" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://cards.sergeyem.test:8000/api/words/9"
+    "http://cards.sergeyem.test:8000/api/words/19"
 );
 
 const headers = {
@@ -2901,13 +3015,13 @@ fetch(url, {
 
 
 <pre><code class="language-bash">curl --request GET \
-    --get "http://cards.sergeyem.test:8000/api/words/5/viewed" \
+    --get "http://cards.sergeyem.test:8000/api/words/15/viewed" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://cards.sergeyem.test:8000/api/words/5/viewed"
+    "http://cards.sergeyem.test:8000/api/words/15/viewed"
 );
 
 const headers = {
@@ -3032,13 +3146,13 @@ fetch(url, {
 
 
 <pre><code class="language-bash">curl --request GET \
-    --get "http://cards.sergeyem.test:8000/api/words/5/known/8" \
+    --get "http://cards.sergeyem.test:8000/api/words/8/known/15" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://cards.sergeyem.test:8000/api/words/5/known/8"
+    "http://cards.sergeyem.test:8000/api/words/8/known/15"
 );
 
 const headers = {
@@ -3171,13 +3285,13 @@ fetch(url, {
 
 
 <pre><code class="language-bash">curl --request GET \
-    --get "http://cards.sergeyem.test:8000/api/words/3/starred/3" \
+    --get "http://cards.sergeyem.test:8000/api/words/16/starred/3" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://cards.sergeyem.test:8000/api/words/3/starred/3"
+    "http://cards.sergeyem.test:8000/api/words/16/starred/3"
 );
 
 const headers = {
@@ -3310,13 +3424,13 @@ fetch(url, {
 
 
 <pre><code class="language-bash">curl --request GET \
-    --get "http://cards.sergeyem.test:8000/api/words/19/share/et" \
+    --get "http://cards.sergeyem.test:8000/api/words/16/share/et" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://cards.sergeyem.test:8000/api/words/19/share/et"
+    "http://cards.sergeyem.test:8000/api/words/16/share/et"
 );
 
 const headers = {
@@ -3452,6 +3566,153 @@ fetch(url, {
     <br>
 <p>User ID which we need to copy word. Example=2</p>            </p>
                     </form>
+
+            <h2 id="words-GETapi-known">List of known words</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get list of known words</p>
+
+<span id="example-requests-GETapi-known">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://cards.sergeyem.test:8000/api/known" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://cards.sergeyem.test:8000/api/known"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+</span>
+
+<span id="example-responses-GETapi-known">
+            <blockquote>
+            <p>Example response (200, success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 18,
+            &quot;original&quot;: &quot;voluptates&quot;,
+            &quot;translated&quot;: &quot;deserunt&quot;,
+            &quot;done_at&quot;: &quot;2021-09-16T08:30:26.000000Z&quot;,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 8,
+            &quot;from_sample&quot;: false,
+            &quot;created_at&quot;: &quot;2021-09-04T10:11:33.000000Z&quot;,
+            &quot;shared_by&quot;: null
+        },
+        {
+            &quot;id&quot;: 27,
+            &quot;original&quot;: &quot;spielen&quot;,
+            &quot;translated&quot;: &quot;играть; резвиться&quot;,
+            &quot;done_at&quot;: &quot;2021-09-16T08:26:26.000000Z&quot;,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 0,
+            &quot;from_sample&quot;: true,
+            &quot;created_at&quot;: &quot;2021-09-04T10:43:34.000000Z&quot;,
+            &quot;shared_by&quot;: null
+        },
+        {
+            &quot;id&quot;: 33,
+            &quot;original&quot;: &quot;die Eltern&quot;,
+            &quot;translated&quot;: &quot;родители&quot;,
+            &quot;done_at&quot;: &quot;2021-09-16T08:30:35.000000Z&quot;,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 0,
+            &quot;from_sample&quot;: true,
+            &quot;created_at&quot;: &quot;2021-09-04T10:43:34.000000Z&quot;,
+            &quot;shared_by&quot;: null
+        },
+        {
+            &quot;id&quot;: 34,
+            &quot;original&quot;: &quot;der Familienstand&quot;,
+            &quot;translated&quot;: &quot;семейное положение&quot;,
+            &quot;done_at&quot;: &quot;2021-09-16T08:30:33.000000Z&quot;,
+            &quot;starred&quot;: false,
+            &quot;user_id&quot;: 1,
+            &quot;language&quot;: &quot;DE&quot;,
+            &quot;views&quot;: 0,
+            &quot;from_sample&quot;: true,
+            &quot;created_at&quot;: &quot;2021-09-04T10:43:34.000000Z&quot;,
+            &quot;shared_by&quot;: null
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-known" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-known"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-known"></code></pre>
+</span>
+<span id="execution-error-GETapi-known" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-known"></code></pre>
+</span>
+<form id="form-GETapi-known" data-method="GET"
+      data-path="api/known"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-known', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-known"
+                    onclick="tryItOut('GETapi-known');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-known"
+                    onclick="cancelTryOut('GETapi-known');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-known" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/known</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-known" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-known"
+                                                                data-component="header"></label>
+        </p>
+                </form>
 
     
 

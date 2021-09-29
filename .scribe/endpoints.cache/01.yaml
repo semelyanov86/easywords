@@ -177,3 +177,28 @@ endpoints:
         headers: []
         description: '422, validation error'
     responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: api/signout
+    metadata:
+      title: 'Revoke current token'
+      description: 'Using this endpoint signout and delete current token'
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+           "success": "ok",
+          }
+        headers: []
+        description: '200, success'
+    responseFields: []

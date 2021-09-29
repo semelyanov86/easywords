@@ -7,285 +7,6 @@ servers:
   -
     url: 'http://cards.sergeyem.test:8000'
 paths:
-  '/api/samples/export/{language}':
-    get:
-      summary: 'Export Samples'
-      description: 'User can load samples from specific language to it''s own database'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        204:
-          description: success
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-      tags:
-        - Samples
-    parameters:
-      -
-        in: path
-        name: language
-        description: 'Language for export. Example=DE'
-        example: et
-        required: true
-        schema:
-          type: string
-  /api/samples:
-    get:
-      summary: 'List of Samples'
-      description: 'Get list of samples which we need for import process.'
-      parameters:
-        -
-          in: query
-          name: language
-          description: 'Language which we need to get list of words. Example=DE'
-          example: quos
-          required: true
-          schema:
-            type: string
-            description: 'Language which we need to get list of words. Example=DE'
-            example: quos
-        -
-          in: query
-          name: page
-          description: 'Page number if you need to get new list of samples. Example=1'
-          example: 14
-          required: false
-          schema:
-            type: integer
-            description: 'Page number if you need to get new list of samples. Example=1'
-            example: 14
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    -
-                      id: 1
-                      original: 'der Sekt'
-                      translated: Шампанское
-                      language: DE
-                      created_at: '2021-08-26T05:57:00.000000Z'
-                    -
-                      id: 2
-                      original: 'der Cognac'
-                      translated: Коньяк
-                      language: DE
-                      created_at: '2021-08-26T05:57:00.000000Z'
-                  links:
-                    first: 'http://cards.sergeyem.test:8000/api/samples?page=1'
-                    last: 'http://cards.sergeyem.test:8000/api/samples?page=1'
-                    prev: null
-                    next: null
-                  meta:
-                    current_page: 1
-                    from: 1
-                    last_page: 1
-                    links:
-                      -
-                        url: null
-                        label: '&laquo; Previous'
-                        active: false
-                      -
-                        url: 'http://cards.sergeyem.test:8000/api/samples?page=1'
-                        label: '1'
-                        active: true
-                      -
-                        url: null
-                        label: 'Next &raquo;'
-                        active: false
-                    path: 'http://cards.sergeyem.test:8000/api/samples'
-                    per_page: '20'
-                    to: 4
-                    total: 4
-                properties:
-                  data:
-                    type: array
-                    example:
-                      -
-                        id: 1
-                        original: 'der Sekt'
-                        translated: Шампанское
-                        language: DE
-                        created_at: '2021-08-26T05:57:00.000000Z'
-                      -
-                        id: 2
-                        original: 'der Cognac'
-                        translated: Коньяк
-                        language: DE
-                        created_at: '2021-08-26T05:57:00.000000Z'
-                    items:
-                      type: object
-                  links:
-                    type: object
-                    example:
-                      first: 'http://cards.sergeyem.test:8000/api/samples?page=1'
-                      last: 'http://cards.sergeyem.test:8000/api/samples?page=1'
-                      prev: null
-                      next: null
-                  meta:
-                    type: object
-                    example:
-                      current_page: 1
-                      from: 1
-                      last_page: 1
-                      links:
-                        -
-                          url: null
-                          label: '&laquo; Previous'
-                          active: false
-                        -
-                          url: 'http://cards.sergeyem.test:8000/api/samples?page=1'
-                          label: '1'
-                          active: true
-                        -
-                          url: null
-                          label: 'Next &raquo;'
-                          active: false
-                      path: 'http://cards.sergeyem.test:8000/api/samples'
-                      per_page: '20'
-                      to: 4
-                      total: 4
-      tags:
-        - Samples
-  '/api/samples/{id}':
-    get:
-      summary: 'Get sample by ID'
-      description: 'Getting detail information about sample by it''s ID'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    id: 2
-                    original: 'der Cognac'
-                    translated: Коньяк
-                    language: DE
-                    created_at: '2021-08-26T05:57:00.000000Z'
-                properties:
-                  data:
-                    type: object
-                    example:
-                      id: 2
-                      original: 'der Cognac'
-                      translated: Коньяк
-                      language: DE
-                      created_at: '2021-08-26T05:57:00.000000Z'
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-        404:
-          description: 'Not Found'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'No query results for model [App\Models\Sample].'
-                properties:
-                  message:
-                    type: string
-                    example: 'No query results for model [App\Models\Sample].'
-      tags:
-        - Samples
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of sample. Example=2'
-        example: 5
-        required: true
-        schema:
-          type: integer
   /api/statistics:
     get:
       summary: 'All statistics'
@@ -854,6 +575,42 @@ paths:
                 - email
                 - password
                 - device_name
+  /api/signout:
+    get:
+      summary: 'Revoke current token'
+      description: 'Using this endpoint signout and delete current token'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n \"success\": \"ok\",\n}"
+      tags:
+        - Authentication
   /api/user:
     get:
       summary: 'User Information'
@@ -948,7 +705,7 @@ paths:
         in: path
         name: user_id
         description: 'The ID of the user.'
-        example: 20
+        example: 18
         required: true
         schema:
           type: integer
@@ -998,15 +755,15 @@ paths:
                 original:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: xztzweeigozkyqthiaxsowvginhalaxhveieqlwnjipzbdyhwvuxhaklfiyjenzafpmxveywiucorsncsutwhlnuqrkuutwvjklynzehorcdhwsxakvydoejwevjqfupzrcanfrzsxyzsjnicucmhfrjzcqlhaqttunvbzkvz
+                  example: uldpotgbwvvfisahktvlpnvoxnndfkokeueuzeyylndieuetdsbgkydhaczxxgztbtbnqiolacugbwwqvuxwkaswnzntvfwfkthwswksgxbegoxyggicxethssgbnwukqlbrxvcvdfxmodfxytibooyztspgrliweymdplpbiudorqnconkggdvlahdrbjhonobfgzuq
                 translated:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: qrhdmkgcksbkvefkzggoljxxnmkughospyngqatswpgvjttjclhglhpxtqxelmwfmdo
+                  example: ttbqvyiovjelvtqesrcnaydiujifwbmjrwrwculpwvaqbxibbiguckwguountowdyiivclfvhngpfscgjhjrmdcxkxwqsmarzuihptisldnltcshlokidveuhnsihcgjcocrzarliufdei
                 done_at:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2021-09-04T09:50:02'
+                  example: '2021-09-29T11:53:49'
                 starred:
                   type: boolean
                   description: ''
@@ -1014,11 +771,11 @@ paths:
                 language:
                   type: string
                   description: 'Must not be greater than 5 characters.'
-                  example: os
+                  example: egizo
                 views:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: vbdckkgfapzhktrhblhngrspuukonmvpjmlaojyqvbcwvqftbdocesdubfidoswytylrtyqwnwtpbcjuxclavcyeupuvhheslmgxbssbsxxxjwvkzzfzpvdwcdmudnuqlbbrdkyllbnfhjzxfnxaqcguuamornocacxwvbcdovlgtzixvcu
+                  example: ixbqujcpptfcjxvthawdegenzciqq
               required:
                 - original
                 - translated
@@ -1030,7 +787,286 @@ paths:
         in: path
         name: user
         description: ''
-        example: 1
+        example: 19
+        required: true
+        schema:
+          type: integer
+  '/api/samples/export/{language}':
+    get:
+      summary: 'Export Samples'
+      description: 'User can load samples from specific language to it''s own database'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: success
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Samples
+    parameters:
+      -
+        in: path
+        name: language
+        description: 'Language for export. Example=DE'
+        example: quia
+        required: true
+        schema:
+          type: string
+  /api/samples:
+    get:
+      summary: 'List of Samples'
+      description: 'Get list of samples which we need for import process.'
+      parameters:
+        -
+          in: query
+          name: language
+          description: 'Language which we need to get list of words. Example=DE'
+          example: voluptatem
+          required: true
+          schema:
+            type: string
+            description: 'Language which we need to get list of words. Example=DE'
+            example: voluptatem
+        -
+          in: query
+          name: page
+          description: 'Page number if you need to get new list of samples. Example=1'
+          example: 7
+          required: false
+          schema:
+            type: integer
+            description: 'Page number if you need to get new list of samples. Example=1'
+            example: 7
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      original: 'der Sekt'
+                      translated: Шампанское
+                      language: DE
+                      created_at: '2021-08-26T05:57:00.000000Z'
+                    -
+                      id: 2
+                      original: 'der Cognac'
+                      translated: Коньяк
+                      language: DE
+                      created_at: '2021-08-26T05:57:00.000000Z'
+                  links:
+                    first: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                    last: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://cards.sergeyem.test:8000/api/samples'
+                    per_page: '20'
+                    to: 4
+                    total: 4
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        original: 'der Sekt'
+                        translated: Шампанское
+                        language: DE
+                        created_at: '2021-08-26T05:57:00.000000Z'
+                      -
+                        id: 2
+                        original: 'der Cognac'
+                        translated: Коньяк
+                        language: DE
+                        created_at: '2021-08-26T05:57:00.000000Z'
+                    items:
+                      type: object
+                  links:
+                    type: object
+                    example:
+                      first: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                      last: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                      prev: null
+                      next: null
+                  meta:
+                    type: object
+                    example:
+                      current_page: 1
+                      from: 1
+                      last_page: 1
+                      links:
+                        -
+                          url: null
+                          label: '&laquo; Previous'
+                          active: false
+                        -
+                          url: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                          label: '1'
+                          active: true
+                        -
+                          url: null
+                          label: 'Next &raquo;'
+                          active: false
+                      path: 'http://cards.sergeyem.test:8000/api/samples'
+                      per_page: '20'
+                      to: 4
+                      total: 4
+      tags:
+        - Samples
+  '/api/samples/{id}':
+    get:
+      summary: 'Get sample by ID'
+      description: 'Getting detail information about sample by it''s ID'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 2
+                    original: 'der Cognac'
+                    translated: Коньяк
+                    language: DE
+                    created_at: '2021-08-26T05:57:00.000000Z'
+                properties:
+                  data:
+                    type: object
+                    example:
+                      id: 2
+                      original: 'der Cognac'
+                      translated: Коньяк
+                      language: DE
+                      created_at: '2021-08-26T05:57:00.000000Z'
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No query results for model [App\Models\Sample].'
+                properties:
+                  message:
+                    type: string
+                    example: 'No query results for model [App\Models\Sample].'
+      tags:
+        - Samples
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of sample. Example=2'
+        example: 4
         required: true
         schema:
           type: integer
@@ -1306,22 +1342,22 @@ paths:
           in: query
           name: language
           description: 'Language which we need to get list of words. Example=DE'
-          example: eum
+          example: voluptatum
           required: true
           schema:
             type: string
             description: 'Language which we need to get list of words. Example=DE'
-            example: eum
+            example: voluptatum
         -
           in: query
           name: page
           description: 'Page number if you need to get new list of words. Example=1'
-          example: 14
+          example: 8
           required: false
           schema:
             type: integer
             description: 'Page number if you need to get new list of words. Example=1'
-            example: 14
+            example: 8
         -
           in: header
           name: Authorization
@@ -1611,6 +1647,10 @@ paths:
                   type: integer
                   description: 'Number of views we create by default for this word.'
                   example: 0
+                shared_by:
+                  type: integer
+                  description: ''
+                  example: 16
               required:
                 - original
                 - translated
@@ -1743,15 +1783,15 @@ paths:
                 original:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: russqhfckarnpfkzishtacfkaxtbgodjbvobnwpjmbrcwgibfrupzrevpkrdwltknzqownzsucnsuefhdqfkshfozxvskxatnjkrdanfqdynlovbqdzcpklaphxyuopnmpbmhwiiaprooymtxuzjcahdervioxwqv
+                  example: kuzhvirfaqavrzroyiacmollirbfuoguysvlicrqxaywroumrgihwhlkqmbrjzuhzvckvkbrjnimgcmxhruzruzhontmoznkekcphucvzbkzolfywwcjigznnarjsyrwwjhsccofvjvlujcfejcuqdkbjheifrtqzzjdyqjjvabvsarjymfmh
                 translated:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: ewzgvepxptwucbmaucoirlmfortfjlltxnjhmjguuyywthbecouzqbmkmxrrywdszwgmssaffjwbijzksoarodouckpijvmgkidovfodlufktpcimiurbammecbxuqtmbddojyzbdrybbccobhsrizsgzjayhljclndwhdzvmbsxcgxwgdkclspjgbqprmarhqnxjfghxkfftnapqyxyxchvnm
+                  example: iytltbzzmhrxpxltoffgljlxpsnbympmahlukarirxflgvsskukkbskwcronlwbsrhcmmkkydlxcdujpdrjicxbujnibhdqsajztwakuymzmqvttvxgixottfjzihuxhskiabatfkxtbvfirellvxobndbccudkwksobzelolhfnqojpdifdxuv
                 done_at:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2021-09-04T09:50:02'
+                  example: '2021-09-29T11:53:49'
                 starred:
                   type: boolean
                   description: ''
@@ -1759,15 +1799,19 @@ paths:
                 user_id:
                   type: string
                   description: ''
-                  example: quo
+                  example: dolorum
                 language:
                   type: string
                   description: 'Must not be greater than 5 characters.'
-                  example: orqc
+                  example: inxf
                 views:
                   type: string
                   description: 'Must not be greater than 255 characters.'
-                  example: bzlnbwlwwulfgixrltymdijzzzbtgjsdcrniftpjvqevwyspwfbjsywqmdvppbxrvhpqdghbfvjgcyemxeibxaplnmlnbmqshgjahvocfwjjjwvjzfrilioptmkustlimnfpwclrvscjuuzjcmxrlzthbslnaxs
+                  example: psvrbseqbfzcqkygkoscnylhgvlitxzkpgrthnsdpfxbnfslntoorsetfeeojjmpxgmhskarqlregkzziyolfaikxmabndmwcmanlseuqeeruzkoxtdqonqriudvkkfzgqkiikfwmclapcyzxzeloqsxcmhxqjktoyoxdslxyosvjetayngnyszjkdckwnuyixbrobxumaztjkigj
+                shared_by:
+                  type: integer
+                  description: ''
+                  example: 5
               required:
                 - original
                 - translated
@@ -1834,7 +1878,7 @@ paths:
         in: path
         name: id
         description: 'The ID of word. Example=2'
-        example: 3
+        example: 6
         required: true
         schema:
           type: integer
@@ -1926,7 +1970,7 @@ paths:
         in: path
         name: word
         description: 'The ID of word. Example=2'
-        example: 5
+        example: 15
         required: true
         schema:
           type: integer
@@ -2018,7 +2062,7 @@ paths:
         in: path
         name: word
         description: 'The ID of word. Example=2'
-        example: 5
+        example: 8
         required: true
         schema:
           type: integer
@@ -2026,7 +2070,7 @@ paths:
         in: path
         name: value
         description: 'Need to pass 0 or 1, should we mark this word known (1) or unknown (0). Example=1'
-        example: 8
+        example: 15
         required: true
         schema:
           type: integer
@@ -2118,7 +2162,7 @@ paths:
         in: path
         name: word
         description: 'The ID of word. Example=2'
-        example: 3
+        example: 16
         required: true
         schema:
           type: integer
@@ -2230,7 +2274,7 @@ paths:
         in: path
         name: word
         description: 'The ID of word. Example=2'
-        example: 19
+        example: 16
         required: true
         schema:
           type: integer
@@ -2246,14 +2290,150 @@ paths:
         in: path
         name: value
         description: 'User ID which we need to copy word. Example=2'
-        example: 20
+        example: 15
         required: true
         schema:
           type: integer
+  /api/known:
+    get:
+      summary: 'List of known words'
+      description: 'Get list of known words'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 18
+                      original: voluptates
+                      translated: deserunt
+                      done_at: '2021-09-16T08:30:26.000000Z'
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 8
+                      from_sample: false
+                      created_at: '2021-09-04T10:11:33.000000Z'
+                      shared_by: null
+                    -
+                      id: 27
+                      original: spielen
+                      translated: 'играть; резвиться'
+                      done_at: '2021-09-16T08:26:26.000000Z'
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-09-04T10:43:34.000000Z'
+                      shared_by: null
+                    -
+                      id: 33
+                      original: 'die Eltern'
+                      translated: родители
+                      done_at: '2021-09-16T08:30:35.000000Z'
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-09-04T10:43:34.000000Z'
+                      shared_by: null
+                    -
+                      id: 34
+                      original: 'der Familienstand'
+                      translated: 'семейное положение'
+                      done_at: '2021-09-16T08:30:33.000000Z'
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-09-04T10:43:34.000000Z'
+                      shared_by: null
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 18
+                        original: voluptates
+                        translated: deserunt
+                        done_at: '2021-09-16T08:30:26.000000Z'
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 8
+                        from_sample: false
+                        created_at: '2021-09-04T10:11:33.000000Z'
+                        shared_by: null
+                      -
+                        id: 27
+                        original: spielen
+                        translated: 'играть; резвиться'
+                        done_at: '2021-09-16T08:26:26.000000Z'
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-09-04T10:43:34.000000Z'
+                        shared_by: null
+                      -
+                        id: 33
+                        original: 'die Eltern'
+                        translated: родители
+                        done_at: '2021-09-16T08:30:35.000000Z'
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-09-04T10:43:34.000000Z'
+                        shared_by: null
+                      -
+                        id: 34
+                        original: 'der Familienstand'
+                        translated: 'семейное положение'
+                        done_at: '2021-09-16T08:30:33.000000Z'
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-09-04T10:43:34.000000Z'
+                        shared_by: null
+                    items:
+                      type: object
+      tags:
+        - Words
 tags:
-  -
-    name: Samples
-    description: "\nList of sample words which we need to autofill words list for users"
   -
     name: Analytics
     description: "\nGet all statistics data which is need for displaying widgets"
@@ -2263,6 +2443,9 @@ tags:
   -
     name: Other
     description: ''
+  -
+    name: Samples
+    description: "\nList of sample words which we need to autofill words list for users"
   -
     name: Settings
     description: "\nGet settings of currently authenticated user or change setting value"

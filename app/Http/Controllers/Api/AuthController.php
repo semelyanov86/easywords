@@ -148,4 +148,23 @@ class AuthController extends Controller
         $action->update($user, $request->all());
         return new UserResource($user);
     }
+
+    /**
+     * Revoke current token
+     *
+     * Using this endpoint signout and delete current token
+     *
+     * @response scenario=success {
+     *  "success": "ok",
+     * }
+     *
+     */
+    #[Get('signout', name: 'user.signout')]
+    public function signOut(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'success' => 'ok'
+        ]);
+    }
 }
