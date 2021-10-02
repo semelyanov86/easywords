@@ -24,7 +24,7 @@ use Spatie\RouteAttributes\Attributes\Resource;
  * Getting information about other users in system and profile information
  */
 #[Prefix('api')]
-#[Middleware('auth:sanctum')]
+#[Middleware(['auth:sanctum', 'cache.headers:public;max_age=2628000;etag'])]
 class UserController extends Controller
 {
     /**

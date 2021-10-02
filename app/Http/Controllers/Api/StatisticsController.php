@@ -17,7 +17,7 @@ use Spatie\RouteAttributes\Attributes\Prefix;
  * Get all statistics data which is need for displaying widgets
  */
 #[Prefix('api')]
-#[Middleware('auth:sanctum')]
+#[Middleware(['auth:sanctum', 'cache.headers:public;max_age=2628000;etag'])]
 final class StatisticsController extends Controller
 {
     /**

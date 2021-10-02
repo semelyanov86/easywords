@@ -33,7 +33,7 @@ use Spatie\RouteAttributes\Attributes\Resource;
  * Main group which is need for different operations with words - getting list of all words, changing status of words
  */
 #[Prefix('api')]
-#[Middleware('auth:sanctum')]
+#[Middleware(['auth:sanctum', 'cache.headers:public;max_age=2628000;etag'])]
 #[Resource('words')]
 final class WordController extends Controller
 {
