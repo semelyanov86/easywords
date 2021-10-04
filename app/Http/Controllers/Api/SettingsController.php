@@ -21,7 +21,7 @@ use Spatie\RouteAttributes\Attributes\Prefix;
  * Get settings of currently authenticated user or change setting value
  */
 #[Prefix('api')]
-#[Middleware('auth:sanctum')]
+#[Middleware(['auth:sanctum', 'cache.headers:public;max_age=2628000;etag'])]
 final class SettingsController extends Controller
 {
     /**
