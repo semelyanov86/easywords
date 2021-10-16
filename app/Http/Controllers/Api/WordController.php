@@ -9,6 +9,7 @@ use App\Actions\DeleteWordAction;
 use App\Actions\IncreaseCounterAction;
 use App\Actions\IndexWordsAction;
 use App\Actions\ListOfKnownWordsAction;
+use App\Actions\ListOfNotKnownWordsAction;
 use App\Actions\MarkWordKnownAction;
 use App\Actions\MarkWordStarredAction;
 use App\Actions\ShareWordAction;
@@ -48,6 +49,36 @@ final class WordController extends Controller
     public function known(Request $request): WordCollection
     {
         $words = ListOfKnownWordsAction::run();
+
+        return new WordCollection($words);
+    }
+
+    /**
+     * List of known words with pagination
+     *
+     * Get list of known words with pagination
+     *
+     * @response scenario=success {"data":[{"id":18,"original":"voluptates","translated":"deserunt","done_at":"2021-09-16T08:30:26.000000Z","starred":false,"user_id":1,"language":"DE","views":8,"from_sample":false,"created_at":"2021-09-04T10:11:33.000000Z","shared_by":null},{"id":27,"original":"spielen","translated":"играть; резвиться","done_at":"2021-09-16T08:26:26.000000Z","starred":false,"user_id":1,"language":"DE","views":0,"from_sample":true,"created_at":"2021-09-04T10:43:34.000000Z","shared_by":null},{"id":33,"original":"die Eltern","translated":"родители","done_at":"2021-09-16T08:30:35.000000Z","starred":false,"user_id":1,"language":"DE","views":0,"from_sample":true,"created_at":"2021-09-04T10:43:34.000000Z","shared_by":null},{"id":34,"original":"der Familienstand","translated":"семейное положение","done_at":"2021-09-16T08:30:33.000000Z","starred":false,"user_id":1,"language":"DE","views":0,"from_sample":true,"created_at":"2021-09-04T10:43:34.000000Z","shared_by":null}],"path": "https:\/\/easywordsapp.ru\/api\/known\/paginated","per_page": 20,"to": 20,"total": 101}
+     */
+    #[Get('known/paginated', name: 'api.words.listknownpaginated')]
+    public function knownPaginated(Request $request): WordCollection
+    {
+        $words = ListOfKnownWordsAction::run(null, true);
+
+        return new WordCollection($words);
+    }
+
+    /**
+     * List of not known words
+     *
+     * Get list of not known words
+     *
+     * @response scenario=success {"data":[{"id":11705,"original":"buchstabieren","translated":"читать по складам; произносить по буквам","done_at":null,"starred":false,"user_id":16,"language":"DE","views":0,"from_sample":true,"created_at":"2021-10-05T10:14:44.000000Z","shared_by":null},{"id":11706,"original":"leben","translated":"жить; существовать","done_at":null,"starred":false,"user_id":16,"language":"DE","views":0,"from_sample":true,"created_at":"2021-10-05T10:14:44.000000Z","shared_by":null},{"id":11707,"original":"lesen","translated":"читать","done_at":null,"starred":false,"user_id":16,"language":"DE","views":0,"from_sample":true,"created_at":"2021-10-05T10:14:44.000000Z","shared_by":null}],"links":{"first":"https://easywordsapp.ru/api/not-known?page=1","last":"https://easywordsapp.ru/api/not-known?page=45","prev":null,"next":"https://easywordsapp.ru/api/not-known?page=2"},"meta":{"current_page":1,"from":1,"last_page":45,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=1","label":"1","active":true},{"url":"https://easywordsapp.ru/api/not-known?page=2","label":"2","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=3","label":"3","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=4","label":"4","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=5","label":"5","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=6","label":"6","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=7","label":"7","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=8","label":"8","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=9","label":"9","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=10","label":"10","active":false},{"url":null,"label":"...","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=44","label":"44","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=45","label":"45","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=2","label":"Next &raquo;","active":false}],"path":"https://easywordsapp.ru/api/not-known","per_page":20,"to":20,"total":892}}
+     */
+    #[Get('not-known', name: 'api.words.listnotknown')]
+    public function notKnown(Request $request): WordCollection
+    {
+        $words = ListOfNotKnownWordsAction::run();
 
         return new WordCollection($words);
     }

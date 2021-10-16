@@ -9,17 +9,16 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-final class ListOfKnownWordsAction
+final class ListOfNotKnownWordsAction
 {
     use AsAction;
 
     public function __construct(
         protected WordRepository $repository
-    )
-    {
+    ) {
     }
 
-    public function handle(?int $userId = null, bool $isPagination = false): Collection|LengthAwarePaginator
+    public function handle(?int $userId = null): LengthAwarePaginator
     {
         if (!$userId) {
             $userId = (int) Auth::id();
@@ -27,10 +26,7 @@ final class ListOfKnownWordsAction
         if (!$userId) {
             abort(403);
         }
-        if ($isPagination) {
-            $settings = GetSettingsAction::run();
-            return $this->repository->getKnownWordsPagination($userId, (int) $settings['paginate']);
-        }
-        return $this->repository->getKnownWords($userId);
+        $settings = GetSettingsAction::run();
+        return $this->repository->getNotKnownWordsPagination($userId, (int) $settings['paginate']);
     }
 }

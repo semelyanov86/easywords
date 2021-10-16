@@ -40,7 +40,8 @@ final class SettingsController extends Controller
      * "DE",
      * "EN"
      * ],
-     * "main_language": "RU"
+     * "main_language": "RU",
+     * "latest_first": false
      * }
      * }
      * @response status=401 scenario=unauthorized {

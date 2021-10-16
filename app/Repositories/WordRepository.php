@@ -7,6 +7,7 @@ namespace App\Repositories;
 use App\DataTransferObjects\WordDto;
 use App\Models\Word;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -117,5 +118,15 @@ final class WordRepository
     public function getKnownWords(int $userId): Collection
     {
         return Word::where('user_id', $userId)->whereNotNull('done_at')->get();
+    }
+
+    public function getKnownWordsPagination(int $userId, int $pagination): LengthAwarePaginator
+    {
+        return Word::where('user_id', $userId)->whereNotNull('done_at')->paginate($pagination);
+    }
+
+    public function getNotKnownWordsPagination(int $userId, int $pagination): LengthAwarePaginator
+    {
+        return Word::where('user_id', $userId)->whereNull('done_at')->paginate($pagination);
     }
 }
