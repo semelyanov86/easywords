@@ -19,6 +19,7 @@ export const initialSettingsState: SettingsStateInterface = {
         ],
         "main_language": "RU",
         "show_shared": true,
-        "show_imported": true
+        "show_imported": true,
+        "latest_first": false
     }
 }

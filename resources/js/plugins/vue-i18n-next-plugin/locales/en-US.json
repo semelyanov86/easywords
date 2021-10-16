@@ -82,7 +82,8 @@
             "known_enabled": "Show known words",
             "fresh_first": "Show fresh first",
             "show_imported": "Show imported words",
-            "show_shared": "Show shared words"
+            "show_shared": "Show shared words",
+            "latest_first": "Latest first"
         },
         "languageList": {
             "chooseLanguage": "For starting choose language",

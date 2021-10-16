@@ -38,7 +38,7 @@ final class WordRepository
         }
 
         return $query
-            ->orderBy('created_at')
+            ->orderBy('created_at', $settings['latest_first'] ? 'desc' : 'asc')
             ->paginate($settings['paginate']);
     }
 

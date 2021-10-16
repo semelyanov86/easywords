@@ -82,6 +82,16 @@
                               v-model="setting.show_shared"
                           />
                       </div>
+                      <div>
+                          <label class="text-gray-700" for="latest_first">{{ i18n.t('setting.latest_first') }}</label>
+                          <input
+                              id="latest_first"
+                              class="rounded text-pink-500"
+                              type="checkbox"
+                              v-on:change="register('latest_first')"
+                              v-model="setting.latest_first"
+                          />
+                      </div>
                   </div>
 
                   <div class="flex justify-end mt-4">

@@ -7,5 +7,6 @@ export interface SettingInterface {
     languages_list: string[],
     main_language: string,
     show_imported: boolean,
-    show_shared: boolean
+    show_shared: boolean,
+    latest_first: boolean
 }
