@@ -8,6 +8,7 @@ use App\Actions\CreateWordAction;
 use App\Actions\DeleteWordAction;
 use App\Actions\IncreaseCounterAction;
 use App\Actions\IndexWordsAction;
+use App\Actions\ListAllWordsAction;
 use App\Actions\ListOfKnownWordsAction;
 use App\Actions\ListOfNotKnownWordsAction;
 use App\Actions\MarkWordKnownAction;
@@ -79,6 +80,21 @@ final class WordController extends Controller
     public function notKnown(Request $request): WordCollection
     {
         $words = ListOfNotKnownWordsAction::run();
+
+        return new WordCollection($words);
+    }
+
+    /**
+     * List of all words
+     *
+     * Get list of all words
+     *
+     * @response scenario=success {"data":[{"id":11705,"original":"buchstabieren","translated":"читать по складам; произносить по буквам","done_at":null,"starred":false,"user_id":16,"language":"DE","views":0,"from_sample":true,"created_at":"2021-10-05T10:14:44.000000Z","shared_by":null},{"id":11706,"original":"leben","translated":"жить; существовать","done_at":null,"starred":false,"user_id":16,"language":"DE","views":0,"from_sample":true,"created_at":"2021-10-05T10:14:44.000000Z","shared_by":null},{"id":11707,"original":"lesen","translated":"читать","done_at":null,"starred":false,"user_id":16,"language":"DE","views":0,"from_sample":true,"created_at":"2021-10-05T10:14:44.000000Z","shared_by":null}],"links":{"first":"https://easywordsapp.ru/api/not-known?page=1","last":"https://easywordsapp.ru/api/not-known?page=45","prev":null,"next":"https://easywordsapp.ru/api/not-known?page=2"},"meta":{"current_page":1,"from":1,"last_page":45,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=1","label":"1","active":true},{"url":"https://easywordsapp.ru/api/not-known?page=2","label":"2","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=3","label":"3","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=4","label":"4","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=5","label":"5","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=6","label":"6","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=7","label":"7","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=8","label":"8","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=9","label":"9","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=10","label":"10","active":false},{"url":null,"label":"...","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=44","label":"44","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=45","label":"45","active":false},{"url":"https://easywordsapp.ru/api/not-known?page=2","label":"Next &raquo;","active":false}],"path":"https://easywordsapp.ru/api/not-known","per_page":20,"to":20,"total":892}}
+     */
+    #[Get('all', name: 'api.words.all')]
+    public function all(Request $request): WordCollection
+    {
+        $words = ListAllWordsAction::run();
 
         return new WordCollection($words);
     }

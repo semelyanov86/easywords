@@ -129,4 +129,9 @@ final class WordRepository
     {
         return Word::where('user_id', $userId)->whereNull('done_at')->paginate($pagination);
     }
+
+    public function getAllWordsPagination(int $userId, int $pagination): LengthAwarePaginator
+    {
+        return Word::where('user_id', $userId)->paginate($pagination);
+    }
 }
