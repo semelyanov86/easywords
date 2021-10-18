@@ -28,6 +28,14 @@
                     <button class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Sign In</button>
                 </form>
             </section>
+            <div class="mt-3 text-center">
+                <span class="text-xs">Get the app. Currently support only APK.</span>
+                <div class="flex mt-3 space-x-2 justify-center">
+                    <a href="apps/flutter_apk/app.apk"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg></a>
+                </div>
+            </div>
         </main>
 
         <footer class="max-w-lg mx-auto flex justify-center text-white">

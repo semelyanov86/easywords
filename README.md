@@ -113,6 +113,7 @@ To run this project, you will need to add the following environment variables to
 - Choose language you want to learn.
 - See statistics and analytics data. Monitor your progress.
 - Cross platform with PWA support.
+- Native [android mobile application](https://easywordsapp.ru/apps/flutter_apk/app.apk)
 - Manage most popular words. If user do not want to create words manually, he can import most popular words from samples table
 
 ## Running Tests
@@ -179,7 +180,6 @@ Also you can get insomnia collection. It is located in `public_html/docs/Insomni
 
 ## Roadmap
 
-- Add mobile application
 - Add native application for Linux
 - Add cloud app functionality
 
@@ -206,7 +206,9 @@ Here you can check some screenshot of this app
 
 For learning words through smartphones you can use PWA. Just open in Google Chrome you domain through HTTPS and install your website as an app.
 
-Mobile application on android is coming. It will use Vue.native stack.
+Also I have a mobile application for android. You can download and install APK using this link: [https://easywordsapp.ru/apps/flutter_apk/app.apk](https://easywordsapp.ru/apps/flutter_apk/app.apk)
+
+For more information visit repository of mobile application: [https://github.com/semelyanov86/easywords-native](https://github.com/semelyanov86/easywords-native)
 
 #### Can I connect multiple users to my app?
 
