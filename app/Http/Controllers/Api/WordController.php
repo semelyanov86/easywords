@@ -290,11 +290,13 @@ final class WordController extends Controller
      * "message": "No query results for model [App\\Models\\Word]."
      * }
      */
-    public function destroy(Request $request, int $word): \Illuminate\Http\Response
+    public function destroy(Request $request, Word $word): \Illuminate\Http\Response
     {
-        $this->authorize('delete', $word);
+        if (Auth::id() !== $word->user_id) {
+            $this->authorize('delete', $word);
+        }
 
-        DeleteWordAction::run($word);
+        DeleteWordAction::run($word->id);
 
         return response()->noContent();
     }
