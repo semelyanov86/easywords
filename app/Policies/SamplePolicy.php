@@ -12,9 +12,6 @@ class SamplePolicy
 
     /**
      * Determine whether the sample can view any models.
-     *
-     * @param  App\Models\User  $user
-     * @return mixed
      */
     public function viewAny(User $user): bool
     {
@@ -23,10 +20,6 @@ class SamplePolicy
 
     /**
      * Determine whether the sample can view the model.
-     *
-     * @param  App\Models\User  $user
-     * @param  App\Models\Sample  $model
-     * @return mixed
      */
     public function view(User $user, Sample $model): bool
     {
@@ -35,9 +28,6 @@ class SamplePolicy
 
     /**
      * Determine whether the sample can create models.
-     *
-     * @param  App\Models\User  $user
-     * @return mixed
      */
     public function create(User $user): bool
     {
@@ -46,10 +36,6 @@ class SamplePolicy
 
     /**
      * Determine whether the sample can update the model.
-     *
-     * @param  App\Models\User  $user
-     * @param  App\Models\Sample  $model
-     * @return mixed
      */
     public function update(User $user, Sample $model): bool
     {
@@ -58,10 +44,6 @@ class SamplePolicy
 
     /**
      * Determine whether the sample can delete the model.
-     *
-     * @param  App\Models\User  $user
-     * @param  App\Models\Sample  $model
-     * @return mixed
      */
     public function delete(User $user, Sample $model): bool
     {
@@ -71,7 +53,6 @@ class SamplePolicy
     /**
      * Determine whether the user can delete multiple instances of the model.
      *
-     * @param  App\Models\User  $user
      * @param  App\Models\Sample  $model
      * @return mixed
      */
@@ -82,10 +63,6 @@ class SamplePolicy
 
     /**
      * Determine whether the sample can restore the model.
-     *
-     * @param  App\Models\User  $user
-     * @param  App\Models\Sample  $model
-     * @return mixed
      */
     public function restore(User $user, Sample $model): bool
     {
@@ -94,10 +71,6 @@ class SamplePolicy
 
     /**
      * Determine whether the sample can permanently delete the model.
-     *
-     * @param  App\Models\User  $user
-     * @param  App\Models\Sample  $model
-     * @return mixed
      */
     public function forceDelete(User $user, Sample $model): bool
     {

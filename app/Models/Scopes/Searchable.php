@@ -6,9 +6,6 @@ trait Searchable
 {
     /**
      * Search paginated items ordering by ID descending
-     *
-     * @param  int  $paginationQuantity
-     * @return void
      */
     public function scopeSearchLatestPaginated(
         $query,
@@ -27,7 +24,6 @@ trait Searchable
      *
      * @param [type] $query
      * @param [type] $search
-     * @return void
      */
     public function scopeSearch($query, $search): void
     {
@@ -44,8 +40,6 @@ trait Searchable
      * Returns the searchable fields. If $searchableFields is undefined,
      * or is an empty array, or its first element is '*', it will search
      * in all table fields
-     *
-     * @return array
      */
     protected function getSearchableFields(): array
     {
@@ -60,8 +54,6 @@ trait Searchable
 
     /**
      * Gets all fields from Model's table
-     *
-     * @return array
      */
     protected function getAllModelTableFields(): array
     {
