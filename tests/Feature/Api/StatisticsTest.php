@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
-class StatisticsTest extends TestCase
+final class StatisticsTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 

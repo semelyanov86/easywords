@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class WordControllerTest extends TestCase
+final class WordControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 

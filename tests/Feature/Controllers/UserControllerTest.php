@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class UserControllerTest extends TestCase
+final class UserControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 

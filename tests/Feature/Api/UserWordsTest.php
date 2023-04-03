@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
-class UserWordsTest extends TestCase
+final class UserWordsTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 

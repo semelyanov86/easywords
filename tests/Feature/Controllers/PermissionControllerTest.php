@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 
-class PermissionControllerTest extends TestCase
+final class PermissionControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 

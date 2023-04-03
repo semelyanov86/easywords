@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class RoleControllerTest extends TestCase
+final class RoleControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
