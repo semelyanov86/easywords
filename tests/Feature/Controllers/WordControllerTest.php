@@ -115,8 +115,8 @@ class WordControllerTest extends TestCase
         $data = [
             'original' => $this->faker->text(255),
             'translated' => $this->faker->text(255),
-            'done_at' => $this->faker->dateTime,
-            'starred' => $this->faker->boolean,
+            'done_at' => $this->faker->dateTime(),
+            'starred' => $this->faker->boolean(),
             'language' => $this->faker->text(5),
             'views' => 0,
             'user_id' => $user->id,

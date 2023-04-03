@@ -111,7 +111,7 @@ class WordTest extends TestCase
             'original' => $this->faker->text(100),
             'translated' => $this->faker->text(100),
             'done_at' => null,
-            'starred' => $this->faker->boolean,
+            'starred' => $this->faker->boolean(),
             'language' => 'RU',
             'views' => 2,
             'user_id' => $user->id,

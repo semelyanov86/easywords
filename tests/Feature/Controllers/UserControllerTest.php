@@ -113,8 +113,8 @@ class UserControllerTest extends TestCase
         $user = User::factory()->create();
 
         $data = [
-            'name' => $this->faker->name,
-            'email' => $this->faker->email,
+            'name' => $this->faker->name(),
+            'email' => $this->faker->email(),
         ];
 
         $data['password'] = \Str::random('8');
