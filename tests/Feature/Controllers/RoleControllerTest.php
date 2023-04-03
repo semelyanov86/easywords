@@ -26,7 +26,7 @@ class RoleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_index_view_with_roles()
+    public function it_displays_index_view_with_roles(): void
     {
         $response = $this->get(route('roles.index'));
 
@@ -39,7 +39,7 @@ class RoleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_create_view_for_role()
+    public function it_displays_create_view_for_role(): void
     {
         $response = $this->get(route('roles.create'));
 
@@ -49,7 +49,7 @@ class RoleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_stores_the_role()
+    public function it_stores_the_role(): void
     {
         $response = $this->post(route('roles.store'), [
             'name' => 'secretary',
@@ -66,7 +66,7 @@ class RoleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_show_view_for_role()
+    public function it_displays_show_view_for_role(): void
     {
         $role = Role::first();
 
@@ -81,7 +81,7 @@ class RoleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_edit_view_for_role()
+    public function it_displays_edit_view_for_role(): void
     {
         $role = Role::first();
 
@@ -96,7 +96,7 @@ class RoleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_updates_the_role()
+    public function it_updates_the_role(): void
     {
         $role = Role::first();
 
@@ -118,7 +118,7 @@ class RoleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_deletes_the_role()
+    public function it_deletes_the_role(): void
     {
         $role = Role::first();
 

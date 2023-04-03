@@ -6,14 +6,13 @@ use App\Http\Requests\WordStoreRequest;
 use App\Http\Requests\WordUpdateRequest;
 use App\Models\User;
 use App\Models\Word;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class WordController extends Controller
 {
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $this->authorize('view-any', Word::class);
 
@@ -26,10 +25,7 @@ class WordController extends Controller
         return view('app.words.index', compact('words', 'search'));
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $this->authorize('create', Word::class);
 
@@ -38,10 +34,7 @@ class WordController extends Controller
         return view('app.words.create', compact('users'));
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function store(WordStoreRequest $request)
+    public function store(WordStoreRequest $request): RedirectResponse
     {
         $this->authorize('create', Word::class);
 
@@ -54,20 +47,14 @@ class WordController extends Controller
             ->withSuccess(__('crud.common.created'));
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, Word $word)
+    public function show(Request $request, Word $word): View
     {
         $this->authorize('view', $word);
 
         return view('app.words.show', compact('word'));
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, Word $word)
+    public function edit(Request $request, Word $word): View
     {
         $this->authorize('update', $word);
 
@@ -76,10 +63,7 @@ class WordController extends Controller
         return view('app.words.edit', compact('word', 'users'));
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function update(WordUpdateRequest $request, Word $word)
+    public function update(WordUpdateRequest $request, Word $word): RedirectResponse
     {
         $this->authorize('update', $word);
 
@@ -92,10 +76,7 @@ class WordController extends Controller
             ->withSuccess(__('crud.common.saved'));
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request, Word $word)
+    public function destroy(Request $request, Word $word): RedirectResponse
     {
         $this->authorize('delete', $word);
 

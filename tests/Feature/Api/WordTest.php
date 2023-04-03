@@ -129,7 +129,7 @@ class WordTest extends TestCase
     /**
      * @test
      */
-    public function it_deletes_the_word()
+    public function it_deletes_the_word(): void
     {
         $word = Word::factory()->create();
 

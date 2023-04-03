@@ -28,7 +28,7 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function it_gets_users_list()
+    public function it_gets_users_list(): void
     {
         $users = User::factory()
             ->count(5)
@@ -42,7 +42,7 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function it_gets_short_list()
+    public function it_gets_short_list(): void
     {
         $users = User::factory()
             ->count(3)

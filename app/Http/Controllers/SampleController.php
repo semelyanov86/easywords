@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SampleStoreRequest;
 use App\Http\Requests\SampleUpdateRequest;
 use App\Models\Sample;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 final class SampleController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $this->authorize('view-any', Sample::class);
 
@@ -22,14 +24,14 @@ final class SampleController extends Controller
         return view('app.samples.index', compact('samples', 'search'));
     }
 
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $this->authorize('create', Sample::class);
 
         return view('app.samples.create');
     }
 
-    public function store(SampleStoreRequest $request)
+    public function store(SampleStoreRequest $request): RedirectResponse
     {
         $this->authorize('create', Sample::class);
 
@@ -42,21 +44,21 @@ final class SampleController extends Controller
             ->withSuccess(__('crud.common.created'));
     }
 
-    public function show(Request $request, Sample $sample)
+    public function show(Request $request, Sample $sample): View
     {
         $this->authorize('view', $sample);
 
         return view('app.samples.show', compact('sample'));
     }
 
-    public function edit(Request $request, Sample $sample)
+    public function edit(Request $request, Sample $sample): View
     {
         $this->authorize('update', $sample);
 
         return view('app.samples.edit', compact('sample'));
     }
 
-    public function update(SampleUpdateRequest $request, Sample $sample)
+    public function update(SampleUpdateRequest $request, Sample $sample): RedirectResponse
     {
         $this->authorize('update', $sample);
 
@@ -69,7 +71,7 @@ final class SampleController extends Controller
             ->withSuccess(__('crud.common.saved'));
     }
 
-    public function destroy(Request $request, Sample $sample)
+    public function destroy(Request $request, Sample $sample): RedirectResponse
     {
         $this->authorize('delete', $sample);
 

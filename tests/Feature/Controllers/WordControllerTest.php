@@ -28,7 +28,7 @@ class WordControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_index_view_with_words()
+    public function it_displays_index_view_with_words(): void
     {
         $words = Word::factory()
             ->count(5)
@@ -45,7 +45,7 @@ class WordControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_create_view_for_word()
+    public function it_displays_create_view_for_word(): void
     {
         $response = $this->get(route('words.create'));
 
@@ -55,7 +55,7 @@ class WordControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_stores_the_word()
+    public function it_stores_the_word(): void
     {
         $data = Word::factory()
             ->make()
@@ -76,7 +76,7 @@ class WordControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_show_view_for_word()
+    public function it_displays_show_view_for_word(): void
     {
         $word = Word::factory()->create();
 
@@ -91,7 +91,7 @@ class WordControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_edit_view_for_word()
+    public function it_displays_edit_view_for_word(): void
     {
         $word = Word::factory()->create();
 
@@ -106,7 +106,7 @@ class WordControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_updates_the_word()
+    public function it_updates_the_word(): void
     {
         $word = Word::factory()->create();
 
@@ -134,7 +134,7 @@ class WordControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_deletes_the_word()
+    public function it_deletes_the_word(): void
     {
         $word = Word::factory()->create();
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -50,7 +51,7 @@ class AuthController extends Controller
      *
      * @psalm-suppress MixedArgument
      */
-    public function apiLogin(AuthRequest $request)
+    public function apiLogin(AuthRequest $request): JsonResponse
     {
         /** @var string $deviceName */
         $deviceName = $request->device_name;
@@ -91,7 +92,7 @@ class AuthController extends Controller
      *
      * @psalm-suppress MixedArgument
      */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -167,7 +168,7 @@ class AuthController extends Controller
      * }
      */
     #[Get('signout', name: 'user.signout')]
-    public function signOut(Request $request): \Illuminate\Http\JsonResponse
+    public function signOut(Request $request): JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
 

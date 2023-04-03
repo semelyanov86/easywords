@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $this->authorize('view-any', User::class);
 
@@ -27,10 +26,7 @@ class UserController extends Controller
         return view('app.users.index', compact('users', 'search'));
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $this->authorize('create', User::class);
 
@@ -39,10 +35,7 @@ class UserController extends Controller
         return view('app.users.create', compact('roles'));
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function store(UserStoreRequest $request)
+    public function store(UserStoreRequest $request): RedirectResponse
     {
         $this->authorize('create', User::class);
 
@@ -59,20 +52,14 @@ class UserController extends Controller
             ->withSuccess(__('crud.common.created'));
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, User $user)
+    public function show(Request $request, User $user): View
     {
         $this->authorize('view', $user);
 
         return view('app.users.show', compact('user'));
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, User $user)
+    public function edit(Request $request, User $user): View
     {
         $this->authorize('update', $user);
 
@@ -81,10 +68,7 @@ class UserController extends Controller
         return view('app.users.edit', compact('user', 'roles'));
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
         $this->authorize('update', $user);
 
@@ -105,10 +89,7 @@ class UserController extends Controller
             ->withSuccess(__('crud.common.saved'));
     }
 
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request, User $user)
+    public function destroy(Request $request, User $user): RedirectResponse
     {
         $this->authorize('delete', $user);
 

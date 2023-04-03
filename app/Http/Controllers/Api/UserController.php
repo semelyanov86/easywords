@@ -11,6 +11,7 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\RouteAttributes\Attributes\Get;
@@ -125,7 +126,7 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function destroy(Request $request, User $user)
+    public function destroy(Request $request, User $user): Response
     {
         $this->authorize('delete', $user);
 
