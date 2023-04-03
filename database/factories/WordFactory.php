@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\User;
-use App\Models\Word;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class WordFactory extends Factory
