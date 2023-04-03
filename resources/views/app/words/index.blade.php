@@ -89,7 +89,7 @@
                                     {{ $word->starred ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3 text-left">
-                                    {{ optional($word->user)->name ?? '-' }}
+                                    {{ $word->user?->name ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3 text-left">
                                     {{ $word->language ?? '-' }}

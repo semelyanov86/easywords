@@ -25,7 +25,7 @@
         <x-inputs.date
             name="done_at"
             label="Done At"
-            value="{{ old('done_at', ($editing ? optional($word->done_at)->format('Y-m-d') : '')) }}"
+            value="{{ old('done_at', ($editing ? $word->done_at?->format('Y-m-d') : '')) }}"
             max="255"
         ></x-inputs.date>
     </x-inputs.group>
