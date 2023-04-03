@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFromSampleColumnToWordsTable extends Migration
+return new class extends Migration
 {
     public function up(): void
     {
@@ -21,4 +21,4 @@ class AddFromSampleColumnToWordsTable extends Migration
             $table->boolean('from_sample')->default(false);
         });
     }
-}
+};
