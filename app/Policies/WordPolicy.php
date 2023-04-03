@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Word;
 use App\Models\User;
+use App\Models\Word;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class WordPolicy

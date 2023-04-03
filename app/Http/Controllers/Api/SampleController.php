@@ -6,14 +6,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Actions\ImportSamplesToUserAction;
 use App\Actions\IndexSamplesAction;
-use App\Actions\ShareWordAction;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\IndexSamplesRequest;
-use App\Http\Resources\WordResource;
+use App\Http\Resources\SampleCollection;
+use App\Http\Resources\SampleResource;
 use App\Models\Sample;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\SampleResource;
-use App\Http\Resources\SampleCollection;
 use Illuminate\Support\Facades\Auth;
 use Spatie\RouteAttributes\Attributes\Get;
 use Spatie\RouteAttributes\Attributes\Middleware;
@@ -32,7 +30,9 @@ final class SampleController extends Controller
      * Export Samples
      *
      * User can load samples from specific language to it's own database
+     *
      * @urlParam language string required Language for export. Example=DE
+     *
      * @response status=204 scenario=success
      * @response status=401 scenario=unauthorized {
      * "message": "Unauthenticated."
@@ -42,6 +42,7 @@ final class SampleController extends Controller
     public function exportWord(string $language): \Illuminate\Http\Response
     {
         ImportSamplesToUserAction::run($language, Auth::id());
+
         return response()->noContent();
     }
 
@@ -52,6 +53,7 @@ final class SampleController extends Controller
      *
      * @queryParam language string required Language which we need to get list of words. Example=DE
      * @queryParam page int Page number if you need to get new list of samples. Example=1
+     *
      * @response scenario=success {"data":[{"id":1,"original":"der Sekt","translated":"Шампанское","language":"DE","created_at":"2021-08-26T05:57:00.000000Z"},{"id":2,"original":"der Cognac","translated":"Коньяк","language":"DE","created_at":"2021-08-26T05:57:00.000000Z"}],"links":{"first":"http://cards.sergeyem.test:8000/api/samples?page=1","last":"http://cards.sergeyem.test:8000/api/samples?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http://cards.sergeyem.test:8000/api/samples?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"http://cards.sergeyem.test:8000/api/samples","per_page":"20","to":4,"total":4}}
      */
     #[Get('samples', name: 'api.samples.index')]
@@ -66,6 +68,7 @@ final class SampleController extends Controller
      * Getting detail information about sample by it's ID
      *
      * @urlParam id integer required The ID of sample. Example=2
+     *
      * @response scenario=success {"data":{"id":2,"original":"der Cognac","translated":"Коньяк","language":"DE","created_at":"2021-08-26T05:57:00.000000Z"}}
      * @response status=401 scenario=unauthorized {
      * "message": "Unauthenticated."

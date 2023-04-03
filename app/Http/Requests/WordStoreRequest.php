@@ -18,8 +18,6 @@ class WordStoreRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
     public function rules(): array
     {
@@ -31,7 +29,7 @@ class WordStoreRequest extends FormRequest
             'user_id' => ['nullable', 'exists:users,id'],
             'language' => ['required', 'max:5', 'string'],
             'views' => ['required', 'max:255'],
-            'shared_by' => ['nullable', 'integer']
+            'shared_by' => ['nullable', 'integer'],
         ];
     }
 }

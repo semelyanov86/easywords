@@ -16,14 +16,13 @@ final class ShareWordAction
 
     public function __construct(
         protected WordRepository $repository
-    )
-    {
+    ) {
     }
 
     public function handle(int $wordId, int $userId): Word
     {
         $user = FindUserByIdAction::run($userId);
-        if (!$user) {
+        if (! $user) {
             abort(404, 'User with this ID not found!');
         }
         $author = Auth::id();
@@ -36,8 +35,9 @@ final class ShareWordAction
             'language' => $word->language,
             'views' => 0,
             'from_sample' => false,
-            'shared_by' => $author
+            'shared_by' => $author,
         ]);
+
         return CreateWordAction::run($dto);
     }
 }

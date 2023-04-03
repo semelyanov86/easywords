@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\DataTransferObjects\WordDto;
 use App\Models\Sample;
-use App\Models\Word;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -21,5 +19,4 @@ final class SampleRepository
     {
         return Sample::where('language', $language)->get();
     }
-
 }

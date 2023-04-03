@@ -14,8 +14,7 @@ final class IncreaseCounterAction
 
     public function __construct(
         protected WordRepository $repository
-    )
-    {
+    ) {
     }
 
     public function handle(int $id): Word

@@ -14,6 +14,7 @@ final class GetSettingsAction
     public function handle(): iterable
     {
         $user = Auth::user();
+
         return $user->settings()->all();
     }
 }

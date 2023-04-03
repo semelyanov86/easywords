@@ -75,6 +75,7 @@ final class SettingsController extends Controller
             value: $request->input('value')
         );
         StoreUserAction::run($data);
+
         return response()->noContent();
     }
 }

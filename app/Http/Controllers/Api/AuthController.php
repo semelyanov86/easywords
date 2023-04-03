@@ -1,12 +1,13 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Actions\Fortify\UpdateUserPassword;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -32,6 +33,7 @@ class AuthController extends Controller
      * @bodyParam email string required Email of authenticated user. Example: "admin@admin.com"
      * @bodyParam password string required Password of authenticated user. Example: "password"
      * @bodyParam device_name string required Type of device which will use this App. Example: "Insomnia"
+     *
      * @response scenario=success {
      *  "token": "2|n4a2Mnfe6FrEpZ0BqbWUiYA84g5USkuGpAcKTyMf",
      * }
@@ -43,7 +45,9 @@ class AuthController extends Controller
      * ]
      * }
      * }
+     *
      * @throws ValidationException
+     *
      * @psalm-suppress MixedArgument
      */
     public function apiLogin(AuthRequest $request)
@@ -59,6 +63,7 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken($deviceName)->plainTextToken;
+
         return response()->json([
             'token' => $token,
         ]);
@@ -71,6 +76,7 @@ class AuthController extends Controller
      *
      * @bodyParam email string required Email of authenticated user. Example: "admin@admin.com"
      * @bodyParam password string required Password of authenticated user. Example: "password"
+     *
      * @response scenario=success {
      *  "token": "sfgdfgfgfds",
      * }
@@ -92,7 +98,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (!auth()->attempt($credentials)) {
+        if (! auth()->attempt($credentials)) {
             throw ValidationException::withMessages([
                 'email' => [trans('auth.failed')],
             ]);
@@ -115,6 +121,7 @@ class AuthController extends Controller
      * @bodyParam current_password string required Current password of user. Example: "password"
      * @bodyParam password string required Your new password. Example: "new_password"
      * @bodyParam password_confirmation string required Retype your new password. Example: "new_password"
+     *
      * @response scenario=success {
      * "data": {
      * "id": 1,
@@ -142,10 +149,11 @@ class AuthController extends Controller
     {
         /** @var User|null $user */
         $user = Auth::user();
-        if (!$user) {
+        if (! $user) {
             abort(403);
         }
         $action->update($user, $request->all());
+
         return new UserResource($user);
     }
 
@@ -157,14 +165,14 @@ class AuthController extends Controller
      * @response scenario=success {
      *  "success": "ok",
      * }
-     *
      */
     #[Get('signout', name: 'user.signout')]
     public function signOut(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
+
         return response()->json([
-            'success' => 'ok'
+            'success' => 'ok',
         ]);
     }
 }

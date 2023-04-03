@@ -11,15 +11,13 @@ final class SampleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {
         $languages = config('app.supported_languages');
         foreach ($languages as $language) {
-            if (file_exists('./database/seeders/samples/' . $language . '.php')) {
-                $samples = require './database/seeders/samples/' . $language . '.php';
+            if (file_exists('./database/seeders/samples/'.$language.'.php')) {
+                $samples = require './database/seeders/samples/'.$language.'.php';
                 Sample::insert($samples);
             }
         }

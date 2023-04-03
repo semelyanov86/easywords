@@ -96,7 +96,7 @@ return [
     'fallback_locale' => 'en',
 
     'supported_languages' => [
-        'DE', 'EN'
+        'DE', 'EN',
     ],
 
     'main_language' => 'RU',

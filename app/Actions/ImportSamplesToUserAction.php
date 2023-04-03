@@ -18,8 +18,7 @@ final class ImportSamplesToUserAction
     public function __construct(
         protected SampleRepository $repository,
         protected WordRepository $wordRepository
-    )
-    {
+    ) {
     }
 
     public function handle(string $language, int $user_id): bool
@@ -27,10 +26,11 @@ final class ImportSamplesToUserAction
         $words = $this->getWordDtoFromSample($language, $user_id);
         /** @var WordDto $word */
         foreach ($words as $word) {
-            if (!$this->wordRepository->findByNameAndUser($word->original, $user_id)) {
+            if (! $this->wordRepository->findByNameAndUser($word->original, $user_id)) {
                 CreateWordAction::run($word);
             }
         }
+
         return true;
     }
 
@@ -48,9 +48,10 @@ final class ImportSamplesToUserAction
                 'user_id' => $user_id,
                 'language' => $sample->language,
                 'views' => 0,
-                'from_sample' => true
+                'from_sample' => true,
             ]));
         }
+
         return $result;
     }
 }

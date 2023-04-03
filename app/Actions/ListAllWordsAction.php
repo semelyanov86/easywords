@@ -2,9 +2,7 @@
 
 namespace App\Actions;
 
-use App\Models\Word;
 use App\Repositories\WordRepository;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -20,13 +18,14 @@ final class ListAllWordsAction
 
     public function handle(?int $userId = null): LengthAwarePaginator
     {
-        if (!$userId) {
+        if (! $userId) {
             $userId = (int) Auth::id();
         }
-        if (!$userId) {
+        if (! $userId) {
             abort(403);
         }
         $settings = GetSettingsAction::run();
+
         return $this->repository->getAllWordsPagination($userId, (int) $settings['paginate']);
     }
 }

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -13,7 +12,7 @@ final class IndexSamplesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'language' => ['required', 'string', 'max:10']
+            'language' => ['required', 'string', 'max:10'],
         ];
     }
 

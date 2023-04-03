@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sample;
-use Illuminate\Http\Request;
 use App\Http\Requests\SampleStoreRequest;
 use App\Http\Requests\SampleUpdateRequest;
+use App\Models\Sample;
+use Illuminate\Http\Request;
 
 final class SampleController extends Controller
 {

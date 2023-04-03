@@ -31,7 +31,7 @@ class WordUpdateRequest extends FormRequest
             'user_id' => ['required', 'exists:users,id'],
             'language' => ['required', 'max:5', 'string'],
             'views' => ['required', 'max:255'],
-            'shared_by' => ['nullable', 'integer']
+            'shared_by' => ['nullable', 'integer'],
         ];
     }
 }

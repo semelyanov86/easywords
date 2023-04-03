@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\User;
 use App\Models\Word;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class WordFactory extends Factory
@@ -29,6 +28,7 @@ class WordFactory extends Factory
         } else {
             $userId = \App\Models\User::factory();
         }
+
         return [
             'original' => $this->faker->word(),
             'translated' => $this->faker->word(),
@@ -37,7 +37,7 @@ class WordFactory extends Factory
             'language' => $this->faker->randomElement(config('app.supported_languages')),
             'views' => $this->faker->randomNumber(1),
             'user_id' => $userId,
-            'shared_by' => null
+            'shared_by' => null,
         ];
     }
 }

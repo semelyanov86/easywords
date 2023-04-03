@@ -2,14 +2,13 @@
 
 namespace Tests\Feature\Api;
 
-use App\Models\User;
 use App\Models\Sample;
-
+use App\Models\User;
 use App\Models\Word;
-use Tests\TestCase;
-use Laravel\Sanctum\Sanctum;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
+use Tests\TestCase;
 
 class SampleTest extends TestCase
 {
@@ -50,13 +49,13 @@ class SampleTest extends TestCase
         $user = User::where('email', 'admin@admin.com')->firstOrFail();
         $user2 = User::factory()->createOne(['email' => 'user@user.com']);
         Word::factory()->createOne([
-            'user_id' => $user2->id
+            'user_id' => $user2->id,
         ]);
 
         $samples = Sample::factory()
             ->count(5)
             ->create([
-                'language' => 'DE'
+                'language' => 'DE',
             ]);
 
         $response = $this->getJson(route('api.samples.export', ['language' => 'DE']));

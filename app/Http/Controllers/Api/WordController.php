@@ -15,14 +15,14 @@ use App\Actions\MarkWordKnownAction;
 use App\Actions\MarkWordStarredAction;
 use App\Actions\ShareWordAction;
 use App\DataTransferObjects\WordDto;
-use App\Http\Requests\IndexWordsRequest;
-use App\Models\Word;
-use Illuminate\Http\Request;
-use App\Http\Resources\WordResource;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\WordCollection;
+use App\Http\Requests\IndexWordsRequest;
 use App\Http\Requests\WordStoreRequest;
 use App\Http\Requests\WordUpdateRequest;
+use App\Http\Resources\WordCollection;
+use App\Http\Resources\WordResource;
+use App\Models\Word;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\RouteAttributes\Attributes\Get;
 use Spatie\RouteAttributes\Attributes\Middleware;
@@ -105,6 +105,7 @@ final class WordController extends Controller
      * Default get request which is need for increasing of VIEWS counter.
      *
      * @urlParam word integer required The ID of word. Example=2
+     *
      * @response scenario=success {"data":{"id":2,"original":"der Cognac","translated":"Коньяк","done_at":null,"starred":true,"user_id":1,"language":"DE","views":9,"created_at":"2021-08-26T05:57:00.000000Z"}}
      * @response status=401 scenario=unauthorized {
      * "message": "Unauthenticated."
@@ -118,6 +119,7 @@ final class WordController extends Controller
     {
         Auth::user()->hasPermissionTo('view words');
         $wordModel = IncreaseCounterAction::run($word);
+
         return new WordResource($wordModel);
     }
 
@@ -128,6 +130,7 @@ final class WordController extends Controller
      *
      * @urlParam word integer required The ID of word. Example=2
      * @urlParam value integer required Need to pass 0 or 1, should we mark this word known (1) or unknown (0). Example=1
+     *
      * @response scenario=success {"data":{"id":2,"original":"der Cognac","translated":"Коньяк","done_at":"2021-09-02T18:53:27.000000Z","starred":true,"user_id":1,"language":"DE","views":9,"created_at":"2021-08-26T05:57:00.000000Z"}}
      * @response status=401 scenario=unauthorized {
      * "message": "Unauthenticated."
@@ -141,8 +144,10 @@ final class WordController extends Controller
     {
         Auth::user()->hasPermissionTo('view words');
         $wordModel = MarkWordKnownAction::run($word, $value);
+
         return new WordResource($wordModel);
     }
+
     /**
      * Mark Starred
      *
@@ -150,6 +155,7 @@ final class WordController extends Controller
      *
      * @urlParam word integer required The ID of word. Example=2
      * @urlParam value integer required Need to pass 0 or 1, should we mark this word starred (1) or unstar it (0). Example=1
+     *
      * @response scenario=success {"data":{"id":2,"original":"der Cognac","translated":"Коньяк","done_at":"2021-09-02T18:53:27.000000Z","starred":true,"user_id":1,"language":"DE","views":9,"created_at":"2021-08-26T05:57:00.000000Z"}}
      * @response status=401 scenario=unauthorized {
      * "message": "Unauthenticated."
@@ -163,6 +169,7 @@ final class WordController extends Controller
     {
         Auth::user()->hasPermissionTo('view words');
         $wordModel = MarkWordStarredAction::run($word, $value);
+
         return new WordResource($wordModel);
     }
 
@@ -170,8 +177,10 @@ final class WordController extends Controller
      * Share Word
      *
      * Using this functionality you can create new word for different user. This way system will diplicate word and change user ID to passed one.
+     *
      * @urlParam word integer required The ID of word. Example=2
      * @urlParam value integer required User ID which we need to copy word. Example=2
+     *
      * @response status=201 scenario=success {"data":{"id":2,"original":"der Cognac","translated":"Коньяк","done_at":"2021-09-02T18:53:27.000000Z","starred":true,"user_id":2,"language":"DE","views":0,"created_at":"2021-08-26T05:57:00.000000Z"}}
      * @response status=401 scenario=unauthorized {
      * "message": "Unauthenticated."
@@ -188,6 +197,7 @@ final class WordController extends Controller
     {
         Auth::user()->hasPermissionTo('view words');
         $wordModel = ShareWordAction::run($word, $user);
+
         return new WordResource($wordModel);
     }
 
@@ -198,6 +208,7 @@ final class WordController extends Controller
      *
      * @queryParam language string required Language which we need to get list of words. Example=DE
      * @queryParam page int Page number if you need to get new list of words. Example=1
+     *
      * @response scenario=success {"data":[{"id":1,"original":"der Sekt","translated":"Шампанское","done_at":null,"starred":false,"user_id":1,"language":"DE","views":0,"created_at":"2021-08-26T05:57:00.000000Z"},{"id":2,"original":"der Cognac","translated":"Коньяк","done_at":null,"starred":false,"user_id":1,"language":"DE","views":0,"created_at":"2021-08-26T05:57:00.000000Z"},{"id":3,"original":"die Sauerkraut","translated":"Квашеная капуста","done_at":null,"starred":false,"user_id":1,"language":"DE","views":0,"created_at":"2021-08-26T05:57:00.000000Z"},{"id":6,"original":"voll","translated":"Полный","done_at":null,"starred":false,"user_id":1,"language":"DE","views":0,"created_at":"2021-08-26T05:58:17.000000Z"}],"links":{"first":"http://cards.sergeyem.test:8000/api/words?page=1","last":"http://cards.sergeyem.test:8000/api/words?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http://cards.sergeyem.test:8000/api/words?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"http://cards.sergeyem.test:8000/api/words","per_page":"20","to":4,"total":4}}
      */
     public function index(IndexWordsRequest $request): WordCollection
@@ -218,6 +229,7 @@ final class WordController extends Controller
      * @bodyParam starred boolean Mark this word as starred or not. Example: false
      * @bodyParam language string required What language for this word you creating. Example: "DE"
      * @bodyParam views int Number of views we create by default for this word. Example: 0
+     *
      * @response scenario=success {"data":{"id":6,"original":"voll","translated":"Полный","done_at":null,"starred":false,"user_id":1,"language":"DE","views":0}}
      * @response status=422 scenario="Validation Error" {
      * "message": "Word already exists"
@@ -241,6 +253,7 @@ final class WordController extends Controller
      * Getting detail information about word by it's ID
      *
      * @urlParam id integer required The ID of word. Example=2
+     *
      * @response scenario=success {"data":{"id":2,"original":"der Cognac","translated":"Коньяк","done_at":null,"starred":false,"user_id":1,"language":"DE","views":7,"created_at":"2021-08-26T05:57:00.000000Z"}}
      * @response status=401 scenario=unauthorized {
      * "message": "Unauthenticated."
@@ -262,6 +275,7 @@ final class WordController extends Controller
      * Update word information. Currently we get 503 error. Route do not implemented yet.
      *
      * @urlParam id integer required The ID of word. Example=2
+     *
      * @response status=503 scenario="Not implemented"
      */
     public function update(WordUpdateRequest $request, Word $word)
@@ -282,6 +296,7 @@ final class WordController extends Controller
      * Here you can remove word through database
      *
      * @urlParam id integer required The ID of word. Example=2
+     *
      * @response status=204 scenario=success
      * @response status=401 scenario=unauthorized {
      * "message": "Unauthenticated."

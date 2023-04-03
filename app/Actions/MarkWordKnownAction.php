@@ -15,8 +15,7 @@ final class MarkWordKnownAction
 
     public function __construct(
         protected WordRepository $repository
-    )
-    {
+    ) {
     }
 
     public function handle(int $word, int $isKnown = 1): Word
@@ -24,6 +23,7 @@ final class MarkWordKnownAction
         if ($isKnown > 0) {
             return $this->repository->markKnown($word, Carbon::now());
         }
+
         return $this->repository->markKnown($word, null);
     }
 }

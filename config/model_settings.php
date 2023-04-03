@@ -18,6 +18,6 @@ return [
             'languages_list' => config('app.supported_languages'),
             'main_language' => config('app.main_language'),
             'latest_first' => false,
-        ]
-    ]
+        ],
+    ],
 ];

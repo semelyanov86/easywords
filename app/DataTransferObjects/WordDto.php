@@ -39,7 +39,7 @@ final class WordDto extends \Spatie\DataTransferObject\DataTransferObject
             'user_id' => $request->input('user_id', $userId),
             'language' => $request->input('language'),
             'views' => (int) $request->input('views'),
-            'from_sample' => $request->boolean('from_sample')
+            'from_sample' => $request->boolean('from_sample'),
         ]);
     }
 }

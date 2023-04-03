@@ -13,8 +13,7 @@ final class IndexWordsAction
 
     public function __construct(
         protected WordRepository $repository
-    )
-    {
+    ) {
     }
 
     public function handle(string $language): \Illuminate\Pagination\LengthAwarePaginator
