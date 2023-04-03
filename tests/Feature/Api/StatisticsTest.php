@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\User;
 use App\Models\Word;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -58,9 +59,7 @@ class StatisticsTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_stat_result(): void
     {
         $response = $this->getJson(route('statistics.index'));

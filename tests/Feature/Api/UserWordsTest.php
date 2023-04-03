@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\User;
 use App\Models\Word;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,9 +27,7 @@ class UserWordsTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_user_words(): void
     {
         $this->markTestSkipped();
@@ -44,9 +43,7 @@ class UserWordsTest extends TestCase
         $response->assertOk()->assertSee($words[0]->original);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_stores_the_user_words(): void
     {
         $this->markTestSkipped();

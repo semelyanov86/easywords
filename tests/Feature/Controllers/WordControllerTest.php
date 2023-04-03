@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\User;
 use App\Models\Word;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -25,9 +26,7 @@ class WordControllerTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_index_view_with_words(): void
     {
         $words = Word::factory()
@@ -42,9 +41,7 @@ class WordControllerTest extends TestCase
             ->assertViewHas('words');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_create_view_for_word(): void
     {
         $response = $this->get(route('words.create'));
@@ -52,9 +49,7 @@ class WordControllerTest extends TestCase
         $response->assertOk()->assertViewIs('app.words.create');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_stores_the_word(): void
     {
         $data = Word::factory()
@@ -73,9 +68,7 @@ class WordControllerTest extends TestCase
         $response->assertRedirect(route('words.edit', $word));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_show_view_for_word(): void
     {
         $word = Word::factory()->create();
@@ -88,9 +81,7 @@ class WordControllerTest extends TestCase
             ->assertViewHas('word');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_edit_view_for_word(): void
     {
         $word = Word::factory()->create();
@@ -103,9 +94,7 @@ class WordControllerTest extends TestCase
             ->assertViewHas('word');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_updates_the_word(): void
     {
         $word = Word::factory()->create();
@@ -131,9 +120,7 @@ class WordControllerTest extends TestCase
         $response->assertRedirect(route('words.edit', $word));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_deletes_the_word(): void
     {
         $word = Word::factory()->create();

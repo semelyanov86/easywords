@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -23,9 +24,7 @@ class PermissionControllerTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_index_view_with_permissions(): void
     {
         $response = $this->get(route('permissions.index'));
@@ -36,9 +35,7 @@ class PermissionControllerTest extends TestCase
             ->assertViewHas('permissions');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_create_view_for_permission(): void
     {
         $response = $this->get(route('permissions.create'));
@@ -46,9 +43,7 @@ class PermissionControllerTest extends TestCase
         $response->assertOk()->assertViewIs('app.permissions.create');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_stores_the_permission(): void
     {
         $response = $this->post(route('permissions.store'), [
@@ -63,9 +58,7 @@ class PermissionControllerTest extends TestCase
         $response->assertRedirect(route('permissions.edit', $permission));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_show_view_for_permission(): void
     {
         $permission = Permission::first();
@@ -78,9 +71,7 @@ class PermissionControllerTest extends TestCase
             ->assertViewHas('permission');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_edit_view_for_permission(): void
     {
         $permission = Permission::first();
@@ -93,9 +84,7 @@ class PermissionControllerTest extends TestCase
             ->assertViewHas('permission');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_updates_the_permission(): void
     {
         $permission = Permission::first();
@@ -115,9 +104,7 @@ class PermissionControllerTest extends TestCase
         $response->assertRedirect(route('permissions.edit', $permission));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_deletes_the_permission(): void
     {
         $permission = Permission::first();

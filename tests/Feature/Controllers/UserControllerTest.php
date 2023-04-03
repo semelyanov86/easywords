@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Controllers;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -24,9 +25,7 @@ class UserControllerTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_index_view_with_users(): void
     {
         $users = User::factory()
@@ -41,9 +40,7 @@ class UserControllerTest extends TestCase
             ->assertViewHas('users');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_create_view_for_user(): void
     {
         $response = $this->get(route('users.create'));
@@ -51,9 +48,7 @@ class UserControllerTest extends TestCase
         $response->assertOk()->assertViewIs('app.users.create');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_stores_the_user(): void
     {
         $data = User::factory()
@@ -75,9 +70,7 @@ class UserControllerTest extends TestCase
         $response->assertRedirect(route('users.edit', $user));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_show_view_for_user(): void
     {
         $user = User::factory()->create();
@@ -90,9 +83,7 @@ class UserControllerTest extends TestCase
             ->assertViewHas('user');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_edit_view_for_user(): void
     {
         $user = User::factory()->create();
@@ -105,9 +96,7 @@ class UserControllerTest extends TestCase
             ->assertViewHas('user');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_updates_the_user(): void
     {
         $user = User::factory()->create();
@@ -133,9 +122,7 @@ class UserControllerTest extends TestCase
         $response->assertRedirect(route('users.edit', $user));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_deletes_the_user(): void
     {
         $user = User::factory()->create();
