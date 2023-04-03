@@ -50,13 +50,7 @@ class SamplePolicy
         return $user->hasPermissionTo('delete samples');
     }
 
-    /**
-     * Determine whether the user can delete multiple instances of the model.
-     *
-     * @param  App\Models\Sample  $model
-     * @return mixed
-     */
-    public function deleteAny(User $user)
+    public function deleteAny(User $user): bool
     {
         return $user->hasPermissionTo('delete samples');
     }

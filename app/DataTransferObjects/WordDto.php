@@ -29,7 +29,7 @@ final class WordDto extends \Spatie\DataTransferObject\DataTransferObject
 
     public ?int $shared_by = null;
 
-    public static function fromRequest(FormRequest $request, ?int $userId = null): self
+    public static function fromRequest(FormRequest $request, int|string|null $userId = null): self
     {
         return new self([
             'original' => $request->input('original'),

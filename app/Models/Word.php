@@ -25,7 +25,8 @@ final class Word extends Model
         'shared_by',
     ];
 
-    protected $searchableFields = ['*'];
+    /** @var string[] */
+    protected array $searchableFields = ['*'];
 
     protected $casts = [
         'done_at' => 'datetime',

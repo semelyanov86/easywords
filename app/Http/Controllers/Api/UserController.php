@@ -25,7 +25,7 @@ use Spatie\RouteAttributes\Attributes\Prefix;
  */
 #[Prefix('api')]
 #[Middleware(['auth:sanctum', 'cache.headers:public;max_age=2628000;etag'])]
-class UserController extends Controller
+final class UserController extends Controller
 {
     /**
      * Get users list
@@ -85,7 +85,7 @@ class UserController extends Controller
         return new UserCollection(IndexUsersAction::run($request->get('search', '')));
     }
 
-    public function store(UserStoreRequest $request)
+    public function store(UserStoreRequest $request): UserResource
     {
         $this->authorize('create', User::class);
 
@@ -100,14 +100,14 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function show(Request $request, User $user)
+    public function show(Request $request, User $user): UserResource
     {
         $this->authorize('view', $user);
 
         return new UserResource($user);
     }
 
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user): UserResource
     {
         $this->authorize('update', $user);
 

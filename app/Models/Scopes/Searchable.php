@@ -2,30 +2,11 @@
 
 namespace App\Models\Scopes;
 
+use Illuminate\Database\Eloquent\Builder;
+
 trait Searchable
 {
-    /**
-     * Search paginated items ordering by ID descending
-     */
-    public function scopeSearchLatestPaginated(
-        $query,
-        string $search,
-        int $paginationQuantity = 10
-    ): void {
-        return $query
-            ->search($search)
-            ->orderBy('updated_at', 'desc')
-            ->paginate($paginationQuantity);
-    }
-
-    /**
-     * Adds a scope to search the table based on the
-     * $searchableFields array inside the model
-     *
-     * @param [type] $query
-     * @param [type] $search
-     */
-    public function scopeSearch($query, $search): void
+    public function scopeSearch(Builder $query, string $search): Builder
     {
         $query->where(function ($query) use ($search) {
             foreach ($this->getSearchableFields() as $field) {
@@ -40,6 +21,8 @@ trait Searchable
      * Returns the searchable fields. If $searchableFields is undefined,
      * or is an empty array, or its first element is '*', it will search
      * in all table fields
+     *
+     * @return string[]
      */
     protected function getSearchableFields(): array
     {
@@ -54,6 +37,8 @@ trait Searchable
 
     /**
      * Gets all fields from Model's table
+     *
+     * @return string[]
      */
     protected function getAllModelTableFields(): array
     {

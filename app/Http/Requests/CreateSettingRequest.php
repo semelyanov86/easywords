@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 final class CreateSettingRequest extends FormRequest
 {
+    /**
+     * @return array<string, string[]>
+     */
     public function rules(): array
     {
         return [

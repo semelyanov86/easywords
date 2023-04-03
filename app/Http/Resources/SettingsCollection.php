@@ -6,8 +6,11 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class SettingsCollection extends ResourceCollection
+final class SettingsCollection extends ResourceCollection
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray($request): array
     {
         return [

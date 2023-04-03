@@ -24,7 +24,7 @@ use Spatie\RouteAttributes\Attributes\Put;
  */
 #[Prefix('api')]
 #[Middleware('auth:sanctum')]
-class AuthController extends Controller
+final class AuthController extends Controller
 {
     /**
      * Get JSON token
@@ -153,7 +153,9 @@ class AuthController extends Controller
         if (! $user) {
             abort(403);
         }
-        $action->update($user, $request->all());
+        /** @var array{password: string, current_password: string|null} $input */
+        $input = $request->all();
+        $action->update($user, $input);
 
         return new UserResource($user);
     }
@@ -170,7 +172,9 @@ class AuthController extends Controller
     #[Get('signout', name: 'user.signout')]
     public function signOut(Request $request): JsonResponse
     {
-        $request->user()->currentAccessToken()->delete();
+        if (method_exists($request->user()->currentAccessToken(), 'delete')) {
+            $request->user()->currentAccessToken()->delete();
+        }
 
         return response()->json([
             'success' => 'ok',

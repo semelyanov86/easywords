@@ -278,16 +278,9 @@ final class WordController extends Controller
      *
      * @response status=503 scenario="Not implemented"
      */
-    public function update(WordUpdateRequest $request, Word $word)
+    public function update(WordUpdateRequest $request, Word $word): \Illuminate\Http\Response
     {
         abort(503);
-        $this->authorize('update', $word);
-
-        $validated = $request->validated();
-
-        $word->update($validated);
-
-        return new WordResource($word);
     }
 
     /**

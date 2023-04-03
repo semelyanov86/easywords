@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\WordCollection;
-use App\Http\Resources\WordResource;
 use App\Models\User;
 use App\Models\Word;
 use Illuminate\Http\Request;
 
-class UserWordsController extends Controller
+final class UserWordsController extends Controller
 {
     /**
      * List of user words
@@ -18,20 +16,9 @@ class UserWordsController extends Controller
      *
      * @response status=503
      */
-    public function index(Request $request, User $user)
+    public function index(Request $request, User $user): \Illuminate\Http\Response
     {
         abort(503);
-        $this->authorize('view', $user);
-
-        $search = $request->get('search', '');
-
-        $words = $user
-            ->words()
-            ->search($search)
-            ->latest()
-            ->paginate();
-
-        return new WordCollection($words);
     }
 
     /**
@@ -41,22 +28,8 @@ class UserWordsController extends Controller
      *
      * @response status=503
      */
-    public function store(Request $request, User $user)
+    public function store(Request $request, User $user): \Illuminate\Http\Response
     {
         abort(503);
-        $this->authorize('create', Word::class);
-
-        $validated = $request->validate([
-            'original' => ['required', 'max:255', 'string'],
-            'translated' => ['required', 'max:255', 'string'],
-            'done_at' => ['nullable', 'date'],
-            'starred' => ['required', 'boolean'],
-            'language' => ['required', 'max:5', 'string'],
-            'views' => ['required', 'max:255'],
-        ]);
-
-        $word = $user->words()->create($validated);
-
-        return new WordResource($word);
     }
 }

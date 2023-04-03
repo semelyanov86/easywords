@@ -7,8 +7,11 @@ namespace App\Http\Resources;
 use App\Models\Word;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class WordResource extends JsonResource
+final class WordResource extends JsonResource
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray($request): array
     {
         /** @var Word $model */

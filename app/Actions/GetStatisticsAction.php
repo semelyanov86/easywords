@@ -18,6 +18,9 @@ final class GetStatisticsAction
     ) {
     }
 
+    /**
+     * @return array<string, int|WordCollection>
+     */
     public function handle(?int $userId = null): array
     {
         if (! $userId) {

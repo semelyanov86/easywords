@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Auth;
 
 final class WordRepository
 {
+    /**
+     * @param  array{starred_enabled: bool, known_enabled: bool, paginate: int, show_shared: bool, show_imported: bool, latest_first: bool}  $settings
+     */
     public function getLatestWords(string $language, array $settings): LengthAwarePaginator
     {
         $user = Auth::user();
@@ -42,6 +45,9 @@ final class WordRepository
             ->paginate($settings['paginate']);
     }
 
+    /**
+     * @param  array{starred_enabled: bool, known_enabled: bool, paginate: int}  $settings
+     */
     public function getLessViewedFirst(string $language, array $settings): LengthAwarePaginator
     {
         $user = Auth::user();
@@ -84,7 +90,7 @@ final class WordRepository
     public function markStarred(int $id, int $value = 1): Word
     {
         $word = $this->getById($id);
-        $word->starred = $value;
+        $word->starred = $value === 1;
         $word->save();
 
         return $word;
@@ -106,6 +112,9 @@ final class WordRepository
             ->where('user_id', $user)->first();
     }
 
+    /**
+     * @return iterable<Word>
+     */
     public function getPopularWords(): iterable
     {
         return Word::orderBy('views', 'DESC')->limit(10)->get();

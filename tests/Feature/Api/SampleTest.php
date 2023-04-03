@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Api;
 
-use PHPUnit\Framework\Attributes\Test;
 use App\Models\Sample;
 use App\Models\User;
 use App\Models\Word;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 final class SampleTest extends TestCase

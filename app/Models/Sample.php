@@ -13,5 +13,6 @@ class Sample extends Model
 
     protected $fillable = ['original', 'translated', 'language'];
 
-    protected $searchableFields = ['*'];
+    /** @var string[] */
+    protected array $searchableFields = ['*'];
 }

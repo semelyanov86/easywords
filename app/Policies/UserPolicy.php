@@ -49,13 +49,7 @@ class UserPolicy
         return $user->hasPermissionTo('delete users');
     }
 
-    /**
-     * Determine whether the user can delete multiple instances of the model.
-     *
-     * @param  App\Models\User  $model
-     * @return mixed
-     */
-    public function deleteAny(User $user)
+    public function deleteAny(User $user): bool
     {
         return $user->hasPermissionTo('delete users');
     }

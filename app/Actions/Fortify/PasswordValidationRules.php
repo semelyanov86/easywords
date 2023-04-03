@@ -8,6 +8,8 @@ trait PasswordValidationRules
 {
     /**
      * Get the validation rules used to validate passwords.
+     *
+     * @return array<int, string|Password>
      */
     protected function passwordRules(): array
     {

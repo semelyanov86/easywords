@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Scopes\Searchable;
 use Glorand\Model\Settings\Traits\HasSettingsTable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -27,7 +28,8 @@ class User extends Authenticatable
 
     protected $fillable = ['name', 'email', 'password'];
 
-    protected $searchableFields = ['*'];
+    /** @var string[] */
+    protected array $searchableFields = ['*'];
 
     protected $hidden = [
         'password',
@@ -40,12 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function words()
+    public function words(): HasMany
     {
         return $this->hasMany(Word::class);
     }
 
-    public function isSuperAdmin()
+    public function isSuperAdmin(): bool
     {
         return $this->hasRole('super-admin');
     }

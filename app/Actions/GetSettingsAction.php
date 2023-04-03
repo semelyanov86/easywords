@@ -11,10 +11,14 @@ final class GetSettingsAction
 {
     use AsAction;
 
-    public function handle(): iterable
+    /**
+     * @return array{starred_enabled: bool, known_enabled: bool, paginate: int, show_shared: bool, show_imported: bool, latest_first: bool}
+     */
+    public function handle(): array
     {
         $user = Auth::user();
-
-        return $user->settings()->all();
+        /** @var array{starred_enabled: bool, known_enabled: bool, paginate: int, show_shared: bool, show_imported: bool, latest_first: bool} $result */
+        $result = $user->settings()->all();
+        return $result;
     }
 }

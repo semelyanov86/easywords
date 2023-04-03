@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 
-class CreateNewUser implements CreatesNewUsers
+final class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
 
     /**
      * Validate and create a newly registered user.
+     *
+     * @param  array{name: string, email: string, password: string}  $input
      */
     public function create(array $input): User
     {
