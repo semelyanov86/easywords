@@ -13,8 +13,8 @@ trait Searchable
     public function scopeSearchLatestPaginated(
         $query,
         string $search,
-        $paginationQuantity = 10
-    ) {
+        int $paginationQuantity = 10
+    ): void {
         return $query
             ->search($search)
             ->orderBy('updated_at', 'desc')
@@ -29,7 +29,7 @@ trait Searchable
      * @param [type] $search
      * @return void
      */
-    public function scopeSearch($query, $search)
+    public function scopeSearch($query, $search): void
     {
         $query->where(function ($query) use ($search) {
             foreach ($this->getSearchableFields() as $field) {
@@ -47,7 +47,7 @@ trait Searchable
      *
      * @return array
      */
-    protected function getSearchableFields()
+    protected function getSearchableFields(): array
     {
         if (isset($this->searchableFields) && count($this->searchableFields)) {
             return $this->searchableFields[0] === '*'
@@ -63,7 +63,7 @@ trait Searchable
      *
      * @return array
      */
-    protected function getAllModelTableFields()
+    protected function getAllModelTableFields(): array
     {
         $tableName = $this->getTable();
 

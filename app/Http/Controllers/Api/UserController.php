@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Response;
 use App\Actions\IndexShortUsersAction;
 use App\Actions\IndexUsersAction;
 use App\Http\Controllers\Controller;
@@ -125,7 +126,7 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function destroy(Request $request, User $user)
+    public function destroy(Request $request, User $user): Response
     {
         $this->authorize('delete', $user);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
@@ -50,7 +51,7 @@ class AuthController extends Controller
      *
      * @psalm-suppress MixedArgument
      */
-    public function apiLogin(AuthRequest $request)
+    public function apiLogin(AuthRequest $request): JsonResponse
     {
         /** @var string $deviceName */
         $deviceName = $request->device_name;
@@ -91,7 +92,7 @@ class AuthController extends Controller
      *
      * @psalm-suppress MixedArgument
      */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $credentials = $request->validate([
             'email' => 'required|email',
