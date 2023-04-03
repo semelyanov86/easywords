@@ -2,13 +2,14 @@
 
 namespace Tests\Feature\Controllers;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class RoleControllerTest extends TestCase
+final class RoleControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -23,9 +24,7 @@ class RoleControllerTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_index_view_with_roles(): void
     {
         $response = $this->get(route('roles.index'));
@@ -36,9 +35,7 @@ class RoleControllerTest extends TestCase
             ->assertViewHas('roles');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_create_view_for_role(): void
     {
         $response = $this->get(route('roles.create'));
@@ -46,9 +43,7 @@ class RoleControllerTest extends TestCase
         $response->assertOk()->assertViewIs('app.roles.create');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_stores_the_role(): void
     {
         $response = $this->post(route('roles.store'), [
@@ -63,9 +58,7 @@ class RoleControllerTest extends TestCase
         $response->assertRedirect(route('roles.edit', $role));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_show_view_for_role(): void
     {
         $role = Role::first();
@@ -78,9 +71,7 @@ class RoleControllerTest extends TestCase
             ->assertViewHas('role');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_edit_view_for_role(): void
     {
         $role = Role::first();
@@ -93,9 +84,7 @@ class RoleControllerTest extends TestCase
             ->assertViewHas('role');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_updates_the_role(): void
     {
         $role = Role::first();
@@ -115,9 +104,7 @@ class RoleControllerTest extends TestCase
         $response->assertRedirect(route('roles.edit', $role));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_deletes_the_role(): void
     {
         $role = Role::first();

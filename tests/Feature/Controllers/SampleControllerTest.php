@@ -2,13 +2,14 @@
 
 namespace Tests\Feature\Controllers;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\Sample;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class SampleControllerTest extends TestCase
+final class SampleControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -25,9 +26,7 @@ class SampleControllerTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_index_view_with_samples(): void
     {
         $samples = Sample::factory()
@@ -42,9 +41,7 @@ class SampleControllerTest extends TestCase
             ->assertViewHas('samples');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_create_view_for_sample(): void
     {
         $response = $this->get(route('samples.create'));
@@ -52,9 +49,7 @@ class SampleControllerTest extends TestCase
         $response->assertOk()->assertViewIs('app.samples.create');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_stores_the_sample(): void
     {
         $data = Sample::factory()
@@ -70,9 +65,7 @@ class SampleControllerTest extends TestCase
         $response->assertRedirect(route('samples.edit', $sample));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_show_view_for_sample(): void
     {
         $sample = Sample::factory()->create();
@@ -85,9 +78,7 @@ class SampleControllerTest extends TestCase
             ->assertViewHas('sample');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_displays_edit_view_for_sample(): void
     {
         $sample = Sample::factory()->create();
@@ -100,9 +91,7 @@ class SampleControllerTest extends TestCase
             ->assertViewHas('sample');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_updates_the_sample(): void
     {
         $sample = Sample::factory()->create();
@@ -122,9 +111,7 @@ class SampleControllerTest extends TestCase
         $response->assertRedirect(route('samples.edit', $sample));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_deletes_the_sample(): void
     {
         $sample = Sample::factory()->create();

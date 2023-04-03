@@ -2,13 +2,14 @@
 
 namespace Tests\Feature\Api;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
-class UserTest extends TestCase
+final class UserTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -25,9 +26,7 @@ class UserTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_users_list(): void
     {
         $users = User::factory()
@@ -39,9 +38,7 @@ class UserTest extends TestCase
         $response->assertOk()->assertSee($users[0]->name);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_short_list(): void
     {
         $users = User::factory()

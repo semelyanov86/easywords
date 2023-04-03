@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\User;
 use App\Models\Word;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -9,7 +10,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
-class WordTest extends TestCase
+final class WordTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -26,9 +27,7 @@ class WordTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_words_list(): void
     {
         $words = Word::factory()
@@ -40,9 +39,7 @@ class WordTest extends TestCase
         $response->assertOk()->assertSee($words[0]->original);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_known_words(): void
     {
         $words = Word::factory()
@@ -59,9 +56,7 @@ class WordTest extends TestCase
         $response->assertOk()->assertSee($wordsKnown[0]->original)->assertSee($wordsKnown[1]->original);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_stores_the_word(): void
     {
         $data = Word::factory()
@@ -78,9 +73,7 @@ class WordTest extends TestCase
         $response->assertStatus(201)->assertJsonFragment($data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_show_the_word(): void
     {
         $data = Word::factory()
@@ -96,9 +89,7 @@ class WordTest extends TestCase
         $response->assertStatus(200)->assertJsonFragment($data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_updates_the_word(): void
     {
         $this->markTestSkipped('Functionality not implemented');
@@ -126,9 +117,7 @@ class WordTest extends TestCase
         $response->assertOk()->assertJsonFragment($data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_deletes_the_word(): void
     {
         $word = Word::factory()->create();
@@ -140,9 +129,7 @@ class WordTest extends TestCase
         $response->assertNoContent();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_marks_as_viewed(): void
     {
         $word = Word::factory()->create([
@@ -154,9 +141,7 @@ class WordTest extends TestCase
         $this->assertEquals(1, $word->views);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_marks_as_known(): void
     {
         $word = Word::factory()->create([
@@ -171,9 +156,7 @@ class WordTest extends TestCase
         $this->assertNotNull($word->done_at);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_marks_as_unknown(): void
     {
         $word = Word::factory()->create([
@@ -188,9 +171,7 @@ class WordTest extends TestCase
         $this->assertNull($word->done_at);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_marks_as_starred(): void
     {
         $word = Word::factory()->create([
@@ -205,9 +186,7 @@ class WordTest extends TestCase
         $this->assertTrue($word->starred);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_marks_as_unstarred(): void
     {
         $word = Word::factory()->create([
@@ -222,9 +201,7 @@ class WordTest extends TestCase
         $this->assertFalse($word->starred);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_share_word_to_different_user(): void
     {
         $user1 = User::factory()->createOne();

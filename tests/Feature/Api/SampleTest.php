@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\Sample;
 use App\Models\User;
 use App\Models\Word;
@@ -10,7 +11,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
-class SampleTest extends TestCase
+final class SampleTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -27,9 +28,7 @@ class SampleTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_samples_list(): void
     {
         $samples = Sample::factory()
@@ -41,9 +40,7 @@ class SampleTest extends TestCase
         $response->assertOk()->assertSee($samples[0]->original);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_export_samples(): void
     {
         $user = User::where('email', 'admin@admin.com')->firstOrFail();
