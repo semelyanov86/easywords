@@ -133,6 +133,6 @@ class SampleControllerTest extends TestCase
 
         $response->assertRedirect(route('samples.index'));
 
-        $this->assertDeleted($sample);
+        $this->assertModelMissing($sample);
     }
 }

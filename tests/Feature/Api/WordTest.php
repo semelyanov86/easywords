@@ -135,7 +135,7 @@ class WordTest extends TestCase
 
         $response = $this->deleteJson('api/words/'.$word->id);
 
-        $this->assertDeleted($word);
+        $this->assertModelMissing($word);
 
         $response->assertNoContent();
     }

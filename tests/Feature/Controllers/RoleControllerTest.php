@@ -126,6 +126,6 @@ class RoleControllerTest extends TestCase
 
         $response->assertRedirect(route('roles.index'));
 
-        $this->assertDeleted($role);
+        $this->assertModelMissing($role);
     }
 }

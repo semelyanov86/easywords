@@ -142,6 +142,6 @@ class WordControllerTest extends TestCase
 
         $response->assertRedirect(route('words.index'));
 
-        $this->assertDeleted($word);
+        $this->assertModelMissing($word);
     }
 }

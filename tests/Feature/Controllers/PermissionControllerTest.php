@@ -126,6 +126,6 @@ class PermissionControllerTest extends TestCase
 
         $response->assertRedirect(route('permissions.index'));
 
-        $this->assertDeleted($permission);
+        $this->assertModelMissing($permission);
     }
 }
