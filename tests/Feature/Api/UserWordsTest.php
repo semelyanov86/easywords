@@ -29,7 +29,7 @@ class UserWordsTest extends TestCase
     /**
      * @test
      */
-    public function it_gets_user_words()
+    public function it_gets_user_words(): void
     {
         $this->markTestSkipped();
         $user = User::factory()->create();
@@ -47,7 +47,7 @@ class UserWordsTest extends TestCase
     /**
      * @test
      */
-    public function it_stores_the_user_words()
+    public function it_stores_the_user_words(): void
     {
         $this->markTestSkipped();
         $user = User::factory()->create();

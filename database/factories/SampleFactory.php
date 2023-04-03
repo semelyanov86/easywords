@@ -11,7 +11,7 @@ class SampleFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'original' => $this->faker->text(255),

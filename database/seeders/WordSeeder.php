@@ -12,7 +12,7 @@ class WordSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         Word::factory()
             ->count(20)

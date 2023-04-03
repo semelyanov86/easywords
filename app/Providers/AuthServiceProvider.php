@@ -21,7 +21,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         // Automatically finding the Policies
         Gate::guessPolicyNamesUsing(function ($modelClass) {

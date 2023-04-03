@@ -12,7 +12,7 @@ class WordFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         $users = User::all();
         if ($users && $users->isNotEmpty()) {

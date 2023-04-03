@@ -16,7 +16,7 @@ class SamplePolicy
      * @param  App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return $user->hasPermissionTo('list samples');
     }
@@ -28,7 +28,7 @@ class SamplePolicy
      * @param  App\Models\Sample  $model
      * @return mixed
      */
-    public function view(User $user, Sample $model)
+    public function view(User $user, Sample $model): bool
     {
         return $user->hasPermissionTo('view samples');
     }
@@ -39,7 +39,7 @@ class SamplePolicy
      * @param  App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->hasPermissionTo('create samples');
     }
@@ -51,7 +51,7 @@ class SamplePolicy
      * @param  App\Models\Sample  $model
      * @return mixed
      */
-    public function update(User $user, Sample $model)
+    public function update(User $user, Sample $model): bool
     {
         return $user->hasPermissionTo('update samples');
     }
@@ -63,7 +63,7 @@ class SamplePolicy
      * @param  App\Models\Sample  $model
      * @return mixed
      */
-    public function delete(User $user, Sample $model)
+    public function delete(User $user, Sample $model): bool
     {
         return $user->hasPermissionTo('delete samples');
     }
@@ -87,7 +87,7 @@ class SamplePolicy
      * @param  App\Models\Sample  $model
      * @return mixed
      */
-    public function restore(User $user, Sample $model)
+    public function restore(User $user, Sample $model): bool
     {
         return false;
     }
@@ -99,7 +99,7 @@ class SamplePolicy
      * @param  App\Models\Sample  $model
      * @return mixed
      */
-    public function forceDelete(User $user, Sample $model)
+    public function forceDelete(User $user, Sample $model): bool
     {
         return false;
     }

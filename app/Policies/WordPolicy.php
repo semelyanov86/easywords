@@ -16,7 +16,7 @@ class WordPolicy
      * @param  App\Models\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return $user->hasPermissionTo('list words');
     }
@@ -28,7 +28,7 @@ class WordPolicy
      * @param  App\Models\Word  $model
      * @return mixed
      */
-    public function view(User $user, Word $model)
+    public function view(User $user, Word $model): bool
     {
         return $user->hasPermissionTo('view words');
     }
@@ -39,7 +39,7 @@ class WordPolicy
      * @param  App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->hasPermissionTo('create words');
     }
@@ -51,7 +51,7 @@ class WordPolicy
      * @param  App\Models\Word  $model
      * @return mixed
      */
-    public function update(User $user, Word $model)
+    public function update(User $user, Word $model): bool
     {
         return $user->hasPermissionTo('update words');
     }
@@ -63,7 +63,7 @@ class WordPolicy
      * @param  App\Models\Word  $model
      * @return mixed
      */
-    public function delete(User $user, Word $model)
+    public function delete(User $user, Word $model): bool
     {
         return $user->hasPermissionTo('delete words');
     }
@@ -87,7 +87,7 @@ class WordPolicy
      * @param  App\Models\Word  $model
      * @return mixed
      */
-    public function restore(User $user, Word $model)
+    public function restore(User $user, Word $model): bool
     {
         return false;
     }
@@ -99,7 +99,7 @@ class WordPolicy
      * @param  App\Models\Word  $model
      * @return mixed
      */
-    public function forceDelete(User $user, Word $model)
+    public function forceDelete(User $user, Word $model): bool
     {
         return false;
     }

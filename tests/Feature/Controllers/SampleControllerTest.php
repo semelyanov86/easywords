@@ -28,7 +28,7 @@ class SampleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_index_view_with_samples()
+    public function it_displays_index_view_with_samples(): void
     {
         $samples = Sample::factory()
             ->count(5)
@@ -45,7 +45,7 @@ class SampleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_create_view_for_sample()
+    public function it_displays_create_view_for_sample(): void
     {
         $response = $this->get(route('samples.create'));
 
@@ -55,7 +55,7 @@ class SampleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_stores_the_sample()
+    public function it_stores_the_sample(): void
     {
         $data = Sample::factory()
             ->make()
@@ -73,7 +73,7 @@ class SampleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_show_view_for_sample()
+    public function it_displays_show_view_for_sample(): void
     {
         $sample = Sample::factory()->create();
 
@@ -88,7 +88,7 @@ class SampleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_edit_view_for_sample()
+    public function it_displays_edit_view_for_sample(): void
     {
         $sample = Sample::factory()->create();
 
@@ -103,7 +103,7 @@ class SampleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_updates_the_sample()
+    public function it_updates_the_sample(): void
     {
         $sample = Sample::factory()->create();
 
@@ -125,7 +125,7 @@ class SampleControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_deletes_the_sample()
+    public function it_deletes_the_sample(): void
     {
         $sample = Sample::factory()->create();
 
