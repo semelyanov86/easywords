@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use App\Actions\GetPopularWords;
+use Illuminate\View\View;
 
 final class DashboardController extends Controller
 {

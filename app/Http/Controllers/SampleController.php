@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\SampleStoreRequest;
 use App\Http\Requests\SampleUpdateRequest;
 use App\Models\Sample;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 final class SampleController extends Controller
 {
