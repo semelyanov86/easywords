@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Resources\WordCollection;
+use App\Http\Resources\WordResource;
 use App\Models\User;
 use App\Models\Word;
 use Illuminate\Http\Request;
-use App\Http\Resources\WordResource;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\WordCollection;
 
 class UserWordsController extends Controller
 {

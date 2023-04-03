@@ -3,13 +3,12 @@
 namespace Tests\Feature\Api;
 
 use App\Models\User;
-
 use App\Models\Word;
-use Illuminate\Support\Carbon;
-use Tests\TestCase;
-use Laravel\Sanctum\Sanctum;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Carbon;
+use Laravel\Sanctum\Sanctum;
+use Tests\TestCase;
 
 class StatisticsTest extends TestCase
 {
@@ -37,25 +36,25 @@ class StatisticsTest extends TestCase
             'user_id' => $user->id,
             'starred' => true,
             'done_at' => null,
-            'views' => 5
+            'views' => 5,
         ]);
         Word::factory()->create([
             'user_id' => $user->id,
             'starred' => false,
             'done_at' => Carbon::now(),
-            'views' => 10
+            'views' => 10,
         ]);
         Word::factory()->create([
             'user_id' => $user->id,
             'starred' => false,
             'done_at' => null,
-            'views' => 0
+            'views' => 0,
         ]);
         Word::factory()->create([
             'user_id' => $user2->id,
             'starred' => true,
             'done_at' => null,
-            'views' => 8
+            'views' => 8,
         ]);
     }
 

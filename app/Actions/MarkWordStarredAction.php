@@ -14,8 +14,7 @@ final class MarkWordStarredAction
 
     public function __construct(
         protected WordRepository $repository
-    )
-    {
+    ) {
     }
 
     public function handle(int $word, int $value = 1): Word

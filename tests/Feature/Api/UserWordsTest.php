@@ -4,11 +4,10 @@ namespace Tests\Feature\Api;
 
 use App\Models\User;
 use App\Models\Word;
-
-use Tests\TestCase;
-use Laravel\Sanctum\Sanctum;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
+use Tests\TestCase;
 
 class UserWordsTest extends TestCase
 {
@@ -65,7 +64,7 @@ class UserWordsTest extends TestCase
 
         $this->assertDatabaseHas('words', [
             'original' => $data['original'],
-            'translated' => $data['translated']
+            'translated' => $data['translated'],
         ]);
 
         $response->assertStatus(201)->assertJsonFragment($data);

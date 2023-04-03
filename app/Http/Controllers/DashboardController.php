@@ -11,8 +11,9 @@ final class DashboardController extends Controller
     public function index()
     {
         $words = GetPopularWords::run();
+
         return view('dashboard', [
-            'words' => $words
+            'words' => $words,
         ]);
     }
 }

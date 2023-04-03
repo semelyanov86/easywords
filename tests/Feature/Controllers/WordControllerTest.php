@@ -4,10 +4,9 @@ namespace Tests\Feature\Controllers;
 
 use App\Models\User;
 use App\Models\Word;
-
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 
 class WordControllerTest extends TestCase
 {
@@ -116,8 +115,8 @@ class WordControllerTest extends TestCase
         $data = [
             'original' => $this->faker->text(255),
             'translated' => $this->faker->text(255),
-            'done_at' => $this->faker->dateTime,
-            'starred' => $this->faker->boolean,
+            'done_at' => $this->faker->dateTime(),
+            'starred' => $this->faker->boolean(),
             'language' => $this->faker->text(5),
             'views' => 0,
             'user_id' => $user->id,
@@ -143,6 +142,6 @@ class WordControllerTest extends TestCase
 
         $response->assertRedirect(route('words.index'));
 
-        $this->assertDeleted($word);
+        $this->assertModelMissing($word);
     }
 }

@@ -15,8 +15,7 @@ final class CreateWordAction
 
     public function __construct(
         protected WordRepository $repository
-    )
-    {
+    ) {
     }
 
     public function handle(WordDto $dto): Word
@@ -25,6 +24,7 @@ final class CreateWordAction
         if ($existing) {
             abort(422, 'Word already existing');
         }
+
         return $this->repository->create($dto);
     }
 }

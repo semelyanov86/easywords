@@ -15,6 +15,7 @@ final class StoreUserAction
     public function handle(SettingsDto $dto): bool
     {
         Auth::user()->settings()->set($dto->name, $dto->value);
+
         return true;
     }
 }

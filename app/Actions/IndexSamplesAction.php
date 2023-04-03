@@ -13,8 +13,7 @@ final class IndexSamplesAction
 
     public function __construct(
         protected SampleRepository $repository
-    )
-    {
+    ) {
     }
 
     public function handle(string $language): \Illuminate\Pagination\LengthAwarePaginator

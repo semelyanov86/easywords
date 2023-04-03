@@ -28,7 +28,7 @@
         "@vue/test-utils": "^2.0.0-rc.12",
         "alpinejs": "^3.0.6",
         "autoprefixer": "^10.0.2",
-        "axios": "^0.21.1",
+        "axios": "^0.25",
         "cross-env": "^7.0.3",
         "jest": "^27.0.6",
         "jest-canvas-mock": "^2.3.1",

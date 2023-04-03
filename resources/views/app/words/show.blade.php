@@ -43,7 +43,7 @@
                         <h5 class="font-medium text-gray-700">
                             @lang('crud.words.inputs.user_id')
                         </h5>
-                        <span>{{ optional($word->user)->name ?? '-' }}</span>
+                        <span>{{ $word->user?->name ?? '-' }}</span>
                     </div>
                     <div class="mb-4">
                         <h5 class="font-medium text-gray-700">

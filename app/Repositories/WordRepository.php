@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Auth;
 
 final class WordRepository
 {
-    public function getLatestWords(string $language, array $settings): \Illuminate\Pagination\LengthAwarePaginator
+    public function getLatestWords(string $language, array $settings): LengthAwarePaginator
     {
         $user = Auth::user();
 
-        if (!$user) {
+        if (! $user) {
             abort(403);
         }
 
@@ -25,15 +25,15 @@ final class WordRepository
             ->where('language', $language)
             ->where('starred', $settings['starred_enabled']);
 
-        if (!$settings['known_enabled']) {
+        if (! $settings['known_enabled']) {
             $query->whereNull('done_at');
         }
 
-        if (!$settings['show_shared']) {
+        if (! $settings['show_shared']) {
             $query->whereNull('shared_by');
         }
 
-        if (!$settings['show_imported']) {
+        if (! $settings['show_imported']) {
             $query->where('from_sample', 0);
         }
 
@@ -42,11 +42,11 @@ final class WordRepository
             ->paginate($settings['paginate']);
     }
 
-    public function getLessViewedFirst(string $language, array $settings): \Illuminate\Pagination\LengthAwarePaginator
+    public function getLessViewedFirst(string $language, array $settings): LengthAwarePaginator
     {
         $user = Auth::user();
 
-        if (!$user) {
+        if (! $user) {
             abort(403);
         }
 
@@ -54,7 +54,7 @@ final class WordRepository
             ->where('language', $language)
             ->where('starred', $settings['starred_enabled']);
 
-        if (!$settings['known_enabled']) {
+        if (! $settings['known_enabled']) {
             $query->whereNull('done_at');
         }
 
@@ -68,6 +68,7 @@ final class WordRepository
         $word = $this->getById($id);
         $word->views++;
         $word->save();
+
         return $word;
     }
 
@@ -76,6 +77,7 @@ final class WordRepository
         $word = $this->getById($id);
         $word->done_at = $date;
         $word->save();
+
         return $word;
     }
 
@@ -84,6 +86,7 @@ final class WordRepository
         $word = $this->getById($id);
         $word->starred = $value;
         $word->save();
+
         return $word;
     }
 
@@ -112,6 +115,7 @@ final class WordRepository
     {
         $word = $this->getById($id);
         $word->delete();
+
         return true;
     }
 

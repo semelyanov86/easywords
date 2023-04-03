@@ -4,13 +4,10 @@ namespace Tests\Feature\Api;
 
 use App\Models\User;
 use App\Models\Word;
-
-use Illuminate\Testing\Fluent\AssertableJson;
-use Tests\TestCase;
-use Laravel\Sanctum\Sanctum;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use function Livewire\str;
+use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
+use Tests\TestCase;
 
 class WordTest extends TestCase
 {
@@ -54,7 +51,7 @@ class WordTest extends TestCase
         $wordsKnown = Word::factory()
             ->count(2)
             ->create([
-                'done_at' => now()
+                'done_at' => now(),
             ]);
 
         $response = $this->getJson(route('api.words.listknown'));
@@ -94,7 +91,7 @@ class WordTest extends TestCase
         $data['user_id'] = (string) $data['user_id'];
         $data['views'] = (string) $data['views'];
 
-        $response = $this->getJson('api/words/' . $data['id']);
+        $response = $this->getJson('api/words/'.$data['id']);
 
         $response->assertStatus(200)->assertJsonFragment($data);
     }
@@ -114,7 +111,7 @@ class WordTest extends TestCase
             'original' => $this->faker->text(100),
             'translated' => $this->faker->text(100),
             'done_at' => null,
-            'starred' => $this->faker->boolean,
+            'starred' => $this->faker->boolean(),
             'language' => 'RU',
             'views' => 2,
             'user_id' => $user->id,
@@ -136,9 +133,9 @@ class WordTest extends TestCase
     {
         $word = Word::factory()->create();
 
-        $response = $this->deleteJson('api/words/' . $word->id);
+        $response = $this->deleteJson('api/words/'.$word->id);
 
-        $this->assertDeleted($word);
+        $this->assertModelMissing($word);
 
         $response->assertNoContent();
     }
@@ -149,7 +146,7 @@ class WordTest extends TestCase
     public function it_marks_as_viewed(): void
     {
         $word = Word::factory()->create([
-            'views' => 0
+            'views' => 0,
         ]);
         $response = $this->getJson(route('api.words.viewed', $word->id));
         $response->assertOk();
@@ -163,11 +160,11 @@ class WordTest extends TestCase
     public function it_marks_as_known(): void
     {
         $word = Word::factory()->create([
-            'done_at' => null
+            'done_at' => null,
         ]);
         $response = $this->getJson(route('api.words.known', [
             'word' => $word->id,
-            'value' => 1
+            'value' => 1,
         ]));
         $response->assertOk();
         $word->refresh();
@@ -180,11 +177,11 @@ class WordTest extends TestCase
     public function it_marks_as_unknown(): void
     {
         $word = Word::factory()->create([
-            'done_at' => null
+            'done_at' => null,
         ]);
         $response = $this->getJson(route('api.words.known', [
             'word' => $word->id,
-            'value' => 0
+            'value' => 0,
         ]));
         $response->assertOk();
         $word->refresh();
@@ -197,11 +194,11 @@ class WordTest extends TestCase
     public function it_marks_as_starred(): void
     {
         $word = Word::factory()->create([
-            'starred' => false
+            'starred' => false,
         ]);
         $response = $this->getJson(route('api.words.starred', [
             'word' => $word->id,
-            'value' => 1
+            'value' => 1,
         ]));
         $response->assertOk();
         $word->refresh();
@@ -214,11 +211,11 @@ class WordTest extends TestCase
     public function it_marks_as_unstarred(): void
     {
         $word = Word::factory()->create([
-            'starred' => true
+            'starred' => true,
         ]);
         $response = $this->getJson(route('api.words.starred', [
             'word' => $word->id,
-            'value' => 0
+            'value' => 0,
         ]));
         $response->assertOk();
         $word->refresh();
@@ -233,18 +230,18 @@ class WordTest extends TestCase
         $user1 = User::factory()->createOne();
         $user2 = User::factory()->createOne();
         $word = Word::factory()->createOne([
-            'user_id' => $user1->id
+            'user_id' => $user1->id,
         ]);
         $response = $this->getJson(route('api.words.share', [
             'word' => $word->id,
-            'user' => $user2->id
+            'user' => $user2->id,
         ]));
         $response->assertStatus(201);
         $word->refresh();
         $this->assertDatabaseHas('words', [
             'original' => $word->original,
             'translated' => $word->translated,
-            'user_id' => $user2->id
+            'user_id' => $user2->id,
         ]);
     }
 }

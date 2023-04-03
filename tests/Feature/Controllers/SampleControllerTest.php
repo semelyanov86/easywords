@@ -2,12 +2,11 @@
 
 namespace Tests\Feature\Controllers;
 
-use App\Models\User;
 use App\Models\Sample;
-
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 
 class SampleControllerTest extends TestCase
 {
@@ -134,6 +133,6 @@ class SampleControllerTest extends TestCase
 
         $response->assertRedirect(route('samples.index'));
 
-        $this->assertDeleted($sample);
+        $this->assertModelMissing($sample);
     }
 }

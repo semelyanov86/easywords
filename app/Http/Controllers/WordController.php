@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Word;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\WordStoreRequest;
 use App\Http\Requests\WordUpdateRequest;
+use App\Models\User;
+use App\Models\Word;
+use Illuminate\Http\Request;
 
 class WordController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -28,7 +27,6 @@ class WordController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
@@ -41,7 +39,6 @@ class WordController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\WordStoreRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(WordStoreRequest $request)
@@ -58,8 +55,6 @@ class WordController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Word $word
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, Word $word)
@@ -70,8 +65,6 @@ class WordController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Word $word
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, Word $word)
@@ -84,8 +77,6 @@ class WordController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\WordUpdateRequest $request
-     * @param \App\Models\Word $word
      * @return \Illuminate\Http\Response
      */
     public function update(WordUpdateRequest $request, Word $word)
@@ -102,8 +93,6 @@ class WordController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Word $word
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, Word $word)

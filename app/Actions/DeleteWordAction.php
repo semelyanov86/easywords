@@ -13,8 +13,7 @@ final class DeleteWordAction
 
     public function __construct(
         protected WordRepository $repository
-    )
-    {
+    ) {
     }
 
     public function handle(int $id): bool

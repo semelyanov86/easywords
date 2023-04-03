@@ -4,19 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Actions\IndexShortUsersAction;
 use App\Actions\IndexUsersAction;
-use App\Models\User;
-use Illuminate\Http\Request;
-use App\Http\Resources\UserResource;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Resources\UserCollection;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Spatie\RouteAttributes\Attributes\Get;
 use Spatie\RouteAttributes\Attributes\Middleware;
 use Spatie\RouteAttributes\Attributes\Prefix;
-use Spatie\RouteAttributes\Attributes\Resource;
 
 /**
  * @group Users
@@ -84,7 +83,6 @@ class UserController extends Controller
 
         return new UserCollection(IndexUsersAction::run($request->get('search', '')));
     }
-
 
     public function store(UserStoreRequest $request)
     {

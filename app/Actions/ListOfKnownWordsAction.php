@@ -2,7 +2,6 @@
 
 namespace App\Actions;
 
-use App\Models\Word;
 use App\Repositories\WordRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -15,22 +14,23 @@ final class ListOfKnownWordsAction
 
     public function __construct(
         protected WordRepository $repository
-    )
-    {
+    ) {
     }
 
     public function handle(?int $userId = null, bool $isPagination = false): Collection|LengthAwarePaginator
     {
-        if (!$userId) {
+        if (! $userId) {
             $userId = (int) Auth::id();
         }
-        if (!$userId) {
+        if (! $userId) {
             abort(403);
         }
         if ($isPagination) {
             $settings = GetSettingsAction::run();
+
             return $this->repository->getKnownWordsPagination($userId, (int) $settings['paginate']);
         }
+
         return $this->repository->getKnownWords($userId);
     }
 }

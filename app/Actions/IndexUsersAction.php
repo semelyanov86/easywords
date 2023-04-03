@@ -12,15 +12,15 @@ final class IndexUsersAction
 
     public function __construct(
         protected UserRepository $repository
-    )
-    {
+    ) {
     }
 
     public function handle(?string $search): \Illuminate\Pagination\LengthAwarePaginator
     {
-        if (!$search) {
+        if (! $search) {
             $search = '';
         }
+
         return $this->repository->paginatedList($search);
     }
 }

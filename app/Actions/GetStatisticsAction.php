@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Actions;
 
 use App\Http\Resources\WordCollection;
-use App\Http\Resources\WordResource;
 use App\Repositories\StatisticsRepository;
 use Illuminate\Support\Facades\Auth;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -16,18 +15,18 @@ final class GetStatisticsAction
 
     public function __construct(
         protected StatisticsRepository $repository
-    )
-    {
+    ) {
     }
 
     public function handle(?int $userId = null): array
     {
-        if (!$userId) {
+        if (! $userId) {
             $userId = (int) Auth::id();
         }
-        if (!$userId) {
+        if (! $userId) {
             abort(403);
         }
+
         return [
             'all' => $this->repository->countAllFromUser($userId),
             'starred' => $this->repository->countStarredWords($userId),

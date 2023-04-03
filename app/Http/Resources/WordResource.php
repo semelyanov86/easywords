@@ -9,11 +9,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class WordResource extends JsonResource
 {
-
     public function toArray($request): array
     {
         /** @var Word $model */
         $model = $this->resource;
+
         return [
             'id' => $model->id,
             'original' => $model->original,
@@ -25,7 +25,7 @@ class WordResource extends JsonResource
             'views' => $model->views,
             'from_sample' => (bool) $model->from_sample,
             'created_at' => $model->created_at,
-            'shared_by' => $model->shared_by
+            'shared_by' => $model->shared_by,
         ];
     }
 }

@@ -13,7 +13,7 @@ final class CreateSettingRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:50'],
-            'value' => ['required']
+            'value' => ['required'],
         ];
     }
 

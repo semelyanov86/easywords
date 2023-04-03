@@ -3,10 +3,9 @@
 namespace Tests\Feature\Controllers;
 
 use App\Models\User;
-
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 
 class UserControllerTest extends TestCase
 {
@@ -114,8 +113,8 @@ class UserControllerTest extends TestCase
         $user = User::factory()->create();
 
         $data = [
-            'name' => $this->faker->name,
-            'email' => $this->faker->email,
+            'name' => $this->faker->name(),
+            'email' => $this->faker->email(),
         ];
 
         $data['password'] = \Str::random('8');
