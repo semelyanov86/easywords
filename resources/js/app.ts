@@ -17,7 +17,6 @@ import { FlagIconsScss } from './plugins/flags-icons/'
 
 const app = createApp(App);
 
-// @ts-ignore
 app.use(i18n);
 app.use(router);
 app.use(FlagIconsScss);

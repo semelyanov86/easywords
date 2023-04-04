@@ -33,7 +33,6 @@
         const locales = useLocalesStore()
 
       const onFlagClicked = (localeInfo: LocaleInfoInterface) => {
-          locales.action('selectLocale', localeInfo.locale)
         emit('clicked', localeInfo)
       }
 

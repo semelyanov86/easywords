@@ -5,6 +5,7 @@ import {
     //DateTimeFormat, // TODO: see if vue-i18n@next alpha 13 has a type for this
     //NumberFormats // TODO: see if vue-i18n@next alpha 13 has a type for this
 } from 'vue-i18n'
+import {LocalStorageKeys} from "@/models/local-storage/LocalStorageKeys";
 
 interface LocalesDataInterface {
     datetimeFormats: any // TODO: see if vue-i18n@next alpha 13 has a type for this
@@ -49,7 +50,7 @@ const data: LocalesDataInterface = getLocalesData()
 // create out vue-18n instance
 export const i18n = createI18n({
     legacy: false,
-    locale: 'ru-RU',
+    locale: localStorage.getItem(LocalStorageKeys.locale) || 'ru-RU',
     fallbackLocale: 'en-US',
     // @ts-ignore
     messages: data.messages,
