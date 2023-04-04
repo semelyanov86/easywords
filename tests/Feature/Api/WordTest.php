@@ -81,8 +81,8 @@ final class WordTest extends TestCase
             ->toArray();
 
         unset($data['updated_at']);
-        $data['user_id'] = (string) $data['user_id'];
-        $data['views'] = (string) $data['views'];
+        $data['user_id'] = $data['user_id'];
+        $data['views'] = $data['views'];
 
         $response = $this->getJson('api/words/'.$data['id']);
 
