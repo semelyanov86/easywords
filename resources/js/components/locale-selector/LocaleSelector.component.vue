@@ -16,6 +16,7 @@
   import { useI18n } from 'vue-i18n'
   import { LocaleInfoInterface } from '../../models/localization/LocaleInfo.interface'
   import LocaleFlagRadio from './LocaleFlagRadio.component.vue'
+  import {useLocalesStore} from "@/store/locales";
 
   export default defineComponent({
     components: {
@@ -29,8 +30,10 @@
     emits: ['clicked'],
     setup(props, { emit }) {
       const i18n = useI18n()
+        const locales = useLocalesStore()
 
       const onFlagClicked = (localeInfo: LocaleInfoInterface) => {
+          locales.action('selectLocale', localeInfo.locale)
         emit('clicked', localeInfo)
       }
 

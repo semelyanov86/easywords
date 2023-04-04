@@ -1,6 +1,6 @@
 <template>
 <div class="container mx-auto px-6 py-8">
-    <h3 class="text-3xl font-medium text-gray-700">{{ i18n.t('languageList.chooseLanguage') }}</h3>
+    <h3 class="text-3xl font-medium text-gray-700">{{ $t('languageList.chooseLanguage') }}</h3>
     <ul>
         <language v-for="language in languages" :key="language" :main_language="main_language" :language="language" @select="onLanguageSelect">
 
@@ -14,6 +14,9 @@ import {defineComponent, PropType, ref} from 'vue'
 import Language from './children/Language.component.vue'
 import {TranslationInterface} from "@/models/settings/translation.interface";
 import {useI18n} from 'vue-i18n';
+import {LocalesMutationType} from "@/models/store/locales/LocalesMutationType";
+import selectLocale = LocalesMutationType.selectLocale;
+import {useLocalesStore} from "@/store/locales";
 
 export default defineComponent({
     name: "LanguageList",
@@ -32,6 +35,7 @@ export default defineComponent({
     setup() {
         const i18n = useI18n()
         let selectedLanguage = ref('DE');
+
         const onLanguageSelect = (language: TranslationInterface) => {
             selectedLanguage.value = language.translated
         }

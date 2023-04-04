@@ -6,7 +6,6 @@ import {
     //NumberFormats // TODO: see if vue-i18n@next alpha 13 has a type for this
 } from 'vue-i18n'
 
-
 interface LocalesDataInterface {
     datetimeFormats: any // TODO: see if vue-i18n@next alpha 13 has a type for this
     numberFormats: any // TODO: see if vue-i18n@next alpha 13 has a type for this
@@ -49,9 +48,12 @@ const data: LocalesDataInterface = getLocalesData()
 
 // create out vue-18n instance
 export const i18n = createI18n({
+    legacy: false,
     locale: 'ru-RU',
     fallbackLocale: 'en-US',
-    message: data.messages,
+    // @ts-ignore
+    messages: data.messages,
     datetimeFormats: data.datetimeFormats,
-    numberFormats: data.numberFormats
+    numberFormats: data.numberFormats,
+    globalInjection: true
 })
