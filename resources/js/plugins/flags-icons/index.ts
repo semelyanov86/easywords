@@ -1,5 +1,5 @@
 export const FlagIconsScss = {
   install() {
-    require('../../assets/scss/flag-icons/index.scss')
+    import('../../assets/scss/flag-icons/index.scss')
   }
 }

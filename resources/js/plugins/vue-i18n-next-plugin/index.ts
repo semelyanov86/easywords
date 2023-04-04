@@ -6,6 +6,7 @@ import {
     //NumberFormats // TODO: see if vue-i18n@next alpha 13 has a type for this
 } from 'vue-i18n'
 
+
 interface LocalesDataInterface {
     datetimeFormats: any // TODO: see if vue-i18n@next alpha 13 has a type for this
     numberFormats: any // TODO: see if vue-i18n@next alpha 13 has a type for this
@@ -18,7 +19,8 @@ interface LocalesDataInterface {
  */
 const getLocalesData = (): LocalesDataInterface => {
     // we use require.context to get all the .json files under the locales sub-directory
-    const files = (require as any).context('./locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
+    // const files = require.context('./locales', true, /^.*$/)
+    const files = import.meta.glob('./locales/*.json')
     // create the instance that will hold the loaded data
     const localeData: LocalesDataInterface = {
         datetimeFormats: {},
@@ -26,18 +28,18 @@ const getLocalesData = (): LocalesDataInterface => {
         messages: {}
     }
     // loop through all the files
-    const keys: string[] = files.keys()
-    keys.forEach((key: string) => {
-        // extract name without extension
-        const matched = key.match(/([A-Za-z0-9-_]+)\./i)
-        if (matched && matched.length > 1) {
-            const localeId = matched[1]
-            // from each file, set the related messages property
-            localeData.datetimeFormats[localeId] = files(key).datetimeFormats
-            localeData.numberFormats[localeId] = files(key).numberFormats
-            localeData.messages[localeId] = files(key).messages
-        }
-    })
+    for (const path in files) {
+        files[path]().then((mod: any) => {
+            const matched = path.match(/([A-Za-z0-9-_]+)\./i)
+            if (matched && matched.length > 1) {
+                const localeId = matched[1]
+                // from each file, set the related messages property
+                localeData.datetimeFormats[localeId] = mod.datetimeFormats
+                localeData.numberFormats[localeId] = mod.numberFormats
+                localeData.messages[localeId] = mod.messages
+            }
+        })
+    }
 
     return localeData
 }
@@ -49,7 +51,7 @@ const data: LocalesDataInterface = getLocalesData()
 export const i18n = createI18n({
     locale: 'ru-RU',
     fallbackLocale: 'en-US',
-    messages: data.messages,
+    message: data.messages,
     datetimeFormats: data.datetimeFormats,
     numberFormats: data.numberFormats
 })

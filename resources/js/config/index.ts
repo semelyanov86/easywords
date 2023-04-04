@@ -10,8 +10,8 @@ import configLive from './config-files/live.json'
 let env: string = 'live' /* by default we return the live configuration */
 
 // if our env VUE_APP_CONFIG variable is set, get its value
-if (process.env && process.env.VUE_APP_CONFIG) {
-  env = process.env.VUE_APP_CONFIG.trim().toLowerCase()
+if (import.meta && import.meta.env) {
+  env = import.meta.env.MODE.trim().toLowerCase()
 }
 
 // example using strategy pattern:
@@ -30,8 +30,10 @@ if (process.env && process.env.VUE_APP_CONFIG) {
 export const configsMap: Map<string, ConfigInterface> = new Map<string, ConfigInterface>([
   ['mock', configMock],
   ['local', configLocal],
+  ['development', configLocal],
   ['beta', configBeta],
-  ['live', configLive]
+  ['live', configLive],
+  ['production', configLive],
 ])
 
 if (!configsMap.has(env)) {

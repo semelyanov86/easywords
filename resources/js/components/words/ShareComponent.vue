@@ -11,7 +11,6 @@
 import {computed, defineComponent, onMounted, ref, reactive} from 'vue'
 import ChooseUserModal from "../users/ChooseUserModal.vue";
 import {useI18n} from 'vue-i18n';
-import {ShareWordInterface} from '../../models/words/ShareWord.interface'
 import {useWordsStore} from "../../store/words";
 
 export default defineComponent({

@@ -1,4 +1,4 @@
-require('./bootstrap');
+import('./bootstrap');
 
 // @ts-ignore
 import Alpine from 'alpinejs';

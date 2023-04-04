@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import {computed, defineComponent, PropType, ref} from "vue";
+import {defineComponent} from "vue";
 import {useI18n} from 'vue-i18n';
 
 export default defineComponent({
