@@ -43,6 +43,9 @@ class PermissionController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        if (! request()->user()) {
+            abort(403);
+        }
         Sanctum::actingAs(request()->user(), [], 'web');
 
         $this->authorize('create', Permission::class);
@@ -101,7 +104,7 @@ class PermissionController extends Controller
         $permission->update($data);
 
         $roles = Role::find($request->roles);
-        $permission->syncRoles($roles);
+        $permission->syncRoles($roles ?? []);
 
         return redirect()
             ->route('permissions.edit', $permission->id)

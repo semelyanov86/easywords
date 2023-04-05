@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
@@ -9,7 +11,7 @@ use Laravel\Sanctum\Sanctum;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class RoleController extends Controller
+final class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,6 +45,9 @@ class RoleController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        if (! request()->user()) {
+            abort(403);
+        }
         Sanctum::actingAs(request()->user(), [], 'web');
 
         $this->authorize('create', Role::class);
@@ -101,7 +106,7 @@ class RoleController extends Controller
         $role->update($data);
 
         $permissions = Permission::find($request->permissions);
-        $role->syncPermissions($permissions);
+        $role->syncPermissions($permissions ?? []);
 
         return redirect()
             ->route('roles.edit', $role->id)

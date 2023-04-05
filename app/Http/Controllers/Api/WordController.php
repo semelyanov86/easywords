@@ -13,6 +13,7 @@ use App\Actions\ListOfKnownWordsAction;
 use App\Actions\ListOfNotKnownWordsAction;
 use App\Actions\MarkWordKnownAction;
 use App\Actions\MarkWordStarredAction;
+use App\Actions\RandomWordsAction;
 use App\Actions\ShareWordAction;
 use App\DataTransferObjects\WordDto;
 use App\Http\Controllers\Controller;
@@ -117,6 +118,9 @@ final class WordController extends Controller
     #[Get('words/{word}/viewed', name: 'api.words.viewed')]
     public function increaseView(int $word): WordResource
     {
+        if (! Auth::user()) {
+            abort(403);
+        }
         Auth::user()->hasPermissionTo('view words');
         $wordModel = IncreaseCounterAction::run($word);
 
@@ -142,6 +146,9 @@ final class WordController extends Controller
     #[Get('words/{word}/known/{value}', name: 'api.words.known')]
     public function markViewed(int $word, int $value = 1): WordResource
     {
+        if (! Auth::user()) {
+            abort(403);
+        }
         Auth::user()->hasPermissionTo('view words');
         $wordModel = MarkWordKnownAction::run($word, $value);
 
@@ -167,6 +174,9 @@ final class WordController extends Controller
     #[Get('words/{word}/starred/{value}', name: 'api.words.starred')]
     public function markStarred(int $word, int $value = 1): WordResource
     {
+        if (! Auth::user()) {
+            abort(403);
+        }
         Auth::user()->hasPermissionTo('view words');
         $wordModel = MarkWordStarredAction::run($word, $value);
 
@@ -195,10 +205,32 @@ final class WordController extends Controller
     #[Get('words/{word}/share/{user}', name: 'api.words.share')]
     public function shareWord(int $word, int $user): WordResource
     {
+        if (! Auth::user()) {
+            abort(403);
+        }
         Auth::user()->hasPermissionTo('view words');
         $wordModel = ShareWordAction::run($word, $user);
 
         return new WordResource($wordModel);
+    }
+
+    /**
+     * Random words
+     *
+     * Get random words based on default language and number of words as param
+     *
+     * @response scenario=success {"data":[{"id":11705,"original":"buchstabieren","translated":"читать по складам; произносить по буквам","done_at":null,"starred":false,"user_id":16,"language":"DE","views":0,"from_sample":true,"created_at":"2021-10-05T10:14:44.000000Z","shared_by":null},{"id":11706,"original":"leben","translated":"жить; существовать","done_at":null,"starred":false,"user_id":16,"language":"DE","views":0,"from_sample":true,"created_at":"2021-10-05T10:14:44.000000Z","shared_by":null},{"id":11707,"original":"lesen","translated":"читать","done_at":null,"starred":false,"user_id":16,"language":"DE","views":0,"from_sample":true,"created_at":"2021-10-05T10:14:44.000000Z","shared_by":null}],"links":{"first":"https://easywordsapp.ru/api/not-known?page=1","last":"https://easywordsapp.ru/api/not-known?page=45","prev":null,"next":"https://easywordsapp.ru/api/not-known?page=2"}}
+     */
+    #[Get('random/{number}', name: 'api.words.random')]
+    public function random(int $number): WordCollection
+    {
+        if (! Auth::user()) {
+            abort(403);
+        }
+        Auth::user()->hasPermissionTo('view words');
+        $words = RandomWordsAction::run($number);
+
+        return new WordCollection($words);
     }
 
     /**

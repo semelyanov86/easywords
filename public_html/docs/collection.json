@@ -5,29 +5,28 @@
             "key": "baseUrl",
             "type": "string",
             "name": "string",
-            "value": "cards.sergeyem.test"
+            "value": "http:\/\/cards.sergeyem.test:8000"
         }
     ],
     "info": {
         "name": "API Documentation for EasyWords APP",
-        "_postman_id": "1f81d0de-7e3f-473e-9cfa-143a8fcb87a0",
+        "_postman_id": "d9f83f1c-40d5-494d-af82-fafeeba9fb75",
         "description": "Here you can find detail documentation about API endpoints for EasyWords APP. Currently API supports getting short list of users and getting latest words for display in cards",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
         {
-            "name": "Analytics",
-            "description": "\nGet all statistics data which is need for displaying widgets",
+            "name": "Users",
+            "description": "\nGetting information about other users in system and profile information",
             "item": [
                 {
-                    "name": "All statistics",
+                    "name": "Get users list",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
-                            "path": "api\/statistics",
+                            "path": "api\/short",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/statistics"
+                            "raw": "{{baseUrl}}\/api\/short"
                         },
                         "method": "GET",
                         "header": [
@@ -41,13 +40,51 @@
                             }
                         ],
                         "body": null,
-                        "description": "Get all analytics information for displaying widgets"
+                        "description": "Receive short list of users for dropdown options. Here we get only ID and name of user."
                     },
                     "response": [
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"all\":24,\"starred\":2,\"not_dones\":8,\"dones\":16,\"total_views\":33,\"users_count\":2,\"most_viewed\":[{\"id\":2,\"original\":\"der Cognac\",\"translated\":\"\u041a\u043e\u043d\u044c\u044f\u043a\",\"done_at\":null,\"starred\":true,\"user_id\":1,\"language\":\"DE\",\"views\":7,\"created_at\":\"2021-08-26T05:57:00.000000Z\"},{\"id\":3,\"original\":\"die Sauerkraut\",\"translated\":\"\u041a\u0432\u0430\u0448\u0435\u043d\u0430\u044f \u043a\u0430\u043f\u0443\u0441\u0442\u0430\",\"done_at\":null,\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":7,\"created_at\":\"2021-08-26T05:57:00.000000Z\"},{\"id\":1,\"original\":\"der Sekt\",\"translated\":\"\u0428\u0430\u043c\u043f\u0430\u043d\u0441\u043a\u043e\u0435\",\"done_at\":null,\"starred\":true,\"user_id\":1,\"language\":\"DE\",\"views\":5,\"created_at\":\"2021-08-26T05:57:00.000000Z\"},{\"id\":9,\"original\":\"gro\u00dfartig\",\"translated\":\"\u0412\u0435\u043b\u0438\u043a\u043e\u043b\u0435\u043f\u043d\u044b\u0439, \u0437\u0430\u043c\u0435\u0447\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0439\",\"done_at\":\"2021-08-30T16:59:56.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":3,\"created_at\":\"2021-08-29T19:53:17.000000Z\"},{\"id\":11,\"original\":\"test11\",\"translated\":\"te11\",\"done_at\":\"2021-08-30T17:00:57.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":1,\"created_at\":\"2021-08-30T14:17:15.000000Z\"},{\"id\":13,\"original\":\"test13\",\"translated\":\"te13\",\"done_at\":\"2021-08-30T17:01:06.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":1,\"created_at\":\"2021-08-30T14:23:44.000000Z\"},{\"id\":12,\"original\":\"test12\",\"translated\":\"te12\",\"done_at\":\"2021-08-30T17:00:47.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":1,\"created_at\":\"2021-08-30T14:23:36.000000Z\"},{\"id\":14,\"original\":\"test14\",\"translated\":\"te14\",\"done_at\":\"2021-08-30T17:00:06.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":1,\"created_at\":\"2021-08-30T14:23:58.000000Z\"},{\"id\":16,\"original\":\"test16\",\"translated\":\"te16\",\"done_at\":\"2021-08-30T17:00:27.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":1,\"created_at\":\"2021-08-30T14:24:39.000000Z\"},{\"id\":19,\"original\":\"test19\",\"translated\":\"te19\",\"done_at\":\"2021-08-30T17:00:36.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":1,\"created_at\":\"2021-08-30T16:47:30.000000Z\"}],\"added_today\":[{\"id\":27,\"original\":\"fasdf\",\"translated\":\"\u0430\u044b\u0432\u0430\u043f\",\"done_at\":null,\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"created_at\":\"2021-09-02T11:55:21.000000Z\"}],\"updated_this_month\":1,\"updated_today\":1}",
+                            "body": "{\n\"data\": [\n{\n\"id\": 12,\n\"name\": \"Ksenia Emelyanova\"\n}\n]\n}",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"message\": \"Unauthenticated.\"\n}",
+                            "name": "unauthorized"
+                        }
+                    ]
+                },
+                {
+                    "name": "Profile Info",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/me",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/me"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get current authenticated user data"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"data\": {\n\"id\": 1,\n\"name\": \"Mr. Nelson Haag\",\n\"email\": \"admin@admin.com\",\n\"email_verified_at\": \"2021-08-26T05:57:00.000000Z\",\n\"current_team_id\": null,\n\"profile_photo_path\": null,\n\"created_at\": \"2021-08-26T05:57:00.000000Z\",\n\"updated_at\": \"2021-08-26T05:57:00.000000Z\",\n\"deleted_at\": null\n}\n}",
                             "name": "success"
                         },
                         {
@@ -61,327 +98,6 @@
             ]
         },
         {
-            "name": "Authentication",
-            "description": "\nAPIs for managing authentication and getting tokens",
-            "item": [
-                {
-                    "name": "Change user password",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/user\/password",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/user\/password"
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"current_password\":\"\\\"password\\\"\",\"password\":\"\\\"new_password\\\"\",\"password_confirmation\":\"\\\"new_password\\\"\"}"
-                        },
-                        "description": "This API endpoint you will use for  changing user password"
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n\"data\": {\n\"id\": 1,\n\"name\": \"Mr. Nelson Haag\",\n\"email\": \"admin@admin.com\",\n\"email_verified_at\": \"2021-08-26T05:57:00.000000Z\",\n\"current_team_id\": null,\n\"profile_photo_path\": null,\n\"created_at\": \"2021-08-26T05:57:00.000000Z\",\n\"updated_at\": \"2021-08-26T05:57:00.000000Z\",\n\"deleted_at\": null\n}\n}",
-                            "name": "success"
-                        },
-                        {
-                            "header": [],
-                            "code": 422,
-                            "body": "{\n\"message\": \"The given data was invalid.\",\n\"errors\": {\n\"email\": [\n\"The provided credentials are incorrect.\"\n]\n}\n}",
-                            "name": "validation error"
-                        }
-                    ]
-                },
-                {
-                    "name": "Get Plain text token",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/login",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/login"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"email\":\"\\\"admin@admin.com\\\"\",\"password\":\"\\\"password\\\"\"}"
-                        },
-                        "description": "Using this endpoint you can get Plain token token"
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n \"token\": \"sfgdfgfgfds\",\n}",
-                            "name": "success"
-                        },
-                        {
-                            "header": [],
-                            "code": 422,
-                            "body": "{\n\"message\": \"The given data was invalid.\",\n\"errors\": {\n\"email\": [\n\"The provided credentials are incorrect.\"\n]\n}\n}",
-                            "name": "validation error"
-                        }
-                    ]
-                },
-                {
-                    "name": "Get JSON token",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/token",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/token"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"email\":\"\\\"admin@admin.com\\\"\",\"password\":\"\\\"password\\\"\",\"device_name\":\"\\\"Insomnia\\\"\"}"
-                        },
-                        "description": "Using this endpoint you can get JSON token. This is the main endpoint which you will use for working with third-party apps"
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n \"token\": \"2|n4a2Mnfe6FrEpZ0BqbWUiYA84g5USkuGpAcKTyMf\",\n}",
-                            "name": "success"
-                        },
-                        {
-                            "header": [],
-                            "code": 422,
-                            "body": "{\n\"message\": \"The given data was invalid.\",\n\"errors\": {\n\"email\": [\n\"The provided credentials are incorrect.\"\n]\n}\n}",
-                            "name": "validation error"
-                        }
-                    ]
-                },
-                {
-                    "name": "Revoke current token",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/signout",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/signout"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "Using this endpoint signout and delete current token"
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n \"success\": \"ok\",\n}",
-                            "name": "success"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "Other",
-            "description": "",
-            "item": [
-                {
-                    "name": "User Information",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/user",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/user"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "Getting authenticated user information"
-                    },
-                    "response": [
-                        {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "vary",
-                                    "value": "Origin"
-                                }
-                            ],
-                            "code": 401,
-                            "body": "{\"message\":\"Unauthenticated.\"}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "List of user words",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/users\/:user_id\/words",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/users\/:user_id\/words",
-                            "variable": [
-                                {
-                                    "id": "user_id",
-                                    "key": "user_id",
-                                    "value": "18",
-                                    "description": "The ID of the user."
-                                }
-                            ]
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "Getting list of words of other users. Currently not implemented."
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 503,
-                            "body": "",
-                            "name": ""
-                        },
-                        {
-                            "header": [
-                                {
-                                    "key": "cache-control",
-                                    "value": "no-cache, private"
-                                },
-                                {
-                                    "key": "content-type",
-                                    "value": "application\/json"
-                                },
-                                {
-                                    "key": "vary",
-                                    "value": "Origin"
-                                }
-                            ],
-                            "code": 401,
-                            "body": "{\"message\":\"Unauthenticated.\"}",
-                            "name": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "Store word by user",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/users\/:user\/words",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/users\/:user\/words",
-                            "variable": [
-                                {
-                                    "id": "user",
-                                    "key": "user",
-                                    "value": "19",
-                                    "description": ""
-                                }
-                            ]
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\"original\":\"uldpotgbwvvfisahktvlpnvoxnndfkokeueuzeyylndieuetdsbgkydhaczxxgztbtbnqiolacugbwwqvuxwkaswnzntvfwfkthwswksgxbegoxyggicxethssgbnwukqlbrxvcvdfxmodfxytibooyztspgrliweymdplpbiudorqnconkggdvlahdrbjhonobfgzuq\",\"translated\":\"ttbqvyiovjelvtqesrcnaydiujifwbmjrwrwculpwvaqbxibbiguckwguountowdyiivclfvhngpfscgjhjrmdcxkxwqsmarzuihptisldnltcshlokidveuhnsihcgjcocrzarliufdei\",\"done_at\":\"2021-09-29T11:53:49\",\"starred\":false,\"language\":\"egizo\",\"views\":\"ixbqujcpptfcjxvthawdegenzciqq\"}"
-                        },
-                        "description": "Creating new word of passed user. Currently this functionality not implemented"
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 503,
-                            "body": "",
-                            "name": ""
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "name": "Samples",
             "description": "\nList of sample words which we need to autofill words list for users",
             "item": [
@@ -389,16 +105,15 @@
                     "name": "Export Samples",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/samples\/export\/:language",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/samples\/export\/:language",
+                            "raw": "{{baseUrl}}\/api\/samples\/export\/:language",
                             "variable": [
                                 {
                                     "id": "language",
                                     "key": "language",
-                                    "value": "quia",
+                                    "value": "est",
                                     "description": "Language for export. Example=DE"
                                 }
                             ]
@@ -436,24 +151,23 @@
                     "name": "List of Samples",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/samples",
                             "query": [
                                 {
                                     "key": "language",
-                                    "value": "voluptatem",
+                                    "value": "voluptatum",
                                     "description": "Language which we need to get list of words. Example=DE",
                                     "disabled": false
                                 },
                                 {
                                     "key": "page",
-                                    "value": "7",
+                                    "value": "17",
                                     "description": "Page number if you need to get new list of samples. Example=1",
                                     "disabled": false
                                 }
                             ],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/samples?language=voluptatem&page=7"
+                            "raw": "{{baseUrl}}\/api\/samples?language=voluptatum&page=17"
                         },
                         "method": "GET",
                         "header": [
@@ -466,7 +180,10 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": null,
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"language\":\"egrphgppkx\"}"
+                        },
                         "description": "Get list of samples which we need for import process."
                     },
                     "response": [
@@ -482,11 +199,10 @@
                     "name": "Get sample by ID",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/samples\/:id",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/samples\/:id",
+                            "raw": "{{baseUrl}}\/api\/samples\/:id",
                             "variable": [
                                 {
                                     "id": "id",
@@ -534,6 +250,156 @@
             ]
         },
         {
+            "name": "Other",
+            "description": "",
+            "item": [
+                {
+                    "name": "User Information",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Getting authenticated user information"
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "List of user words",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:user_id\/words",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/:user_id\/words",
+                            "variable": [
+                                {
+                                    "id": "user_id",
+                                    "key": "user_id",
+                                    "value": "1",
+                                    "description": "The ID of the user."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Getting list of words of other users. Currently not implemented."
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "vary",
+                                    "value": "Origin"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 503,
+                            "body": "",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Store word by user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users\/:user_id\/words",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users\/:user_id\/words",
+                            "variable": [
+                                {
+                                    "id": "user_id",
+                                    "key": "user_id",
+                                    "value": "1",
+                                    "description": "The ID of the user."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Creating new word of passed user. Currently this functionality not implemented"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 503,
+                            "body": "",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "name": "Settings",
             "description": "\nGet settings of currently authenticated user or change setting value",
             "item": [
@@ -541,11 +407,10 @@
                     "name": "Settings Information",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/settings",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/settings"
+                            "raw": "{{baseUrl}}\/api\/settings"
                         },
                         "method": "GET",
                         "header": [
@@ -565,7 +430,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n\"data\": {\n\"paginate\": \"20\",\n\"default_language\": \"DE\",\n\"starred_enabled\": \"\",\n\"known_enabled\": \"\",\n\"fresh_first\": \"1\",\n\"languages_list\": [\n\"DE\",\n\"EN\"\n],\n\"main_language\": \"RU\"\n}\n}",
+                            "body": "{\n\"data\": {\n\"paginate\": \"20\",\n\"default_language\": \"DE\",\n\"starred_enabled\": \"\",\n\"known_enabled\": \"\",\n\"fresh_first\": \"1\",\n\"languages_list\": [\n\"DE\",\n\"EN\"\n],\n\"main_language\": \"RU\",\n\"latest_first\": false\n}\n}",
                             "name": "success"
                         },
                         {
@@ -580,11 +445,10 @@
                     "name": "Change Settings",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/settings",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/settings"
+                            "raw": "{{baseUrl}}\/api\/settings"
                         },
                         "method": "POST",
                         "header": [
@@ -621,90 +485,6 @@
             ]
         },
         {
-            "name": "Users",
-            "description": "\nGetting information about other users in system and profile information",
-            "item": [
-                {
-                    "name": "Get users list",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/short",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/short"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "Receive short list of users for dropdown options. Here we get only ID and name of user."
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n\"data\": [\n{\n\"id\": 12,\n\"name\": \"Ksenia Emelyanova\"\n}\n]\n}",
-                            "name": "success"
-                        },
-                        {
-                            "header": [],
-                            "code": 401,
-                            "body": "{\n\"message\": \"Unauthenticated.\"\n}",
-                            "name": "unauthorized"
-                        }
-                    ]
-                },
-                {
-                    "name": "Profile Info",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/me",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/me"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "Get current authenticated user data"
-                    },
-                    "response": [
-                        {
-                            "header": [],
-                            "code": 200,
-                            "body": "{\n\"data\": {\n\"id\": 1,\n\"name\": \"Mr. Nelson Haag\",\n\"email\": \"admin@admin.com\",\n\"email_verified_at\": \"2021-08-26T05:57:00.000000Z\",\n\"current_team_id\": null,\n\"profile_photo_path\": null,\n\"created_at\": \"2021-08-26T05:57:00.000000Z\",\n\"updated_at\": \"2021-08-26T05:57:00.000000Z\",\n\"deleted_at\": null\n}\n}",
-                            "name": "success"
-                        },
-                        {
-                            "header": [],
-                            "code": 401,
-                            "body": "{\n\"message\": \"Unauthenticated.\"\n}",
-                            "name": "unauthorized"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "name": "Words",
             "description": "\nMain group which is need for different operations with words - getting list of all words, changing status of words",
             "item": [
@@ -712,24 +492,23 @@
                     "name": "List of Words",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/words",
                             "query": [
                                 {
                                     "key": "language",
-                                    "value": "voluptatum",
+                                    "value": "in",
                                     "description": "Language which we need to get list of words. Example=DE",
                                     "disabled": false
                                 },
                                 {
                                     "key": "page",
-                                    "value": "8",
+                                    "value": "9",
                                     "description": "Page number if you need to get new list of words. Example=1",
                                     "disabled": false
                                 }
                             ],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/words?language=voluptatum&page=8"
+                            "raw": "{{baseUrl}}\/api\/words?language=in&page=9"
                         },
                         "method": "GET",
                         "header": [
@@ -742,7 +521,10 @@
                                 "value": "application\/json"
                             }
                         ],
-                        "body": null,
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"language\":\"hvytqrtufp\"}"
+                        },
                         "description": "Get list of words which we need for learning. Getting words with limit which we store in settings."
                     },
                     "response": [
@@ -758,11 +540,10 @@
                     "name": "Create Word",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/words",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/words"
+                            "raw": "{{baseUrl}}\/api\/words"
                         },
                         "method": "POST",
                         "header": [
@@ -777,7 +558,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"original\":\"\\\"wichtig\\\"\",\"translated\":\"\\\"\u0412\u0430\u0436\u043d\u043e\\\"\",\"done_at\":\"null\",\"starred\":false,\"language\":\"\\\"DE\\\"\",\"views\":0,\"shared_by\":16}"
+                            "raw": "{\"original\":\"\\\"wichtig\\\"\",\"translated\":\"\\\"\u0412\u0430\u0436\u043d\u043e\\\"\",\"done_at\":\"null\",\"starred\":false,\"language\":\"\\\"DE\\\"\",\"views\":0,\"shared_by\":2}"
                         },
                         "description": "Here you can create new word. Before saving system will check for existing ford and if it is exist it will throw validation error."
                     },
@@ -790,15 +571,15 @@
                         },
                         {
                             "header": [],
-                            "code": 422,
-                            "body": "{\n\"message\": \"Word already exists\"\n}",
-                            "name": "Validation Error"
-                        },
-                        {
-                            "header": [],
                             "code": 401,
                             "body": "{\n\"message\": \"Unauthenticated.\"\n}",
                             "name": "unauthorized"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n\"message\": \"Word already exists\"\n}",
+                            "name": "Validation Error"
                         }
                     ]
                 },
@@ -806,16 +587,15 @@
                     "name": "Get word by ID",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/words\/:id",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/words\/:id",
+                            "raw": "{{baseUrl}}\/api\/words\/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "6",
+                                    "value": "3",
                                     "description": "The ID of word. Example=2"
                                 }
                             ]
@@ -859,16 +639,15 @@
                     "name": "Update word by ID",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/words\/:id",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/words\/:id",
+                            "raw": "{{baseUrl}}\/api\/words\/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "18",
+                                    "value": "10",
                                     "description": "The ID of word. Example=2"
                                 }
                             ]
@@ -886,7 +665,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"original\":\"kuzhvirfaqavrzroyiacmollirbfuoguysvlicrqxaywroumrgihwhlkqmbrjzuhzvckvkbrjnimgcmxhruzruzhontmoznkekcphucvzbkzolfywwcjigznnarjsyrwwjhsccofvjvlujcfejcuqdkbjheifrtqzzjdyqjjvabvsarjymfmh\",\"translated\":\"iytltbzzmhrxpxltoffgljlxpsnbympmahlukarirxflgvsskukkbskwcronlwbsrhcmmkkydlxcdujpdrjicxbujnibhdqsajztwakuymzmqvttvxgixottfjzihuxhskiabatfkxtbvfirellvxobndbccudkwksobzelolhfnqojpdifdxuv\",\"done_at\":\"2021-09-29T11:53:49\",\"starred\":false,\"user_id\":\"dolorum\",\"language\":\"inxf\",\"views\":\"psvrbseqbfzcqkygkoscnylhgvlitxzkpgrthnsdpfxbnfslntoorsetfeeojjmpxgmhskarqlregkzziyolfaikxmabndmwcmanlseuqeeruzkoxtdqonqriudvkkfzgqkiikfwmclapcyzxzeloqsxcmhxqjktoyoxdslxyosvjetayngnyszjkdckwnuyixbrobxumaztjkigj\",\"shared_by\":5}"
+                            "raw": "{\"original\":\"dbvikvyozuyl\",\"translated\":\"ljrzbxwlhwwg\",\"done_at\":\"2023-04-05T14:22:24\",\"starred\":false,\"user_id\":\"veniam\",\"language\":\"yed\",\"views\":\"gveezdyypvmudpsqlffonqka\",\"shared_by\":19}"
                         },
                         "description": "Update word information. Currently we get 503 error. Route do not implemented yet."
                     },
@@ -903,16 +682,15 @@
                     "name": "Delete word by ID",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/words\/:id",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/words\/:id",
+                            "raw": "{{baseUrl}}\/api\/words\/:id",
                             "variable": [
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "19",
+                                    "value": "5",
                                     "description": "The ID of word. Example=2"
                                 }
                             ]
@@ -953,19 +731,146 @@
                     ]
                 },
                 {
+                    "name": "List of known words",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/known",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/known"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get list of known words"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[{\"id\":18,\"original\":\"voluptates\",\"translated\":\"deserunt\",\"done_at\":\"2021-09-16T08:30:26.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":8,\"from_sample\":false,\"created_at\":\"2021-09-04T10:11:33.000000Z\",\"shared_by\":null},{\"id\":27,\"original\":\"spielen\",\"translated\":\"\u0438\u0433\u0440\u0430\u0442\u044c; \u0440\u0435\u0437\u0432\u0438\u0442\u044c\u0441\u044f\",\"done_at\":\"2021-09-16T08:26:26.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-09-04T10:43:34.000000Z\",\"shared_by\":null},{\"id\":33,\"original\":\"die Eltern\",\"translated\":\"\u0440\u043e\u0434\u0438\u0442\u0435\u043b\u0438\",\"done_at\":\"2021-09-16T08:30:35.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-09-04T10:43:34.000000Z\",\"shared_by\":null},{\"id\":34,\"original\":\"der Familienstand\",\"translated\":\"\u0441\u0435\u043c\u0435\u0439\u043d\u043e\u0435 \u043f\u043e\u043b\u043e\u0436\u0435\u043d\u0438\u0435\",\"done_at\":\"2021-09-16T08:30:33.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-09-04T10:43:34.000000Z\",\"shared_by\":null}]}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
+                    "name": "List of known words with pagination",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/known\/paginated",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/known\/paginated"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get list of known words with pagination"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[{\"id\":18,\"original\":\"voluptates\",\"translated\":\"deserunt\",\"done_at\":\"2021-09-16T08:30:26.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":8,\"from_sample\":false,\"created_at\":\"2021-09-04T10:11:33.000000Z\",\"shared_by\":null},{\"id\":27,\"original\":\"spielen\",\"translated\":\"\u0438\u0433\u0440\u0430\u0442\u044c; \u0440\u0435\u0437\u0432\u0438\u0442\u044c\u0441\u044f\",\"done_at\":\"2021-09-16T08:26:26.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-09-04T10:43:34.000000Z\",\"shared_by\":null},{\"id\":33,\"original\":\"die Eltern\",\"translated\":\"\u0440\u043e\u0434\u0438\u0442\u0435\u043b\u0438\",\"done_at\":\"2021-09-16T08:30:35.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-09-04T10:43:34.000000Z\",\"shared_by\":null},{\"id\":34,\"original\":\"der Familienstand\",\"translated\":\"\u0441\u0435\u043c\u0435\u0439\u043d\u043e\u0435 \u043f\u043e\u043b\u043e\u0436\u0435\u043d\u0438\u0435\",\"done_at\":\"2021-09-16T08:30:33.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-09-04T10:43:34.000000Z\",\"shared_by\":null}],\"path\": \"https:\\\/\\\/easywordsapp.ru\\\/api\\\/known\\\/paginated\",\"per_page\": 20,\"to\": 20,\"total\": 101}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
+                    "name": "List of not known words",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/not-known",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/not-known"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get list of not known words"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[{\"id\":11705,\"original\":\"buchstabieren\",\"translated\":\"\u0447\u0438\u0442\u0430\u0442\u044c \u043f\u043e \u0441\u043a\u043b\u0430\u0434\u0430\u043c; \u043f\u0440\u043e\u0438\u0437\u043d\u043e\u0441\u0438\u0442\u044c \u043f\u043e \u0431\u0443\u043a\u0432\u0430\u043c\",\"done_at\":null,\"starred\":false,\"user_id\":16,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-10-05T10:14:44.000000Z\",\"shared_by\":null},{\"id\":11706,\"original\":\"leben\",\"translated\":\"\u0436\u0438\u0442\u044c; \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043e\u0432\u0430\u0442\u044c\",\"done_at\":null,\"starred\":false,\"user_id\":16,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-10-05T10:14:44.000000Z\",\"shared_by\":null},{\"id\":11707,\"original\":\"lesen\",\"translated\":\"\u0447\u0438\u0442\u0430\u0442\u044c\",\"done_at\":null,\"starred\":false,\"user_id\":16,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-10-05T10:14:44.000000Z\",\"shared_by\":null}],\"links\":{\"first\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=1\",\"last\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=45\",\"prev\":null,\"next\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=2\"},\"meta\":{\"current_page\":1,\"from\":1,\"last_page\":45,\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=1\",\"label\":\"1\",\"active\":true},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=2\",\"label\":\"2\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=3\",\"label\":\"3\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=4\",\"label\":\"4\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=5\",\"label\":\"5\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=6\",\"label\":\"6\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=7\",\"label\":\"7\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=8\",\"label\":\"8\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=9\",\"label\":\"9\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=10\",\"label\":\"10\",\"active\":false},{\"url\":null,\"label\":\"...\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=44\",\"label\":\"44\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=45\",\"label\":\"45\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=2\",\"label\":\"Next &raquo;\",\"active\":false}],\"path\":\"https:\/\/easywordsapp.ru\/api\/not-known\",\"per_page\":20,\"to\":20,\"total\":892}}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
+                    "name": "List of all words",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/all",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/all"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get list of all words"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"data\":[{\"id\":11705,\"original\":\"buchstabieren\",\"translated\":\"\u0447\u0438\u0442\u0430\u0442\u044c \u043f\u043e \u0441\u043a\u043b\u0430\u0434\u0430\u043c; \u043f\u0440\u043e\u0438\u0437\u043d\u043e\u0441\u0438\u0442\u044c \u043f\u043e \u0431\u0443\u043a\u0432\u0430\u043c\",\"done_at\":null,\"starred\":false,\"user_id\":16,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-10-05T10:14:44.000000Z\",\"shared_by\":null},{\"id\":11706,\"original\":\"leben\",\"translated\":\"\u0436\u0438\u0442\u044c; \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043e\u0432\u0430\u0442\u044c\",\"done_at\":null,\"starred\":false,\"user_id\":16,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-10-05T10:14:44.000000Z\",\"shared_by\":null},{\"id\":11707,\"original\":\"lesen\",\"translated\":\"\u0447\u0438\u0442\u0430\u0442\u044c\",\"done_at\":null,\"starred\":false,\"user_id\":16,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-10-05T10:14:44.000000Z\",\"shared_by\":null}],\"links\":{\"first\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=1\",\"last\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=45\",\"prev\":null,\"next\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=2\"},\"meta\":{\"current_page\":1,\"from\":1,\"last_page\":45,\"links\":[{\"url\":null,\"label\":\"&laquo; Previous\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=1\",\"label\":\"1\",\"active\":true},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=2\",\"label\":\"2\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=3\",\"label\":\"3\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=4\",\"label\":\"4\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=5\",\"label\":\"5\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=6\",\"label\":\"6\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=7\",\"label\":\"7\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=8\",\"label\":\"8\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=9\",\"label\":\"9\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=10\",\"label\":\"10\",\"active\":false},{\"url\":null,\"label\":\"...\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=44\",\"label\":\"44\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=45\",\"label\":\"45\",\"active\":false},{\"url\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=2\",\"label\":\"Next &raquo;\",\"active\":false}],\"path\":\"https:\/\/easywordsapp.ru\/api\/not-known\",\"per_page\":20,\"to\":20,\"total\":892}}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
                     "name": "Mark Viewed",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/words\/:word\/viewed",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/words\/:word\/viewed",
+                            "raw": "{{baseUrl}}\/api\/words\/:word\/viewed",
                             "variable": [
                                 {
                                     "id": "word",
                                     "key": "word",
-                                    "value": "15",
+                                    "value": "5",
                                     "description": "The ID of word. Example=2"
                                 }
                             ]
@@ -1009,22 +914,21 @@
                     "name": "Mark Known",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/words\/:word\/known\/:value",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/words\/:word\/known\/:value",
+                            "raw": "{{baseUrl}}\/api\/words\/:word\/known\/:value",
                             "variable": [
                                 {
                                     "id": "word",
                                     "key": "word",
-                                    "value": "8",
+                                    "value": "14",
                                     "description": "The ID of word. Example=2"
                                 },
                                 {
                                     "id": "value",
                                     "key": "value",
-                                    "value": "15",
+                                    "value": "18",
                                     "description": "Need to pass 0 or 1, should we mark this word known (1) or unknown (0). Example=1"
                                 }
                             ]
@@ -1068,22 +972,21 @@
                     "name": "Mark Starred",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/words\/:word\/starred\/:value",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/words\/:word\/starred\/:value",
+                            "raw": "{{baseUrl}}\/api\/words\/:word\/starred\/:value",
                             "variable": [
                                 {
                                     "id": "word",
                                     "key": "word",
-                                    "value": "16",
+                                    "value": "14",
                                     "description": "The ID of word. Example=2"
                                 },
                                 {
                                     "id": "value",
                                     "key": "value",
-                                    "value": "3",
+                                    "value": "14",
                                     "description": "Need to pass 0 or 1, should we mark this word starred (1) or unstar it (0). Example=1"
                                 }
                             ]
@@ -1127,28 +1030,27 @@
                     "name": "Share Word",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
                             "path": "api\/words\/:word\/share\/:user",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/words\/:word\/share\/:user",
+                            "raw": "{{baseUrl}}\/api\/words\/:word\/share\/:user",
                             "variable": [
                                 {
                                     "id": "word",
                                     "key": "word",
-                                    "value": "16",
+                                    "value": "11",
                                     "description": "The ID of word. Example=2"
                                 },
                                 {
                                     "id": "user",
                                     "key": "user",
-                                    "value": "et",
+                                    "value": "explicabo",
                                     "description": ""
                                 },
                                 {
                                     "id": "value",
                                     "key": "value",
-                                    "value": "15",
+                                    "value": "18",
                                     "description": "User ID which we need to copy word. Example=2"
                                 }
                             ]
@@ -1195,14 +1097,21 @@
                     ]
                 },
                 {
-                    "name": "List of known words",
+                    "name": "Random words",
                     "request": {
                         "url": {
-                            "protocol": "http",
                             "host": "{{baseUrl}}",
-                            "path": "api\/known",
+                            "path": "api\/random\/:number",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/known"
+                            "raw": "{{baseUrl}}\/api\/random\/:number",
+                            "variable": [
+                                {
+                                    "id": "number",
+                                    "key": "number",
+                                    "value": "in",
+                                    "description": ""
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -1216,14 +1125,219 @@
                             }
                         ],
                         "body": null,
-                        "description": "Get list of known words"
+                        "description": "Get random words based on default language and number of words as param"
                     },
                     "response": [
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\"data\":[{\"id\":18,\"original\":\"voluptates\",\"translated\":\"deserunt\",\"done_at\":\"2021-09-16T08:30:26.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":8,\"from_sample\":false,\"created_at\":\"2021-09-04T10:11:33.000000Z\",\"shared_by\":null},{\"id\":27,\"original\":\"spielen\",\"translated\":\"\u0438\u0433\u0440\u0430\u0442\u044c; \u0440\u0435\u0437\u0432\u0438\u0442\u044c\u0441\u044f\",\"done_at\":\"2021-09-16T08:26:26.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-09-04T10:43:34.000000Z\",\"shared_by\":null},{\"id\":33,\"original\":\"die Eltern\",\"translated\":\"\u0440\u043e\u0434\u0438\u0442\u0435\u043b\u0438\",\"done_at\":\"2021-09-16T08:30:35.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-09-04T10:43:34.000000Z\",\"shared_by\":null},{\"id\":34,\"original\":\"der Familienstand\",\"translated\":\"\u0441\u0435\u043c\u0435\u0439\u043d\u043e\u0435 \u043f\u043e\u043b\u043e\u0436\u0435\u043d\u0438\u0435\",\"done_at\":\"2021-09-16T08:30:33.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-09-04T10:43:34.000000Z\",\"shared_by\":null}]}",
+                            "body": "{\"data\":[{\"id\":11705,\"original\":\"buchstabieren\",\"translated\":\"\u0447\u0438\u0442\u0430\u0442\u044c \u043f\u043e \u0441\u043a\u043b\u0430\u0434\u0430\u043c; \u043f\u0440\u043e\u0438\u0437\u043d\u043e\u0441\u0438\u0442\u044c \u043f\u043e \u0431\u0443\u043a\u0432\u0430\u043c\",\"done_at\":null,\"starred\":false,\"user_id\":16,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-10-05T10:14:44.000000Z\",\"shared_by\":null},{\"id\":11706,\"original\":\"leben\",\"translated\":\"\u0436\u0438\u0442\u044c; \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u043e\u0432\u0430\u0442\u044c\",\"done_at\":null,\"starred\":false,\"user_id\":16,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-10-05T10:14:44.000000Z\",\"shared_by\":null},{\"id\":11707,\"original\":\"lesen\",\"translated\":\"\u0447\u0438\u0442\u0430\u0442\u044c\",\"done_at\":null,\"starred\":false,\"user_id\":16,\"language\":\"DE\",\"views\":0,\"from_sample\":true,\"created_at\":\"2021-10-05T10:14:44.000000Z\",\"shared_by\":null}],\"links\":{\"first\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=1\",\"last\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=45\",\"prev\":null,\"next\":\"https:\/\/easywordsapp.ru\/api\/not-known?page=2\"}}",
                             "name": "success"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Authentication",
+            "description": "\nAPIs for managing authentication and getting tokens",
+            "item": [
+                {
+                    "name": "Change user password",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user\/password",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user\/password"
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"current_password\":\"\\\"password\\\"\",\"password\":\"\\\"new_password\\\"\",\"password_confirmation\":\"\\\"new_password\\\"\"}"
+                        },
+                        "description": "This API endpoint you will use for  changing user password"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"data\": {\n\"id\": 1,\n\"name\": \"Mr. Nelson Haag\",\n\"email\": \"admin@admin.com\",\n\"email_verified_at\": \"2021-08-26T05:57:00.000000Z\",\n\"current_team_id\": null,\n\"profile_photo_path\": null,\n\"created_at\": \"2021-08-26T05:57:00.000000Z\",\n\"updated_at\": \"2021-08-26T05:57:00.000000Z\",\n\"deleted_at\": null\n}\n}",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n\"message\": \"The given data was invalid.\",\n\"errors\": {\n\"email\": [\n\"The provided credentials are incorrect.\"\n]\n}\n}",
+                            "name": "validation error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Revoke current token",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/signout",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/signout"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Using this endpoint signout and delete current token"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"success\": \"ok\",\n}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Plain text token",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"\\\"admin@admin.com\\\"\",\"password\":\"\\\"password\\\"\"}"
+                        },
+                        "description": "Using this endpoint you can get Plain token token"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"token\": \"sfgdfgfgfds\",\n}",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n\"message\": \"The given data was invalid.\",\n\"errors\": {\n\"email\": [\n\"The provided credentials are incorrect.\"\n]\n}\n}",
+                            "name": "validation error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get JSON token",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/token",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/token"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"\\\"admin@admin.com\\\"\",\"password\":\"\\\"password\\\"\",\"device_name\":\"\\\"Insomnia\\\"\"}"
+                        },
+                        "description": "Using this endpoint you can get JSON token. This is the main endpoint which you will use for working with third-party apps"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n \"token\": \"2|n4a2Mnfe6FrEpZ0BqbWUiYA84g5USkuGpAcKTyMf\",\n}",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\n\"message\": \"The given data was invalid.\",\n\"errors\": {\n\"email\": [\n\"The provided credentials are incorrect.\"\n]\n}\n}",
+                            "name": "validation error"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Analytics",
+            "description": "\nGet all statistics data which is need for displaying widgets",
+            "item": [
+                {
+                    "name": "All statistics",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/statistics",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/statistics"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get all analytics information for displaying widgets"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"all\":24,\"starred\":2,\"not_dones\":8,\"dones\":16,\"total_views\":33,\"users_count\":2,\"most_viewed\":[{\"id\":2,\"original\":\"der Cognac\",\"translated\":\"\u041a\u043e\u043d\u044c\u044f\u043a\",\"done_at\":null,\"starred\":true,\"user_id\":1,\"language\":\"DE\",\"views\":7,\"created_at\":\"2021-08-26T05:57:00.000000Z\"},{\"id\":3,\"original\":\"die Sauerkraut\",\"translated\":\"\u041a\u0432\u0430\u0448\u0435\u043d\u0430\u044f \u043a\u0430\u043f\u0443\u0441\u0442\u0430\",\"done_at\":null,\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":7,\"created_at\":\"2021-08-26T05:57:00.000000Z\"},{\"id\":1,\"original\":\"der Sekt\",\"translated\":\"\u0428\u0430\u043c\u043f\u0430\u043d\u0441\u043a\u043e\u0435\",\"done_at\":null,\"starred\":true,\"user_id\":1,\"language\":\"DE\",\"views\":5,\"created_at\":\"2021-08-26T05:57:00.000000Z\"},{\"id\":9,\"original\":\"gro\u00dfartig\",\"translated\":\"\u0412\u0435\u043b\u0438\u043a\u043e\u043b\u0435\u043f\u043d\u044b\u0439, \u0437\u0430\u043c\u0435\u0447\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u0439\",\"done_at\":\"2021-08-30T16:59:56.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":3,\"created_at\":\"2021-08-29T19:53:17.000000Z\"},{\"id\":11,\"original\":\"test11\",\"translated\":\"te11\",\"done_at\":\"2021-08-30T17:00:57.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":1,\"created_at\":\"2021-08-30T14:17:15.000000Z\"},{\"id\":13,\"original\":\"test13\",\"translated\":\"te13\",\"done_at\":\"2021-08-30T17:01:06.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":1,\"created_at\":\"2021-08-30T14:23:44.000000Z\"},{\"id\":12,\"original\":\"test12\",\"translated\":\"te12\",\"done_at\":\"2021-08-30T17:00:47.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":1,\"created_at\":\"2021-08-30T14:23:36.000000Z\"},{\"id\":14,\"original\":\"test14\",\"translated\":\"te14\",\"done_at\":\"2021-08-30T17:00:06.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":1,\"created_at\":\"2021-08-30T14:23:58.000000Z\"},{\"id\":16,\"original\":\"test16\",\"translated\":\"te16\",\"done_at\":\"2021-08-30T17:00:27.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":1,\"created_at\":\"2021-08-30T14:24:39.000000Z\"},{\"id\":19,\"original\":\"test19\",\"translated\":\"te19\",\"done_at\":\"2021-08-30T17:00:36.000000Z\",\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":1,\"created_at\":\"2021-08-30T16:47:30.000000Z\"}],\"added_today\":[{\"id\":27,\"original\":\"fasdf\",\"translated\":\"\u0430\u044b\u0432\u0430\u043f\",\"done_at\":null,\"starred\":false,\"user_id\":1,\"language\":\"DE\",\"views\":0,\"created_at\":\"2021-09-02T11:55:21.000000Z\"}],\"updated_this_month\":1,\"updated_today\":1}",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n\"message\": \"Unauthenticated.\"\n}",
+                            "name": "unauthorized"
                         }
                     ]
                 }
@@ -1231,6 +1345,13 @@
         }
     ],
     "auth": {
-        "type": "bearer"
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "key",
+                "value": null,
+                "type": "string"
+            }
+        ]
     }
 }

@@ -40,6 +40,23 @@ final class WordTest extends TestCase
     }
 
     #[Test]
+    public function it_gets_a_random_word(): void
+    {
+        $words = Word::factory()
+            ->count(5)
+            ->create();
+        $words[2]->done_at = null;
+        $words[2]->language = 'de';
+        $words[2]->save();
+        $user = User::whereEmail('admin@admin.com')->first();
+        $user->settings()->set('language', 'de');
+
+        $response = $this->getJson(route('words.index'));
+
+        $response->assertOk()->assertSee($words[2]->original);
+    }
+
+    #[Test]
     public function it_gets_known_words(): void
     {
         $words = Word::factory()

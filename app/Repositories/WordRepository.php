@@ -6,7 +6,9 @@ namespace App\Repositories;
 
 use App\DataTransferObjects\WordDto;
 use App\Models\Word;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 final class WordRepository
 {
     /**
-     * @param  array{starred_enabled: bool, known_enabled: bool, paginate: int, show_shared: bool, show_imported: bool, latest_first: bool}  $settings
+     * @param  array{starred_enabled: bool, known_enabled: bool, paginate: int, show_shared: bool, show_imported: bool, latest_first: bool, fresh_first: bool}  $settings
      */
     public function getLatestWords(string $language, array $settings): LengthAwarePaginator
     {
@@ -67,6 +69,23 @@ final class WordRepository
         return $query
             ->orderBy('views')
             ->paginate($settings['paginate']);
+    }
+
+    /**
+     * @param  array{starred_enabled: bool, known_enabled: bool, paginate: int, show_shared: bool, show_imported: bool, latest_first: bool, default_language: string}  $settings
+     * @return Collection<int, Word>
+     */
+    public function getRandomWords(int $number, array $settings): Collection
+    {
+        /** @var Collection<int, Word> $words */
+        $words = Word::inRandomOrder()->where('language', $settings['default_language'])->when(! $settings['known_enabled'], function (Builder $q) {
+            /** @var Builder<Model> $builder */
+            $builder = $q->whereNull('done_at');
+
+            return $builder;
+        })->limit($number)->get();
+
+        return $words;
     }
 
     public function increaseCounter(int $id): Word

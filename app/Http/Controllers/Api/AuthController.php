@@ -172,7 +172,7 @@ final class AuthController extends Controller
     #[Get('signout', name: 'user.signout')]
     public function signOut(Request $request): JsonResponse
     {
-        if (method_exists($request->user()->currentAccessToken(), 'delete')) {
+        if ($request->user() && method_exists($request->user()->currentAccessToken(), 'delete')) {
             $request->user()->currentAccessToken()->delete();
         }
 

@@ -7,9 +7,3512 @@ servers:
   -
     url: 'http://cards.sergeyem.test:8000'
 paths:
+  /api/short:
+    get:
+      summary: 'Get users list'
+      operationId: getUsersList
+      description: 'Receive short list of users for dropdown options. Here we get only ID and name of user.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 12
+                      name: 'Ksenia Emelyanova'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 12
+                        name: 'Ksenia Emelyanova'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 12
+                        name:
+                          type: string
+                          example: 'Ksenia Emelyanova'
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Users
+  /api/me:
+    get:
+      summary: 'Profile Info'
+      operationId: profileInfo
+      description: 'Get current authenticated user data'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 1
+                    name: 'Mr. Nelson Haag'
+                    email: admin@admin.com
+                    email_verified_at: '2021-08-26T05:57:00.000000Z'
+                    current_team_id: null
+                    profile_photo_path: null
+                    created_at: '2021-08-26T05:57:00.000000Z'
+                    updated_at: '2021-08-26T05:57:00.000000Z'
+                    deleted_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Mr. Nelson Haag'
+                      email:
+                        type: string
+                        example: admin@admin.com
+                      email_verified_at:
+                        type: string
+                        example: '2021-08-26T05:57:00.000000Z'
+                      current_team_id:
+                        type: string
+                        example: null
+                      profile_photo_path:
+                        type: string
+                        example: null
+                      created_at:
+                        type: string
+                        example: '2021-08-26T05:57:00.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2021-08-26T05:57:00.000000Z'
+                      deleted_at:
+                        type: string
+                        example: null
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Users
+  '/api/samples/export/{language}':
+    get:
+      summary: 'Export Samples'
+      operationId: exportSamples
+      description: "User can load samples from specific language to it's own database"
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: success
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Samples
+    parameters:
+      -
+        in: path
+        name: language
+        description: 'Language for export. Example=DE'
+        example: est
+        required: true
+        schema:
+          type: string
+  /api/samples:
+    get:
+      summary: 'List of Samples'
+      operationId: listOfSamples
+      description: 'Get list of samples which we need for import process.'
+      parameters:
+        -
+          in: query
+          name: language
+          description: 'Language which we need to get list of words. Example=DE'
+          example: voluptatum
+          required: true
+          schema:
+            type: string
+            description: 'Language which we need to get list of words. Example=DE'
+            example: voluptatum
+        -
+          in: query
+          name: page
+          description: 'Page number if you need to get new list of samples. Example=1'
+          example: 17
+          required: false
+          schema:
+            type: integer
+            description: 'Page number if you need to get new list of samples. Example=1'
+            example: 17
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      original: 'der Sekt'
+                      translated: Шампанское
+                      language: DE
+                      created_at: '2021-08-26T05:57:00.000000Z'
+                    -
+                      id: 2
+                      original: 'der Cognac'
+                      translated: Коньяк
+                      language: DE
+                      created_at: '2021-08-26T05:57:00.000000Z'
+                  links:
+                    first: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                    last: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://cards.sergeyem.test:8000/api/samples'
+                    per_page: '20'
+                    to: 4
+                    total: 4
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        original: 'der Sekt'
+                        translated: Шампанское
+                        language: DE
+                        created_at: '2021-08-26T05:57:00.000000Z'
+                      -
+                        id: 2
+                        original: 'der Cognac'
+                        translated: Коньяк
+                        language: DE
+                        created_at: '2021-08-26T05:57:00.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        original:
+                          type: string
+                          example: 'der Sekt'
+                        translated:
+                          type: string
+                          example: Шампанское
+                        language:
+                          type: string
+                          example: DE
+                        created_at:
+                          type: string
+                          example: '2021-08-26T05:57:00.000000Z'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                      last:
+                        type: string
+                        example: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://cards.sergeyem.test:8000/api/samples?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://cards.sergeyem.test:8000/api/samples'
+                      per_page:
+                        type: string
+                        example: '20'
+                      to:
+                        type: integer
+                        example: 4
+                      total:
+                        type: integer
+                        example: 4
+      tags:
+        - Samples
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                language:
+                  type: string
+                  description: 'Must not be greater than 10 characters.'
+                  example: egrphgppkx
+              required:
+                - language
+  '/api/samples/{id}':
+    get:
+      summary: 'Get sample by ID'
+      operationId: getSampleByID
+      description: "Getting detail information about sample by it's ID"
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 2
+                    original: 'der Cognac'
+                    translated: Коньяк
+                    language: DE
+                    created_at: '2021-08-26T05:57:00.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      original:
+                        type: string
+                        example: 'der Cognac'
+                      translated:
+                        type: string
+                        example: Коньяк
+                      language:
+                        type: string
+                        example: DE
+                      created_at:
+                        type: string
+                        example: '2021-08-26T05:57:00.000000Z'
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No query results for model [App\Models\Sample].'
+                properties:
+                  message:
+                    type: string
+                    example: 'No query results for model [App\Models\Sample].'
+      tags:
+        - Samples
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of sample. Example=2'
+        example: 4
+        required: true
+        schema:
+          type: integer
+  /api/user:
+    get:
+      summary: 'User Information'
+      operationId: userInformation
+      description: 'Getting authenticated user information'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Other
+  '/api/users/{user_id}/words':
+    get:
+      summary: 'List of user words'
+      operationId: listOfUserWords
+      description: 'Getting list of words of other users. Currently not implemented.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+        503:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ''
+      tags:
+        - Other
+    post:
+      summary: 'Store word by user'
+      operationId: storeWordByUser
+      description: 'Creating new word of passed user. Currently this functionality not implemented'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        503:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ''
+      tags:
+        - Other
+    parameters:
+      -
+        in: path
+        name: user_id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/settings:
+    get:
+      summary: 'Settings Information'
+      operationId: settingsInformation
+      description: "Get current list of authenticated user with it's key and value"
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    paginate: '20'
+                    default_language: DE
+                    starred_enabled: ''
+                    known_enabled: ''
+                    fresh_first: '1'
+                    languages_list:
+                      - DE
+                      - EN
+                    main_language: RU
+                    latest_first: false
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      paginate:
+                        type: string
+                        example: '20'
+                      default_language:
+                        type: string
+                        example: DE
+                      starred_enabled:
+                        type: string
+                        example: ''
+                      known_enabled:
+                        type: string
+                        example: ''
+                      fresh_first:
+                        type: string
+                        example: '1'
+                      languages_list:
+                        type: array
+                        example:
+                          - DE
+                          - EN
+                        items:
+                          type: string
+                      main_language:
+                        type: string
+                        example: RU
+                      latest_first:
+                        type: boolean
+                        example: false
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Settings
+    post:
+      summary: 'Change Settings'
+      operationId: changeSettings
+      description: "Here you can change any setting value. For this purposes in body params you need to pass key of setting and it's value"
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: success
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Name of setting.'
+                  example: '"main_language"'
+                value:
+                  type: string
+                  description: 'Setting value.'
+                  example: '"RU"'
+              required:
+                - name
+                - value
+  /api/words:
+    get:
+      summary: 'List of Words'
+      operationId: listOfWords
+      description: 'Get list of words which we need for learning. Getting words with limit which we store in settings.'
+      parameters:
+        -
+          in: query
+          name: language
+          description: 'Language which we need to get list of words. Example=DE'
+          example: in
+          required: true
+          schema:
+            type: string
+            description: 'Language which we need to get list of words. Example=DE'
+            example: in
+        -
+          in: query
+          name: page
+          description: 'Page number if you need to get new list of words. Example=1'
+          example: 9
+          required: false
+          schema:
+            type: integer
+            description: 'Page number if you need to get new list of words. Example=1'
+            example: 9
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      original: 'der Sekt'
+                      translated: Шампанское
+                      done_at: null
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      created_at: '2021-08-26T05:57:00.000000Z'
+                    -
+                      id: 2
+                      original: 'der Cognac'
+                      translated: Коньяк
+                      done_at: null
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      created_at: '2021-08-26T05:57:00.000000Z'
+                    -
+                      id: 3
+                      original: 'die Sauerkraut'
+                      translated: 'Квашеная капуста'
+                      done_at: null
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      created_at: '2021-08-26T05:57:00.000000Z'
+                    -
+                      id: 6
+                      original: voll
+                      translated: Полный
+                      done_at: null
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      created_at: '2021-08-26T05:58:17.000000Z'
+                  links:
+                    first: 'http://cards.sergeyem.test:8000/api/words?page=1'
+                    last: 'http://cards.sergeyem.test:8000/api/words?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://cards.sergeyem.test:8000/api/words?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://cards.sergeyem.test:8000/api/words'
+                    per_page: '20'
+                    to: 4
+                    total: 4
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        original: 'der Sekt'
+                        translated: Шампанское
+                        done_at: null
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        created_at: '2021-08-26T05:57:00.000000Z'
+                      -
+                        id: 2
+                        original: 'der Cognac'
+                        translated: Коньяк
+                        done_at: null
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        created_at: '2021-08-26T05:57:00.000000Z'
+                      -
+                        id: 3
+                        original: 'die Sauerkraut'
+                        translated: 'Квашеная капуста'
+                        done_at: null
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        created_at: '2021-08-26T05:57:00.000000Z'
+                      -
+                        id: 6
+                        original: voll
+                        translated: Полный
+                        done_at: null
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        created_at: '2021-08-26T05:58:17.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        original:
+                          type: string
+                          example: 'der Sekt'
+                        translated:
+                          type: string
+                          example: Шампанское
+                        done_at:
+                          type: string
+                          example: null
+                        starred:
+                          type: boolean
+                          example: false
+                        user_id:
+                          type: integer
+                          example: 1
+                        language:
+                          type: string
+                          example: DE
+                        views:
+                          type: integer
+                          example: 0
+                        created_at:
+                          type: string
+                          example: '2021-08-26T05:57:00.000000Z'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://cards.sergeyem.test:8000/api/words?page=1'
+                      last:
+                        type: string
+                        example: 'http://cards.sergeyem.test:8000/api/words?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://cards.sergeyem.test:8000/api/words?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://cards.sergeyem.test:8000/api/words'
+                      per_page:
+                        type: string
+                        example: '20'
+                      to:
+                        type: integer
+                        example: 4
+                      total:
+                        type: integer
+                        example: 4
+      tags:
+        - Words
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                language:
+                  type: string
+                  description: 'Must not be greater than 10 characters.'
+                  example: hvytqrtufp
+              required:
+                - language
+    post:
+      summary: 'Create Word'
+      operationId: createWord
+      description: 'Here you can create new word. Before saving system will check for existing ford and if it is exist it will throw validation error.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 6
+                    original: voll
+                    translated: Полный
+                    done_at: null
+                    starred: false
+                    user_id: 1
+                    language: DE
+                    views: 0
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 6
+                      original:
+                        type: string
+                        example: voll
+                      translated:
+                        type: string
+                        example: Полный
+                      done_at:
+                        type: string
+                        example: null
+                      starred:
+                        type: boolean
+                        example: false
+                      user_id:
+                        type: integer
+                        example: 1
+                      language:
+                        type: string
+                        example: DE
+                      views:
+                        type: integer
+                        example: 0
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+        422:
+          description: 'Validation Error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Word already exists'
+                properties:
+                  message:
+                    type: string
+                    example: 'Word already exists'
+      tags:
+        - Words
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                original:
+                  type: string
+                  description: 'Original name of word.'
+                  example: '"wichtig"'
+                translated:
+                  type: string
+                  description: 'Translated word value.'
+                  example: '"Важно"'
+                done_at:
+                  type: string
+                  description: 'Should we mark this word as known.'
+                  example: 'null'
+                starred:
+                  type: boolean
+                  description: 'Mark this word as starred or not.'
+                  example: false
+                user_id:
+                  type: string
+                  description: ''
+                  example: null
+                language:
+                  type: string
+                  description: 'What language for this word you creating.'
+                  example: '"DE"'
+                views:
+                  type: integer
+                  description: 'Number of views we create by default for this word.'
+                  example: 0
+                shared_by:
+                  type: integer
+                  description: ''
+                  example: 2
+              required:
+                - original
+                - translated
+                - language
+  '/api/words/{id}':
+    get:
+      summary: 'Get word by ID'
+      operationId: getWordByID
+      description: "Getting detail information about word by it's ID"
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 2
+                    original: 'der Cognac'
+                    translated: Коньяк
+                    done_at: null
+                    starred: false
+                    user_id: 1
+                    language: DE
+                    views: 7
+                    created_at: '2021-08-26T05:57:00.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      original:
+                        type: string
+                        example: 'der Cognac'
+                      translated:
+                        type: string
+                        example: Коньяк
+                      done_at:
+                        type: string
+                        example: null
+                      starred:
+                        type: boolean
+                        example: false
+                      user_id:
+                        type: integer
+                        example: 1
+                      language:
+                        type: string
+                        example: DE
+                      views:
+                        type: integer
+                        example: 7
+                      created_at:
+                        type: string
+                        example: '2021-08-26T05:57:00.000000Z'
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No query results for model [App\Models\Word].'
+                properties:
+                  message:
+                    type: string
+                    example: 'No query results for model [App\Models\Word].'
+      tags:
+        - Words
+    put:
+      summary: 'Update word by ID'
+      operationId: updateWordByID
+      description: 'Update word information. Currently we get 503 error. Route do not implemented yet.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        503:
+          description: 'Not implemented'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ''
+      tags:
+        - Words
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                original:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: dbvikvyozuyl
+                translated:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: ljrzbxwlhwwg
+                done_at:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2023-04-05T14:22:24'
+                starred:
+                  type: boolean
+                  description: ''
+                  example: false
+                user_id:
+                  type: string
+                  description: ''
+                  example: veniam
+                language:
+                  type: string
+                  description: 'Must not be greater than 5 characters.'
+                  example: yed
+                views:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: gveezdyypvmudpsqlffonqka
+                shared_by:
+                  type: integer
+                  description: ''
+                  example: 19
+              required:
+                - original
+                - translated
+                - starred
+                - user_id
+                - language
+                - views
+    delete:
+      summary: 'Delete word by ID'
+      operationId: deleteWordByID
+      description: 'Here you can remove word through database'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        204:
+          description: success
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No query results for model [App\Models\Word].'
+                properties:
+                  message:
+                    type: string
+                    example: 'No query results for model [App\Models\Word].'
+      tags:
+        - Words
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of word. Example=2'
+        example: 3
+        required: true
+        schema:
+          type: integer
+  /api/known:
+    get:
+      summary: 'List of known words'
+      operationId: listOfKnownWords
+      description: 'Get list of known words'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 18
+                      original: voluptates
+                      translated: deserunt
+                      done_at: '2021-09-16T08:30:26.000000Z'
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 8
+                      from_sample: false
+                      created_at: '2021-09-04T10:11:33.000000Z'
+                      shared_by: null
+                    -
+                      id: 27
+                      original: spielen
+                      translated: 'играть; резвиться'
+                      done_at: '2021-09-16T08:26:26.000000Z'
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-09-04T10:43:34.000000Z'
+                      shared_by: null
+                    -
+                      id: 33
+                      original: 'die Eltern'
+                      translated: родители
+                      done_at: '2021-09-16T08:30:35.000000Z'
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-09-04T10:43:34.000000Z'
+                      shared_by: null
+                    -
+                      id: 34
+                      original: 'der Familienstand'
+                      translated: 'семейное положение'
+                      done_at: '2021-09-16T08:30:33.000000Z'
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-09-04T10:43:34.000000Z'
+                      shared_by: null
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 18
+                        original: voluptates
+                        translated: deserunt
+                        done_at: '2021-09-16T08:30:26.000000Z'
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 8
+                        from_sample: false
+                        created_at: '2021-09-04T10:11:33.000000Z'
+                        shared_by: null
+                      -
+                        id: 27
+                        original: spielen
+                        translated: 'играть; резвиться'
+                        done_at: '2021-09-16T08:26:26.000000Z'
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-09-04T10:43:34.000000Z'
+                        shared_by: null
+                      -
+                        id: 33
+                        original: 'die Eltern'
+                        translated: родители
+                        done_at: '2021-09-16T08:30:35.000000Z'
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-09-04T10:43:34.000000Z'
+                        shared_by: null
+                      -
+                        id: 34
+                        original: 'der Familienstand'
+                        translated: 'семейное положение'
+                        done_at: '2021-09-16T08:30:33.000000Z'
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-09-04T10:43:34.000000Z'
+                        shared_by: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 18
+                        original:
+                          type: string
+                          example: voluptates
+                        translated:
+                          type: string
+                          example: deserunt
+                        done_at:
+                          type: string
+                          example: '2021-09-16T08:30:26.000000Z'
+                        starred:
+                          type: boolean
+                          example: false
+                        user_id:
+                          type: integer
+                          example: 1
+                        language:
+                          type: string
+                          example: DE
+                        views:
+                          type: integer
+                          example: 8
+                        from_sample:
+                          type: boolean
+                          example: false
+                        created_at:
+                          type: string
+                          example: '2021-09-04T10:11:33.000000Z'
+                        shared_by:
+                          type: string
+                          example: null
+      tags:
+        - Words
+  /api/known/paginated:
+    get:
+      summary: 'List of known words with pagination'
+      operationId: listOfKnownWordsWithPagination
+      description: 'Get list of known words with pagination'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 18
+                      original: voluptates
+                      translated: deserunt
+                      done_at: '2021-09-16T08:30:26.000000Z'
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 8
+                      from_sample: false
+                      created_at: '2021-09-04T10:11:33.000000Z'
+                      shared_by: null
+                    -
+                      id: 27
+                      original: spielen
+                      translated: 'играть; резвиться'
+                      done_at: '2021-09-16T08:26:26.000000Z'
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-09-04T10:43:34.000000Z'
+                      shared_by: null
+                    -
+                      id: 33
+                      original: 'die Eltern'
+                      translated: родители
+                      done_at: '2021-09-16T08:30:35.000000Z'
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-09-04T10:43:34.000000Z'
+                      shared_by: null
+                    -
+                      id: 34
+                      original: 'der Familienstand'
+                      translated: 'семейное положение'
+                      done_at: '2021-09-16T08:30:33.000000Z'
+                      starred: false
+                      user_id: 1
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-09-04T10:43:34.000000Z'
+                      shared_by: null
+                  path: 'https://easywordsapp.ru/api/known/paginated'
+                  per_page: 20
+                  to: 20
+                  total: 101
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 18
+                        original: voluptates
+                        translated: deserunt
+                        done_at: '2021-09-16T08:30:26.000000Z'
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 8
+                        from_sample: false
+                        created_at: '2021-09-04T10:11:33.000000Z'
+                        shared_by: null
+                      -
+                        id: 27
+                        original: spielen
+                        translated: 'играть; резвиться'
+                        done_at: '2021-09-16T08:26:26.000000Z'
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-09-04T10:43:34.000000Z'
+                        shared_by: null
+                      -
+                        id: 33
+                        original: 'die Eltern'
+                        translated: родители
+                        done_at: '2021-09-16T08:30:35.000000Z'
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-09-04T10:43:34.000000Z'
+                        shared_by: null
+                      -
+                        id: 34
+                        original: 'der Familienstand'
+                        translated: 'семейное положение'
+                        done_at: '2021-09-16T08:30:33.000000Z'
+                        starred: false
+                        user_id: 1
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-09-04T10:43:34.000000Z'
+                        shared_by: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 18
+                        original:
+                          type: string
+                          example: voluptates
+                        translated:
+                          type: string
+                          example: deserunt
+                        done_at:
+                          type: string
+                          example: '2021-09-16T08:30:26.000000Z'
+                        starred:
+                          type: boolean
+                          example: false
+                        user_id:
+                          type: integer
+                          example: 1
+                        language:
+                          type: string
+                          example: DE
+                        views:
+                          type: integer
+                          example: 8
+                        from_sample:
+                          type: boolean
+                          example: false
+                        created_at:
+                          type: string
+                          example: '2021-09-04T10:11:33.000000Z'
+                        shared_by:
+                          type: string
+                          example: null
+                  path:
+                    type: string
+                    example: 'https://easywordsapp.ru/api/known/paginated'
+                  per_page:
+                    type: integer
+                    example: 20
+                  to:
+                    type: integer
+                    example: 20
+                  total:
+                    type: integer
+                    example: 101
+      tags:
+        - Words
+  /api/not-known:
+    get:
+      summary: 'List of not known words'
+      operationId: listOfNotKnownWords
+      description: 'Get list of not known words'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 11705
+                      original: buchstabieren
+                      translated: 'читать по складам; произносить по буквам'
+                      done_at: null
+                      starred: false
+                      user_id: 16
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-10-05T10:14:44.000000Z'
+                      shared_by: null
+                    -
+                      id: 11706
+                      original: leben
+                      translated: 'жить; существовать'
+                      done_at: null
+                      starred: false
+                      user_id: 16
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-10-05T10:14:44.000000Z'
+                      shared_by: null
+                    -
+                      id: 11707
+                      original: lesen
+                      translated: читать
+                      done_at: null
+                      starred: false
+                      user_id: 16
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-10-05T10:14:44.000000Z'
+                      shared_by: null
+                  links:
+                    first: 'https://easywordsapp.ru/api/not-known?page=1'
+                    last: 'https://easywordsapp.ru/api/not-known?page=45'
+                    prev: null
+                    next: 'https://easywordsapp.ru/api/not-known?page=2'
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 45
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=2'
+                        label: '2'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=3'
+                        label: '3'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=4'
+                        label: '4'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=5'
+                        label: '5'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=6'
+                        label: '6'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=7'
+                        label: '7'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=8'
+                        label: '8'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=9'
+                        label: '9'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=10'
+                        label: '10'
+                        active: false
+                      -
+                        url: null
+                        label: ...
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=44'
+                        label: '44'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=45'
+                        label: '45'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=2'
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'https://easywordsapp.ru/api/not-known'
+                    per_page: 20
+                    to: 20
+                    total: 892
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 11705
+                        original: buchstabieren
+                        translated: 'читать по складам; произносить по буквам'
+                        done_at: null
+                        starred: false
+                        user_id: 16
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-10-05T10:14:44.000000Z'
+                        shared_by: null
+                      -
+                        id: 11706
+                        original: leben
+                        translated: 'жить; существовать'
+                        done_at: null
+                        starred: false
+                        user_id: 16
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-10-05T10:14:44.000000Z'
+                        shared_by: null
+                      -
+                        id: 11707
+                        original: lesen
+                        translated: читать
+                        done_at: null
+                        starred: false
+                        user_id: 16
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-10-05T10:14:44.000000Z'
+                        shared_by: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 11705
+                        original:
+                          type: string
+                          example: buchstabieren
+                        translated:
+                          type: string
+                          example: 'читать по складам; произносить по буквам'
+                        done_at:
+                          type: string
+                          example: null
+                        starred:
+                          type: boolean
+                          example: false
+                        user_id:
+                          type: integer
+                          example: 16
+                        language:
+                          type: string
+                          example: DE
+                        views:
+                          type: integer
+                          example: 0
+                        from_sample:
+                          type: boolean
+                          example: true
+                        created_at:
+                          type: string
+                          example: '2021-10-05T10:14:44.000000Z'
+                        shared_by:
+                          type: string
+                          example: null
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'https://easywordsapp.ru/api/not-known?page=1'
+                      last:
+                        type: string
+                        example: 'https://easywordsapp.ru/api/not-known?page=45'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: 'https://easywordsapp.ru/api/not-known?page=2'
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 45
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=2'
+                            label: '2'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=3'
+                            label: '3'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=4'
+                            label: '4'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=5'
+                            label: '5'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=6'
+                            label: '6'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=7'
+                            label: '7'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=8'
+                            label: '8'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=9'
+                            label: '9'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=10'
+                            label: '10'
+                            active: false
+                          -
+                            url: null
+                            label: ...
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=44'
+                            label: '44'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=45'
+                            label: '45'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=2'
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'https://easywordsapp.ru/api/not-known'
+                      per_page:
+                        type: integer
+                        example: 20
+                      to:
+                        type: integer
+                        example: 20
+                      total:
+                        type: integer
+                        example: 892
+      tags:
+        - Words
+  /api/all:
+    get:
+      summary: 'List of all words'
+      operationId: listOfAllWords
+      description: 'Get list of all words'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 11705
+                      original: buchstabieren
+                      translated: 'читать по складам; произносить по буквам'
+                      done_at: null
+                      starred: false
+                      user_id: 16
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-10-05T10:14:44.000000Z'
+                      shared_by: null
+                    -
+                      id: 11706
+                      original: leben
+                      translated: 'жить; существовать'
+                      done_at: null
+                      starred: false
+                      user_id: 16
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-10-05T10:14:44.000000Z'
+                      shared_by: null
+                    -
+                      id: 11707
+                      original: lesen
+                      translated: читать
+                      done_at: null
+                      starred: false
+                      user_id: 16
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-10-05T10:14:44.000000Z'
+                      shared_by: null
+                  links:
+                    first: 'https://easywordsapp.ru/api/not-known?page=1'
+                    last: 'https://easywordsapp.ru/api/not-known?page=45'
+                    prev: null
+                    next: 'https://easywordsapp.ru/api/not-known?page=2'
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 45
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=2'
+                        label: '2'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=3'
+                        label: '3'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=4'
+                        label: '4'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=5'
+                        label: '5'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=6'
+                        label: '6'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=7'
+                        label: '7'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=8'
+                        label: '8'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=9'
+                        label: '9'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=10'
+                        label: '10'
+                        active: false
+                      -
+                        url: null
+                        label: ...
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=44'
+                        label: '44'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=45'
+                        label: '45'
+                        active: false
+                      -
+                        url: 'https://easywordsapp.ru/api/not-known?page=2'
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'https://easywordsapp.ru/api/not-known'
+                    per_page: 20
+                    to: 20
+                    total: 892
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 11705
+                        original: buchstabieren
+                        translated: 'читать по складам; произносить по буквам'
+                        done_at: null
+                        starred: false
+                        user_id: 16
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-10-05T10:14:44.000000Z'
+                        shared_by: null
+                      -
+                        id: 11706
+                        original: leben
+                        translated: 'жить; существовать'
+                        done_at: null
+                        starred: false
+                        user_id: 16
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-10-05T10:14:44.000000Z'
+                        shared_by: null
+                      -
+                        id: 11707
+                        original: lesen
+                        translated: читать
+                        done_at: null
+                        starred: false
+                        user_id: 16
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-10-05T10:14:44.000000Z'
+                        shared_by: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 11705
+                        original:
+                          type: string
+                          example: buchstabieren
+                        translated:
+                          type: string
+                          example: 'читать по складам; произносить по буквам'
+                        done_at:
+                          type: string
+                          example: null
+                        starred:
+                          type: boolean
+                          example: false
+                        user_id:
+                          type: integer
+                          example: 16
+                        language:
+                          type: string
+                          example: DE
+                        views:
+                          type: integer
+                          example: 0
+                        from_sample:
+                          type: boolean
+                          example: true
+                        created_at:
+                          type: string
+                          example: '2021-10-05T10:14:44.000000Z'
+                        shared_by:
+                          type: string
+                          example: null
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'https://easywordsapp.ru/api/not-known?page=1'
+                      last:
+                        type: string
+                        example: 'https://easywordsapp.ru/api/not-known?page=45'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: 'https://easywordsapp.ru/api/not-known?page=2'
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 45
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=2'
+                            label: '2'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=3'
+                            label: '3'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=4'
+                            label: '4'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=5'
+                            label: '5'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=6'
+                            label: '6'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=7'
+                            label: '7'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=8'
+                            label: '8'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=9'
+                            label: '9'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=10'
+                            label: '10'
+                            active: false
+                          -
+                            url: null
+                            label: ...
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=44'
+                            label: '44'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=45'
+                            label: '45'
+                            active: false
+                          -
+                            url: 'https://easywordsapp.ru/api/not-known?page=2'
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'https://easywordsapp.ru/api/not-known'
+                      per_page:
+                        type: integer
+                        example: 20
+                      to:
+                        type: integer
+                        example: 20
+                      total:
+                        type: integer
+                        example: 892
+      tags:
+        - Words
+  '/api/words/{word}/viewed':
+    get:
+      summary: 'Mark Viewed'
+      operationId: markViewed
+      description: 'Default get request which is need for increasing of VIEWS counter.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 2
+                    original: 'der Cognac'
+                    translated: Коньяк
+                    done_at: null
+                    starred: true
+                    user_id: 1
+                    language: DE
+                    views: 9
+                    created_at: '2021-08-26T05:57:00.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      original:
+                        type: string
+                        example: 'der Cognac'
+                      translated:
+                        type: string
+                        example: Коньяк
+                      done_at:
+                        type: string
+                        example: null
+                      starred:
+                        type: boolean
+                        example: true
+                      user_id:
+                        type: integer
+                        example: 1
+                      language:
+                        type: string
+                        example: DE
+                      views:
+                        type: integer
+                        example: 9
+                      created_at:
+                        type: string
+                        example: '2021-08-26T05:57:00.000000Z'
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No query results for model [App\Models\Word].'
+                properties:
+                  message:
+                    type: string
+                    example: 'No query results for model [App\Models\Word].'
+      tags:
+        - Words
+    parameters:
+      -
+        in: path
+        name: word
+        description: 'The ID of word. Example=2'
+        example: 5
+        required: true
+        schema:
+          type: integer
+  '/api/words/{word}/known/{value}':
+    get:
+      summary: 'Mark Known'
+      operationId: markKnown
+      description: 'If you mark this word as known, we put current timestamp in done_at column. Also you can mark corrent word as unknown. In this case you should pass 0 as value param'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 2
+                    original: 'der Cognac'
+                    translated: Коньяк
+                    done_at: '2021-09-02T18:53:27.000000Z'
+                    starred: true
+                    user_id: 1
+                    language: DE
+                    views: 9
+                    created_at: '2021-08-26T05:57:00.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      original:
+                        type: string
+                        example: 'der Cognac'
+                      translated:
+                        type: string
+                        example: Коньяк
+                      done_at:
+                        type: string
+                        example: '2021-09-02T18:53:27.000000Z'
+                      starred:
+                        type: boolean
+                        example: true
+                      user_id:
+                        type: integer
+                        example: 1
+                      language:
+                        type: string
+                        example: DE
+                      views:
+                        type: integer
+                        example: 9
+                      created_at:
+                        type: string
+                        example: '2021-08-26T05:57:00.000000Z'
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No query results for model [App\Models\Word].'
+                properties:
+                  message:
+                    type: string
+                    example: 'No query results for model [App\Models\Word].'
+      tags:
+        - Words
+    parameters:
+      -
+        in: path
+        name: word
+        description: 'The ID of word. Example=2'
+        example: 14
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: value
+        description: 'Need to pass 0 or 1, should we mark this word known (1) or unknown (0). Example=1'
+        example: 18
+        required: true
+        schema:
+          type: integer
+  '/api/words/{word}/starred/{value}':
+    get:
+      summary: 'Mark Starred'
+      operationId: markStarred
+      description: 'You can mark word as starred in case later to learn only starred words. To makr word as starred, pass value 1. To mark as unstarred, pass 0'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 2
+                    original: 'der Cognac'
+                    translated: Коньяк
+                    done_at: '2021-09-02T18:53:27.000000Z'
+                    starred: true
+                    user_id: 1
+                    language: DE
+                    views: 9
+                    created_at: '2021-08-26T05:57:00.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      original:
+                        type: string
+                        example: 'der Cognac'
+                      translated:
+                        type: string
+                        example: Коньяк
+                      done_at:
+                        type: string
+                        example: '2021-09-02T18:53:27.000000Z'
+                      starred:
+                        type: boolean
+                        example: true
+                      user_id:
+                        type: integer
+                        example: 1
+                      language:
+                        type: string
+                        example: DE
+                      views:
+                        type: integer
+                        example: 9
+                      created_at:
+                        type: string
+                        example: '2021-08-26T05:57:00.000000Z'
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No query results for model [App\Models\Word].'
+                properties:
+                  message:
+                    type: string
+                    example: 'No query results for model [App\Models\Word].'
+      tags:
+        - Words
+    parameters:
+      -
+        in: path
+        name: word
+        description: 'The ID of word. Example=2'
+        example: 14
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: value
+        description: 'Need to pass 0 or 1, should we mark this word starred (1) or unstar it (0). Example=1'
+        example: 14
+        required: true
+        schema:
+          type: integer
+  '/api/words/{word}/share/{user}':
+    get:
+      summary: 'Share Word'
+      operationId: shareWord
+      description: 'Using this functionality you can create new word for different user. This way system will diplicate word and change user ID to passed one.'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        201:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 2
+                    original: 'der Cognac'
+                    translated: Коньяк
+                    done_at: '2021-09-02T18:53:27.000000Z'
+                    starred: true
+                    user_id: 2
+                    language: DE
+                    views: 0
+                    created_at: '2021-08-26T05:57:00.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      original:
+                        type: string
+                        example: 'der Cognac'
+                      translated:
+                        type: string
+                        example: Коньяк
+                      done_at:
+                        type: string
+                        example: '2021-09-02T18:53:27.000000Z'
+                      starred:
+                        type: boolean
+                        example: true
+                      user_id:
+                        type: integer
+                        example: 2
+                      language:
+                        type: string
+                        example: DE
+                      views:
+                        type: integer
+                        example: 0
+                      created_at:
+                        type: string
+                        example: '2021-08-26T05:57:00.000000Z'
+        401:
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No query results for model [App\Models\Word].'
+                properties:
+                  message:
+                    type: string
+                    example: 'No query results for model [App\Models\Word].'
+        422:
+          description: 'Validation Error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Word already exists'
+                properties:
+                  message:
+                    type: string
+                    example: 'Word already exists'
+      tags:
+        - Words
+    parameters:
+      -
+        in: path
+        name: word
+        description: 'The ID of word. Example=2'
+        example: 11
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: user
+        description: ''
+        example: explicabo
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: value
+        description: 'User ID which we need to copy word. Example=2'
+        example: 18
+        required: true
+        schema:
+          type: integer
+  '/api/random/{number}':
+    get:
+      summary: 'Random words'
+      operationId: randomWords
+      description: 'Get random words based on default language and number of words as param'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 11705
+                      original: buchstabieren
+                      translated: 'читать по складам; произносить по буквам'
+                      done_at: null
+                      starred: false
+                      user_id: 16
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-10-05T10:14:44.000000Z'
+                      shared_by: null
+                    -
+                      id: 11706
+                      original: leben
+                      translated: 'жить; существовать'
+                      done_at: null
+                      starred: false
+                      user_id: 16
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-10-05T10:14:44.000000Z'
+                      shared_by: null
+                    -
+                      id: 11707
+                      original: lesen
+                      translated: читать
+                      done_at: null
+                      starred: false
+                      user_id: 16
+                      language: DE
+                      views: 0
+                      from_sample: true
+                      created_at: '2021-10-05T10:14:44.000000Z'
+                      shared_by: null
+                  links:
+                    first: 'https://easywordsapp.ru/api/not-known?page=1'
+                    last: 'https://easywordsapp.ru/api/not-known?page=45'
+                    prev: null
+                    next: 'https://easywordsapp.ru/api/not-known?page=2'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 11705
+                        original: buchstabieren
+                        translated: 'читать по складам; произносить по буквам'
+                        done_at: null
+                        starred: false
+                        user_id: 16
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-10-05T10:14:44.000000Z'
+                        shared_by: null
+                      -
+                        id: 11706
+                        original: leben
+                        translated: 'жить; существовать'
+                        done_at: null
+                        starred: false
+                        user_id: 16
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-10-05T10:14:44.000000Z'
+                        shared_by: null
+                      -
+                        id: 11707
+                        original: lesen
+                        translated: читать
+                        done_at: null
+                        starred: false
+                        user_id: 16
+                        language: DE
+                        views: 0
+                        from_sample: true
+                        created_at: '2021-10-05T10:14:44.000000Z'
+                        shared_by: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 11705
+                        original:
+                          type: string
+                          example: buchstabieren
+                        translated:
+                          type: string
+                          example: 'читать по складам; произносить по буквам'
+                        done_at:
+                          type: string
+                          example: null
+                        starred:
+                          type: boolean
+                          example: false
+                        user_id:
+                          type: integer
+                          example: 16
+                        language:
+                          type: string
+                          example: DE
+                        views:
+                          type: integer
+                          example: 0
+                        from_sample:
+                          type: boolean
+                          example: true
+                        created_at:
+                          type: string
+                          example: '2021-10-05T10:14:44.000000Z'
+                        shared_by:
+                          type: string
+                          example: null
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'https://easywordsapp.ru/api/not-known?page=1'
+                      last:
+                        type: string
+                        example: 'https://easywordsapp.ru/api/not-known?page=45'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: 'https://easywordsapp.ru/api/not-known?page=2'
+      tags:
+        - Words
+    parameters:
+      -
+        in: path
+        name: number
+        description: ''
+        example: in
+        required: true
+        schema:
+          type: string
+  /api/user/password:
+    put:
+      summary: 'Change user password'
+      operationId: changeUserPassword
+      description: 'This API endpoint you will use for  changing user password'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 1
+                    name: 'Mr. Nelson Haag'
+                    email: admin@admin.com
+                    email_verified_at: '2021-08-26T05:57:00.000000Z'
+                    current_team_id: null
+                    profile_photo_path: null
+                    created_at: '2021-08-26T05:57:00.000000Z'
+                    updated_at: '2021-08-26T05:57:00.000000Z'
+                    deleted_at: null
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Mr. Nelson Haag'
+                      email:
+                        type: string
+                        example: admin@admin.com
+                      email_verified_at:
+                        type: string
+                        example: '2021-08-26T05:57:00.000000Z'
+                      current_team_id:
+                        type: string
+                        example: null
+                      profile_photo_path:
+                        type: string
+                        example: null
+                      created_at:
+                        type: string
+                        example: '2021-08-26T05:57:00.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2021-08-26T05:57:00.000000Z'
+                      deleted_at:
+                        type: string
+                        example: null
+        422:
+          description: 'validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    email:
+                      - 'The provided credentials are incorrect.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The provided credentials are incorrect.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                current_password:
+                  type: string
+                  description: 'Current password of user.'
+                  example: '"password"'
+                password:
+                  type: string
+                  description: 'Your new password.'
+                  example: '"new_password"'
+                password_confirmation:
+                  type: string
+                  description: 'Retype your new password.'
+                  example: '"new_password"'
+              required:
+                - current_password
+                - password
+                - password_confirmation
+  /api/signout:
+    get:
+      summary: 'Revoke current token'
+      operationId: revokeCurrentToken
+      description: 'Using this endpoint signout and delete current token'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n \"success\": \"ok\",\n}"
+      tags:
+        - Authentication
+  /api/login:
+    post:
+      summary: 'Get Plain text token'
+      operationId: getPlainTextToken
+      description: 'Using this endpoint you can get Plain token token'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n \"token\": \"sfgdfgfgfds\",\n}"
+        422:
+          description: 'validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    email:
+                      - 'The provided credentials are incorrect.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The provided credentials are incorrect.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Email of authenticated user.'
+                  example: '"admin@admin.com"'
+                password:
+                  type: string
+                  description: 'Password of authenticated user.'
+                  example: '"password"'
+              required:
+                - email
+                - password
+  /api/token:
+    post:
+      summary: 'Get JSON token'
+      operationId: getJSONToken
+      description: 'Using this endpoint you can get JSON token. This is the main endpoint which you will use for working with third-party apps'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n \"token\": \"2|n4a2Mnfe6FrEpZ0BqbWUiYA84g5USkuGpAcKTyMf\",\n}"
+        422:
+          description: 'validation error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The given data was invalid.'
+                  errors:
+                    email:
+                      - 'The provided credentials are incorrect.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The given data was invalid.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The provided credentials are incorrect.'
+                        items:
+                          type: string
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Email of authenticated user.'
+                  example: '"admin@admin.com"'
+                password:
+                  type: string
+                  description: 'Password of authenticated user.'
+                  example: '"password"'
+                device_name:
+                  type: string
+                  description: 'Type of device which will use this App.'
+                  example: '"Insomnia"'
+              required:
+                - email
+                - password
+                - device_name
   /api/statistics:
     get:
       summary: 'All statistics'
+      operationId: allStatistics
       description: 'Get all analytics information for displaying widgets'
       parameters:
         -
@@ -285,6 +3788,34 @@ paths:
                         created_at: '2021-08-30T16:47:30.000000Z'
                     items:
                       type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 2
+                        original:
+                          type: string
+                          example: 'der Cognac'
+                        translated:
+                          type: string
+                          example: Коньяк
+                        done_at:
+                          type: string
+                          example: null
+                        starred:
+                          type: boolean
+                          example: true
+                        user_id:
+                          type: integer
+                          example: 1
+                        language:
+                          type: string
+                          example: DE
+                        views:
+                          type: integer
+                          example: 7
+                        created_at:
+                          type: string
+                          example: '2021-08-26T05:57:00.000000Z'
                   added_today:
                     type: array
                     example:
@@ -300,6 +3831,34 @@ paths:
                         created_at: '2021-09-02T11:55:21.000000Z'
                     items:
                       type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 27
+                        original:
+                          type: string
+                          example: fasdf
+                        translated:
+                          type: string
+                          example: аывап
+                        done_at:
+                          type: string
+                          example: null
+                        starred:
+                          type: boolean
+                          example: false
+                        user_id:
+                          type: integer
+                          example: 1
+                        language:
+                          type: string
+                          example: DE
+                        views:
+                          type: integer
+                          example: 0
+                        created_at:
+                          type: string
+                          example: '2021-09-02T11:55:21.000000Z'
                   updated_this_month:
                     type: integer
                     example: 1
@@ -320,2141 +3879,28 @@ paths:
                     example: Unauthenticated.
       tags:
         - Analytics
-  /api/user/password:
-    put:
-      summary: 'Change user password'
-      description: 'This API endpoint you will use for  changing user password'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    id: 1
-                    name: 'Mr. Nelson Haag'
-                    email: admin@admin.com
-                    email_verified_at: '2021-08-26T05:57:00.000000Z'
-                    current_team_id: null
-                    profile_photo_path: null
-                    created_at: '2021-08-26T05:57:00.000000Z'
-                    updated_at: '2021-08-26T05:57:00.000000Z'
-                    deleted_at: null
-                properties:
-                  data:
-                    type: object
-                    example:
-                      id: 1
-                      name: 'Mr. Nelson Haag'
-                      email: admin@admin.com
-                      email_verified_at: '2021-08-26T05:57:00.000000Z'
-                      current_team_id: null
-                      profile_photo_path: null
-                      created_at: '2021-08-26T05:57:00.000000Z'
-                      updated_at: '2021-08-26T05:57:00.000000Z'
-                      deleted_at: null
-        422:
-          description: 'validation error'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'The given data was invalid.'
-                  errors:
-                    email:
-                      - 'The provided credentials are incorrect.'
-                properties:
-                  message:
-                    type: string
-                    example: 'The given data was invalid.'
-                  errors:
-                    type: object
-                    example:
-                      email:
-                        - 'The provided credentials are incorrect.'
-      tags:
-        - Authentication
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                current_password:
-                  type: string
-                  description: 'Current password of user.'
-                  example: '"password"'
-                password:
-                  type: string
-                  description: 'Your new password.'
-                  example: '"new_password"'
-                password_confirmation:
-                  type: string
-                  description: 'Retype your new password.'
-                  example: '"new_password"'
-              required:
-                - current_password
-                - password
-                - password_confirmation
-  /api/login:
-    post:
-      summary: 'Get Plain text token'
-      description: 'Using this endpoint you can get Plain token token'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: "{\n \"token\": \"sfgdfgfgfds\",\n}"
-        422:
-          description: 'validation error'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'The given data was invalid.'
-                  errors:
-                    email:
-                      - 'The provided credentials are incorrect.'
-                properties:
-                  message:
-                    type: string
-                    example: 'The given data was invalid.'
-                  errors:
-                    type: object
-                    example:
-                      email:
-                        - 'The provided credentials are incorrect.'
-      tags:
-        - Authentication
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                  description: 'Email of authenticated user.'
-                  example: '"admin@admin.com"'
-                password:
-                  type: string
-                  description: 'Password of authenticated user.'
-                  example: '"password"'
-              required:
-                - email
-                - password
-  /api/token:
-    post:
-      summary: 'Get JSON token'
-      description: 'Using this endpoint you can get JSON token. This is the main endpoint which you will use for working with third-party apps'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: "{\n \"token\": \"2|n4a2Mnfe6FrEpZ0BqbWUiYA84g5USkuGpAcKTyMf\",\n}"
-        422:
-          description: 'validation error'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'The given data was invalid.'
-                  errors:
-                    email:
-                      - 'The provided credentials are incorrect.'
-                properties:
-                  message:
-                    type: string
-                    example: 'The given data was invalid.'
-                  errors:
-                    type: object
-                    example:
-                      email:
-                        - 'The provided credentials are incorrect.'
-      tags:
-        - Authentication
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                  description: 'Email of authenticated user.'
-                  example: '"admin@admin.com"'
-                password:
-                  type: string
-                  description: 'Password of authenticated user.'
-                  example: '"password"'
-                device_name:
-                  type: string
-                  description: 'Type of device which will use this App.'
-                  example: '"Insomnia"'
-              required:
-                - email
-                - password
-                - device_name
-  /api/signout:
-    get:
-      summary: 'Revoke current token'
-      description: 'Using this endpoint signout and delete current token'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: "{\n \"success\": \"ok\",\n}"
-      tags:
-        - Authentication
-  /api/user:
-    get:
-      summary: 'User Information'
-      description: 'Getting authenticated user information'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        401:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-      tags:
-        - Other
-  '/api/users/{user_id}/words':
-    get:
-      summary: 'List of user words'
-      description: 'Getting list of words of other users. Currently not implemented.'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        503:
-          description: ''
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: ''
-        401:
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-      tags:
-        - Other
-    parameters:
-      -
-        in: path
-        name: user_id
-        description: 'The ID of the user.'
-        example: 18
-        required: true
-        schema:
-          type: integer
-  '/api/users/{user}/words':
-    post:
-      summary: 'Store word by user'
-      description: 'Creating new word of passed user. Currently this functionality not implemented'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        503:
-          description: ''
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: ''
-      tags:
-        - Other
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                original:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: uldpotgbwvvfisahktvlpnvoxnndfkokeueuzeyylndieuetdsbgkydhaczxxgztbtbnqiolacugbwwqvuxwkaswnzntvfwfkthwswksgxbegoxyggicxethssgbnwukqlbrxvcvdfxmodfxytibooyztspgrliweymdplpbiudorqnconkggdvlahdrbjhonobfgzuq
-                translated:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: ttbqvyiovjelvtqesrcnaydiujifwbmjrwrwculpwvaqbxibbiguckwguountowdyiivclfvhngpfscgjhjrmdcxkxwqsmarzuihptisldnltcshlokidveuhnsihcgjcocrzarliufdei
-                done_at:
-                  type: string
-                  description: 'Must be a valid date.'
-                  example: '2021-09-29T11:53:49'
-                starred:
-                  type: boolean
-                  description: ''
-                  example: false
-                language:
-                  type: string
-                  description: 'Must not be greater than 5 characters.'
-                  example: egizo
-                views:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: ixbqujcpptfcjxvthawdegenzciqq
-              required:
-                - original
-                - translated
-                - starred
-                - language
-                - views
-    parameters:
-      -
-        in: path
-        name: user
-        description: ''
-        example: 19
-        required: true
-        schema:
-          type: integer
-  '/api/samples/export/{language}':
-    get:
-      summary: 'Export Samples'
-      description: 'User can load samples from specific language to it''s own database'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        204:
-          description: success
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-      tags:
-        - Samples
-    parameters:
-      -
-        in: path
-        name: language
-        description: 'Language for export. Example=DE'
-        example: quia
-        required: true
-        schema:
-          type: string
-  /api/samples:
-    get:
-      summary: 'List of Samples'
-      description: 'Get list of samples which we need for import process.'
-      parameters:
-        -
-          in: query
-          name: language
-          description: 'Language which we need to get list of words. Example=DE'
-          example: voluptatem
-          required: true
-          schema:
-            type: string
-            description: 'Language which we need to get list of words. Example=DE'
-            example: voluptatem
-        -
-          in: query
-          name: page
-          description: 'Page number if you need to get new list of samples. Example=1'
-          example: 7
-          required: false
-          schema:
-            type: integer
-            description: 'Page number if you need to get new list of samples. Example=1'
-            example: 7
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    -
-                      id: 1
-                      original: 'der Sekt'
-                      translated: Шампанское
-                      language: DE
-                      created_at: '2021-08-26T05:57:00.000000Z'
-                    -
-                      id: 2
-                      original: 'der Cognac'
-                      translated: Коньяк
-                      language: DE
-                      created_at: '2021-08-26T05:57:00.000000Z'
-                  links:
-                    first: 'http://cards.sergeyem.test:8000/api/samples?page=1'
-                    last: 'http://cards.sergeyem.test:8000/api/samples?page=1'
-                    prev: null
-                    next: null
-                  meta:
-                    current_page: 1
-                    from: 1
-                    last_page: 1
-                    links:
-                      -
-                        url: null
-                        label: '&laquo; Previous'
-                        active: false
-                      -
-                        url: 'http://cards.sergeyem.test:8000/api/samples?page=1'
-                        label: '1'
-                        active: true
-                      -
-                        url: null
-                        label: 'Next &raquo;'
-                        active: false
-                    path: 'http://cards.sergeyem.test:8000/api/samples'
-                    per_page: '20'
-                    to: 4
-                    total: 4
-                properties:
-                  data:
-                    type: array
-                    example:
-                      -
-                        id: 1
-                        original: 'der Sekt'
-                        translated: Шампанское
-                        language: DE
-                        created_at: '2021-08-26T05:57:00.000000Z'
-                      -
-                        id: 2
-                        original: 'der Cognac'
-                        translated: Коньяк
-                        language: DE
-                        created_at: '2021-08-26T05:57:00.000000Z'
-                    items:
-                      type: object
-                  links:
-                    type: object
-                    example:
-                      first: 'http://cards.sergeyem.test:8000/api/samples?page=1'
-                      last: 'http://cards.sergeyem.test:8000/api/samples?page=1'
-                      prev: null
-                      next: null
-                  meta:
-                    type: object
-                    example:
-                      current_page: 1
-                      from: 1
-                      last_page: 1
-                      links:
-                        -
-                          url: null
-                          label: '&laquo; Previous'
-                          active: false
-                        -
-                          url: 'http://cards.sergeyem.test:8000/api/samples?page=1'
-                          label: '1'
-                          active: true
-                        -
-                          url: null
-                          label: 'Next &raquo;'
-                          active: false
-                      path: 'http://cards.sergeyem.test:8000/api/samples'
-                      per_page: '20'
-                      to: 4
-                      total: 4
-      tags:
-        - Samples
-  '/api/samples/{id}':
-    get:
-      summary: 'Get sample by ID'
-      description: 'Getting detail information about sample by it''s ID'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    id: 2
-                    original: 'der Cognac'
-                    translated: Коньяк
-                    language: DE
-                    created_at: '2021-08-26T05:57:00.000000Z'
-                properties:
-                  data:
-                    type: object
-                    example:
-                      id: 2
-                      original: 'der Cognac'
-                      translated: Коньяк
-                      language: DE
-                      created_at: '2021-08-26T05:57:00.000000Z'
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-        404:
-          description: 'Not Found'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'No query results for model [App\Models\Sample].'
-                properties:
-                  message:
-                    type: string
-                    example: 'No query results for model [App\Models\Sample].'
-      tags:
-        - Samples
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of sample. Example=2'
-        example: 4
-        required: true
-        schema:
-          type: integer
-  /api/settings:
-    get:
-      summary: 'Settings Information'
-      description: 'Get current list of authenticated user with it''s key and value'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    paginate: '20'
-                    default_language: DE
-                    starred_enabled: ''
-                    known_enabled: ''
-                    fresh_first: '1'
-                    languages_list:
-                      - DE
-                      - EN
-                    main_language: RU
-                properties:
-                  data:
-                    type: object
-                    example:
-                      paginate: '20'
-                      default_language: DE
-                      starred_enabled: ''
-                      known_enabled: ''
-                      fresh_first: '1'
-                      languages_list:
-                        - DE
-                        - EN
-                      main_language: RU
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-      tags:
-        - Settings
-    post:
-      summary: 'Change Settings'
-      description: 'Here you can change any setting value. For this purposes in body params you need to pass key of setting and it''s value'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        204:
-          description: success
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-      tags:
-        - Settings
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: 'Name of setting.'
-                  example: '"main_language"'
-                value:
-                  type: string
-                  description: 'Setting value.'
-                  example: '"RU"'
-              required:
-                - name
-                - value
-  /api/short:
-    get:
-      summary: 'Get users list'
-      description: 'Receive short list of users for dropdown options. Here we get only ID and name of user.'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    -
-                      id: 12
-                      name: 'Ksenia Emelyanova'
-                properties:
-                  data:
-                    type: array
-                    example:
-                      -
-                        id: 12
-                        name: 'Ksenia Emelyanova'
-                    items:
-                      type: object
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-      tags:
-        - Users
-  /api/me:
-    get:
-      summary: 'Profile Info'
-      description: 'Get current authenticated user data'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    id: 1
-                    name: 'Mr. Nelson Haag'
-                    email: admin@admin.com
-                    email_verified_at: '2021-08-26T05:57:00.000000Z'
-                    current_team_id: null
-                    profile_photo_path: null
-                    created_at: '2021-08-26T05:57:00.000000Z'
-                    updated_at: '2021-08-26T05:57:00.000000Z'
-                    deleted_at: null
-                properties:
-                  data:
-                    type: object
-                    example:
-                      id: 1
-                      name: 'Mr. Nelson Haag'
-                      email: admin@admin.com
-                      email_verified_at: '2021-08-26T05:57:00.000000Z'
-                      current_team_id: null
-                      profile_photo_path: null
-                      created_at: '2021-08-26T05:57:00.000000Z'
-                      updated_at: '2021-08-26T05:57:00.000000Z'
-                      deleted_at: null
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-      tags:
-        - Users
-  /api/words:
-    get:
-      summary: 'List of Words'
-      description: 'Get list of words which we need for learning. Getting words with limit which we store in settings.'
-      parameters:
-        -
-          in: query
-          name: language
-          description: 'Language which we need to get list of words. Example=DE'
-          example: voluptatum
-          required: true
-          schema:
-            type: string
-            description: 'Language which we need to get list of words. Example=DE'
-            example: voluptatum
-        -
-          in: query
-          name: page
-          description: 'Page number if you need to get new list of words. Example=1'
-          example: 8
-          required: false
-          schema:
-            type: integer
-            description: 'Page number if you need to get new list of words. Example=1'
-            example: 8
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    -
-                      id: 1
-                      original: 'der Sekt'
-                      translated: Шампанское
-                      done_at: null
-                      starred: false
-                      user_id: 1
-                      language: DE
-                      views: 0
-                      created_at: '2021-08-26T05:57:00.000000Z'
-                    -
-                      id: 2
-                      original: 'der Cognac'
-                      translated: Коньяк
-                      done_at: null
-                      starred: false
-                      user_id: 1
-                      language: DE
-                      views: 0
-                      created_at: '2021-08-26T05:57:00.000000Z'
-                    -
-                      id: 3
-                      original: 'die Sauerkraut'
-                      translated: 'Квашеная капуста'
-                      done_at: null
-                      starred: false
-                      user_id: 1
-                      language: DE
-                      views: 0
-                      created_at: '2021-08-26T05:57:00.000000Z'
-                    -
-                      id: 6
-                      original: voll
-                      translated: Полный
-                      done_at: null
-                      starred: false
-                      user_id: 1
-                      language: DE
-                      views: 0
-                      created_at: '2021-08-26T05:58:17.000000Z'
-                  links:
-                    first: 'http://cards.sergeyem.test:8000/api/words?page=1'
-                    last: 'http://cards.sergeyem.test:8000/api/words?page=1'
-                    prev: null
-                    next: null
-                  meta:
-                    current_page: 1
-                    from: 1
-                    last_page: 1
-                    links:
-                      -
-                        url: null
-                        label: '&laquo; Previous'
-                        active: false
-                      -
-                        url: 'http://cards.sergeyem.test:8000/api/words?page=1'
-                        label: '1'
-                        active: true
-                      -
-                        url: null
-                        label: 'Next &raquo;'
-                        active: false
-                    path: 'http://cards.sergeyem.test:8000/api/words'
-                    per_page: '20'
-                    to: 4
-                    total: 4
-                properties:
-                  data:
-                    type: array
-                    example:
-                      -
-                        id: 1
-                        original: 'der Sekt'
-                        translated: Шампанское
-                        done_at: null
-                        starred: false
-                        user_id: 1
-                        language: DE
-                        views: 0
-                        created_at: '2021-08-26T05:57:00.000000Z'
-                      -
-                        id: 2
-                        original: 'der Cognac'
-                        translated: Коньяк
-                        done_at: null
-                        starred: false
-                        user_id: 1
-                        language: DE
-                        views: 0
-                        created_at: '2021-08-26T05:57:00.000000Z'
-                      -
-                        id: 3
-                        original: 'die Sauerkraut'
-                        translated: 'Квашеная капуста'
-                        done_at: null
-                        starred: false
-                        user_id: 1
-                        language: DE
-                        views: 0
-                        created_at: '2021-08-26T05:57:00.000000Z'
-                      -
-                        id: 6
-                        original: voll
-                        translated: Полный
-                        done_at: null
-                        starred: false
-                        user_id: 1
-                        language: DE
-                        views: 0
-                        created_at: '2021-08-26T05:58:17.000000Z'
-                    items:
-                      type: object
-                  links:
-                    type: object
-                    example:
-                      first: 'http://cards.sergeyem.test:8000/api/words?page=1'
-                      last: 'http://cards.sergeyem.test:8000/api/words?page=1'
-                      prev: null
-                      next: null
-                  meta:
-                    type: object
-                    example:
-                      current_page: 1
-                      from: 1
-                      last_page: 1
-                      links:
-                        -
-                          url: null
-                          label: '&laquo; Previous'
-                          active: false
-                        -
-                          url: 'http://cards.sergeyem.test:8000/api/words?page=1'
-                          label: '1'
-                          active: true
-                        -
-                          url: null
-                          label: 'Next &raquo;'
-                          active: false
-                      path: 'http://cards.sergeyem.test:8000/api/words'
-                      per_page: '20'
-                      to: 4
-                      total: 4
-      tags:
-        - Words
-    post:
-      summary: 'Create Word'
-      description: 'Here you can create new word. Before saving system will check for existing ford and if it is exist it will throw validation error.'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    id: 6
-                    original: voll
-                    translated: Полный
-                    done_at: null
-                    starred: false
-                    user_id: 1
-                    language: DE
-                    views: 0
-                properties:
-                  data:
-                    type: object
-                    example:
-                      id: 6
-                      original: voll
-                      translated: Полный
-                      done_at: null
-                      starred: false
-                      user_id: 1
-                      language: DE
-                      views: 0
-        422:
-          description: 'Validation Error'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'Word already exists'
-                properties:
-                  message:
-                    type: string
-                    example: 'Word already exists'
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-      tags:
-        - Words
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                original:
-                  type: string
-                  description: 'Original name of word.'
-                  example: '"wichtig"'
-                translated:
-                  type: string
-                  description: 'Translated word value.'
-                  example: '"Важно"'
-                done_at:
-                  type: string
-                  description: 'Should we mark this word as known.'
-                  example: 'null'
-                starred:
-                  type: boolean
-                  description: 'Mark this word as starred or not.'
-                  example: false
-                user_id:
-                  type: string
-                  description: ''
-                  example: null
-                language:
-                  type: string
-                  description: 'What language for this word you creating.'
-                  example: '"DE"'
-                views:
-                  type: integer
-                  description: 'Number of views we create by default for this word.'
-                  example: 0
-                shared_by:
-                  type: integer
-                  description: ''
-                  example: 16
-              required:
-                - original
-                - translated
-                - language
-  '/api/words/{id}':
-    get:
-      summary: 'Get word by ID'
-      description: 'Getting detail information about word by it''s ID'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    id: 2
-                    original: 'der Cognac'
-                    translated: Коньяк
-                    done_at: null
-                    starred: false
-                    user_id: 1
-                    language: DE
-                    views: 7
-                    created_at: '2021-08-26T05:57:00.000000Z'
-                properties:
-                  data:
-                    type: object
-                    example:
-                      id: 2
-                      original: 'der Cognac'
-                      translated: Коньяк
-                      done_at: null
-                      starred: false
-                      user_id: 1
-                      language: DE
-                      views: 7
-                      created_at: '2021-08-26T05:57:00.000000Z'
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-        404:
-          description: 'Not Found'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'No query results for model [App\Models\Word].'
-                properties:
-                  message:
-                    type: string
-                    example: 'No query results for model [App\Models\Word].'
-      tags:
-        - Words
-    put:
-      summary: 'Update word by ID'
-      description: 'Update word information. Currently we get 503 error. Route do not implemented yet.'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        503:
-          description: 'Not implemented'
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: ''
-      tags:
-        - Words
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                original:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: kuzhvirfaqavrzroyiacmollirbfuoguysvlicrqxaywroumrgihwhlkqmbrjzuhzvckvkbrjnimgcmxhruzruzhontmoznkekcphucvzbkzolfywwcjigznnarjsyrwwjhsccofvjvlujcfejcuqdkbjheifrtqzzjdyqjjvabvsarjymfmh
-                translated:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: iytltbzzmhrxpxltoffgljlxpsnbympmahlukarirxflgvsskukkbskwcronlwbsrhcmmkkydlxcdujpdrjicxbujnibhdqsajztwakuymzmqvttvxgixottfjzihuxhskiabatfkxtbvfirellvxobndbccudkwksobzelolhfnqojpdifdxuv
-                done_at:
-                  type: string
-                  description: 'Must be a valid date.'
-                  example: '2021-09-29T11:53:49'
-                starred:
-                  type: boolean
-                  description: ''
-                  example: false
-                user_id:
-                  type: string
-                  description: ''
-                  example: dolorum
-                language:
-                  type: string
-                  description: 'Must not be greater than 5 characters.'
-                  example: inxf
-                views:
-                  type: string
-                  description: 'Must not be greater than 255 characters.'
-                  example: psvrbseqbfzcqkygkoscnylhgvlitxzkpgrthnsdpfxbnfslntoorsetfeeojjmpxgmhskarqlregkzziyolfaikxmabndmwcmanlseuqeeruzkoxtdqonqriudvkkfzgqkiikfwmclapcyzxzeloqsxcmhxqjktoyoxdslxyosvjetayngnyszjkdckwnuyixbrobxumaztjkigj
-                shared_by:
-                  type: integer
-                  description: ''
-                  example: 5
-              required:
-                - original
-                - translated
-                - starred
-                - user_id
-                - language
-                - views
-    delete:
-      summary: 'Delete word by ID'
-      description: 'Here you can remove word through database'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        204:
-          description: success
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-        404:
-          description: 'Not Found'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'No query results for model [App\Models\Word].'
-                properties:
-                  message:
-                    type: string
-                    example: 'No query results for model [App\Models\Word].'
-      tags:
-        - Words
-    parameters:
-      -
-        in: path
-        name: id
-        description: 'The ID of word. Example=2'
-        example: 6
-        required: true
-        schema:
-          type: integer
-  '/api/words/{word}/viewed':
-    get:
-      summary: 'Mark Viewed'
-      description: 'Default get request which is need for increasing of VIEWS counter.'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    id: 2
-                    original: 'der Cognac'
-                    translated: Коньяк
-                    done_at: null
-                    starred: true
-                    user_id: 1
-                    language: DE
-                    views: 9
-                    created_at: '2021-08-26T05:57:00.000000Z'
-                properties:
-                  data:
-                    type: object
-                    example:
-                      id: 2
-                      original: 'der Cognac'
-                      translated: Коньяк
-                      done_at: null
-                      starred: true
-                      user_id: 1
-                      language: DE
-                      views: 9
-                      created_at: '2021-08-26T05:57:00.000000Z'
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-        404:
-          description: 'Not Found'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'No query results for model [App\Models\Word].'
-                properties:
-                  message:
-                    type: string
-                    example: 'No query results for model [App\Models\Word].'
-      tags:
-        - Words
-    parameters:
-      -
-        in: path
-        name: word
-        description: 'The ID of word. Example=2'
-        example: 15
-        required: true
-        schema:
-          type: integer
-  '/api/words/{word}/known/{value}':
-    get:
-      summary: 'Mark Known'
-      description: 'If you mark this word as known, we put current timestamp in done_at column. Also you can mark corrent word as unknown. In this case you should pass 0 as value param'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    id: 2
-                    original: 'der Cognac'
-                    translated: Коньяк
-                    done_at: '2021-09-02T18:53:27.000000Z'
-                    starred: true
-                    user_id: 1
-                    language: DE
-                    views: 9
-                    created_at: '2021-08-26T05:57:00.000000Z'
-                properties:
-                  data:
-                    type: object
-                    example:
-                      id: 2
-                      original: 'der Cognac'
-                      translated: Коньяк
-                      done_at: '2021-09-02T18:53:27.000000Z'
-                      starred: true
-                      user_id: 1
-                      language: DE
-                      views: 9
-                      created_at: '2021-08-26T05:57:00.000000Z'
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-        404:
-          description: 'Not Found'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'No query results for model [App\Models\Word].'
-                properties:
-                  message:
-                    type: string
-                    example: 'No query results for model [App\Models\Word].'
-      tags:
-        - Words
-    parameters:
-      -
-        in: path
-        name: word
-        description: 'The ID of word. Example=2'
-        example: 8
-        required: true
-        schema:
-          type: integer
-      -
-        in: path
-        name: value
-        description: 'Need to pass 0 or 1, should we mark this word known (1) or unknown (0). Example=1'
-        example: 15
-        required: true
-        schema:
-          type: integer
-  '/api/words/{word}/starred/{value}':
-    get:
-      summary: 'Mark Starred'
-      description: 'You can mark word as starred in case later to learn only starred words. To makr word as starred, pass value 1. To mark as unstarred, pass 0'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    id: 2
-                    original: 'der Cognac'
-                    translated: Коньяк
-                    done_at: '2021-09-02T18:53:27.000000Z'
-                    starred: true
-                    user_id: 1
-                    language: DE
-                    views: 9
-                    created_at: '2021-08-26T05:57:00.000000Z'
-                properties:
-                  data:
-                    type: object
-                    example:
-                      id: 2
-                      original: 'der Cognac'
-                      translated: Коньяк
-                      done_at: '2021-09-02T18:53:27.000000Z'
-                      starred: true
-                      user_id: 1
-                      language: DE
-                      views: 9
-                      created_at: '2021-08-26T05:57:00.000000Z'
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-        404:
-          description: 'Not Found'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'No query results for model [App\Models\Word].'
-                properties:
-                  message:
-                    type: string
-                    example: 'No query results for model [App\Models\Word].'
-      tags:
-        - Words
-    parameters:
-      -
-        in: path
-        name: word
-        description: 'The ID of word. Example=2'
-        example: 16
-        required: true
-        schema:
-          type: integer
-      -
-        in: path
-        name: value
-        description: 'Need to pass 0 or 1, should we mark this word starred (1) or unstar it (0). Example=1'
-        example: 3
-        required: true
-        schema:
-          type: integer
-  '/api/words/{word}/share/{user}':
-    get:
-      summary: 'Share Word'
-      description: 'Using this functionality you can create new word for different user. This way system will diplicate word and change user ID to passed one.'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        201:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    id: 2
-                    original: 'der Cognac'
-                    translated: Коньяк
-                    done_at: '2021-09-02T18:53:27.000000Z'
-                    starred: true
-                    user_id: 2
-                    language: DE
-                    views: 0
-                    created_at: '2021-08-26T05:57:00.000000Z'
-                properties:
-                  data:
-                    type: object
-                    example:
-                      id: 2
-                      original: 'der Cognac'
-                      translated: Коньяк
-                      done_at: '2021-09-02T18:53:27.000000Z'
-                      starred: true
-                      user_id: 2
-                      language: DE
-                      views: 0
-                      created_at: '2021-08-26T05:57:00.000000Z'
-        401:
-          description: unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: Unauthenticated.
-                properties:
-                  message:
-                    type: string
-                    example: Unauthenticated.
-        404:
-          description: 'Not Found'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'No query results for model [App\Models\Word].'
-                properties:
-                  message:
-                    type: string
-                    example: 'No query results for model [App\Models\Word].'
-        422:
-          description: 'Validation Error'
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  message: 'Word already exists'
-                properties:
-                  message:
-                    type: string
-                    example: 'Word already exists'
-      tags:
-        - Words
-    parameters:
-      -
-        in: path
-        name: word
-        description: 'The ID of word. Example=2'
-        example: 16
-        required: true
-        schema:
-          type: integer
-      -
-        in: path
-        name: user
-        description: ''
-        example: et
-        required: true
-        schema:
-          type: string
-      -
-        in: path
-        name: value
-        description: 'User ID which we need to copy word. Example=2'
-        example: 15
-        required: true
-        schema:
-          type: integer
-  /api/known:
-    get:
-      summary: 'List of known words'
-      description: 'Get list of known words'
-      parameters:
-        -
-          in: header
-          name: Authorization
-          description: ''
-          example: 'Bearer {YOUR_AUTH_KEY}'
-          schema:
-            type: string
-        -
-          in: header
-          name: Content-Type
-          description: ''
-          example: application/json
-          schema:
-            type: string
-        -
-          in: header
-          name: Accept
-          description: ''
-          example: application/json
-          schema:
-            type: string
-      responses:
-        200:
-          description: success
-          content:
-            application/json:
-              schema:
-                type: object
-                example:
-                  data:
-                    -
-                      id: 18
-                      original: voluptates
-                      translated: deserunt
-                      done_at: '2021-09-16T08:30:26.000000Z'
-                      starred: false
-                      user_id: 1
-                      language: DE
-                      views: 8
-                      from_sample: false
-                      created_at: '2021-09-04T10:11:33.000000Z'
-                      shared_by: null
-                    -
-                      id: 27
-                      original: spielen
-                      translated: 'играть; резвиться'
-                      done_at: '2021-09-16T08:26:26.000000Z'
-                      starred: false
-                      user_id: 1
-                      language: DE
-                      views: 0
-                      from_sample: true
-                      created_at: '2021-09-04T10:43:34.000000Z'
-                      shared_by: null
-                    -
-                      id: 33
-                      original: 'die Eltern'
-                      translated: родители
-                      done_at: '2021-09-16T08:30:35.000000Z'
-                      starred: false
-                      user_id: 1
-                      language: DE
-                      views: 0
-                      from_sample: true
-                      created_at: '2021-09-04T10:43:34.000000Z'
-                      shared_by: null
-                    -
-                      id: 34
-                      original: 'der Familienstand'
-                      translated: 'семейное положение'
-                      done_at: '2021-09-16T08:30:33.000000Z'
-                      starred: false
-                      user_id: 1
-                      language: DE
-                      views: 0
-                      from_sample: true
-                      created_at: '2021-09-04T10:43:34.000000Z'
-                      shared_by: null
-                properties:
-                  data:
-                    type: array
-                    example:
-                      -
-                        id: 18
-                        original: voluptates
-                        translated: deserunt
-                        done_at: '2021-09-16T08:30:26.000000Z'
-                        starred: false
-                        user_id: 1
-                        language: DE
-                        views: 8
-                        from_sample: false
-                        created_at: '2021-09-04T10:11:33.000000Z'
-                        shared_by: null
-                      -
-                        id: 27
-                        original: spielen
-                        translated: 'играть; резвиться'
-                        done_at: '2021-09-16T08:26:26.000000Z'
-                        starred: false
-                        user_id: 1
-                        language: DE
-                        views: 0
-                        from_sample: true
-                        created_at: '2021-09-04T10:43:34.000000Z'
-                        shared_by: null
-                      -
-                        id: 33
-                        original: 'die Eltern'
-                        translated: родители
-                        done_at: '2021-09-16T08:30:35.000000Z'
-                        starred: false
-                        user_id: 1
-                        language: DE
-                        views: 0
-                        from_sample: true
-                        created_at: '2021-09-04T10:43:34.000000Z'
-                        shared_by: null
-                      -
-                        id: 34
-                        original: 'der Familienstand'
-                        translated: 'семейное положение'
-                        done_at: '2021-09-16T08:30:33.000000Z'
-                        starred: false
-                        user_id: 1
-                        language: DE
-                        views: 0
-                        from_sample: true
-                        created_at: '2021-09-04T10:43:34.000000Z'
-                        shared_by: null
-                    items:
-                      type: object
-      tags:
-        - Words
 tags:
-  -
-    name: Analytics
-    description: "\nGet all statistics data which is need for displaying widgets"
-  -
-    name: Authentication
-    description: "\nAPIs for managing authentication and getting tokens"
-  -
-    name: Other
-    description: ''
-  -
-    name: Samples
-    description: "\nList of sample words which we need to autofill words list for users"
-  -
-    name: Settings
-    description: "\nGet settings of currently authenticated user or change setting value"
   -
     name: Users
     description: "\nGetting information about other users in system and profile information"
   -
+    name: Samples
+    description: "\nList of sample words which we need to autofill words list for users"
+  -
+    name: Other
+    description: ''
+  -
+    name: Settings
+    description: "\nGet settings of currently authenticated user or change setting value"
+  -
     name: Words
     description: "\nMain group which is need for different operations with words - getting list of all words, changing status of words"
+  -
+    name: Authentication
+    description: "\nAPIs for managing authentication and getting tokens"
+  -
+    name: Analytics
+    description: "\nGet all statistics data which is need for displaying widgets"
 components:
   securitySchemes:
     default:
