@@ -1,9 +1,9 @@
-import { LocalesStateInterface } from '@/models/store'
-import { LocaleInfoInterface } from '@/models/localization/LocaleInfo.interface'
-import { config } from '../../config'
+import { LocalesStateInterface } from '@/models/store';
+import { LocaleInfoInterface } from '@/models/localization/LocaleInfo.interface';
+import { config } from '../../config';
 
 // drive locales with config
-const availableLocales: LocaleInfoInterface[] = config.locales
+const availableLocales: LocaleInfoInterface[] = config.locales;
 
 /**
  * @name initialLocalesState
@@ -11,5 +11,5 @@ const availableLocales: LocaleInfoInterface[] = config.locales
  * The Locales state instance
  */
 export const initialLocalesState: LocalesStateInterface = {
-  availableLocales: availableLocales
-}
+    availableLocales: availableLocales,
+};

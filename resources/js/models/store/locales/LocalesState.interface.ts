@@ -1,4 +1,4 @@
-import { LocaleInfoInterface } from '@/models/localization/LocaleInfo.interface'
+import { LocaleInfoInterface } from '@/models/localization/LocaleInfo.interface';
 
 /**
  * @name LocalesStateInterface
@@ -6,5 +6,5 @@ import { LocaleInfoInterface } from '@/models/localization/LocaleInfo.interface'
  * Interface for the Locales state
  */
 export interface LocalesStateInterface {
-  availableLocales: LocaleInfoInterface[]
+    availableLocales: LocaleInfoInterface[];
 }

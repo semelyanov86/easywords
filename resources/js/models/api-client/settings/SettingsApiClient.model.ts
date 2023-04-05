@@ -1,10 +1,10 @@
-import { HttpClient, HttpRequestParamsInterface } from '../../../models/http-client'
+import { HttpClient, HttpRequestParamsInterface } from '../../../models/http-client';
 
-import { SettingsApiClientUrlsInterface } from './SettingsApiClientUrls.interface'
-import { SettingsApiClientInterface } from './SettingsApiClient.interface'
-import { SettingInterface } from '../../../models/settings/setting.interface'
-import {LoadedSettingsInterface} from "../../../models/settings/LoadedSettingsInterface";
-import {UpdateSettingsInterface} from "../../../models/settings/updateSettings.interface";
+import { SettingsApiClientUrlsInterface } from './SettingsApiClientUrls.interface';
+import { SettingsApiClientInterface } from './SettingsApiClient.interface';
+import { SettingInterface } from '../../../models/settings/setting.interface';
+import { LoadedSettingsInterface } from '../../../models/settings/LoadedSettingsInterface';
+import { UpdateSettingsInterface } from '../../../models/settings/updateSettings.interface';
 
 /**
  * @Name SettingsApiClientModel
@@ -12,28 +12,28 @@ import {UpdateSettingsInterface} from "../../../models/settings/updateSettings.i
  * Implements the SettingsApiClientInterface interface
  */
 export class SettingsApiClientModel implements SettingsApiClientInterface {
-  private readonly urls!: SettingsApiClientUrlsInterface
+    private readonly urls!: SettingsApiClientUrlsInterface;
 
-  constructor(urls: SettingsApiClientUrlsInterface) {
-    this.urls = urls
-  }
-
-  fetchItems(): Promise<LoadedSettingsInterface> {
-    const getParameters: HttpRequestParamsInterface = {
-      url: this.urls.fetchSettings,
-      requiresToken: true
+    constructor(urls: SettingsApiClientUrlsInterface) {
+        this.urls = urls;
     }
 
-    return HttpClient.get<LoadedSettingsInterface>(getParameters)
-  }
+    fetchItems(): Promise<LoadedSettingsInterface> {
+        const getParameters: HttpRequestParamsInterface = {
+            url: this.urls.fetchSettings,
+            requiresToken: true,
+        };
 
-  updateSetting(data:UpdateSettingsInterface): Promise<void> {
-      const postParameters: HttpRequestParamsInterface = {
-          url: this.urls.updateSetting,
-          requiresToken: true,
-          payload: data
-      }
+        return HttpClient.get<LoadedSettingsInterface>(getParameters);
+    }
 
-      return HttpClient.post<void>(postParameters)
-  }
+    updateSetting(data: UpdateSettingsInterface): Promise<void> {
+        const postParameters: HttpRequestParamsInterface = {
+            url: this.urls.updateSetting,
+            requiresToken: true,
+            payload: data,
+        };
+
+        return HttpClient.post<void>(postParameters);
+    }
 }

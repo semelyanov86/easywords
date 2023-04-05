@@ -1,5 +1,5 @@
-import {StatisticsDataInterface} from "../../statistics/statisticsData.interface";
+import { StatisticsDataInterface } from '../../statistics/statisticsData.interface';
 
 export interface StatisticsApiClientInterface {
-    fetchStatistics: () => Promise<StatisticsDataInterface>
+    fetchStatistics: () => Promise<StatisticsDataInterface>;
 }

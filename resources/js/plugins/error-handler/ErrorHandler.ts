@@ -1,12 +1,12 @@
-import router from "../../router";
-import axios from "axios";
-import {AxiosError} from "axios";
-import {notify} from "../../components/notifications";
-import {NotifyTypes} from "../../components/notifications/NotifyTypes";
+import router from '../../router';
+import axios from 'axios';
+import { AxiosError } from 'axios';
+import { notify } from '../../components/notifications';
+import { NotifyTypes } from '../../components/notifications/NotifyTypes';
 
 export function ErrorHandler(error: Error | AxiosError) {
-    let message:string;
-    if (axios.isAxiosError(error))  {
+    let message: string;
+    if (axios.isAxiosError(error)) {
         if (error.response) {
             /*
              * The request was made and the server responded with a
@@ -14,7 +14,7 @@ export function ErrorHandler(error: Error | AxiosError) {
              */
             message = error.response.data.message;
             if (error.response.status === 401) {
-                router.push({name: 'Login'})
+                router.push({ name: 'Login' });
             }
         } else if (error.request) {
             /*
@@ -35,6 +35,6 @@ export function ErrorHandler(error: Error | AxiosError) {
     notify({
         title: 'Error in server request',
         message: message,
-        type: NotifyTypes.danger
-    })
+        type: NotifyTypes.danger,
+    });
 }

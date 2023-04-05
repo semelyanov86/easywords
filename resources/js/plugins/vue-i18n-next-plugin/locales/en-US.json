@@ -69,6 +69,12 @@
         "user": {
             "created_at": "Created At",
             "email": "Email",
+            "password": "Password",
+            "device_name": "Device Name",
+            "generate_token": "Generate token",
+            "token_exists": "Your token has been generated, copy it below",
+            "generate_personal_token": "Generate Personal Access Token",
+            "token_description": "If you want to be able to use our service via API, you need to get a Personal Access Token. To do it, enter your credentials and device name.",
             "id": "ID",
             "name": "User Name",
             "updated_at": "Updated At",

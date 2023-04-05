@@ -1,4 +1,4 @@
-import { SettingInterface } from '@/models/settings/setting.interface'
+import { SettingInterface } from '@/models/settings/setting.interface';
 
 /**
  * @name SettingsStateInterface
@@ -6,6 +6,6 @@ import { SettingInterface } from '@/models/settings/setting.interface'
  * Interface for the Settings state
  */
 export interface SettingsStateInterface {
-  loading: boolean
-  settings: SettingInterface
+    loading: boolean;
+    settings: SettingInterface;
 }

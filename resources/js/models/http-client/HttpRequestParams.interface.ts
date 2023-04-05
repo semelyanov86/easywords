@@ -4,7 +4,7 @@
  * HttpClient requests parameters for get/post/put etc operations
  */
 export interface HttpRequestParamsInterface {
-  url: string
-  requiresToken: boolean
-  payload?: any
+    url: string;
+    requiresToken: boolean;
+    payload?: any;
 }

@@ -1,4 +1,4 @@
-import { RootStateInterface } from '@/models/store'
+import { RootStateInterface } from '@/models/store';
 
 /**
  * @name initialRootState
@@ -6,5 +6,5 @@ import { RootStateInterface } from '@/models/store'
  * The Root state instance with the initial default values
  */
 export const initialRootState: RootStateInterface = {
-  loading: false
-}
+    loading: false,
+};

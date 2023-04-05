@@ -1,5 +1,5 @@
-import Vuex from 'vuex'
-import { RootStoreInterface } from './RootStore.interface'
+import Vuex from 'vuex';
+import { RootStoreInterface } from './RootStore.interface';
 
 /**
  * @name RootStoreModel

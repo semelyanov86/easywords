@@ -1,4 +1,4 @@
 export interface UpdateWordStatusInterface {
-    id: number,
-    value: number
+    id: number;
+    value: number;
 }

@@ -1,4 +1,4 @@
-import { SettingsStateInterface } from '@/models/store'
+import { SettingsStateInterface } from '@/models/store';
 
 /**
  * @name initialSettingsState
@@ -8,18 +8,15 @@ import { SettingsStateInterface } from '@/models/store'
 export const initialSettingsState: SettingsStateInterface = {
     loading: false,
     settings: {
-        "paginate": "20",
-        "default_language": "DE",
-        "starred_enabled": false,
-        "known_enabled": false,
-        "fresh_first": false,
-        "languages_list": [
-            "DE",
-            "EN"
-        ],
-        "main_language": "RU",
-        "show_shared": true,
-        "show_imported": true,
-        "latest_first": false
-    }
-}
+        paginate: '20',
+        default_language: 'DE',
+        starred_enabled: false,
+        known_enabled: false,
+        fresh_first: false,
+        languages_list: ['DE', 'EN'],
+        main_language: 'RU',
+        show_shared: true,
+        show_imported: true,
+        latest_first: false,
+    },
+};

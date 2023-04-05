@@ -4,5 +4,5 @@
  * Interface for the Root state
  */
 export interface RootStateInterface {
-  loading: boolean
+    loading: boolean;
 }

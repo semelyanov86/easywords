@@ -1,5 +1,5 @@
-import {WordInterface} from "./Word.interface";
+import { WordInterface } from './Word.interface';
 
 export interface LoadedWordInterface {
-    data: WordInterface
+    data: WordInterface;
 }

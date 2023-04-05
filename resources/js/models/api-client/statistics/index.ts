@@ -1,3 +1,3 @@
-export * from './StatisticsApiClientUrls.interface'
-export * from './StatisticsApiClient.interface'
-export * from './StatisticsApiClient.model'
+export * from './StatisticsApiClientUrls.interface';
+export * from './StatisticsApiClient.interface';
+export * from './StatisticsApiClient.model';

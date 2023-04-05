@@ -1,5 +1,5 @@
-import { rootStore, dispatchModuleAction } from '../root'
-import { StoreModuleNames, UserStateInterface } from '../../models/store'
+import { rootStore, dispatchModuleAction } from '../root';
+import { StoreModuleNames, UserStateInterface } from '../../models/store';
 
 /**
  * @name userStore
@@ -8,13 +8,13 @@ import { StoreModuleNames, UserStateInterface } from '../../models/store'
  */
 const userStore = {
     get state(): UserStateInterface {
-        return rootStore.state.userState
+        return rootStore.state.userState;
     },
     action<T>(actionName: string, params?: T): void {
-        dispatchModuleAction(StoreModuleNames.userState, actionName, params)
-    }
-}
+        dispatchModuleAction(StoreModuleNames.userState, actionName, params);
+    },
+};
 // export our wrapper using the composition API convention (i.e. useXYZ)
 export const useUserStore = () => {
-    return userStore
-}
+    return userStore;
+};

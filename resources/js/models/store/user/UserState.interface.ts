@@ -1,5 +1,5 @@
-import { UserInterface } from '@/models/user/user.interface'
-import {ShortUserInterface} from "@/models/user/shortUser.interface";
+import { UserInterface } from '@/models/user/user.interface';
+import { ShortUserInterface } from '@/models/user/shortUser.interface';
 
 /**
  * @name UserStateInterface
@@ -7,7 +7,7 @@ import {ShortUserInterface} from "@/models/user/shortUser.interface";
  * Interface for the Settings state
  */
 export interface UserStateInterface {
-  loading: boolean
-  user: UserInterface,
-    usersList: ShortUserInterface[]
+    loading: boolean;
+    user: UserInterface;
+    usersList: ShortUserInterface[];
 }

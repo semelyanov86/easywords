@@ -1,5 +1,5 @@
-import {SettingInterface} from "./setting.interface";
+import { SettingInterface } from './setting.interface';
 
 export interface LoadedSettingsInterface {
-    data: SettingInterface
+    data: SettingInterface;
 }

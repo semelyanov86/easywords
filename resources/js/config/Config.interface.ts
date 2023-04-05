@@ -1,9 +1,9 @@
-import { SettingsApiClientUrlsInterface } from '../models/api-client/settings'
-import { WordsApiClientUrlsInterface } from '../models/api-client/words'
-import { UserApiClientUrlsInterface } from '../models/api-client/user'
-import { AuthApiClientUrlsInterface } from '../models/api-client/auth'
-import { LocaleInfoInterface } from '@/models/localization/LocaleInfo.interface'
-import {StatisticsApiClientUrlsInterface} from "../models/api-client/statistics";
+import { SettingsApiClientUrlsInterface } from '../models/api-client/settings';
+import { WordsApiClientUrlsInterface } from '../models/api-client/words';
+import { UserApiClientUrlsInterface } from '../models/api-client/user';
+import { AuthApiClientUrlsInterface } from '../models/api-client/auth';
+import { LocaleInfoInterface } from '@/models/localization/LocaleInfo.interface';
+import { StatisticsApiClientUrlsInterface } from '../models/api-client/statistics';
 
 /**
  * @Name ConfigInterface
@@ -11,33 +11,33 @@ import {StatisticsApiClientUrlsInterface} from "../models/api-client/statistics"
  *
  */
 export interface ConfigInterface {
-  global: {
-    // ... things that are not specific to a single app domain
-  }
+    global: {
+        // ... things that are not specific to a single app domain
+    };
 
-  locales: LocaleInfoInterface[]
+    locales: LocaleInfoInterface[];
 
-  httpClient: {
-    tokenKey: string
-  }
+    httpClient: {
+        tokenKey: string;
+    };
 
-  apiClient: {
-    type: string
-  }
+    apiClient: {
+        type: string;
+    };
 
-  settings: {
-    apiUrls: SettingsApiClientUrlsInterface
-  }
+    settings: {
+        apiUrls: SettingsApiClientUrlsInterface;
+    };
     user: {
-        apiUrls: UserApiClientUrlsInterface
-    }
+        apiUrls: UserApiClientUrlsInterface;
+    };
     statistics: {
-        apiUrls: StatisticsApiClientUrlsInterface
-    }
+        apiUrls: StatisticsApiClientUrlsInterface;
+    };
     auth: {
-        apiUrls: AuthApiClientUrlsInterface
-    }
+        apiUrls: AuthApiClientUrlsInterface;
+    };
     words: {
-      apiUrls: WordsApiClientUrlsInterface
-    }
+        apiUrls: WordsApiClientUrlsInterface;
+    };
 }

@@ -1,15 +1,15 @@
-import { Module, MutationTree, ActionTree, GetterTree } from 'vuex'
+import { Module, MutationTree, ActionTree, GetterTree } from 'vuex';
 
-import { MutationType, RootStateInterface, UserStateInterface } from '../../models/store'
+import { MutationType, RootStateInterface, UserStateInterface } from '../../models/store';
 
-import { initialUserState } from './initialState'
+import { initialUserState } from './initialState';
 
-import {UserInterface} from "../../models/user/user.interface";
-import {UserMutationType} from "../../models/store/user/UserMutationType";
-import {ErrorHandler} from "../../plugins/error-handler/ErrorHandler";
-import apiClient from "../../api-client";
-import {AxiosError} from "axios";
-import {ShortUserInterface} from "../../models/user/shortUser.interface";
+import { UserInterface } from '../../models/user/user.interface';
+import { UserMutationType } from '../../models/store/user/UserMutationType';
+import { ErrorHandler } from '../../plugins/error-handler/ErrorHandler';
+import apiClient from '../../api-client';
+import { AxiosError } from 'axios';
+import { ShortUserInterface } from '../../models/user/shortUser.interface';
 
 /**
  * @name mutations
@@ -18,17 +18,17 @@ import {ShortUserInterface} from "../../models/user/shortUser.interface";
  */
 export const mutations: MutationTree<UserStateInterface> = {
     loadingUser(state: UserStateInterface) {
-        state.loading = true
+        state.loading = true;
     },
     loadedUser(state: UserStateInterface, user: UserInterface) {
-        state.user = user
-        state.loading = false
+        state.user = user;
+        state.loading = false;
     },
     loadedUsersList(state: UserStateInterface, users: ShortUserInterface[]) {
-        state.usersList = users
-        state.loading = false
-    }
-}
+        state.usersList = users;
+        state.loading = false;
+    },
+};
 
 /**
  * @name actions
@@ -37,40 +37,46 @@ export const mutations: MutationTree<UserStateInterface> = {
  */
 export const actions: ActionTree<UserStateInterface, RootStateInterface> = {
     loadUser({ commit }) {
-        commit(MutationType.user.loadingUser)
+        commit(MutationType.user.loadingUser);
 
         // let's pretend we called some API end-point
         // and it takes 1 second to return the data
         // by using javascript setTimeout with 1000 for the milliseconds option
-        apiClient.user.fetchUser().then((data) => {
-            const result:UserInterface = data.data;
-            commit(MutationType.user.loadedUser, result)
-        }).catch((error: Error | AxiosError) => {
-            ErrorHandler(error);
-        })
+        apiClient.user
+            .fetchUser()
+            .then((data) => {
+                const result: UserInterface = data.data;
+                commit(MutationType.user.loadedUser, result);
+            })
+            .catch((error: Error | AxiosError) => {
+                ErrorHandler(error);
+            });
     },
     loadShortUsers({ commit }) {
-        commit(MutationType.user.loadingUser)
+        commit(MutationType.user.loadingUser);
 
-        apiClient.user.fetchUsersShort().then((data) => {
-            const result:ShortUserInterface[] = data.data;
-            commit(MutationType.user.loadedUsersList, result)
-        }).catch((error: Error | AxiosError) => {
-            ErrorHandler(error);
-        })
-    }
-}
+        apiClient.user
+            .fetchUsersShort()
+            .then((data) => {
+                const result: ShortUserInterface[] = data.data;
+                commit(MutationType.user.loadedUsersList, result);
+            })
+            .catch((error: Error | AxiosError) => {
+                ErrorHandler(error);
+            });
+    },
+};
 
 /**
  * @name getters
  * @description
  * Vuex Items getters
  */
-export const getters: GetterTree<UserStateInterface, RootStateInterface> = {}
+export const getters: GetterTree<UserStateInterface, RootStateInterface> = {};
 
 // create our Items store instance
-const namespaced: boolean = true
-const state: UserStateInterface = initialUserState
+const namespaced: boolean = true;
+const state: UserStateInterface = initialUserState;
 
 /**
  * @name userState
@@ -82,5 +88,5 @@ export const userState: Module<UserStateInterface, RootStateInterface> = {
     state,
     getters,
     actions,
-    mutations
-}
+    mutations,
+};

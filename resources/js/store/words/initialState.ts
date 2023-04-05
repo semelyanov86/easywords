@@ -1,4 +1,4 @@
-import { WordsStateInterface } from '@/models/store'
+import { WordsStateInterface } from '@/models/store';
 
 /**
  * @name WordsStateInterface
@@ -6,6 +6,6 @@ import { WordsStateInterface } from '@/models/store'
  * The Items state instance with the initial default values
  */
 export const initialWordsState: WordsStateInterface = {
-  loading: false,
-  words: []
-}
+    loading: false,
+    words: [],
+};

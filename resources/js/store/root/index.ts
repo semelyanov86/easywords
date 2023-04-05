@@ -1,16 +1,16 @@
-import { createStore, StoreOptions } from 'vuex'
+import { createStore, StoreOptions } from 'vuex';
 
-import { RootStateInterface, RootStoreModel } from '@/models/store'
+import { RootStateInterface, RootStoreModel } from '@/models/store';
 
-import { initialRootState } from './initialState'
+import { initialRootState } from './initialState';
 
 // import each Vuex module
 // GEN-IMPORTS-STATE
-import { settingsState } from '../settings/module'
-import { wordsState } from '../words/module'
-import { userState } from '../user/module'
-import { localesState } from '../locales/module'
-import {WordInterface} from "@/models/words/Word.interface";
+import { settingsState } from '../settings/module';
+import { wordsState } from '../words/module';
+import { userState } from '../user/module';
+import { localesState } from '../locales/module';
+import { WordInterface } from '@/models/words/Word.interface';
 
 /**
  * @name storeOptions
@@ -25,13 +25,13 @@ const storeOptions: StoreOptions<RootStateInterface> = {
         settingsState,
         localesState,
         userState,
-        wordsState
+        wordsState,
         // as you create additional modules, you'll add them here similar to the itemsState
-    }
-}
+    },
+};
 
 // Vuex Root store instance
-export const rootStore: RootStoreModel<RootStateInterface> = <any>createStore(storeOptions)
+export const rootStore: RootStoreModel<RootStateInterface> = <any>createStore(storeOptions);
 
 /**
  * @name dispatchModuleAction
@@ -44,5 +44,5 @@ export const rootStore: RootStoreModel<RootStateInterface> = <any>createStore(st
  * @param params
  */
 export function dispatchModuleAction<T>(moduleName: string, actionName: string, params?: T): void {
-    rootStore.dispatch(`${moduleName}/${actionName}`, params)
+    rootStore.dispatch(`${moduleName}/${actionName}`, params);
 }

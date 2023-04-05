@@ -11,9 +11,9 @@ import { createApp } from 'vue';
 // import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue';
 
-import {i18n} from './plugins/vue-i18n-next-plugin'
-import router from './router'
-import { FlagIconsScss } from './plugins/flags-icons/'
+import { i18n } from './plugins/vue-i18n-next-plugin';
+import router from './router';
+import { FlagIconsScss } from './plugins/flags-icons/';
 
 const app = createApp(App);
 

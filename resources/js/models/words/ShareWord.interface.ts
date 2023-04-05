@@ -1,4 +1,4 @@
 export interface ShareWordInterface {
-    word: number,
-    user: number
+    word: number;
+    user: number;
 }

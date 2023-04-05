@@ -1,3 +1,3 @@
 export interface ValidatorInterface {
-    required: any
+    required: any;
 }

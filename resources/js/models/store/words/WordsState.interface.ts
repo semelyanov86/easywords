@@ -1,4 +1,4 @@
-import { WordInterface } from '../../../models/words/Word.interface'
+import { WordInterface } from '../../../models/words/Word.interface';
 
 /**
  * @name WordsStateInterface
@@ -6,6 +6,6 @@ import { WordInterface } from '../../../models/words/Word.interface'
  * Interface for the Words state
  */
 export interface WordsStateInterface {
-  loading: boolean
-  words: WordInterface[]
+    loading: boolean;
+    words: WordInterface[];
 }

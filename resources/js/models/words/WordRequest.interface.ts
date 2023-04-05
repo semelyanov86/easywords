@@ -1,3 +1,3 @@
 export interface WordRequestInterface {
-    language: string
+    language: string;
 }
