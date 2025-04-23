@@ -1,0 +1,1071 @@
+_type: export
+__export_format: 4
+__export_date: 2025-04-23T16:48:55.892Z
+__export_source: insomnia.desktop.app:v9.1.1
+resources:
+  - _id: req_5feed044f18140fe8ba22a79326d5839
+    parentId: fld_22dce1445bbc4a06bbdd11a19f23a027
+    modified: 1630748692488
+    created: 1630748654878
+    url: "{{ _.BASE_URL }}/samples/export/DE"
+    name: Import Words
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_be932e263d9b4ac98b5de5c598e5a9f6
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_40430c972ed84693b6b099bd923b8da6
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1630748654878
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_22dce1445bbc4a06bbdd11a19f23a027
+    parentId: wrk_7c24dc6a683c416a99ae422c7883e687
+    modified: 1630748419313
+    created: 1630748419313
+    name: Samples
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630748419314
+    _type: request_group
+  - _id: wrk_7c24dc6a683c416a99ae422c7883e687
+    parentId: null
+    modified: 1715258156733
+    created: 1629899436837
+    name: EasyWords
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_b9245c42b3284b9a898b5ffc594e06e6
+    parentId: fld_22dce1445bbc4a06bbdd11a19f23a027
+    modified: 1630748489300
+    created: 1630748428195
+    url: "{{ _.BASE_URL }}/samples?language=DE"
+    name: List of samples
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_8bb6ac215ce84d8fb377b098567b4236
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_eba646af506347768c7ec19b49e194db
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1630748428195
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_a4de2be3ae0b40b09e6e4f54e290f67a
+    parentId: fld_22dce1445bbc4a06bbdd11a19f23a027
+    modified: 1630748571881
+    created: 1630748566738
+    url: "{{ _.BASE_URL }}/samples/3"
+    name: Get Sample By ID
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_8bb6ac215ce84d8fb377b098567b4236
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_eba646af506347768c7ec19b49e194db
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1630665155883.5
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_498bcfda01e34894994183c1b2201435
+    parentId: fld_87530f575dab48b5999f121bcda43b19
+    modified: 1630581915643
+    created: 1630581883572
+    url: "{{ _.BASE_URL }}/statistics"
+    name: All Statistics
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_1d639d84fd3e475dbc70ee5973c69697
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_4a1be990f93e4b9ca876e9037a020c4a
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1630581883572
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_87530f575dab48b5999f121bcda43b19
+    parentId: wrk_7c24dc6a683c416a99ae422c7883e687
+    modified: 1630581435446
+    created: 1630581435446
+    name: Analytics
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1630581435446
+    _type: request_group
+  - _id: req_45656f2a73434ab2913baed4cbeaefcc
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1681581001660
+    created: 1680704108650
+    url: "{{ _.BASE_URL }}/random/3"
+    name: Get Random Words
+    description: >-
+      Displays random words from default language in settings. As a param need
+      to pass number of random words you need to display.
+
+
+      ```json
+
+      {
+      	"data": [
+      		{
+      			"id": 12642,
+      			"original": "offiziell",
+      			"translated": "служебный; должностной",
+      			"done_at": null,
+      			"starred": false,
+      			"user_id": 16,
+      			"language": "DE",
+      			"views": 0,
+      			"from_sample": true,
+      			"created_at": "2021-10-05T07:14:46.000000Z",
+      			"shared_by": null
+      		},
+      		{
+      			"id": 6509,
+      			"original": "gestern",
+      			"translated": "вчера",
+      			"done_at": null,
+      			"starred": false,
+      			"user_id": 14,
+      			"language": "DE",
+      			"views": 0,
+      			"from_sample": true,
+      			"created_at": "2021-09-14T08:50:01.000000Z",
+      			"shared_by": null
+      		},
+      		{
+      			"id": 11757,
+      			"original": "von",
+      			"translated": "от",
+      			"done_at": null,
+      			"starred": false,
+      			"user_id": 16,
+      			"language": "DE",
+      			"views": 0,
+      			"from_sample": true,
+      			"created_at": "2021-10-05T07:14:44.000000Z",
+      			"shared_by": null
+      		}
+      	]
+      }
+
+      ```
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_50f153e00a384d7b824717ce14a88ba0
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_5b6cddb3f3a84c71874f4761289c3bb6
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1680704108650
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_6c24baac659b4a6a9884d3a265dc9010
+    parentId: wrk_7c24dc6a683c416a99ae422c7883e687
+    modified: 1629952435057
+    created: 1629952435057
+    name: Words
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1629952435057
+    _type: request_group
+  - _id: req_c3a1cae4e2db4231b3deeeeb3eee8e9d
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1680704130221
+    created: 1631781586167
+    url: "{{ _.BASE_URL }}/known/paginated"
+    name: Get Done words
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_825b1b2154894ef7b69429c44ea0e9b1
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_426a9d83557344d4a9638dcee578d89d
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1631781586225
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_6f18ec733c5b41ee9eefabfcef13bd9f
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1634363895781
+    created: 1634363892349
+    url: "{{ _.BASE_URL }}/not-known"
+    name: Get Not Done words
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_825b1b2154894ef7b69429c44ea0e9b1
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_426a9d83557344d4a9638dcee578d89d
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1631779755024.25
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f50a5d4f26ed48db94906edc402b7876
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1680629793336
+    created: 1634368772842
+    url: "{{ _.BASE_URL }}/all"
+    name: Get All words
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_825b1b2154894ef7b69429c44ea0e9b1
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_426a9d83557344d4a9638dcee578d89d
+        name: Content-Type
+        value: application/json
+        description: ""
+      - id: pair_6363caf418b348128be1ed5e35f3139b
+        name: ""
+        value: ""
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1631778839423.875
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8e4c8f5bdc604975984fbec193231e03
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1634362997532
+    created: 1634362993395
+    url: "{{ _.BASE_URL }}/known/paginated"
+    name: Get Done words Pagination
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_825b1b2154894ef7b69429c44ea0e9b1
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_426a9d83557344d4a9638dcee578d89d
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1631777923823.5
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_299505051915451cb727a2f9449d5c79
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1633851621325
+    created: 1630515511930
+    url: "{{ _.BASE_URL }}/words/12548/share/14"
+    name: Share Word
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_15088f6593e446cb9e83adcd182a7e08
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_8c6005f64fc941e89b7e2d460a6b888b
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1630515511930
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b7dc55d726c04c1cbaa78155df787962
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1681404648937
+    created: 1629956851304
+    url: "{{ _.BASE_URL }}/words"
+    name: Create Word
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"original": "voll22",
+        	"translated": "Полный22",
+        	"done_at": null,
+        	"starred": false,
+        	"language": "DE",
+        	"views": 0
+        }
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4153195a2d6c41f7859439bfd0bf582f
+      - id: pair_e0073abdedd34868903c8e15b1b60d81
+        name: Accept
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1629956851305
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1a49c77aa2d944ab98602756fb3debbc
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1630608314682
+    created: 1629955900635
+    url: "{{ _.BASE_URL }}/words/2/viewed"
+    name: Mark Viewed
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_bb89bd85036d45aaa630b907083d2c55
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_6ad2faa6e7754134a8d6c06faed39750
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1629955900635
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_454af245009e4e24a2f74c3baf0c406f
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1630432091860
+    created: 1630432008564
+    url: "{{ _.BASE_URL }}/words/3/starred/0"
+    name: Mark Starred
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_bb89bd85036d45aaa630b907083d2c55
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_6ad2faa6e7754134a8d6c06faed39750
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1629955522898.5
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_aa4bc2afc5ce480384b653d6587ffb8d
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1630608806355
+    created: 1629956534677
+    url: "{{ _.BASE_URL }}/words/2/known/1"
+    name: Mark Known
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_bb89bd85036d45aaa630b907083d2c55
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_6ad2faa6e7754134a8d6c06faed39750
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1629955145162
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_10732be257c249629f902b3d6cf755ef
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1633274678538
+    created: 1629954389689
+    url: "{{ _.BASE_URL }}/words"
+    name: Get Words
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters:
+      - id: pair_fe492ec0bb784098ade0e67b046789a6
+        name: language
+        value: DE
+        description: ""
+      - id: pair_5571183289ba486db7df8c5d3d08f621
+        name: known
+        value: "true"
+        description: ""
+      - id: pair_f2bb127bcf774330a0f58d55909279ad
+        name: page
+        value: "1"
+        description: ""
+    headers:
+      - id: pair_5e8cb817c0d44d6bbc1d0ad141e9d97d
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_133a67a7b15b41029b3972744db3498b
+        name: Content-Type
+        value: application/json
+        description: ""
+      - id: pair_b3886302774345d5ba9367b9aa816196
+        name: If-None-Match
+        value: '"7cfa519ea4548257be34f58700cb0bc4"'
+        description: ""
+        disabled: true
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1629954389689
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2114ebb2be854fd5bde291e4f1197a34
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1634534504011
+    created: 1633853215477
+    url: "{{ _.BASE_URL }}/words/12385"
+    name: Delete word
+    description: ""
+    method: DELETE
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_f234b3e8620643229305f47d6dcca856
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_536e03bb06ac4870a4bfdc170cdf96f5
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1629953978460
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_58cdf556f37749e7be5faaef8e0062c1
+    parentId: fld_6c24baac659b4a6a9884d3a265dc9010
+    modified: 1630432180406
+    created: 1629953567231
+    url: "{{ _.BASE_URL }}/words/2"
+    name: Show Word
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_9c6b0199bb8746d385683a494ef66a19
+        name: Content-Type
+        value: application/json
+        description: ""
+      - id: pair_5248248210e04630b68cbde8bab21c5a
+        name: Accept
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1629953567231
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7c1b4794245a4bc298abba430000b1bc
+    parentId: fld_66f7d57c42c84a2a845bed457ba43c6c
+    modified: 1634406802403
+    created: 1629915121975
+    url: "{{ _.BASE_URL }}/settings"
+    name: Store Settings
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "latest_first",
+        	"value": true
+        }
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_d2c0a4f1c09f4cf69f4e710aaee54711
+      - id: pair_52df96854e1b4399ba74dfa2f980e51f
+        name: Accept
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1629915121975
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_66f7d57c42c84a2a845bed457ba43c6c
+    parentId: wrk_7c24dc6a683c416a99ae422c7883e687
+    modified: 1629914628800
+    created: 1629914628800
+    name: Settings
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1629914628800
+    _type: request_group
+  - _id: req_edb2a965de184063a3580e7d26675ae5
+    parentId: fld_66f7d57c42c84a2a845bed457ba43c6c
+    modified: 1680955858438
+    created: 1629914637799
+    url: "{{ _.BASE_URL }}/settings"
+    name: Get Current Settings
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_195c917d73344b5c8574a0598ca6a5d3
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_25468fdb5fa44cb6b64ecbd2aeb0fb78
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1629914637865
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_38e178b5e4c64d29ad30bc2a230f0535
+    parentId: fld_f12dbcda38c9480998834b1c4c44754d
+    modified: 1630606211705
+    created: 1630518474547
+    url: "{{ _.BASE_URL }}/short"
+    name: Short Users
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_5b4cb793fdbd4fba9f9604db9fc26bb2
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_610c270adc934faeafe42846d0e74f22
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1630518474619
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_f12dbcda38c9480998834b1c4c44754d
+    parentId: wrk_7c24dc6a683c416a99ae422c7883e687
+    modified: 1629910454100
+    created: 1629910454100
+    name: Users
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1629910454100
+    _type: request_group
+  - _id: req_c6ed14317d514aec853aa7cb30854d71
+    parentId: fld_f12dbcda38c9480998834b1c4c44754d
+    modified: 1630140187524
+    created: 1629910934671
+    url: "{{ _.BASE_URL }}/me"
+    name: Profile Information
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_5ae789171584406dbcfb0f45f9e78836
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_370a76a7370c4aeea2c8028e76787712
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1629910934671
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e7b4a905c2da475ca9b307f68328b233
+    parentId: fld_f12dbcda38c9480998834b1c4c44754d
+    modified: 1629910499046
+    created: 1629910463190
+    url: "{{ _.BASE_URL }}/users"
+    name: List of Users
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_a1ec7beb47904413ba8a6050726aa138
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_662c0d1d2dea4c46bcc83e8bb266c62a
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1629910463190
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3cef7f4de2654baca7a26c2d96a3ba98
+    parentId: fld_bd903ab07ef24c0f824cdae7a0085cdd
+    modified: 1632916376995
+    created: 1632916331678
+    url: "{{ _.BASE_URL }}/signout"
+    name: SignOut
+    description: ""
+    method: GET
+    body: {}
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - id: pair_5942a6849cd844b9b02c9859aebd596c
+        name: Accept
+        value: application/json
+        description: ""
+      - id: pair_5d2e0b5bcc584c53ae767fc7ac0d9832
+        name: Content-Type
+        value: application/json
+        description: ""
+    authentication:
+      type: bearer
+      token: "{{ _.TOKEN }}"
+    metaSortKey: -1632916331678
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_bd903ab07ef24c0f824cdae7a0085cdd
+    parentId: wrk_7c24dc6a683c416a99ae422c7883e687
+    modified: 1629899506603
+    created: 1629899506603
+    name: Auth
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1629899506603
+    _type: request_group
+  - _id: req_2cf2bc4941dd454ca01985e66ae518a7
+    parentId: fld_bd903ab07ef24c0f824cdae7a0085cdd
+    modified: 1681405743514
+    created: 1629899747081
+    url: "{{ _.BASE_URL }}/token"
+    name: Get Token
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "{{ _.LOGIN }}",
+        	"password": "{{ _.PASSWORD }}",
+        	"device_name": "chat_bot"
+        }
+    preRequestScript: ""
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_f601f84472594edb89194a4b6ffb8292
+      - id: pair_db0f3764484d419489296a1dfa91547d
+        name: Accept
+        value: application/json
+        description: ""
+    authentication: {}
+    metaSortKey: -1629899747081
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_1ee151589ae110794170982a8669080227b9c79a
+    parentId: wrk_7c24dc6a683c416a99ae422c7883e687
+    modified: 1633166679302
+    created: 1629899437200
+    name: Base Environment
+    data:
+      BASE_URL: http://cards.sergeyem.test:8000/api
+      LOGIN: admin@admin.com
+      PASSWORD: password
+      TOKEN: 3|W7ZO8UA6lmVpaiTMIGTrXxWHm4VoODxzXtb99JnP
+    dataPropertyOrder:
+      "&":
+        - BASE_URL
+        - LOGIN
+        - PASSWORD
+        - TOKEN
+    color: null
+    isPrivate: false
+    metaSortKey: 1629899437200
+    _type: environment
+  - _id: jar_1ee151589ae110794170982a8669080227b9c79a
+    parentId: wrk_7c24dc6a683c416a99ae422c7883e687
+    modified: 1634622327219
+    created: 1629899437210
+    name: Default Jar
+    cookies:
+      - key: easywords_session
+        value: eyJpdiI6ImVPQVVseExYdTNMUXRIQUtTMklWUVE9PSIsInZhbHVlIjoiaTNnempRUjZiTUdDTjFWVVd1Q2s1Z1BybVUvcGdQTkZMK2dCMTEzV2lEQ0VBQXhlQWp2U0NDZE54K1cyUWEwZmFYc1dzeEFvYmlsZS92aDNtRXFJbjFmMitkeExveWh0N1k1Szh1Mk1SbUxJZDJQblF4eTRBdVB6dzNHaEswMWIiLCJtYWMiOiIxNWY3ZjU1ZWE3NmJjZmJhNDU3NTdiNTdjYzJmNTU3NmVkMDgwMDM0MTI0ZTM0YWZhOTJmZDg5NDIzNmNkNjU5IiwidGFnIjoiIn0%3D
+        expires: 2021-08-25T15:57:30.000Z
+        maxAge: 7200
+        domain: cards.sergeyem.test
+        path: /
+        httpOnly: true
+        extensions:
+          - samesite=lax
+        hostOnly: true
+        creation: 2021-08-25T13:57:30.269Z
+        lastAccessed: 2021-08-25T13:57:30.269Z
+        id: "32255615698221685"
+      - key: lang
+        value: en
+        domain: pons.com
+        path: /
+        hostOnly: false
+        creation: 2021-10-19T05:27:13.223Z
+        lastAccessed: 2021-10-19T05:27:13.223Z
+        id: "07111888988517645"
+      - key: JSESSIONID
+        value: 5A131BB2F43F651E04DA91FA1E8E6680
+        domain: www.openthesaurus.de
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2021-10-19T05:29:37.702Z
+        lastAccessed: 2021-10-19T05:29:37.702Z
+        id: "3037478986182043"
+      - key: premium-plus
+        value: deleted
+        expires: 2020-10-19T05:45:26.000Z
+        maxAge: 0
+        domain: www.duden.de
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2021-10-19T05:45:27.218Z
+        lastAccessed: 2021-10-19T05:45:27.218Z
+        id: "01227049381614398"
+    _type: cookie_jar
+  - _id: spc_51b8511b9d884c7ca6889e590b3877da
+    parentId: wrk_7c24dc6a683c416a99ae422c7883e687
+    modified: 1629899436845
+    created: 1629899436845
+    fileName: EasyWords
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_938f6f5aea4d4ea48a939d7efa779f20
+    parentId: env_1ee151589ae110794170982a8669080227b9c79a
+    modified: 1681581001119
+    created: 1633345754480
+    name: Production
+    data:
+      BASE_URL: https://easywordsapp.ru/api
+      LOGIN: se@sergeyem.ru
+      PASSWORD: 1qaz2wsx
+      TOKEN: 85|vypYQ9IbfkDoFalvvFNh4HqHEzUIarjNrBNTXR4x
+    dataPropertyOrder:
+      "&":
+        - BASE_URL
+        - LOGIN
+        - PASSWORD
+        - TOKEN
+    color: null
+    isPrivate: false
+    metaSortKey: 1633345754480
+    _type: environment
+  - _id: env_7a2332c7db8f41c0af5f3be53782eb42
+    parentId: env_1ee151589ae110794170982a8669080227b9c79a
+    modified: 1680858425835
+    created: 1633345816414
+    name: Dev
+    data:
+      BASE_URL: http://cards.sergeyem.test:8000/api
+      LOGIN: se@sergeyem.ru
+      PASSWORD: password
+      TOKEN: 87|TVx7Tt3m1W0K7LI7gnrj39jySr1OYyx4ZNsvNevQ
+    dataPropertyOrder:
+      "&":
+        - BASE_URL
+        - LOGIN
+        - PASSWORD
+        - TOKEN
+    color: null
+    isPrivate: false
+    metaSortKey: 1633345816414
+    _type: environment
