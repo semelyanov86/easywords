@@ -77,13 +77,19 @@ final class WordRepository
      */
     public function getRandomWords(int $number, array $settings): Collection
     {
+        $user = Auth::user();
+
+        if (! $user) {
+            abort(403);
+        }
+        
         /** @var Collection<int, Word> $words */
         $words = Word::inRandomOrder()->where('language', $settings['default_language'])->when(! $settings['known_enabled'], function (Builder $q) {
             /** @var Builder<Model> $builder */
             $builder = $q->whereNull('done_at');
 
             return $builder;
-        })->limit($number)->get();
+        })->where('user_id', $user->id)->limit($number)->get();
 
         return $words;
     }
