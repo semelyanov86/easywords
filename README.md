@@ -1,5 +1,7 @@
 # EasyWords App
 
+DEPRECATED! Use ![https://github.com/semelyanov86/easywords-app](https://github.com/semelyanov86/easywords-app) instead
+
 Self-hosted application which you can use for quickly learn new words. As backend this app uses Laravel 8 with php8, as frontend - Vue.js with vue-router. You can use this as PWA, mobile application is coming.
 
 ## 🚀 About Me
